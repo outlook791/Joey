@@ -40,7 +40,7 @@ printf '%s\n' \
     '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
     "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"joey_inspect\",\"arguments\":{\"paths\":[\"$tmp/photo.jpg\"]}}}" |
     target/release/joey --mcp >"$tmp/mcp"
-cat "$tmp/mcp"
+cut -c1-300 "$tmp/mcp"
 grep -q '"serverInfo"' "$tmp/mcp"
 grep -q joey_convert "$tmp/mcp"
 grep -q '"format":"jpg"' "$tmp/mcp"
@@ -48,7 +48,8 @@ grep -q '"format":"jpg"' "$tmp/mcp"
 step "Window starts and stays open"
 # timeout ends it after 10 s: exit code 124 means it was still running.
 set +e
-dbus-run-session -- xvfb-run -a timeout 10 target/release/joey-gtk "$tmp/photo.jpg"
+# Containers have no GPU drivers: draw in software.
+GSK_RENDERER=cairo dbus-run-session -- xvfb-run -a timeout 10 target/release/joey-gtk "$tmp/photo.jpg"
 code=$?
 set -e
 if [ "$code" != 124 ]; then

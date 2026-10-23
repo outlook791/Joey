@@ -48,10 +48,21 @@ impl LibreOffice {
         let bin = which("soffice").or_else(|| which("libreoffice"))?;
         // Distributions split LibreOffice into parts (Writer, Calc,
         // Impress, PDF import); only offer what the installed parts can do.
+        // `soffice` is a link into the program folder, or (openSUSE) a
+        // script: then look in the usual places.
         let program = std::fs::canonicalize(&bin)
             .ok()
             .and_then(|p| p.parent().map(PathBuf::from))
-            .filter(|d| d.join("soffice.bin").exists());
+            .into_iter()
+            .chain(
+                [
+                    "/usr/lib64/libreoffice/program",
+                    "/usr/lib/libreoffice/program",
+                    "/opt/libreoffice/program",
+                ]
+                .map(PathBuf::from),
+            )
+            .find(|d| d.join("soffice.bin").exists());
         let has = |lib: &str| program.as_ref().is_none_or(|d| d.join(lib).exists());
         let writer = has("libswlo.so");
         let calc = has("libsclo.so");

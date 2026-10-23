@@ -55,7 +55,7 @@ opensuse)
         xvfb-run dbus-1 desktop-file-utils AppStream
     set +e
     optional ImageMagick poppler-tools python3-img2pdf rsvg-convert ffmpeg-7 qpdf ghostscript \
-        libreoffice pandoc-cli bsdtar python3-pdfplumber python3-openpyxl exiftool
+        libreoffice libreoffice-writer libreoffice-calc libreoffice-impress pandoc-cli bsdtar python3-pdfplumber python3-openpyxl exiftool
     ;;
 *)
     echo "unknown distribution $distro" >&2
