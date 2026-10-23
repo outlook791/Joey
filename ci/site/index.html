@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Joey – install</title>
+<link rel="icon" href="joey.svg">
+<style>
+  :root { --bg: #fbf8f5; --fg: #2a2522; --muted: #6f655f; --card: #ffffff; --line: #e8dfd8; --accent: #c4561f; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1e1b19; --fg: #f1ece8; --muted: #a99f98; --card: #282421; --line: #3a3430; --accent: #f08a4b; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 48px 16px; }
+  header { display: flex; gap: 16px; align-items: center; margin-bottom: 28px; }
+  header img { width: 72px; height: 72px; }
+  h1 { margin: 0; font-size: 2rem; }
+  .tag { color: var(--muted); margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; margin: 16px 0; }
+  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 999px; font-weight: 600; margin: 6px 8px 6px 0; }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  pre { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; overflow-x: auto; font-size: 14px; }
+  .muted { color: var(--muted); font-size: 0.92rem; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="joey.svg" alt="">
+    <div>
+      <h1>Joey</h1>
+      <p class="tag">Converte file. Tutto qui, davvero. · Converts files. That's it, really.</p>
+    </div>
+  </header>
+
+  <div class="card">
+    <strong>Installa · Install</strong>
+    <p>Apri il file con Discover o GNOME Software. · Open the file with Discover or GNOME Software.</p>
+    <a class="btn" href="joey.flatpakref">Joey</a>
+    <a class="btn ghost" href="joey-office.flatpakref">Joey Office (LibreOffice)</a>
+    <p class="muted">Joey Office è facoltativo: serve per PowerPoint e per Word ed Excel al meglio. · Joey Office is optional: it adds PowerPoint, and Word and Excel at their best.</p>
+  </div>
+
+  <div class="card">
+    <strong>Dal terminale · From a terminal</strong>
+<pre>flatpak install --user https://outlook791.github.io/Joey/joey.flatpakref
+flatpak run io.github.outlook791.Joey --setup-file-managers</pre>
+    <p class="muted">Poi esci e rientra nella sessione: Alt+C nel file manager, Ctrl+C e Meta+C ovunque. · Then log out and back in: Alt+C in the file manager, Ctrl+C then Meta+C anywhere.</p>
+  </div>
+
+  <p class="muted"><a href="https://github.com/outlook791/Joey">GitHub</a> · <a href="https://github.com/outlook791/Joey/blob/main/README.it.md">Guida</a> · <a href="https://github.com/outlook791/Joey#readme">Guide</a> · GPL-3.0</p>
+</main>
+</body>
+</html>
