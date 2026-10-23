@@ -30,6 +30,14 @@ Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i f
 
 ## Installazione
 
+**Il modo semplice:** apri **[outlook791.github.io/Joey](https://outlook791.github.io/Joey/)** e premi **Joey**: Discover o GNOME Software lo installano, e gli aggiornamenti arrivano da soli. Premi anche **Joey Office** se vuoi PowerPoint, e Word ed Excel al meglio (aggiunge LibreOffice, circa 230 MB). Poi, una volta sola, in un terminale:
+
+```sh
+flatpak run io.github.outlook791.Joey --setup-file-managers
+```
+
+ed esci e rientra nella sessione: Alt+C, tasto destro e Meta+C sono pronti.
+
 ### Dal codice sorgente (qualsiasi distribuzione)
 
 Su Fedora:
