@@ -162,11 +162,7 @@ impl Joey {
                 .unwrap_or_else(|| PathBuf::from(".")),
         };
         std::fs::create_dir_all(&dest_dir)?;
-        let stem = input
-            .file_stem()
-            .and_then(|s| s.to_str())
-            .unwrap_or("file")
-            .to_string();
+        let stem = stem_of(input);
 
         // Work in a hidden folder inside the destination: moving the result
         // into place is then a rename on the same disk. Removed when done.
@@ -261,6 +257,12 @@ impl Joey {
         }
         Err(last_err)
     }
+}
+
+/// File name without its extension; "backup.tar.gz" gives "backup".
+pub fn stem_of(path: &Path) -> String {
+    let stem = path.file_stem().and_then(|s| s.to_str()).unwrap_or("file");
+    stem.strip_suffix(".tar").unwrap_or(stem).to_string()
 }
 
 /// `dir/name`, or `dir/stem (1).ext`, `(2)`… if taken.

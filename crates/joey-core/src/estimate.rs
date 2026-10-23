@@ -131,6 +131,20 @@ pub fn popularity(f: Format) -> u16 {
         Format::Avi,
         Format::Bmp,
         Format::Ico,
+        Format::Zip,
+        Format::Md,
+        Format::Html,
+        Format::Epub,
+        Format::Srt,
+        Format::Vtt,
+        Format::Ass,
+        Format::Tgz,
+        Format::SevenZ,
+        Format::Tar,
+        Format::Tsv,
+        Format::Wma,
+        Format::Wmv,
+        Format::Rar,
     ];
     ORDER
         .iter()

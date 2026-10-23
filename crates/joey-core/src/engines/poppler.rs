@@ -106,3 +106,43 @@ impl Engine for Poppler {
         Ok(out)
     }
 }
+
+/// PDF text through Poppler's `pdftotext`, in reading order.
+pub struct PdfText {
+    bin: PathBuf,
+    edges: Vec<(Format, Format)>,
+}
+
+impl PdfText {
+    pub fn probe() -> Option<Self> {
+        let bin = which("pdftotext")?;
+        Some(Self {
+            bin,
+            edges: vec![(Format::Pdf, Format::Txt)],
+        })
+    }
+}
+
+impl Engine for PdfText {
+    fn name(&self) -> &'static str {
+        "pdftotext"
+    }
+
+    fn edges(&self) -> &[(Format, Format)] {
+        &self.edges
+    }
+
+    fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
+        let o = step.opts();
+        let out = step.output();
+        let mut cmd = Command::new(&self.bin);
+        cmd.args(["-enc", "UTF-8"]);
+        // pdftotext takes one range: the first one chosen.
+        if let Some(&(first, last)) = o.page_ranges().first() {
+            cmd.args(["-f", &first.to_string(), "-l", &last.to_string()]);
+        }
+        cmd.arg(step.input).arg(&out);
+        run("pdftotext", &mut cmd)?;
+        Ok(vec![out])
+    }
+}

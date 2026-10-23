@@ -16,6 +16,8 @@ pub enum Category {
     Document,
     Spreadsheet,
     Presentation,
+    Subtitle,
+    Archive,
 }
 
 impl Category {
@@ -29,6 +31,8 @@ impl Category {
             Category::Document => "document",
             Category::Spreadsheet => "spreadsheet",
             Category::Presentation => "presentation",
+            Category::Subtitle => "subtitles",
+            Category::Archive => "archive",
         }
     }
 }
@@ -85,24 +89,38 @@ formats! {
     Flac => "flac", "FLAC", Audio, [];
     Wav  => "wav",  "WAV",  Audio, ["wave"];
     Aiff => "aiff", "AIFF", Audio, ["aif", "aifc"];
+    Wma  => "wma",  "WMA",  Audio, [];
     Mp4  => "mp4",  "MP4",  Video, ["m4v"];
     Mkv  => "mkv",  "MKV",  Video, [];
     Webm => "webm", "WebM", Video, [];
     Mov  => "mov",  "MOV",  Video, ["qt"];
     Avi  => "avi",  "AVI",  Video, [];
+    Wmv  => "wmv",  "WMV",  Video, ["asf"];
     Pdf  => "pdf",  "PDF",  Pdf, [];
     Docx => "docx", "Word (DOCX)", Document, [];
     Doc  => "doc",  "Word 97 (DOC)", Document, [];
     Odt  => "odt",  "ODT",  Document, [];
     Rtf  => "rtf",  "RTF",  Document, [];
     Txt  => "txt",  "Text (TXT)", Document, ["text"];
+    Md   => "md",   "Markdown", Document, ["markdown"];
+    Html => "html", "Web page (HTML)", Document, ["htm", "xhtml"];
+    Epub => "epub", "EPUB", Document, [];
     Xlsx => "xlsx", "Excel (XLSX)", Spreadsheet, [];
     Xls  => "xls",  "Excel 97 (XLS)", Spreadsheet, [];
     Ods  => "ods",  "ODS",  Spreadsheet, [];
     Csv  => "csv",  "CSV",  Spreadsheet, [];
+    Tsv  => "tsv",  "TSV",  Spreadsheet, ["tab"];
     Pptx => "pptx", "PowerPoint (PPTX)", Presentation, [];
     Ppt  => "ppt",  "PowerPoint 97 (PPT)", Presentation, [];
     Odp  => "odp",  "ODP",  Presentation, [];
+    Srt  => "srt",  "SRT",  Subtitle, [];
+    Vtt  => "vtt",  "WebVTT", Subtitle, ["webvtt"];
+    Ass  => "ass",  "ASS",  Subtitle, ["ssa"];
+    Zip  => "zip",  "ZIP",  Archive, [];
+    Tar  => "tar",  "TAR",  Archive, [];
+    Tgz  => "tar.gz", "TAR.GZ", Archive, ["tgz", "gz"];
+    SevenZ => "7z", "7Z",   Archive, [];
+    Rar  => "rar",  "RAR",  Archive, [];
 }
 
 impl Format {
@@ -129,7 +147,18 @@ impl Format {
             // Text-only formats have no signature: trust the name only if
             // the content really is text.
             let is_text = std::str::from_utf8(&head).is_ok() && !head.contains(&0);
-            by_ext.filter(|f| !matches!(f, Format::Txt | Format::Csv) || is_text)
+            let text_only = matches!(
+                by_ext,
+                Some(
+                    Format::Txt
+                        | Format::Csv
+                        | Format::Tsv
+                        | Format::Md
+                        | Format::Srt
+                        | Format::Html
+                )
+            );
+            by_ext.filter(|_| !text_only || is_text)
         })
     }
 }
@@ -153,6 +182,15 @@ pub fn sensible(from: Format, to: Format) -> bool {
         (Video, Image) => to == Format::Gif,
         (Pdf, Image) => pages_as_images,
         (Document, Document) | (Spreadsheet, Spreadsheet) | (Presentation, Presentation) => true,
+        // PDF back to editable files: text and layout, not spreadsheets.
+        (Pdf, Document) => matches!(
+            to,
+            Format::Docx | Format::Odt | Format::Txt | Format::Md | Format::Epub
+        ),
+        (Pdf, Presentation) => matches!(to, Format::Pptx | Format::Odp),
+        (Subtitle, Subtitle) => true,
+        (Subtitle, Document) => to == Format::Txt,
+        (Archive, Archive) => to != Format::Rar,
         (Document | Spreadsheet | Presentation, Pdf) => true,
         (Document | Spreadsheet | Presentation, Image) => matches!(to, Format::Png | Format::Jpg),
         _ => false,
@@ -249,11 +287,33 @@ fn from_magic(b: &[u8]) -> Option<Format> {
         }
         return Some(Format::Mp4);
     }
+    if starts(b"Rar!\x1a\x07") {
+        return Some(Format::Rar);
+    }
+    if starts(&[b'7', b'z', 0xBC, 0xAF, 0x27, 0x1C]) {
+        return Some(Format::SevenZ);
+    }
+    if starts(&[0x1F, 0x8B]) {
+        return Some(Format::Tgz);
+    }
+    if at(257, b"ustar") {
+        return Some(Format::Tar);
+    }
+    if starts(&[0x30, 0x26, 0xB2, 0x75, 0x8E, 0x66, 0xCF, 0x11]) {
+        // ASF container: WMV video or WMA audio. A video stream decides.
+        let head = &b[..b.len().min(8192)];
+        let video_guid = [0xC0, 0xEF, 0x19, 0xBC, 0x4D, 0x5B, 0xCF, 0x11];
+        return Some(if contains(head, &video_guid) {
+            Format::Wmv
+        } else {
+            Format::Wma
+        });
+    }
     if starts(b"{\\rtf") {
         return Some(Format::Rtf);
     }
-    if starts(b"PK\x03\x04") {
-        return zip_kind(b);
+    if starts(b"PK\x03\x04") || starts(b"PK\x05\x06") {
+        return Some(zip_kind(b).unwrap_or(Format::Zip));
     }
     if let Ok(text) = std::str::from_utf8(&b[..b.len().min(512)]) {
         let t = text.trim_start_matches('\u{feff}').trim_start();
@@ -262,12 +322,25 @@ fn from_magic(b: &[u8]) -> Option<Format> {
         {
             return Some(Format::Svg);
         }
+        let lower = t.get(..t.len().min(200)).unwrap_or("").to_ascii_lowercase();
+        if lower.starts_with("<!doctype html") || lower.starts_with("<html") {
+            return Some(Format::Html);
+        }
+        if t.starts_with("WEBVTT") {
+            return Some(Format::Vtt);
+        }
+        if t.starts_with("[Script Info]") {
+            return Some(Format::Ass);
+        }
     }
     None
 }
 
 /// Office files are ZIP archives; the names inside say which kind.
 fn zip_kind(b: &[u8]) -> Option<Format> {
+    if at_odf(b, b"application/epub+zip") {
+        return Some(Format::Epub);
+    }
     if at_odf(b, b"application/vnd.oasis.opendocument.text") {
         return Some(Format::Odt);
     }

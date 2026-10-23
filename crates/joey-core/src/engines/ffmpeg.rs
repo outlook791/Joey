@@ -58,6 +58,17 @@ impl Ffmpeg {
                 }
             }
         }
+        let subs: Vec<Format> = [Format::Srt, Format::Vtt, Format::Ass]
+            .into_iter()
+            .filter(|&f| me.subtitle_codec(f).is_some())
+            .collect();
+        for &to in &subs {
+            for &from in &[Format::Srt, Format::Vtt, Format::Ass] {
+                if from != to {
+                    edges.push((from, to));
+                }
+            }
+        }
         if me.has("gif") {
             for &from in &video {
                 edges.push((from, Format::Gif));
@@ -88,10 +99,21 @@ impl Ffmpeg {
             Format::Flac => self.first(&["flac"]),
             Format::Wav => self.first(&["pcm_s16le"]),
             Format::Aiff => self.first(&["pcm_s16be"]),
+            Format::Wma => self.first(&["wmav2"]),
+            Format::Wmv => self.first(&["wmav2"]),
             Format::Avi => self.first(&["libmp3lame", "aac"]),
             Format::Webm => self.first(&["libopus", "libvorbis"]),
             Format::Mkv => self.first(&["libopus", "aac"]),
             Format::Mp4 | Format::Mov => self.first(&["aac"]),
+            _ => None,
+        }
+    }
+
+    fn subtitle_codec(&self, to: Format) -> Option<&'static str> {
+        match to {
+            Format::Srt => self.first(&["srt", "subrip"]),
+            Format::Vtt => self.first(&["webvtt"]),
+            Format::Ass => self.first(&["ass", "ssa"]),
             _ => None,
         }
     }
@@ -103,6 +125,7 @@ impl Ffmpeg {
             }
             Format::Webm => self.first(&["libvpx-vp9", "libvpx"]),
             Format::Avi => self.first(&["mpeg4", "libx264"]),
+            Format::Wmv => self.first(&["wmv2"]),
             _ => None,
         }
     }
@@ -160,6 +183,13 @@ impl Engine for Ffmpeg {
         }
 
         match step.to.category() {
+            Category::Subtitle => {
+                let codec = self.subtitle_codec(step.to).ok_or(Error::NoRoute {
+                    from: step.from,
+                    to: step.to,
+                })?;
+                cmd.args(["-c:s", codec]);
+            }
             Category::Audio => {
                 let codec = self.audio_codec(step.to).ok_or(Error::NoRoute {
                     from: step.from,

@@ -105,10 +105,14 @@ pub fn available_engines() -> Vec<Box<dyn Engine>> {
     }
     add!(rsvg::Rsvg::probe());
     add!(poppler::Poppler::probe());
+    add!(poppler::PdfText::probe());
     add!(ghostscript::Ghostscript::probe());
     add!(img2pdf::Img2Pdf::probe());
     add!(imagemagick::ImageMagick::probe());
     add!(ffmpeg::Ffmpeg::probe());
     add!(libreoffice::LibreOffice::probe());
+    add!(pandoc::Pandoc::probe());
+    add!(archive::Archive::probe());
+    add!(Some(text::Text::new()));
     engines
 }

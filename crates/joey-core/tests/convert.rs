@@ -419,3 +419,56 @@ fn compress_pdf_with_ghostscript() {
     }
     drop(dir);
 }
+
+// ---- Formats added for parity with Tangerine ----
+
+#[test]
+fn subtitles_between_formats_and_to_text() {
+    check("talk.srt", Format::Vtt);
+    check("talk.srt", Format::Ass);
+    let (dir, input) = sample("talk.srt");
+    let out = Joey::new().convert(&input, Format::Txt, None).unwrap();
+    let text = std::fs::read_to_string(&out[0]).unwrap();
+    assert_eq!(text, "Hello from the pouch\n\nHop!\n");
+    drop(dir);
+}
+
+#[test]
+fn markdown_to_web_page_ebook_and_word() {
+    for to in [Format::Html, Format::Epub, Format::Docx, Format::Pdf] {
+        check("readme.md", to);
+    }
+}
+
+#[test]
+fn archives_repack() {
+    for to in [Format::Tgz, Format::SevenZ, Format::Tar] {
+        check("bundle.zip", to);
+    }
+}
+
+#[test]
+fn tsv_and_wma() {
+    check("table.tsv", Format::Xlsx);
+    check("tone.wma", Format::Mp3);
+    check("tone.wav", Format::Wma);
+}
+
+#[test]
+fn pdf_back_to_text_and_word() {
+    check("two-pages.pdf", Format::Txt);
+    check("two-pages.pdf", Format::Docx);
+}
+
+#[test]
+fn tar_gz_keeps_a_clean_name() {
+    let joey = Joey::new();
+    let (dir, input) = sample("bundle.zip");
+    let Ok(tgz) = joey.convert(&input, Format::Tgz, None) else {
+        return;
+    };
+    assert_eq!(tgz[0].file_name().unwrap(), "bundle.tar.gz");
+    let back = joey.convert(&tgz[0], Format::Zip, None).unwrap();
+    assert_eq!(back[0].file_name().unwrap(), "bundle (1).zip");
+    drop(dir);
+}
