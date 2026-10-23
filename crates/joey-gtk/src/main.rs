@@ -484,7 +484,32 @@ fn choose_files(ui: &Rc<Ui>) {
     );
 }
 
+/// Inside the Flatpak, files from the file manager arrive through the
+/// document portal (`/run/user/…/doc/…`). Results must go next to the real
+/// file, so ask the portal where it lives (Joey can reach it directly).
+fn real_path(p: PathBuf) -> PathBuf {
+    if !p.starts_with("/run/user") || !p.components().any(|c| c.as_os_str() == "doc") {
+        return p;
+    }
+    match xattr::get(&p, "user.document-portal.host-path") {
+        Ok(Some(raw)) => {
+            let host = PathBuf::from(
+                String::from_utf8_lossy(&raw)
+                    .trim_end_matches('\0')
+                    .to_string(),
+            );
+            if host.exists() {
+                host
+            } else {
+                p
+            }
+        }
+        _ => p,
+    }
+}
+
 fn add_files(ui: &Rc<Ui>, files: Vec<PathBuf>) {
+    let files: Vec<PathBuf> = files.into_iter().map(real_path).collect();
     {
         let mut st = ui.state.borrow_mut();
         if st.busy {

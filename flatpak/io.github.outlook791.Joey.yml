@@ -1,0 +1,175 @@
+# Flatpak manifest for Joey.
+#
+# Build and install locally (Fedora: sudo dnf install flatpak-builder):
+#   flatpak-builder --user --install-deps-from=flathub --force-clean \
+#     --install build-dir flatpak/io.github.outlook791.Joey.yml
+#   flatpak run io.github.outlook791.Joey
+#
+# Regenerate cargo-sources.json after changing dependencies:
+#   python3 flatpak-cargo-generator.py Cargo.lock -o flatpak/cargo-sources.json
+#
+# Office documents are not included: LibreOffice is far too big to bundle.
+# The Flatpak converts images, drawings, PDFs, audio and video; the
+# install.sh build also handles documents through the system LibreOffice.
+
+id: io.github.outlook791.Joey
+runtime: org.gnome.Platform
+runtime-version: '50'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: joey-gtk
+
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  # Converted files are saved next to the originals, wherever they are,
+  # and the right-click entry and Alt+C are written into the file
+  # managers' settings in the home folder. Without this, every conversion
+  # would need a "save as" dialog: an extra step Joey exists to avoid.
+  - --filesystem=home
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /lib/cmake
+  - /share/doc
+  - /share/man
+  - '*.a'
+  - '*.la'
+
+modules:
+  # ---- Video and audio: FFmpeg with H.264 ----
+  - name: x264
+    config-opts:
+      - --enable-shared
+      - --enable-pic
+      - --disable-cli
+    sources:
+      - type: git
+        url: https://github.com/mirror/x264.git
+        commit: 31e19f92f00c7003fa115047ce50978bc98c3a0d
+
+  - name: ffmpeg
+    config-opts:
+      - --enable-gpl
+      - --enable-shared
+      - --disable-static
+      - --disable-doc
+      - --disable-ffplay
+      - --disable-ffprobe
+      - --enable-libx264
+      - --enable-libvpx
+      - --enable-libopus
+      - --enable-libvorbis
+      - --enable-libmp3lame
+      - --enable-libdav1d
+    cleanup:
+      - /share/ffmpeg
+    sources:
+      - type: git
+        url: https://github.com/FFmpeg/FFmpeg.git
+        tag: n8.0.3
+        commit: 8ae0b34901ba60a802f183ee75a250a9fc3e09a5
+
+  # ---- Images: ImageMagick with HEIC/AVIF reading and SVG ----
+  - name: libde265
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_SDL=OFF
+      - -DENABLE_ENCODER=OFF
+    sources:
+      - type: git
+        url: https://github.com/strukturag/libde265.git
+        tag: v1.1.3
+        commit: ba62bf4cfb3242f3bf0a45617ff09e35236e4d82
+
+  - name: libheif
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DWITH_LIBDE265=ON
+      - -DWITH_DAV1D=ON
+      - -DWITH_X265=OFF
+      - -DWITH_AOM_ENCODER=OFF
+      - -DWITH_AOM_DECODER=OFF
+      - -DWITH_EXAMPLES=OFF
+      - -DWITH_GDK_PIXBUF=OFF
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: git
+        url: https://github.com/strukturag/libheif.git
+        tag: v1.23.6
+        commit: f81f28ac014b1c28dee483ac45b72c6b05bc421a
+
+  - name: imagemagick
+    config-opts:
+      - --disable-docs
+      - --disable-static
+      - --with-heic=yes
+      - --with-rsvg=yes
+      - --with-webp=yes
+      - --without-x
+      - --without-perl
+      - --without-magick-plus-plus
+      - --without-gslib
+    sources:
+      - type: git
+        url: https://github.com/ImageMagick/ImageMagick.git
+        tag: 7.1.2-34
+        commit: a0c4bf729a26a5c2feb28b0365b47a8db736078a
+
+  # ---- PDF: pages to images, compression, merging ----
+  - name: ghostscript
+    buildsystem: simple
+    build-commands:
+      - ./autogen.sh --prefix=/app --disable-cups --disable-gtk --without-x --without-tesseract --without-libpaper --disable-compile-inits
+      - make -j${FLATPAK_BUILDER_N_JOBS} so gs
+      - make install
+    sources:
+      - type: git
+        url: https://github.com/ArtifexSoftware/ghostpdl.git
+        tag: ghostpdl-10.08.0
+        commit: 05631c2cba4e578fdd6bd25cae6f0939436de848
+
+  - name: qpdf
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DREQUIRE_CRYPTO_NATIVE=ON
+      - -DUSE_IMPLICIT_CRYPTO=OFF
+      - -DBUILD_DOC=OFF
+      - -DBUILD_STATIC_LIBS=OFF
+    sources:
+      - type: git
+        url: https://github.com/qpdf/qpdf.git
+        tag: v12.4.2
+        commit: 4eba95899886e851cc41d76886483b347612f2a8
+
+  # ---- Joey itself ----
+  - name: joey
+    buildsystem: simple
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+      env:
+        CARGO_HOME: /run/build/joey/cargo
+        CARGO_NET_OFFLINE: 'true'
+    build-commands:
+      - cargo --offline build --release -p joey-gtk -p joey-cli
+      - install -Dm755 target/release/joey-gtk /app/bin/joey-gtk
+      - install -Dm755 target/release/joey /app/bin/joey
+      - install -Dm644 data/io.github.outlook791.Joey.desktop /app/share/applications/io.github.outlook791.Joey.desktop
+      - install -Dm644 data/io.github.outlook791.Joey.metainfo.xml /app/share/metainfo/io.github.outlook791.Joey.metainfo.xml
+      - install -Dm644 data/io.github.outlook791.Joey.svg /app/share/icons/hicolor/scalable/apps/io.github.outlook791.Joey.svg
+      - for d in data/icons/*/; do install -Dm644 "$d/io.github.outlook791.Joey.png" "/app/share/icons/hicolor/$(basename "$d")/apps/io.github.outlook791.Joey.png"; done
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - target
+          - build-dir
+          - .flatpak-builder
+      - cargo-sources.json

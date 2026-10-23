@@ -376,3 +376,46 @@ fn tools_match_the_kind_of_file() {
     assert!(!joey.tools_for(Format::Pdf, 1).contains(&Tool::MergePdf));
     assert!(!joey.tools_for(Format::Mp3, 1).contains(&Tool::RemoveAudio));
 }
+
+#[test]
+fn ghostscript_renders_pages_when_poppler_is_missing() {
+    use joey_core::engines::ghostscript::Ghostscript;
+    let Some(gs) = Ghostscript::probe() else {
+        return eprintln!("skipped: no gs");
+    };
+    let joey = Joey::with_engines(vec![Box::new(gs)]);
+    let (dir, input) = sample("two-pages.pdf");
+    let out = joey.convert(&input, Format::Png, None).unwrap();
+    let names: Vec<_> = out
+        .iter()
+        .map(|p| p.file_name().unwrap().to_string_lossy().into_owned())
+        .collect();
+    assert_eq!(names, ["two-pages-1.png", "two-pages-2.png"]);
+    let o = Options {
+        pages: Some("2".into()),
+        ..Default::default()
+    };
+    let one = joey.convert_with(&input, Format::Jpg, None, &o).unwrap();
+    assert_eq!(one.len(), 1);
+    assert_eq!(Format::detect(&one[0]), Some(Format::Jpg));
+    drop(dir);
+}
+
+#[test]
+fn compress_pdf_with_ghostscript() {
+    let joey = Joey::new();
+    if !joey.tools_for(Format::Pdf, 1).contains(&Tool::Compress) {
+        return eprintln!("skipped: no gs");
+    }
+    let (dir, input) = sample("two-pages.pdf");
+    // A tiny PDF may already be minimal: either outcome is a clear answer.
+    match joey
+        .run_tool(Tool::Compress, std::slice::from_ref(&input))
+        .remove(0)
+    {
+        Ok(out) => assert_eq!(Format::detect(&out[0]), Some(Format::Pdf)),
+        Err(Error::Tool { message, .. }) => assert!(message.contains("small"), "{message}"),
+        Err(e) => panic!("{e}"),
+    }
+    drop(dir);
+}
