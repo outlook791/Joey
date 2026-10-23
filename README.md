@@ -8,7 +8,7 @@ Joey is a free, open-source file converter for Linux. Select files, press a key,
 
 <p align="center"><img src="docs/images/demo-en.gif" width="620" alt="A photo becomes a PDF: Joey opens, Enter, done"></p>
 
-> Status: current version (26.10.1). It works end to end; polish comes next.
+> Status: current version (26.10.2). It works end to end; polish comes next.
 >
 > **Made with AI:** Joey is written with an AI assistant. See [How Joey is made](#how-joey-is-made).
 >
