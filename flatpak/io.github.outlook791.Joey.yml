@@ -219,7 +219,7 @@ modules:
   - name: python-openpyxl
     buildsystem: simple
     build-commands:
-      - pip3 install --exec-prefix=/app --prefix=/app --no-deps --no-index
+      - pip3 install --prefix=/app --no-deps --no-index
         --find-links=. --no-build-isolation et_xmlfile openpyxl xlrd
     sources:
       - type: file
