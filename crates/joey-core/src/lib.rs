@@ -27,6 +27,10 @@ use graph::Graph;
 pub enum Error {
     #[error("{0}: file type not recognised")]
     UnknownFormat(PathBuf),
+    #[error("{0}: file not found")]
+    NotFound(PathBuf),
+    #[error("{0}: is a folder, not a file")]
+    IsFolder(PathBuf),
     #[error("cannot convert {from} to {to} on this computer")]
     NoRoute { from: Format, to: Format },
     #[error("{tool}: {message}")]
@@ -70,6 +74,12 @@ impl Joey {
     }
 
     pub fn detect(&self, path: &Path) -> Result<Format, Error> {
+        if path.is_dir() {
+            return Err(Error::IsFolder(path.to_path_buf()));
+        }
+        if !path.exists() {
+            return Err(Error::NotFound(path.to_path_buf()));
+        }
         Format::detect(path).ok_or_else(|| Error::UnknownFormat(path.to_path_buf()))
     }
 

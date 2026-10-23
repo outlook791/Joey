@@ -115,12 +115,11 @@ impl Format {
     }
 
     /// Detects the real format from the file's first bytes; falls back to
-    /// the extension only when the content says nothing.
+    /// the extension only when the content says nothing. A file that can't
+    /// be read is never guessed from its name.
     pub fn detect(path: &Path) -> Option<Format> {
         let mut head = [0u8; 512];
-        let n = File::open(path)
-            .and_then(|mut f| f.read(&mut head))
-            .unwrap_or(0);
+        let n = File::open(path).and_then(|mut f| f.read(&mut head)).ok()?;
         from_magic(&head[..n]).or_else(|| {
             path.extension()
                 .and_then(|e| e.to_str())

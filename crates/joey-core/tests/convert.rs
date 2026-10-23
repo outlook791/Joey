@@ -170,3 +170,23 @@ fn unknown_file_is_a_clear_error() {
         Err(Error::UnknownFormat(_))
     ));
 }
+
+#[test]
+fn missing_file_is_not_guessed_from_its_name() {
+    let joey = Joey::new();
+    let p = Path::new("/nonexistent/photo.jpg");
+    assert!(matches!(joey.detect(p), Err(Error::NotFound(_))));
+    assert!(matches!(
+        joey.convert(p, Format::Png, None),
+        Err(Error::NotFound(_))
+    ));
+}
+
+#[test]
+fn folder_is_a_clear_error() {
+    let dir = tempfile::tempdir().unwrap();
+    assert!(matches!(
+        Joey::new().detect(dir.path()),
+        Err(Error::IsFolder(_))
+    ));
+}
