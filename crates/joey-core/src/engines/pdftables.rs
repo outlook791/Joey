@@ -77,13 +77,26 @@ def columns(text, into):
 def poppler_tables():
     # Without pdfplumber: Poppler's text in its page layout, split at the
     # gaps between columns. Fine for invoices and statements.
-    import subprocess
-    out = subprocess.run(["pdftotext", "-layout", src, "-"], capture_output=True, text=True, check=True).stdout
-    chosen = None if pages == "all" else set(page_list(pages, out.count("\f") + 1))
+    import shutil, subprocess
     found_all = []
-    for n, page in enumerate(out.split("\f"), 1):
-        if chosen is None or n in chosen:
-            columns(page, found_all)
+    if shutil.which("pdftotext"):
+        out = subprocess.run(["pdftotext", "-layout", src, "-"], capture_output=True, text=True, check=True).stdout
+        chosen = None if pages == "all" else set(page_list(pages, out.count("\f") + 1))
+        for n, page in enumerate(out.split("\f"), 1):
+            if chosen is None or n in chosen:
+                columns(page, found_all)
+        return found_all
+    # Or Ghostscript's text, which also keeps the layout (one page at a time).
+    def gs_page(first, last):
+        cmd = ["gs", "-q", "-dNOPAUSE", "-dBATCH", "-dSAFER", "-sDEVICE=txtwrite", "-o", "-"]
+        if first:
+            cmd += ["-dFirstPage=%d" % first, "-dLastPage=%d" % last]
+        return subprocess.run(cmd + [src], capture_output=True, text=True).stdout.replace("\r", "")
+    if pages == "all":
+        columns(gs_page(None, None), found_all)
+    else:
+        for n in page_list(pages, 100000):
+            columns(gs_page(n, n), found_all)
     return found_all
 
 if not tables:
@@ -119,7 +132,7 @@ impl PdfTables {
         let python = which("python3")?;
         // Checks the libraries exist without importing them (fast).
         let check = "import importlib.util as u, shutil, sys; \
-                     ok = u.find_spec('openpyxl') and (u.find_spec('pdfplumber') or u.find_spec('camelot') or shutil.which('pdftotext')); \
+                     ok = u.find_spec('openpyxl') and (u.find_spec('pdfplumber') or u.find_spec('camelot') or shutil.which('pdftotext') or shutil.which('gs')); \
                      sys.exit(0 if ok else 1)";
         let ok = Command::new(&python)
             .args(["-c", check])

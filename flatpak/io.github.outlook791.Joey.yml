@@ -8,10 +8,11 @@
 # Regenerate cargo-sources.json after changing dependencies:
 #   python3 flatpak-cargo-generator.py Cargo.lock -o flatpak/cargo-sources.json
 #
-# Office documents and Pandoc formats (Markdown, HTML, EPUB) are not
-# included: LibreOffice and Pandoc are far too big to bundle. The Flatpak
-# converts images, drawings, PDFs, audio, video, subtitles and archives;
-# the install.sh build also handles documents through the system tools.
+# Inside: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive,
+# Pandoc and Typst (Word, ODT, RTF, Markdown, HTML, EPUB, and those to
+# PDF), openpyxl (Excel <-> CSV, PDF tables to Excel). LibreOffice is far
+# too big to bundle: Joey uses the one on the computer, if any, for the
+# best Office conversions, PowerPoint included.
 
 id: io.github.outlook791.Joey
 runtime: org.gnome.Platform
@@ -31,6 +32,13 @@ finish-args:
   # managers' settings in the home folder. Without this, every conversion
   # would need a "save as" dialog: an extra step Joey exists to avoid.
   - --filesystem=home
+  # Programs Joey hands files to, outside the sandbox: LibreOffice for
+  # Office documents (too big to bundle), KDE Connect and LocalSend to send
+  # files to phones, a terminal for "Open a terminal here". Started with
+  # flatpak-spawn --host, only when the person picks one of these.
+  - --talk-name=org.freedesktop.Flatpak
+  # GSConnect, KDE Connect for GNOME: send files to paired phones.
+  - --talk-name=org.gnome.Shell.Extensions.GSConnect
 
 cleanup:
   - /include
@@ -171,6 +179,49 @@ modules:
         commit: 27cbc7827172698143e440801fc0ba39ccb4f1f5
 
   # ---- Joey itself ----
+  # ---- Documents: Pandoc and Typst (upstream release builds) ----
+  - name: pandoc
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 bin/pandoc /app/bin/pandoc
+    sources:
+      - type: archive
+        only-arches: [x86_64]
+        url: https://github.com/jgm/pandoc/releases/download/3.12.1/pandoc-3.12.1-linux-amd64.tar.gz
+        sha256: d0c90410e90204c9ca83b8539fac5c7aed01fd537207e4585849f8abc5df20b8
+      - type: archive
+        only-arches: [aarch64]
+        url: https://github.com/jgm/pandoc/releases/download/3.12.1/pandoc-3.12.1-linux-arm64.tar.gz
+        sha256: 445d96fd08801fe636cab1158b4f017ee320ac3b7446328b4fe2f902117b19b9
+
+  - name: typst
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 typst /app/bin/typst
+    sources:
+      - type: archive
+        only-arches: [x86_64]
+        url: https://github.com/typst/typst/releases/download/v0.15.1/typst-x86_64-unknown-linux-musl.tar.xz
+        sha256: a6d077d0a95eed5a2eba715b2dae06be954f624ccbf85758a03f389ded33118c
+      - type: archive
+        only-arches: [aarch64]
+        url: https://github.com/typst/typst/releases/download/v0.15.1/typst-aarch64-unknown-linux-musl.tar.xz
+        sha256: 5aa8d74a3d906e60ea12a66ac2f37f8eef1b14cbad7182a745e393a10c23dcee
+
+  # ---- Spreadsheets: openpyxl (Excel <-> CSV, PDF tables to Excel) ----
+  - name: python-openpyxl
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exec-prefix=/app --prefix=/app --no-deps --no-index
+        --find-links=. --no-build-isolation et_xmlfile openpyxl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl
+        sha256: 7a91720bc756843502c3b7504c77b8fe44217c85c537d85037f0f536151b2caa
+      - type: file
+        url: https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl
+        sha256: 5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2
+
   - name: joey
     buildsystem: simple
     build-options:

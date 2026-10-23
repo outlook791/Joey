@@ -115,14 +115,20 @@ impl Engine for Poppler {
 /// PDF text through Poppler's `pdftotext`, in reading order.
 pub struct PdfText {
     bin: PathBuf,
+    /// Ghostscript instead of pdftotext (when Poppler isn't installed).
+    gs: bool,
     edges: Vec<(Format, Format)>,
 }
 
 impl PdfText {
     pub fn probe() -> Option<Self> {
-        let bin = which("pdftotext")?;
+        let (bin, gs) = match which("pdftotext") {
+            Some(b) => (b, false),
+            None => (which("gs")?, true),
+        };
         Some(Self {
             bin,
+            gs,
             edges: vec![(Format::Pdf, Format::Txt)],
         })
     }
@@ -141,6 +147,19 @@ impl Engine for PdfText {
         let o = step.opts();
         let out = step.output();
         let mut cmd = Command::new(&self.bin);
+        if self.gs {
+            cmd.args(["-q", "-dNOPAUSE", "-dBATCH", "-dSAFER", "-sDEVICE=txtwrite"]);
+            if let Some(&(first, last)) = o.page_ranges().first() {
+                cmd.arg(format!("-dFirstPage={first}"))
+                    .arg(format!("-dLastPage={last}"));
+            }
+            cmd.arg("-o").arg(&out).arg(step.input);
+            run("ghostscript", &mut cmd)?;
+            // Windows line ends, and lines indented to the page position.
+            let text = std::fs::read_to_string(&out)?.replace('\r', "");
+            std::fs::write(&out, text)?;
+            return Ok(vec![out]);
+        }
         cmd.args(["-enc", "UTF-8"]);
         // pdftotext takes one range: the first one chosen.
         if let Some(&(first, last)) = o.page_ranges().first() {

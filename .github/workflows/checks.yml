@@ -98,9 +98,18 @@ jobs:
           # user), opened to the sandbox as the home folder is for people.
           dir=/srv/joey-test
           mkdir -p "$dir"
-          cp crates/joey-core/tests/fixtures/photo.jpg crates/joey-core/tests/fixtures/two-pages.pdf "$dir/"
+          for f in photo.jpg two-pages.pdf note.docx readme.md invoice.pdf table.csv; do
+            cp "crates/joey-core/tests/fixtures/$f" "$dir/"
+          done
           run="flatpak run --filesystem=$dir --command=joey io.github.outlook791.Joey"
           ci/run.sh "Flatpak convert" $run "$dir/photo.jpg" --to webp
           ci/run.sh "Flatpak PDF pages" $run "$dir/two-pages.pdf" --to png
+          ci/run.sh "Flatpak Word to PDF" $run "$dir/note.docx" --to pdf
+          ci/run.sh "Flatpak Markdown to EPUB" $run "$dir/readme.md" --to epub
+          ci/run.sh "Flatpak PDF to Excel" $run "$dir/invoice.pdf" --to xlsx
+          ci/run.sh "Flatpak PDF to text" $run "$dir/invoice.pdf" --to txt
+          ci/run.sh "Flatpak CSV to Excel" $run "$dir/table.csv" --to xlsx
           ls -l "$dir"
-          test -s "$dir/photo.webp" && test -s "$dir/two-pages-1.png"
+          for f in photo.webp two-pages-1.png note.pdf readme.epub invoice.xlsx invoice.txt table.xlsx; do
+            test -s "$dir/$f" || { echo "::error title=Flatpak::$f missing"; exit 1; }
+          done

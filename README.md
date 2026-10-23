@@ -101,7 +101,7 @@ flatpak-builder --user --install-deps-from=flathub --force-clean \
 flatpak run io.github.outlook791.Joey --setup-file-managers   # Alt+C, right-click, Meta+C
 ```
 
-The Flatpak bundles FFmpeg, ImageMagick, Ghostscript, qpdf and libarchive. It does not include LibreOffice or Pandoc (far too big to bundle), so Office documents, Markdown, HTML and EPUB need the source install. Inside the Flatpak, "Open a terminal here", KDE Connect and LocalSend are not available (the sandbox can't start other programs).
+The Flatpak includes everything except LibreOffice: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc and Typst (Word, ODT, RTF, Markdown, HTML and EPUB, also to PDF), and openpyxl (Excel ↔ CSV, PDF tables to Excel, PDF to text). LibreOffice is far too big to bundle: if it's on your computer (as a normal program or a Flatpak), Joey uses it for the best Office conversions, PowerPoint included. KDE Connect, GSConnect, LocalSend and "Open a terminal here" work too. For this the Flatpak may start those programs outside its sandbox, only when you choose them.
 
 ## Converting
 
@@ -191,7 +191,7 @@ When the files go on to another app (terminal, KDE Connect, LocalSend), Joey clo
 
 The free alternative to AirDrop:
 
-- **KDE Connect** (on GNOME, GSConnect uses the same app): pair your phone or PC once in KDE Connect. Each paired device that is reachable appears as *Send to Pixel 8* (with its name). The file arrives on the device; KDE Connect shows the progress.
+- **KDE Connect** (KDE and other desktops) or **GSConnect** (its GNOME version, a GNOME Shell extension): pair your phone or PC once in the KDE Connect app on the phone. Each paired device that is reachable appears as *Send to Pixel 8* (with its name). The file arrives on the device; KDE Connect or GSConnect shows the progress.
 - **LocalSend**: works with Android, iPhone, Windows, Mac and Linux on the same Wi-Fi, without pairing. *Send with LocalSend…* opens LocalSend with your files already selected: pick the device there.
 
 ## PDF to Excel

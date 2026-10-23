@@ -1,5 +1,6 @@
 //! Text documents through Pandoc: Markdown, web pages (HTML), EPUB e-books,
-//! and Word/ODT/RTF/TXT when LibreOffice isn't there.
+//! and Word/ODT/RTF/TXT when LibreOffice isn't there; with Typst, all of
+//! them to PDF too.
 
 use std::path::PathBuf;
 use std::process::Command;
@@ -21,6 +22,8 @@ const OUTPUTS: [Format; 7] = INPUTS;
 
 pub struct Pandoc {
     bin: PathBuf,
+    /// Typst lays documents out as PDF when LibreOffice isn't there.
+    typst: Option<PathBuf>,
     edges: Vec<(Format, Format)>,
 }
 
@@ -35,7 +38,11 @@ impl Pandoc {
                 }
             }
         }
-        Some(Self { bin, edges })
+        let typst = which("typst");
+        if typst.is_some() {
+            edges.extend(INPUTS.iter().map(|&f| (f, Format::Pdf)));
+        }
+        Some(Self { bin, typst, edges })
     }
 }
 
@@ -59,6 +66,7 @@ fn writer(f: Format) -> &'static str {
         Format::Epub => "epub",
         Format::Rtf => "rtf",
         Format::Txt => "plain",
+        Format::Pdf => "typst",
         _ => "gfm",
     }
 }
@@ -87,6 +95,11 @@ impl Engine for Pandoc {
             }
             Format::Rtf => {
                 cmd.arg("--standalone");
+            }
+            Format::Pdf => {
+                if let Some(typst) = &self.typst {
+                    cmd.arg(format!("--pdf-engine={}", typst.display()));
+                }
             }
             _ => {}
         }

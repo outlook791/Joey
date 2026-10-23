@@ -101,7 +101,7 @@ flatpak-builder --user --install-deps-from=flathub --force-clean \
 flatpak run io.github.outlook791.Joey --setup-file-managers   # Alt+C, tasto destro, Meta+C
 ```
 
-Il Flatpak include FFmpeg, ImageMagick, Ghostscript, qpdf e libarchive. Non include LibreOffice né Pandoc (troppo grandi), quindi documenti Office, Markdown, HTML ed EPUB richiedono l'installazione dal sorgente. Dentro il Flatpak non sono disponibili "Apri un terminale qui", KDE Connect e LocalSend (la sandbox non può avviare altri programmi).
+Il Flatpak include tutto tranne LibreOffice: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc e Typst (Word, ODT, RTF, Markdown, HTML ed EPUB, anche in PDF) e openpyxl (Excel ↔ CSV, tabelle PDF in Excel, PDF in testo). LibreOffice è troppo grande da includere: se è sul tuo computer (normale o Flatpak), Joey lo usa per le conversioni Office migliori, PowerPoint compreso. Funzionano anche KDE Connect, GSConnect, LocalSend e "Apri un terminale qui". Per questo il Flatpak può avviare quei programmi fuori dalla sua sandbox, solo quando li scegli.
 
 ## Convertire
 
@@ -191,7 +191,7 @@ Quando i file passano a un'altra app (terminale, KDE Connect, LocalSend), Joey s
 
 L'alternativa gratuita ad AirDrop:
 
-- **KDE Connect** (su GNOME, GSConnect usa la stessa app): associa una volta il telefono o il PC in KDE Connect. Ogni dispositivo associato e raggiungibile compare come *Invia a Pixel 8* (con il suo nome). Il file arriva sul dispositivo; KDE Connect mostra l'avanzamento.
+- **KDE Connect** (KDE e altri desktop) o **GSConnect** (la sua versione per GNOME, un'estensione di GNOME Shell): associa una volta il telefono o il PC con l'app KDE Connect sul telefono. Ogni dispositivo associato e raggiungibile compare come *Invia a Pixel 8* (con il suo nome). Il file arriva sul dispositivo; KDE Connect o GSConnect mostrano l'avanzamento.
 - **LocalSend**: funziona con Android, iPhone, Windows, Mac e Linux sulla stessa rete Wi-Fi, senza associazione. *Invia con LocalSend…* apre LocalSend con i file già selezionati: lì scegli il dispositivo.
 
 ## Da PDF a Excel

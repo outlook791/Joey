@@ -1,6 +1,6 @@
 //! File actions: things to do with files that aren't conversions, for any
 //! kind of file, folders included (like Tangerine's Copy, Move, Copy Path,
-//! Terminal and AirDrop — here KDE Connect and LocalSend).
+//! Terminal and AirDrop — here KDE Connect, GSConnect and LocalSend).
 
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
@@ -34,7 +34,7 @@ impl Action {
             Action::Phone(i) => {
                 let name = phones()
                     .get(i as usize)
-                    .map(|(_, n)| n.as_str())
+                    .map(|d| d.name.as_str())
                     .unwrap_or("?");
                 tf("Send to {device}", &[("device", &name)])
             }
@@ -109,10 +109,6 @@ pub fn available(zip: bool) -> Vec<Action> {
     v
 }
 
-fn sandboxed() -> bool {
-    std::env::var_os("FLATPAK_ID").is_some()
-}
-
 /// Runs a command and returns its output, giving up after `secs`.
 fn output_within(mut cmd: Command, secs: u64) -> Option<String> {
     let child = cmd
@@ -130,52 +126,160 @@ fn output_within(mut cmd: Command, secs: u64) -> Option<String> {
         .then(|| String::from_utf8_lossy(&out.stdout).into_owned())
 }
 
-/// Phones and PCs paired with KDE Connect and reachable now: (id, name).
-pub fn phones() -> &'static [(String, String)] {
-    static PHONES: OnceLock<Vec<(String, String)>> = OnceLock::new();
+/// A phone or PC that files can be sent to now.
+pub struct Device {
+    pub id: String,
+    pub name: String,
+    via: Via,
+}
+
+#[derive(Clone, Copy, PartialEq)]
+enum Via {
+    /// KDE Connect, through its command.
+    KdeConnect,
+    /// GSConnect, KDE Connect for GNOME, through D-Bus.
+    GsConnect,
+}
+
+const GSCONNECT: &str = "org.gnome.Shell.Extensions.GSConnect";
+
+/// Phones and PCs paired with KDE Connect or GSConnect and reachable now.
+pub fn phones() -> &'static [Device] {
+    static PHONES: OnceLock<Vec<Device>> = OnceLock::new();
     PHONES.get_or_init(|| {
-        if sandboxed() {
-            return Vec::new();
+        let mut list = Vec::new();
+        if let Some(bin) = joey_core::engine::which("kdeconnect-cli") {
+            let mut cmd = Command::new(bin);
+            cmd.args(["--list-available", "--id-name-only"]);
+            list.extend(
+                output_within(cmd, 2)
+                    .unwrap_or_default()
+                    .lines()
+                    .filter_map(|l| {
+                        let (id, name) = l.trim().split_once(' ')?;
+                        Some(Device {
+                            id: id.to_string(),
+                            name: name.trim().to_string(),
+                            via: Via::KdeConnect,
+                        })
+                    }),
+            );
         }
-        let Some(bin) = joey_core::engine::which("kdeconnect-cli") else {
-            return Vec::new();
-        };
-        let mut cmd = Command::new(bin);
-        cmd.args(["--list-available", "--id-name-only"]);
-        output_within(cmd, 2)
-            .unwrap_or_default()
-            .lines()
-            .filter_map(|l| {
-                let (id, name) = l.trim().split_once(' ')?;
-                Some((id.to_string(), name.trim().to_string()))
-            })
-            .collect()
+        list.extend(gsconnect_devices());
+        list
     })
 }
 
-/// Sends files to a KDE Connect device. The transfer continues in KDE
-/// Connect, which shows its own progress.
-pub fn send_to_phone(index: u8, files: &[PathBuf]) -> Result<String, String> {
-    let (id, name) = phones().get(index as usize).ok_or("device not found")?;
-    let bin = joey_core::engine::which("kdeconnect-cli").ok_or("KDE Connect isn't installed")?;
-    let status = Command::new(bin)
-        .args(["--device", id])
-        .arg("--share")
-        .args(files)
-        .status()
-        .map_err(|e| e.to_string())?;
-    if status.success() {
-        Ok(tf("Sent to {device}", &[("device", name)]))
-    } else {
-        Err(tf("{device} didn't answer", &[("device", name)]))
+/// GSConnect's paired, connected devices, from its D-Bus objects.
+fn gsconnect_devices() -> Vec<Device> {
+    use gtk::gio;
+    use gtk::glib;
+    let Ok(bus) = gio::bus_get_sync(gio::BusType::Session, gio::Cancellable::NONE) else {
+        return Vec::new();
+    };
+    let Ok(reply) = bus.call_sync(
+        Some(GSCONNECT),
+        "/org/gnome/Shell/Extensions/GSConnect",
+        "org.freedesktop.DBus.ObjectManager",
+        "GetManagedObjects",
+        None,
+        Some(glib::VariantTy::new("(a{oa{sa{sv}}})").unwrap()),
+        gio::DBusCallFlags::NO_AUTO_START,
+        1500,
+        gio::Cancellable::NONE,
+    ) else {
+        return Vec::new();
+    };
+    let mut out = Vec::new();
+    let objects = reply.child_value(0);
+    for i in 0..objects.n_children() {
+        let entry = objects.child_value(i);
+        let path: String = entry.child_value(0).str().unwrap_or_default().to_string();
+        let ifaces = entry.child_value(1);
+        let props = (0..ifaces.n_children())
+            .map(|j| ifaces.child_value(j))
+            .find(|e| e.child_value(0).str() == Some("org.gnome.Shell.Extensions.GSConnect.Device"))
+            .map(|e| glib::VariantDict::new(Some(&e.child_value(1))));
+        let Some(props) = props else {
+            continue;
+        };
+        let get_bool = |k: &str| {
+            props
+                .lookup_value(k, Some(glib::VariantTy::BOOLEAN))
+                .and_then(|v| v.get::<bool>())
+                .unwrap_or(false)
+        };
+        let name = props
+            .lookup_value("Name", Some(glib::VariantTy::STRING))
+            .and_then(|v| v.get::<String>())
+            .unwrap_or_else(|| "GSConnect".into());
+        if get_bool("Connected") && get_bool("Paired") {
+            out.push(Device {
+                id: path,
+                name,
+                via: Via::GsConnect,
+            });
+        }
     }
+    out
+}
+
+/// Sends files to a phone or PC. The transfer continues in KDE Connect or
+/// GSConnect, which show their own progress.
+pub fn send_to_phone(index: u8, files: &[PathBuf]) -> Result<String, String> {
+    let d = phones().get(index as usize).ok_or("device not found")?;
+    let ok = match d.via {
+        Via::KdeConnect => {
+            let bin =
+                joey_core::engine::which("kdeconnect-cli").ok_or("KDE Connect isn't installed")?;
+            Command::new(bin)
+                .args(["--device", &d.id])
+                .arg("--share")
+                .args(files)
+                .status()
+                .map_err(|e| e.to_string())?
+                .success()
+        }
+        Via::GsConnect => files.iter().all(|f| gsconnect_share(&d.id, f).is_ok()),
+    };
+    if ok {
+        Ok(tf("Sent to {device}", &[("device", &d.name)]))
+    } else {
+        Err(tf("{device} didn't answer", &[("device", &d.name)]))
+    }
+}
+
+/// Asks GSConnect to send one file (its "shareFile" device action).
+fn gsconnect_share(device: &str, file: &Path) -> Result<(), String> {
+    use gtk::gio::{self, prelude::*};
+    use gtk::glib;
+    let bus = gio::bus_get_sync(gio::BusType::Session, gio::Cancellable::NONE)
+        .map_err(|e| e.to_string())?;
+    let uri = gio::File::for_path(file).uri().to_string();
+    let param: glib::Variant = (uri, false).to_variant();
+    let args = (
+        "shareFile",
+        vec![param],
+        std::collections::HashMap::<String, glib::Variant>::new(),
+    )
+        .to_variant();
+    bus.call_sync(
+        Some(GSCONNECT),
+        device,
+        "org.gtk.Actions",
+        "Activate",
+        Some(&args),
+        None,
+        gio::DBusCallFlags::NONE,
+        5000,
+        gio::Cancellable::NONE,
+    )
+    .map(|_| ())
+    .map_err(|e| e.to_string())
 }
 
 /// How to start LocalSend: a program, or its Flatpak.
 fn localsend() -> Option<Command> {
-    if sandboxed() {
-        return None;
-    }
     for bin in ["localsend_app", "localsend"] {
         if let Some(p) = joey_core::engine::which(bin) {
             return Some(Command::new(p));
@@ -209,9 +313,6 @@ pub fn open_localsend(files: &[PathBuf]) -> Result<String, String> {
 
 /// A terminal program and how to tell it the starting folder.
 fn terminal() -> Option<(PathBuf, &'static str)> {
-    if std::env::var_os("FLATPAK_ID").is_some() {
-        return None; // the sandbox can't start host programs
-    }
     let known: [(&str, &str); 12] = [
         ("xdg-terminal-exec", ""),
         ("ptyxis", "--working-directory="),

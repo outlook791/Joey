@@ -42,6 +42,7 @@ struct Cli {
 
 fn main() -> ExitCode {
     let cli = Cli::parse();
+    joey_core::host::bridge();
     if cli.mcp {
         return match mcp::serve() {
             Ok(()) => ExitCode::SUCCESS,

@@ -151,7 +151,11 @@ impl Engine for LibreOffice {
     fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
         // A private profile per run: lets several conversions run at once
         // and never touches the user's own LibreOffice settings.
-        let profile = tempfile::Builder::new().prefix("joey-lo-").tempdir()?;
+        // Next to the files, not in /tmp: from the Flatpak, LibreOffice may
+        // run outside the sandbox, which can't see the sandbox's /tmp.
+        let profile = tempfile::Builder::new()
+            .prefix(".joey-lo-")
+            .tempdir_in(step.work_dir)?;
         let out_dir = step.work_dir.join(format!("{}.lo", step.stem));
         std::fs::create_dir_all(&out_dir)?;
         let o = step.opts();

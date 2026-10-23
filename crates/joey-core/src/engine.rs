@@ -131,6 +131,7 @@ pub fn available_engines() -> Vec<Box<dyn Engine>> {
     add!(libreoffice::LibreOffice::probe());
     add!(pandoc::Pandoc::probe());
     add!(pdftables::PdfTables::probe());
+    add!(sheets::Sheets::probe());
     add!(archive::Archive::probe());
     add!(Some(text::Text::new()));
     engines

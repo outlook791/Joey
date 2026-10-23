@@ -8,4 +8,5 @@ pub mod pandoc;
 pub mod pdftables;
 pub mod poppler;
 pub mod rsvg;
+pub mod sheets;
 pub mod text;

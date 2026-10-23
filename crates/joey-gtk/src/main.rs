@@ -182,6 +182,9 @@ pub struct Ui {
 
 fn main() -> glib::ExitCode {
     feedback::install_panic_hook();
+    // Flatpak: reach LibreOffice, KDE Connect, LocalSend and terminals on
+    // the computer.
+    joey_core::host::bridge();
     // Plain command-line actions, no window.
     match std::env::args().nth(1).as_deref() {
         Some("--setup-file-managers") => {

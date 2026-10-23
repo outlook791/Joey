@@ -16,6 +16,7 @@ pub mod engines;
 pub mod estimate;
 pub mod format;
 pub mod graph;
+pub mod host;
 pub mod options;
 pub mod tools;
 
