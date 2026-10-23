@@ -12,6 +12,7 @@
 
 pub mod engine;
 pub mod engines;
+pub mod estimate;
 pub mod format;
 pub mod graph;
 
@@ -86,6 +87,13 @@ impl Joey {
     /// Formats this kind of file can become here.
     pub fn targets(&self, from: Format) -> Vec<Format> {
         self.graph.targets(from)
+    }
+
+    /// Same as `targets`, most wanted formats first.
+    pub fn suggested_targets(&self, from: Format) -> Vec<Format> {
+        let mut t = self.graph.targets(from);
+        t.sort_by_key(|&f| estimate::popularity(f));
+        t
     }
 
     /// The chain of formats a conversion will go through.

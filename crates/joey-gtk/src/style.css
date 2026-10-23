@@ -1,0 +1,79 @@
+/* The window itself is invisible: only the pocket shows. */
+window.joey {
+  background: none;
+  box-shadow: none;
+}
+
+.pocket {
+  background-color: @window_bg_color;
+  border: 1px solid alpha(currentColor, 0.15);
+  border-radius: 16px 16px 44px 44px;
+  margin: 10px;
+  padding: 0 6px 18px 6px;
+  box-shadow: 0 3px 12px alpha(black, 0.22);
+}
+
+.summary {
+  padding: 0 12px 6px 12px;
+}
+
+.group-title {
+  font-size: 0.85em;
+  padding: 10px 12px 3px 12px;
+}
+
+.fmt-row {
+  border-radius: 9px;
+  padding: 6px 8px;
+  min-height: 0;
+}
+
+.fmt-row.on {
+  background-color: alpha(@accent_bg_color, 0.16);
+  color: @accent_color;
+}
+
+.key {
+  font-family: monospace;
+  font-size: 0.78em;
+  border: 1px solid alpha(currentColor, 0.3);
+  border-radius: 5px;
+  min-width: 18px;
+  min-height: 18px;
+}
+
+.fmt-row.on .key {
+  border-color: alpha(@accent_color, 0.6);
+}
+
+.size {
+  font-size: 0.85em;
+}
+
+.convert {
+  margin: 12px 8px 0 8px;
+  border-radius: 10px;
+}
+
+.hint {
+  font-size: 0.8em;
+  margin-top: 8px;
+}
+
+.skipped {
+  font-size: 0.85em;
+  padding: 2px 12px;
+}
+
+.empty-page,
+.done-page,
+.progress-page {
+  padding: 18px 16px 4px 16px;
+}
+
+.more {
+  font-size: 0.85em;
+  min-height: 0;
+  padding: 2px 8px;
+  opacity: 0.7;
+}

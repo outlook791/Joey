@@ -4,19 +4,31 @@
 
 Joey is a free, open-source file converter for Linux. Select files, press a key, pick a format: done. Everything happens on your computer; nothing is uploaded.
 
-> Status: early development. This is phase 1 of 5 — the conversion engine, used from the terminal. The pocket-shaped selector, file manager integration and the Flatpak come next.
+> Status: early development, phase 2 of 5 — the engine and the pocket-shaped selector work. The Alt+C shortcut in your file manager and the Flatpak come next.
 
-## Try it (phase 1)
+## Try it
 
-You need Rust and the tools Joey drives. On Fedora:
+You need Rust, GTK 4, libadwaita and the tools Joey drives. On Fedora:
 
 ```sh
-sudo dnf install rust cargo ImageMagick poppler-utils img2pdf librsvg2-tools
+sudo dnf install rust cargo gtk4-devel libadwaita-devel ImageMagick poppler-utils img2pdf librsvg2-tools
 git clone https://github.com/outlook791/joey && cd joey
 cargo build --release
 ```
 
-Then:
+### The window
+
+```sh
+./target/release/joey-gtk ~/Pictures/*.jpg     # open with files
+./target/release/joey-gtk                      # empty: drop files on it
+```
+
+- Numbers pick a format, **Enter** converts, **Esc** closes.
+- One kind of file: the number converts right away.
+- Mixed files get a group each; every group starts on the format you chose last time for that kind of file.
+- Sizes are rough estimates (`~`). When everything went well, the pocket closes by itself.
+
+### The command line
 
 ```sh
 ./target/release/joey photo.heic --to jpg       # one file
@@ -52,6 +64,7 @@ Audio, video, Office documents and more arrive in phase 4.
 ```
 crates/joey-core   the engine: format detection, conversion graph, tool wrappers
 crates/joey-cli    the `joey` command
+crates/joey-gtk    the pocket-shaped selector (GTK 4 + libadwaita)
 ```
 
 Run the tests with `cargo test`. Conversions the installed tools can't do are reported as skipped.

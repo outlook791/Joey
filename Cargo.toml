@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/joey-core", "crates/joey-cli"]
+members = ["crates/joey-core", "crates/joey-cli", "crates/joey-gtk"]
 
 [workspace.package]
 version = "0.1.0"
