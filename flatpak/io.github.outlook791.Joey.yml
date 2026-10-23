@@ -208,12 +208,12 @@ modules:
         url: https://github.com/typst/typst/releases/download/v0.15.1/typst-aarch64-unknown-linux-musl.tar.xz
         sha256: 5aa8d74a3d906e60ea12a66ac2f37f8eef1b14cbad7182a745e393a10c23dcee
 
-  # ---- Spreadsheets: openpyxl (Excel <-> CSV, PDF tables to Excel) ----
+  # ---- Spreadsheets: openpyxl and xlrd (XLSX, XLS, ODS, CSV; PDF tables) ----
   - name: python-openpyxl
     buildsystem: simple
     build-commands:
       - pip3 install --exec-prefix=/app --prefix=/app --no-deps --no-index
-        --find-links=. --no-build-isolation et_xmlfile openpyxl
+        --find-links=. --no-build-isolation et_xmlfile openpyxl xlrd
     sources:
       - type: file
         url: https://files.pythonhosted.org/packages/c1/8b/5fe2cc11fee489817272089c4203e679c63b570a5aaeb18d852ae3cbba6a/et_xmlfile-2.0.0-py3-none-any.whl
@@ -221,6 +221,9 @@ modules:
       - type: file
         url: https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl
         sha256: 5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2
+      - type: file
+        url: https://files.pythonhosted.org/packages/1a/62/c8d562e7766786ba6587d09c5a8ba9f718ed3fa8af7f4553e8f91c36f302/xlrd-2.0.2-py2.py3-none-any.whl
+        sha256: ea762c3d29f4cca48d82df517b6d89fbce4db3107f9d78713e48cd321d5c9aa9
 
   - name: joey
     buildsystem: simple
