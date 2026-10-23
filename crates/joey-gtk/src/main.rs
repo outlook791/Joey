@@ -422,11 +422,8 @@ fn file_name(p: &std::path::Path) -> String {
 }
 
 fn category_label(f: Format) -> &'static str {
-    match f.category() {
-        Category::Image => "image",
-        Category::Vector => "drawing",
-        Category::Document => "PDF",
-    }
+    let _: Category = f.category();
+    f.category().label()
 }
 
 fn render(ui: &Rc<Ui>) {
