@@ -36,9 +36,9 @@ jobs:
           esac
       - uses: actions/checkout@v4
       - name: Install what Joey needs
-        run: ci/deps.sh ${{ matrix.distro }}
+        run: ci/run.sh "${{ matrix.name }}: install" ci/deps.sh ${{ matrix.distro }}
       - name: Build, test and try everything
-        run: ci/check.sh
+        run: ci/run.sh "${{ matrix.name }}: checks" ci/check.sh
 
   style:
     name: Code style and store metadata
@@ -50,13 +50,13 @@ jobs:
       - run: ci/deps.sh fedora
       - run: dnf -y -q install rustfmt clippy
       - name: Formatting
-        run: cargo fmt --all --check
+        run: ci/run.sh Formatting cargo fmt --all --check
       - name: Lints
-        run: cargo clippy --locked --all-targets -- -D warnings
+        run: ci/run.sh Lints cargo clippy --locked --all-targets -- -D warnings
       - name: Menu entry
-        run: desktop-file-validate data/io.github.outlook791.Joey.desktop
+        run: ci/run.sh "Menu entry" desktop-file-validate data/io.github.outlook791.Joey.desktop
       - name: Store metadata
-        run: appstreamcli validate --no-net --explain data/io.github.outlook791.Joey.metainfo.xml
+        run: ci/run.sh "Store metadata" appstreamcli validate --no-net --explain data/io.github.outlook791.Joey.metainfo.xml
 
   flatpak:
     name: Flatpak
