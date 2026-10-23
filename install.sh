@@ -27,6 +27,7 @@ remove_icons() {
 }
 
 if [ "${1:-}" = "--uninstall" ]; then
+    "$BIN/joey-gtk" --remove-file-managers 2>/dev/null || true
     rm -f "$BIN/joey" "$BIN/joey-gtk" "$APPS/$APP_ID.desktop"
     remove_icons
     refresh
@@ -46,4 +47,7 @@ for dir in data/icons/*/; do
     install -m 644 "$dir$APP_ID.png" "$HICOLOR/$size/apps/"
 done
 refresh
-echo "Joey installed. If the icon doesn't show yet, log out and back in."
+echo "Joey installed."
+# Right-click entry and Alt+C in the file managers found on this computer.
+"$BIN/joey-gtk" --setup-file-managers || true
+echo "If the icon doesn't show yet, log out and back in."

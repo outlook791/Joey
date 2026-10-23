@@ -77,3 +77,24 @@ window.joey {
   padding: 2px 8px;
   opacity: 0.7;
 }
+
+.tools-title {
+  font-size: 0.8em;
+  padding: 6px 12px 2px 12px;
+}
+
+.actions {
+  margin: 12px 8px 0 8px;
+}
+
+.actions .convert {
+  margin: 0;
+}
+
+.adjust-button {
+  border-radius: 10px;
+}
+
+.adjust-page {
+  padding: 4px 8px 0 8px;
+}
