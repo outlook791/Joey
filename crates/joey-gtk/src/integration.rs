@@ -24,6 +24,8 @@ type Setup = fn() -> std::io::Result<bool>;
 pub struct Report {
     /// (file manager, has the Alt+C shortcut)
     pub done: Vec<(&'static str, bool)>,
+    /// Keys of the system-wide "files on the clipboard" shortcut, if set.
+    pub global: Option<String>,
 }
 
 fn home() -> PathBuf {
@@ -299,7 +301,120 @@ pub fn setup() -> Report {
             }
         }
     }
-    Report { done }
+    let global = global_shortcut().ok().flatten();
+    Report { done, global }
+}
+
+const CLIP_ID: &str = "io.github.outlook791.Joey.Clipboard";
+
+/// A hidden launcher that opens Joey with the files on the clipboard.
+fn clipboard_launcher() -> std::io::Result<()> {
+    let exec = if in_flatpak() {
+        format!("flatpak run {APP_ID} --clipboard")
+    } else {
+        command("--clipboard")
+    };
+    let entry = format!(
+        "[Desktop Entry]\nType=Application\nName=Joey\nComment={MARK}: open the copied files\nExec={exec}\nIcon={APP_ID}\nNoDisplay=true\nTerminal=false\n"
+    );
+    let path = home()
+        .join(".local/share/applications")
+        .join(format!("{CLIP_ID}.desktop"));
+    if let Some(d) = path.parent() {
+        fs::create_dir_all(d)?;
+    }
+    fs::write(path, entry)
+}
+
+fn desktop_is(name: &str) -> bool {
+    std::env::var("XDG_CURRENT_DESKTOP")
+        .map(|d| d.to_ascii_uppercase().split(':').any(|p| p == name))
+        .unwrap_or(false)
+}
+
+/// System-wide Meta+C: opens Joey with the files last copied with Ctrl+C,
+/// so the desktop and file managers without shortcuts work too.
+/// KDE Plasma and GNOME; returns the keys set, if any.
+fn global_shortcut() -> std::io::Result<Option<String>> {
+    let h = home();
+    if desktop_is("KDE") || h.join(".config/kglobalshortcutsrc").exists() {
+        clipboard_launcher()?;
+        let rc = h.join(".config/kglobalshortcutsrc");
+        let old = fs::read_to_string(&rc).unwrap_or_default();
+        let section = format!("[services][{CLIP_ID}.desktop]");
+        let cleaned = remove_ini_section(&old, &section);
+        let mut new = cleaned.trim_end().to_string();
+        if !new.is_empty() {
+            new.push_str("\n\n");
+        }
+        new.push_str(&format!("{section}\n_launch=Meta+C\n"));
+        fs::write(&rc, new)?;
+        // The shortcut service reads its settings when it starts.
+        if let Some(q) = joey_core::engine::which("kquitapp6") {
+            let _ = std::process::Command::new(q).arg("kglobalaccel").status();
+        }
+        return Ok(Some("Meta+C".into()));
+    }
+    if desktop_is("GNOME") {
+        if let Some(gs) = joey_core::engine::which("gsettings") {
+            clipboard_launcher()?;
+            let base = "org.gnome.settings-daemon.plugins.media-keys";
+            let path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/joey/";
+            let out = std::process::Command::new(&gs)
+                .args(["get", base, "custom-keybindings"])
+                .output()?;
+            let current = String::from_utf8_lossy(&out.stdout).trim().to_string();
+            if !current.contains(path) {
+                let inner = current
+                    .trim_start_matches("@as")
+                    .trim()
+                    .trim_start_matches('[')
+                    .trim_end_matches(']')
+                    .trim();
+                let list = if inner.is_empty() {
+                    format!("['{path}']")
+                } else {
+                    format!("[{inner}, '{path}']")
+                };
+                std::process::Command::new(&gs)
+                    .args(["set", base, "custom-keybindings", &list])
+                    .status()?;
+            }
+            let key = format!("{base}.custom-keybinding:{path}");
+            let cmd = if in_flatpak() {
+                format!("flatpak run {APP_ID} --clipboard")
+            } else {
+                command("--clipboard")
+            };
+            for (k, v) in [
+                ("name", "Joey".to_string()),
+                ("command", cmd),
+                ("binding", "<Super>c".to_string()),
+            ] {
+                std::process::Command::new(&gs)
+                    .args(["set", &key, k, &v])
+                    .status()?;
+            }
+            return Ok(Some("Super+C".into()));
+        }
+    }
+    Ok(None)
+}
+
+/// Removes one `[section]` and its keys from an INI file.
+fn remove_ini_section(ini: &str, section: &str) -> String {
+    let mut out = String::new();
+    let mut skipping = false;
+    for line in ini.lines() {
+        if line.trim_start().starts_with('[') {
+            skipping = line.trim() == section;
+        }
+        if !skipping {
+            out.push_str(line);
+            out.push('\n');
+        }
+    }
+    out
 }
 
 /// True if Joey is already set up in at least one file manager.
@@ -340,6 +455,23 @@ pub fn remove() {
     remove_line(&h.join(".config/Thunar/accels.scm"), |l| {
         l.contains(THUNAR_ID)
     });
+    let rc = dolphin_ui_rc();
+    if let Ok(old) = fs::read_to_string(&rc) {
+        if let Some(new) = dolphin_shortcut(Some(&old), None) {
+            let _ = fs::write(&rc, new);
+        }
+    }
+    let _ = fs::remove_file(
+        h.join(".local/share/applications")
+            .join(format!("{CLIP_ID}.desktop")),
+    );
+    let kde = h.join(".config/kglobalshortcutsrc");
+    if let Ok(old) = fs::read_to_string(&kde) {
+        let section = format!("[services][{CLIP_ID}.desktop]");
+        if old.contains(&section) {
+            let _ = fs::write(&kde, remove_ini_section(&old, &section));
+        }
+    }
 }
 
 #[cfg(test)]
@@ -363,6 +495,16 @@ mod tests {
         let no_props = "<gui name=\"dolphin\" version=\"42\">\n <MenuBar/>\n</gui>\n";
         let added = dolphin_shortcut(Some(no_props), Some("Alt+C")).unwrap();
         assert!(added.contains("<ActionProperties") && added.contains(DOLPHIN_ACTION));
+    }
+
+    #[test]
+    fn ini_section_is_removed_cleanly() {
+        let ini = "[a]\nx=1\n\n[services][io.github.outlook791.Joey.Clipboard.desktop]\n_launch=Meta+C\n[b]\ny=2\n";
+        let out = remove_ini_section(
+            ini,
+            "[services][io.github.outlook791.Joey.Clipboard.desktop]",
+        );
+        assert_eq!(out, "[a]\nx=1\n\n[b]\ny=2\n");
     }
 
     #[test]

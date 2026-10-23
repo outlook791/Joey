@@ -183,20 +183,75 @@ fn main() -> glib::ExitCode {
         _ => {}
     }
 
+    // `--clipboard`: open with the files last copied (Ctrl+C) anywhere,
+    // for places without a selection shortcut, like the desktop.
+    let from_clipboard = std::env::args().nth(1).as_deref() == Some("--clipboard");
+
     let app = adw::Application::builder()
         .application_id(APP_ID)
         .flags(gio::ApplicationFlags::HANDLES_OPEN | gio::ApplicationFlags::NON_UNIQUE)
         .build();
     app.connect_startup(|_| load_css());
-    app.connect_activate(|app| {
-        build(app).window.present();
+    app.connect_activate(move |app| {
+        let ui = build(app);
+        ui.window.present();
+        if from_clipboard {
+            // Wait until the window has focus: Wayland only lets a focused
+            // window read the clipboard.
+            let ui = ui.clone();
+            glib::timeout_add_local_once(std::time::Duration::from_millis(150), move || {
+                read_clipboard(&ui)
+            });
+        }
     });
     app.connect_open(|app, files, _| {
         let ui = build(app);
         add_files(&ui, files.iter().filter_map(|f| f.path()).collect());
         ui.window.present();
     });
+    if from_clipboard {
+        let argv0 = std::env::args().next().unwrap_or_default();
+        return app.run_with_args(&[argv0]);
+    }
     app.run()
+}
+
+/// Adds the files currently on the clipboard (copied in any file manager
+/// or on the desktop).
+fn read_clipboard(ui: &Rc<Ui>) {
+    let clipboard = ui.window.clipboard();
+    let ui = ui.clone();
+    glib::spawn_future_local(async move {
+        let list = clipboard
+            .read_value_future(gdk::FileList::static_type(), glib::Priority::DEFAULT)
+            .await
+            .ok()
+            .and_then(|v| v.get::<gdk::FileList>().ok());
+        let mut files: Vec<PathBuf> = list
+            .map(|l| l.files().iter().filter_map(|f| f.path()).collect())
+            .unwrap_or_default();
+        if files.is_empty() {
+            // Some apps put plain file:// lines on the clipboard.
+            if let Ok(Some(text)) = clipboard.read_text_future().await {
+                files = text
+                    .lines()
+                    .map(str::trim)
+                    .filter(|l| l.starts_with("file://") || l.starts_with('/'))
+                    .filter_map(|l| {
+                        if l.starts_with('/') {
+                            Some(PathBuf::from(l))
+                        } else {
+                            gio::File::for_uri(l).path()
+                        }
+                    })
+                    .filter(|p| p.exists())
+                    .collect();
+            }
+        }
+        if !files.is_empty() {
+            add_files(&ui, files);
+        }
+    });
 }
 
 fn report_lines(r: &integration::Report) -> Vec<String> {
@@ -217,6 +272,12 @@ fn report_lines(r: &integration::Report) -> Vec<String> {
             }
         })
         .collect();
+    if let Some(keys) = &r.global {
+        lines.push(tf(
+            "Anywhere, desktop included: Ctrl+C, then {keys}",
+            &[("keys", keys)],
+        ));
+    }
     lines.push(t("Restart the file manager once to use it"));
     lines
 }

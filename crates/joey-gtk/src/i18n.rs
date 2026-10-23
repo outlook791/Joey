@@ -184,6 +184,7 @@ const IT: &[(&str, &str)] = &[
     ("Text (TXT)", "Testo (TXT)"),
     ("Web page (HTML)", "Pagina web (HTML)"),
     ("Send to {device}", "Invia a {device}"),
+    ("Anywhere, desktop included: Ctrl+C, then {keys}", "Ovunque, anche sul desktop: Ctrl+C, poi {keys}"),
     ("Send with LocalSend…", "Invia con LocalSend…"),
     ("Sent to {device}", "Inviato a {device}"),
     ("{device} didn't answer", "{device} non risponde"),
