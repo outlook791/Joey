@@ -179,6 +179,51 @@ fn xml_escape(s: &str) -> String {
         .replace('"', "&quot;")
 }
 
+/// Dolphin names service menu actions `servicemenu_<file>::<action>` and,
+/// from Dolphin 26.04, lets them carry a shortcut saved with its other
+/// shortcuts in `dolphinui.rc`.
+const DOLPHIN_ACTION: &str = "servicemenu_joey.desktop::convert";
+
+fn dolphin_ui_rc() -> PathBuf {
+    home().join(".local/share/kxmlgui5/dolphin/dolphinui.rc")
+}
+
+/// Sets (or, with `None`, removes) the shortcut of Joey's action in a
+/// Dolphin `dolphinui.rc`, keeping everything else in the file.
+fn dolphin_shortcut(xml: Option<&str>, shortcut: Option<&str>) -> Option<String> {
+    let line =
+        shortcut.map(|s| format!("  <Action shortcut=\"{s}\" name=\"{DOLPHIN_ACTION}\"/>\n"));
+    let Some(xml) = xml.filter(|x| x.contains("<gui")) else {
+        // No file yet: a minimal one. Its low version makes Dolphin use its
+        // built-in layout while keeping these shortcuts.
+        let line = line?;
+        return Some(format!(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE gui SYSTEM \"kpartgui.dtd\">\n<gui name=\"dolphin\" version=\"1\">\n <ActionProperties scheme=\"Default\">\n{line} </ActionProperties>\n</gui>\n"
+        ));
+    };
+    // Drop any earlier Joey line.
+    let mut out: String = xml
+        .lines()
+        .filter(|l| !l.contains(DOLPHIN_ACTION))
+        .map(|l| format!("{l}\n"))
+        .collect();
+    let Some(line) = line else { return Some(out) };
+    if let Some(i) = out.find("</ActionProperties>") {
+        out.insert_str(i, &line);
+    } else if let Some(i) = out.find("<ActionProperties/>") {
+        out.replace_range(
+            i..i + "<ActionProperties/>".len(),
+            &format!("<ActionProperties scheme=\"Default\">\n{line} </ActionProperties>"),
+        );
+    } else if let Some(i) = out.rfind("</gui>") {
+        out.insert_str(
+            i,
+            &format!(" <ActionProperties scheme=\"Default\">\n{line} </ActionProperties>\n"),
+        );
+    }
+    Some(out)
+}
+
 fn dolphin() -> std::io::Result<bool> {
     let entry = format!(
         "[Desktop Entry]\nType=Service\nMimeType=all/allfiles;\nActions=convert;\nX-KDE-Priority=TopLevel\nX-Joey={MARK}\n\n[Desktop Action convert]\nName={}\nIcon={APP_ID}\nExec={}\n",
@@ -194,7 +239,15 @@ fn dolphin() -> std::io::Result<bool> {
         &home().join(".local/share/kservices5/ServiceMenus/joey.desktop"),
         &entry,
     )?;
-    Ok(false)
+    let rc = dolphin_ui_rc();
+    let old = fs::read_to_string(&rc).ok();
+    if let Some(new) = dolphin_shortcut(old.as_deref(), Some("Alt+C")) {
+        if let Some(dir) = rc.parent() {
+            fs::create_dir_all(dir)?;
+        }
+        fs::write(&rc, new)?;
+    }
+    Ok(true)
 }
 
 fn nemo() -> std::io::Result<bool> {
@@ -272,6 +325,25 @@ pub fn remove() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn dolphin_shortcut_is_added_replaced_and_removed() {
+        let fresh = dolphin_shortcut(None, Some("Alt+C")).unwrap();
+        assert!(fresh.contains("servicemenu_joey.desktop::convert") && fresh.contains("Alt+C"));
+
+        let existing = "<gui name=\"dolphin\" version=\"42\">\n <MenuBar/>\n <ActionProperties scheme=\"Default\">\n  <Action shortcut=\"F4\" name=\"open_terminal\"/>\n </ActionProperties>\n</gui>\n";
+        let once = dolphin_shortcut(Some(existing), Some("Alt+C")).unwrap();
+        let twice = dolphin_shortcut(Some(&once), Some("Alt+C")).unwrap();
+        assert_eq!(twice.matches(DOLPHIN_ACTION).count(), 1);
+        assert!(twice.contains("open_terminal") && twice.contains("version=\"42\""));
+
+        let removed = dolphin_shortcut(Some(&twice), None).unwrap();
+        assert!(!removed.contains(DOLPHIN_ACTION) && removed.contains("open_terminal"));
+
+        let no_props = "<gui name=\"dolphin\" version=\"42\">\n <MenuBar/>\n</gui>\n";
+        let added = dolphin_shortcut(Some(no_props), Some("Alt+C")).unwrap();
+        assert!(added.contains("<ActionProperties") && added.contains(DOLPHIN_ACTION));
+    }
 
     #[test]
     fn thunar_action_is_replaced_not_duplicated() {
