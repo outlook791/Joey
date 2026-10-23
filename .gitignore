@@ -1,1 +1,5 @@
+*.flatpak
 /target
+build-office/
+flatpak/LibreOffice.tar.gz
+repo/

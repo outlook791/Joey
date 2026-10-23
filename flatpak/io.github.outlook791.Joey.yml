@@ -22,6 +22,13 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
 command: joey-gtk
 
+# Joey Office (LibreOffice), installed only by those who want it.
+add-extensions:
+  io.github.outlook791.Joey.Office:
+    directory: office
+    no-autodownload: true
+    autodelete: true
+
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -234,6 +241,7 @@ modules:
         CARGO_NET_OFFLINE: 'true'
     build-commands:
       - cargo --offline build --release -p joey-gtk -p joey-cli
+      - mkdir -p /app/office
       - install -Dm755 target/release/joey-gtk /app/bin/joey-gtk
       - install -Dm755 target/release/joey /app/bin/joey
       - install -Dm644 data/io.github.outlook791.Joey.desktop /app/share/applications/io.github.outlook791.Joey.desktop
@@ -247,4 +255,7 @@ modules:
           - target
           - build-dir
           - .flatpak-builder
+          - build-office
+          - repo
+          - flatpak/LibreOffice.tar.gz
       - cargo-sources.json

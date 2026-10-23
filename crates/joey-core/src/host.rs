@@ -47,6 +47,15 @@ pub fn in_flatpak() -> bool {
 /// Finds the programs on the computer and makes them reachable. Call once,
 /// at the very start, before other threads exist (it changes PATH).
 pub fn bridge() {
+    // Joey Office, the optional LibreOffice add-on, comes first.
+    let office = Path::new("/app/office/program");
+    if office.join("soffice").exists() {
+        let path = std::env::var_os("PATH").unwrap_or_default();
+        let dirs = std::iter::once(office.to_path_buf()).chain(std::env::split_paths(&path));
+        if let Ok(joined) = std::env::join_paths(dirs) {
+            std::env::set_var("PATH", joined);
+        }
+    }
     if !in_flatpak() || crate::engine::which("flatpak-spawn").is_none() {
         return;
     }

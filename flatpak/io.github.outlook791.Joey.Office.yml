@@ -1,0 +1,36 @@
+# Joey Office: an optional add-on with LibreOffice, for Word, Excel and
+# PowerPoint conversions at their best (PowerPoint needs it).
+#
+# It repackages the official LibreOffice build from The Document
+# Foundation. The checks download it (LibreOffice.tar.gz, the "deb" archive
+# for this architecture), verify its checksum and put it next to this
+# file before building. Install with:
+#   flatpak install io.github.outlook791.Joey.Office
+
+id: io.github.outlook791.Joey.Office
+runtime: io.github.outlook791.Joey
+runtime-version: master
+sdk: org.gnome.Sdk//50
+build-extension: true
+separate-locales: false
+appstream-compose: false
+build-options:
+  prefix: /app/office
+modules:
+  - name: libreoffice
+    buildsystem: simple
+    build-commands:
+      - mkdir debs && tar -xzf LibreOffice.tar.gz -C debs --strip-components=1
+      # Everything but the database (Base, needs Java) and desktop menus.
+      - |
+        for d in debs/DEBS/*.deb; do
+          case "$d" in *-base_*|*-freedesktop-menus*|*-kde-integration*|*-gnome-integration*|*-librelogo*) continue ;; esac
+          ar x "$d" && tar -xf data.tar.* && rm -f data.tar.* control.tar.* debian-binary
+        done
+      - cp -a opt/libreoffice*/. /app/office/
+      - install -Dm644 io.github.outlook791.Joey.Office.metainfo.xml /app/office/share/metainfo/io.github.outlook791.Joey.Office.metainfo.xml
+    sources:
+      - type: file
+        path: LibreOffice.tar.gz
+      - type: file
+        path: ../data/io.github.outlook791.Joey.Office.metainfo.xml

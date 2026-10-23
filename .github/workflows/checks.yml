@@ -114,3 +114,28 @@ jobs:
           for f in photo.webp two-pages-1.png note.pdf readme.epub invoice.xlsx invoice.txt table.xlsx table.pdf; do
             test -s "$dir/$f" || { echo "::error title=Flatpak::$f missing"; exit 1; }
           done
+      - name: Joey Office (LibreOffice add-on)
+        run: |
+          # The official LibreOffice build, checked against its published checksum.
+          base=https://download.documentfoundation.org/libreoffice/stable
+          v=$(curl -sSL "$base/" | grep -o 'href="[0-9][0-9.]*/"' | sed 's/href="//; s#/"##' | sort -V | tail -1)
+          f="LibreOffice_${v}_Linux_x86-64_deb.tar.gz"
+          echo "LibreOffice $v"
+          curl -sSL -o flatpak/LibreOffice.tar.gz "$base/$v/deb/x86_64/$f"
+          want=$(curl -sSL "$base/$v/deb/x86_64/$f.sha256" | grep -o '^[0-9a-f]\{64\}')
+          echo "$want  flatpak/LibreOffice.tar.gz" | sha256sum -c
+          ci/run.sh "Joey Office build" flatpak-builder --user --disable-rofiles-fuse --force-clean \
+            --repo=repo build-office flatpak/io.github.outlook791.Joey.Office.yml
+          flatpak build-bundle --runtime repo joey-office.flatpak io.github.outlook791.Joey.Office master
+          ci/run.sh "Joey Office install" flatpak install --user -y --noninteractive joey-office.flatpak
+          dir=/srv/joey-test
+          cp crates/joey-core/tests/fixtures/slides.pptx "$dir/"
+          run="flatpak run --filesystem=$dir --command=joey io.github.outlook791.Joey"
+          ci/run.sh "Joey Office engines" $run --engines
+          ci/run.sh "Joey Office PowerPoint to PDF" $run "$dir/slides.pptx" --to pdf
+          test -s "$dir/slides.pdf"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: joey-office-flatpak
+          path: joey-office.flatpak
+          retention-days: 30
