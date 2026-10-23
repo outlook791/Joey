@@ -65,4 +65,5 @@ esac
 
 if [ -n "$missing" ]; then
     echo "Not available here (Joey will skip what needs them):$missing"
+    echo "::notice title=Packages not available on $distro::$missing"
 fi
