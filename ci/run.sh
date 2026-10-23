@@ -10,7 +10,7 @@ log=$(mktemp)
 code=$?
 cat "$log"
 if [ "$code" != 0 ]; then
-    body=$(grep -v -e 'portal' -e 'a11y' -e 'dbus-daemon' "$log" | tail -n 40 | cut -c1-400 |
+    body=$(grep -v -e 'portal' -e 'a11y' -e 'dbus-daemon' "$log" | tail -n 30 | cut -c1-200 |
         sed -e 's/%/%25/g' -e 's/\r//g' | awk 'BEGIN{ORS="%0A"} {print}')
     echo "::error title=$title (exit $code)::$body"
 fi
