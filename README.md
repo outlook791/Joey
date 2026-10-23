@@ -38,10 +38,49 @@ On Fedora:
 sudo dnf install rust cargo gtk4-devel libadwaita-devel \
     ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
     libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-pdfimport \
-    pandoc bsdtar python3-pdfplumber python3-openpyxl
+    pandoc bsdtar python3-openpyxl
 git clone https://github.com/outlook791/Joey joey && cd joey
 ./install.sh
 ```
+
+On other distributions, the same packages have other names. These commands are checked automatically on every change:
+
+<details><summary><b>Ubuntu 24.04+ / Debian 13</b></summary>
+
+Their own Rust is too old for GTK's Rust bindings (1.92 or newer is needed), so Rust comes from rustup:
+
+```sh
+sudo apt install build-essential pkg-config curl git libgtk-4-dev libadwaita-1-dev \
+    imagemagick poppler-utils img2pdf librsvg2-bin ffmpeg qpdf ghostscript \
+    libreoffice-writer-nogui libreoffice-calc-nogui libreoffice-impress-nogui \
+    pandoc libarchive-tools python3-openpyxl
+curl -sSf https://sh.rustup.rs | sh -s -- -y && . "$HOME/.cargo/env"
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
+
+<details><summary><b>Arch Linux</b></summary>
+
+```sh
+sudo pacman -S --needed base-devel rust gtk4 libadwaita git \
+    imagemagick poppler img2pdf librsvg ffmpeg qpdf ghostscript libreoffice-fresh \
+    pandoc-cli libarchive python-openpyxl
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
+
+<details><summary><b>openSUSE Tumbleweed</b></summary>
+
+```sh
+sudo zypper in rust cargo gcc pkgconf gtk4-devel libadwaita-devel git \
+    ImageMagick poppler-tools python3-img2pdf rsvg-convert ffmpeg-7 qpdf ghostscript \
+    libreoffice-writer libreoffice-calc libreoffice-impress pandoc-cli bsdtar python3-openpyxl
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
 
 Then **log out and back in once**, so the file manager and the desktop pick up the shortcuts.
 
@@ -157,7 +196,7 @@ The free alternative to AirDrop:
 
 ## PDF to Excel
 
-Select a PDF, open the full list (*N more…*) and choose **Excel (XLSX)**. Each table in the PDF becomes a sheet, and numbers stay numbers (they can be summed). It needs `python3-pdfplumber` and `python3-openpyxl` (Camelot is used instead if installed, for difficult tables). It works on PDFs made by a computer, like invoices and statements; scanned pages are pictures with no text to read (error E108).
+Select a PDF, open the full list (*N more…*) and choose **Excel (XLSX)**. Each table in the PDF becomes a sheet, and numbers stay numbers (they can be summed). It needs `python3-openpyxl` (and Poppler, which Joey uses anyway). For tables with unusual layouts, install pdfplumber too (`pip install --user pdfplumber`; on Debian and Ubuntu add `--break-system-packages`), or Camelot: Joey uses the best one it finds. It works on PDFs made by a computer, like invoices and statements; scanned pages are pictures with no text to read (error E108).
 
 <p align="center"><img src="docs/screenshots/en/pdf-excel.png" width="360" alt="A PDF can become Word, Excel, PowerPoint and more"></p>
 
@@ -266,7 +305,7 @@ joey-gtk --remove-file-managers    # take them out
 
 1. **Recognises** each file by its content, not its extension.
 2. **Finds a route** in a graph of conversions, chaining up to three steps when no program converts directly (WebP → PNG → PDF, DOCX → PDF → PNG), and offers only conversions a person would want.
-3. **Drives proven programs**: ImageMagick, FFmpeg, LibreOffice, Pandoc, Poppler, Ghostscript, img2pdf, librsvg, qpdf, libarchive, pdfplumber/Camelot. If one fails on a step, it tries the next able to do it. Settings apply on the last step only, so intermediate steps lose nothing.
+3. **Drives proven programs**: ImageMagick, FFmpeg, LibreOffice, Pandoc, Poppler, Ghostscript, img2pdf, librsvg, qpdf, libarchive, openpyxl (with pdfplumber or Camelot if installed). If one fails on a step, it tries the next able to do it. Settings apply on the last step only, so intermediate steps lose nothing.
 
 ## Project layout
 

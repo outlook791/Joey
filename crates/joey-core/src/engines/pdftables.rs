@@ -1,8 +1,8 @@
 //! Tables in a PDF to an Excel workbook, one sheet per table.
 //!
 //! Uses the best free extractor installed: Camelot (ruled tables, then
-//! whitespace-aligned ones) or pdfplumber; if a page has no ruled table,
-//! text laid out in columns is split by its gaps. Works on PDFs made by a
+//! whitespace-aligned ones), pdfplumber, or Poppler's pdftotext; if a page
+//! has no ruled table, text laid out in columns is split by its gaps. Works on PDFs made by a
 //! computer; scanned pages have no text to read.
 
 use std::path::PathBuf;
@@ -55,20 +55,42 @@ try:
 except Exception:
     tables = []
 
-if not tables:
+def plumber_tables():
     import pdfplumber
+    found_all = []
     with pdfplumber.open(src) as pdf:
         for n in page_list(pages, len(pdf.pages)):
             page = pdf.pages[n - 1]
             found = [t for t in page.extract_tables() if t and any(any(c for c in r) for r in t)]
             if found:
-                tables += found
+                found_all += found
                 continue
             # No ruled table: split text laid out in columns at its gaps.
-            text = page.extract_text(layout=True) or ""
-            rows = [re.split(r"\s{2,}", line.strip()) for line in text.splitlines() if line.strip()]
-            if sum(1 for r in rows if len(r) > 1) >= 2:
-                tables.append(rows)
+            columns(page.extract_text(layout=True) or "", found_all)
+    return found_all
+
+def columns(text, into):
+    rows = [re.split(r"\s{2,}", line.strip()) for line in text.splitlines() if line.strip()]
+    if sum(1 for r in rows if len(r) > 1) >= 2:
+        into.append(rows)
+
+def poppler_tables():
+    # Without pdfplumber: Poppler's text in its page layout, split at the
+    # gaps between columns. Fine for invoices and statements.
+    import subprocess
+    out = subprocess.run(["pdftotext", "-layout", src, "-"], capture_output=True, text=True, check=True).stdout
+    chosen = None if pages == "all" else set(page_list(pages, out.count("\f") + 1))
+    found_all = []
+    for n, page in enumerate(out.split("\f"), 1):
+        if chosen is None or n in chosen:
+            columns(page, found_all)
+    return found_all
+
+if not tables:
+    try:
+        tables = plumber_tables()
+    except ImportError:
+        tables = poppler_tables()
 
 if not tables:
     sys.stderr.write("NO_TABLES\n")
@@ -96,8 +118,8 @@ impl PdfTables {
     pub fn probe() -> Option<Self> {
         let python = which("python3")?;
         // Checks the libraries exist without importing them (fast).
-        let check = "import importlib.util as u, sys; \
-                     ok = u.find_spec('openpyxl') and (u.find_spec('pdfplumber') or u.find_spec('camelot')); \
+        let check = "import importlib.util as u, shutil, sys; \
+                     ok = u.find_spec('openpyxl') and (u.find_spec('pdfplumber') or u.find_spec('camelot') or shutil.which('pdftotext')); \
                      sys.exit(0 if ok else 1)";
         let ok = Command::new(&python)
             .args(["-c", check])

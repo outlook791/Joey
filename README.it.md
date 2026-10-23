@@ -38,10 +38,49 @@ Su Fedora:
 sudo dnf install rust cargo gtk4-devel libadwaita-devel \
     ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
     libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-pdfimport \
-    pandoc bsdtar python3-pdfplumber python3-openpyxl
+    pandoc bsdtar python3-openpyxl
 git clone https://github.com/outlook791/Joey joey && cd joey
 ./install.sh
 ```
+
+Sulle altre distribuzioni gli stessi pacchetti hanno altri nomi. Questi comandi vengono verificati automaticamente a ogni modifica:
+
+<details><summary><b>Ubuntu 24.04+ / Debian 13</b></summary>
+
+Il loro Rust è troppo vecchio per le librerie GTK di Rust (serve la 1.92 o successiva), quindi Rust si installa con rustup:
+
+```sh
+sudo apt install build-essential pkg-config curl git libgtk-4-dev libadwaita-1-dev \
+    imagemagick poppler-utils img2pdf librsvg2-bin ffmpeg qpdf ghostscript \
+    libreoffice-writer-nogui libreoffice-calc-nogui libreoffice-impress-nogui \
+    pandoc libarchive-tools python3-openpyxl
+curl -sSf https://sh.rustup.rs | sh -s -- -y && . "$HOME/.cargo/env"
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
+
+<details><summary><b>Arch Linux</b></summary>
+
+```sh
+sudo pacman -S --needed base-devel rust gtk4 libadwaita git \
+    imagemagick poppler img2pdf librsvg ffmpeg qpdf ghostscript libreoffice-fresh \
+    pandoc-cli libarchive python-openpyxl
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
+
+<details><summary><b>openSUSE Tumbleweed</b></summary>
+
+```sh
+sudo zypper in rust cargo gcc pkgconf gtk4-devel libadwaita-devel git \
+    ImageMagick poppler-tools python3-img2pdf rsvg-convert ffmpeg-7 qpdf ghostscript \
+    libreoffice-writer libreoffice-calc libreoffice-impress pandoc-cli bsdtar python3-openpyxl
+git clone https://github.com/outlook791/Joey joey && cd joey
+./install.sh
+```
+</details>
 
 Poi **esci e rientra nella sessione una volta**, così file manager e desktop caricano le scorciatoie.
 
@@ -157,7 +196,7 @@ L'alternativa gratuita ad AirDrop:
 
 ## Da PDF a Excel
 
-Seleziona un PDF, apri l'elenco completo (*Altri N…*) e scegli **Excel (XLSX)**. Ogni tabella del PDF diventa un foglio e i numeri restano numeri (si possono sommare). Servono `python3-pdfplumber` e `python3-openpyxl` (se è installato Camelot, viene usato lui per le tabelle difficili). Funziona sui PDF creati al computer, come fatture ed estratti conto; le pagine scansionate sono immagini senza testo da leggere (errore E108).
+Seleziona un PDF, apri l'elenco completo (*Altri N…*) e scegli **Excel (XLSX)**. Ogni tabella del PDF diventa un foglio e i numeri restano numeri (si possono sommare). Serve `python3-openpyxl` (più Poppler, che Joey usa comunque). Per tabelle con impaginazioni insolite installa anche pdfplumber (`pip install --user pdfplumber`; su Debian e Ubuntu aggiungi `--break-system-packages`) oppure Camelot: Joey usa il migliore che trova. Funziona sui PDF creati al computer, come fatture ed estratti conto; le pagine scansionate sono immagini senza testo da leggere (errore E108).
 
 <p align="center"><img src="docs/screenshots/it/pdf-excel.png" width="360" alt="Un PDF può diventare Word, Excel, PowerPoint e altro"></p>
 

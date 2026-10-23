@@ -78,6 +78,7 @@ modules:
   # ---- Images: ImageMagick with HEIC/AVIF reading and SVG ----
   - name: libde265
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DENABLE_SDL=OFF
@@ -90,6 +91,7 @@ modules:
 
   - name: libheif
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DWITH_LIBDE265=ON
@@ -137,13 +139,15 @@ modules:
         commit: 05631c2cba4e578fdd6bd25cae6f0939436de848
 
   - name: qpdf
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DREQUIRE_CRYPTO_NATIVE=ON
-      - -DUSE_IMPLICIT_CRYPTO=OFF
-      - -DBUILD_DOC=OFF
-      - -DBUILD_STATIC_LIBS=OFF
+    # qpdf refuses to configure in its source folder, and flatpak-builder's
+    # cmake-ninja ended up doing just that: build in "build/" by hand.
+    buildsystem: simple
+    build-commands:
+      - cmake -S . -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/app -DCMAKE_INSTALL_LIBDIR=lib
+        -DCMAKE_BUILD_TYPE=Release -DREQUIRE_CRYPTO_NATIVE=ON -DUSE_IMPLICIT_CRYPTO=OFF
+        -DBUILD_DOC=OFF -DBUILD_STATIC_LIBS=OFF -DBUILD_TESTING=OFF
+      - cmake --build build
+      - cmake --install build
     sources:
       - type: git
         url: https://github.com/qpdf/qpdf.git
@@ -153,6 +157,7 @@ modules:
   # ---- Archives: ZIP, TAR, 7Z, RAR (read) ----
   - name: libarchive
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DENABLE_TEST=OFF
