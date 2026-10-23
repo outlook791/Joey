@@ -1,10 +1,10 @@
 //! Images to PDF through `img2pdf`: embeds JPG and others without
 //! re-compressing, so quality stays exactly the same.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
-use crate::engine::{output_path, run, which, Engine};
+use crate::engine::{run, which, Engine, Step};
 use crate::format::Format;
 use crate::Error;
 
@@ -34,18 +34,20 @@ impl Engine for Img2Pdf {
         &self.edges
     }
 
-    fn convert(
-        &self,
-        input: &Path,
-        _from: Format,
-        to: Format,
-        work_dir: &Path,
-        stem: &str,
-    ) -> Result<Vec<PathBuf>, Error> {
-        let out = output_path(work_dir, stem, to);
+    fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
+        // Embedding untouched means settings can't apply: let ImageMagick
+        // take the job when the user asked for a smaller or lighter file.
+        let o = step.opts();
+        if o.max_size.is_some() || (step.last && o.quality != crate::options::Quality::High) {
+            return Err(Error::Tool {
+                tool: "img2pdf",
+                message: "settings need re-encoding".into(),
+            });
+        }
+        let out = step.output();
         run(
             "img2pdf",
-            Command::new(&self.bin).arg(input).arg("-o").arg(&out),
+            Command::new(&self.bin).arg(step.input).arg("-o").arg(&out),
         )?;
         Ok(vec![out])
     }

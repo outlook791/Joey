@@ -95,7 +95,7 @@ fn main() -> ExitCode {
         return ExitCode::from(2);
     };
 
-    let results = joey.convert_all(&cli.files, to, cli.out_dir.as_deref());
+    let results = joey.convert_all(&cli.files, to, cli.out_dir.as_deref(), &Default::default());
     let mut failed = 0;
     for (file, result) in cli.files.iter().zip(results) {
         match result {

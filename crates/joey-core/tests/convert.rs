@@ -3,7 +3,7 @@
 
 use std::path::{Path, PathBuf};
 
-use joey_core::{Error, Format, Joey};
+use joey_core::{Error, Format, Joey, Options, Quality, Tool};
 
 fn fixture(name: &str) -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -148,7 +148,7 @@ fn many_files_at_once_keep_order() {
             p
         })
         .collect();
-    let results = joey.convert_all(&inputs, Format::Png, None);
+    let results = joey.convert_all(&inputs, Format::Png, None, &Options::default());
     assert_eq!(results.len(), 6);
     for (i, r) in results.into_iter().enumerate() {
         if let Ok(out) = r {
@@ -189,4 +189,190 @@ fn folder_is_a_clear_error() {
         Joey::new().detect(dir.path()),
         Err(Error::IsFolder(_))
     ));
+}
+
+// ---- Audio, video, documents ----
+
+#[test]
+fn wav_to_lossy_audio() {
+    for to in [
+        Format::Mp3,
+        Format::M4a,
+        Format::Ogg,
+        Format::Opus,
+        Format::Flac,
+    ] {
+        check("tone.wav", to);
+    }
+}
+
+#[test]
+fn video_to_other_video_and_audio() {
+    for to in [
+        Format::Webm,
+        Format::Mkv,
+        Format::Mov,
+        Format::Mp3,
+        Format::Gif,
+    ] {
+        check("clip.mp4", to);
+    }
+}
+
+#[test]
+fn animated_gif_to_video() {
+    check("anim.gif", Format::Mp4);
+}
+
+#[test]
+fn documents_through_libreoffice() {
+    check("note.docx", Format::Pdf);
+    check("note.docx", Format::Odt);
+    check("table.csv", Format::Xlsx);
+}
+
+#[test]
+fn document_to_images_goes_through_pdf() {
+    check("note.docx", Format::Png);
+}
+
+#[test]
+fn sound_only_from_video_without_audio_is_a_clear_error() {
+    let joey = Joey::new();
+    let (dir, input) = sample("clip.mp4");
+    let Ok(silent) = joey.run_tool(Tool::RemoveAudio, &[input]).remove(0) else {
+        return;
+    };
+    match joey.convert(&silent[0], Format::Mp3, None) {
+        Err(Error::Tool { message, .. }) => assert!(message.contains("no audio"), "{message}"),
+        other => panic!("expected a no-audio error, got {other:?}"),
+    }
+    drop(dir);
+}
+
+// ---- Settings ----
+
+#[test]
+fn max_size_shrinks_images() {
+    let joey = Joey::new();
+    let (dir, input) = sample("big.jpg");
+    let o = Options {
+        max_size: Some(60),
+        ..Default::default()
+    };
+    if let Ok(out) = joey.convert_with(&input, Format::Png, None, &o) {
+        let dims = std::process::Command::new("identify")
+            .args(["-format", "%w %h"])
+            .arg(&out[0])
+            .output()
+            .unwrap();
+        let s = String::from_utf8_lossy(&dims.stdout);
+        let (w, h) = s.split_once(' ').unwrap();
+        assert!(
+            w.parse::<u32>().unwrap() <= 60 && h.parse::<u32>().unwrap() <= 60,
+            "{s}"
+        );
+    }
+    drop(dir);
+}
+
+#[test]
+fn lower_quality_gives_smaller_jpg() {
+    let joey = Joey::new();
+    let (dir, input) = sample("alpha.png");
+    let size = |q| {
+        let o = Options {
+            quality: q,
+            ..Default::default()
+        };
+        let out = joey.convert_with(&input, Format::Jpg, None, &o).unwrap();
+        std::fs::metadata(&out[0]).unwrap().len()
+    };
+    let (low, max) = (size(Quality::Low), size(Quality::Max));
+    assert!(low < max, "low {low} vs max {max}");
+    drop(dir);
+}
+
+#[test]
+fn chosen_pdf_pages_only() {
+    let joey = Joey::new();
+    let (dir, input) = sample("two-pages.pdf");
+    let o = Options {
+        pages: Some("2".into()),
+        ..Default::default()
+    };
+    let out = joey.convert_with(&input, Format::Png, None, &o).unwrap();
+    assert_eq!(out.len(), 1);
+    drop(dir);
+}
+
+// ---- Quick tools ----
+
+#[test]
+fn compress_makes_photos_smaller() {
+    let joey = Joey::new();
+    let (dir, input) = sample("big.jpg");
+    let out = joey
+        .run_tool(Tool::Compress, std::slice::from_ref(&input))
+        .remove(0)
+        .unwrap();
+    assert_eq!(out[0].file_name().unwrap(), "big (compressed).jpg");
+    assert!(std::fs::metadata(&out[0]).unwrap().len() < std::fs::metadata(&input).unwrap().len());
+    drop(dir);
+}
+
+#[test]
+fn merge_pdfs_into_one() {
+    let joey = Joey::new();
+    if !joey.tools_for(Format::Pdf, 2).contains(&Tool::MergePdf) {
+        return eprintln!("skipped: qpdf missing");
+    }
+    let dir = tempfile::tempdir().unwrap();
+    let a = dir.path().join("a.pdf");
+    let b = dir.path().join("b.pdf");
+    std::fs::copy(fixture("two-pages.pdf"), &a).unwrap();
+    std::fs::copy(fixture("two-pages.pdf"), &b).unwrap();
+    let out = joey.run_tool(Tool::MergePdf, &[a, b]).remove(0).unwrap();
+    assert_eq!(out[0].file_name().unwrap(), "a (merged).pdf");
+    let pages = joey.convert(&out[0], Format::Png, None).unwrap();
+    assert_eq!(pages.len(), 4);
+}
+
+#[test]
+fn audio_tools() {
+    let joey = Joey::new();
+    let dir = tempfile::tempdir().unwrap();
+    let a = dir.path().join("a.wav");
+    let b = dir.path().join("b.wav");
+    std::fs::copy(fixture("tone.wav"), &a).unwrap();
+    std::fs::copy(fixture("tone.wav"), &b).unwrap();
+    let joined = joey
+        .run_tool(Tool::MergeAudio, &[a.clone(), b])
+        .remove(0)
+        .unwrap();
+    assert!(std::fs::metadata(&joined[0]).unwrap().len() > std::fs::metadata(&a).unwrap().len());
+    let norm = joey.run_tool(Tool::NormalizeAudio, &[a]).remove(0).unwrap();
+    assert_eq!(norm[0].file_name().unwrap(), "a (normalized).wav");
+}
+
+#[test]
+fn metadata_removal_keeps_the_format() {
+    let joey = Joey::new();
+    for name in ["big.jpg", "clip.mp4"] {
+        let (dir, input) = sample(name);
+        let out = joey
+            .run_tool(Tool::RemoveMetadata, std::slice::from_ref(&input))
+            .remove(0)
+            .unwrap();
+        assert_eq!(Format::detect(&out[0]), Format::detect(&input));
+        drop(dir);
+    }
+}
+
+#[test]
+fn tools_match_the_kind_of_file() {
+    let joey = Joey::new();
+    assert!(!joey.tools_for(Format::Jpg, 3).contains(&Tool::MergePdf));
+    assert!(!joey.tools_for(Format::Pdf, 1).contains(&Tool::MergePdf));
+    assert!(!joey.tools_for(Format::Mp3, 1).contains(&Tool::RemoveAudio));
 }

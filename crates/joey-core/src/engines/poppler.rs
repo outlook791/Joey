@@ -1,9 +1,9 @@
 //! PDF pages to images through Poppler's `pdftoppm`.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
-use crate::engine::{run, which, Engine};
+use crate::engine::{run, which, Engine, Step};
 use crate::format::Format;
 use crate::Error;
 
@@ -33,55 +33,74 @@ impl Engine for Poppler {
         &self.edges
     }
 
-    fn convert(
-        &self,
-        input: &Path,
-        _from: Format,
-        to: Format,
-        work_dir: &Path,
-        stem: &str,
-    ) -> Result<Vec<PathBuf>, Error> {
+    fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
+        let o = step.opts();
         // Render into a private sub-folder so we can collect every page.
-        let pages_dir = work_dir.join(format!("{stem}.pages"));
+        let pages_dir = step.work_dir.join(format!("{}.pages", step.stem));
         std::fs::create_dir_all(&pages_dir)?;
-        let flag = match to {
+        let flag = match step.to {
             Format::Png => "-png",
             Format::Jpg => "-jpeg",
             _ => "-tiff",
         };
-        run(
-            "poppler",
-            Command::new(&self.bin)
-                .args([flag, "-r", "150"])
-                .arg(input)
-                .arg(pages_dir.join("page")),
-        )?;
+        let mut ranges = o.page_ranges();
+        if ranges.is_empty() {
+            ranges.push((0, 0)); // all pages
+        }
+        for (first, last) in ranges {
+            let mut cmd = Command::new(&self.bin);
+            cmd.args([flag, "-r", &o.dpi().to_string()]);
+            if step.to == Format::Jpg {
+                cmd.args(["-jpegopt", &format!("quality={}", o.quality.image())]);
+            }
+            if let Some(px) = o.max_size {
+                cmd.args(["-scale-to", &px.to_string()]);
+            }
+            if first > 0 {
+                cmd.args(["-f", &first.to_string(), "-l", &last.to_string()]);
+            }
+            cmd.arg(step.input).arg(pages_dir.join("page"));
+            run("poppler", &mut cmd)?;
+        }
 
         let mut pages: Vec<PathBuf> = std::fs::read_dir(&pages_dir)?
             .filter_map(|e| e.ok().map(|e| e.path()))
             .filter(|p| p.is_file())
             .collect();
-        // pdftoppm zero-pads page numbers, so name order is page order.
-        pages.sort();
+        // Order by page number (pdftoppm pads differently per range).
+        pages.sort_by_key(|p| {
+            p.file_stem()
+                .and_then(|s| s.to_str())
+                .and_then(|s| s.rsplit('-').next())
+                .and_then(|n| n.parse::<u32>().ok())
+                .unwrap_or(0)
+        });
+        pages.dedup();
 
-        let ext = to.extension();
+        let ext = step.to.extension();
         let mut out = Vec::with_capacity(pages.len());
         if pages.len() == 1 {
-            let dest = work_dir.join(format!("{stem}.{ext}"));
+            let dest = step.work_dir.join(format!("{}.{ext}", step.stem));
             std::fs::rename(&pages[0], &dest)?;
             out.push(dest);
         } else {
-            for (i, page) in pages.iter().enumerate() {
-                let dest = work_dir.join(format!("{stem}-{}.{ext}", i + 1));
+            for page in &pages {
+                let n = page
+                    .file_stem()
+                    .and_then(|s| s.to_str())
+                    .and_then(|s| s.rsplit('-').next())
+                    .and_then(|n| n.parse::<u32>().ok())
+                    .unwrap_or(0);
+                let dest = step.work_dir.join(format!("{}-{n}.{ext}", step.stem));
                 std::fs::rename(page, &dest)?;
                 out.push(dest);
             }
         }
-        let _ = std::fs::remove_dir(&pages_dir);
+        let _ = std::fs::remove_dir_all(&pages_dir);
         if out.is_empty() {
             return Err(Error::Tool {
                 tool: "poppler",
-                message: "the PDF has no pages".into(),
+                message: "no pages to convert (check the page numbers)".into(),
             });
         }
         Ok(out)

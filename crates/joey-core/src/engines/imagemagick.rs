@@ -5,7 +5,7 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use crate::engine::{output_path, run, which, Engine};
+use crate::engine::{run, which, Engine, Step};
 use crate::format::{Category, Format};
 use crate::Error;
 
@@ -26,12 +26,12 @@ impl ImageMagick {
                 if from == to {
                     continue;
                 }
-                // Images to PDF; PDF input needs Ghostscript, so left to Poppler.
+                // PDF input needs Ghostscript, so it's left to Poppler.
                 let ok = matches!(
                     (from.category(), to.category()),
                     (Category::Image, Category::Image)
                         | (Category::Vector, Category::Image)
-                        | (Category::Image, Category::Document)
+                        | (Category::Image, Category::Pdf)
                 );
                 if ok {
                     edges.push((from, to));
@@ -39,6 +39,10 @@ impl ImageMagick {
             }
         }
         Some(Self { bin, edges })
+    }
+
+    pub fn bin(&self) -> &Path {
+        &self.bin
     }
 }
 
@@ -52,6 +56,12 @@ fn parse_format_list(list: &str) -> (Vec<Format>, Vec<Format>) {
         let Some(format) = Format::parse(name.trim_end_matches('*')) else {
             continue;
         };
+        if !matches!(
+            format.category(),
+            Category::Image | Category::Vector | Category::Pdf
+        ) {
+            continue;
+        }
         let Some(mode) = tokens.find(|t| t.len() == 3 && t.chars().all(|c| "rw+-".contains(c)))
         else {
             continue;
@@ -67,6 +77,29 @@ fn parse_format_list(list: &str) -> (Vec<Format>, Vec<Format>) {
     (readable, writable)
 }
 
+/// ImageMagick arguments for writing `to` with the step's settings.
+pub(crate) fn output_args(cmd: &mut Command, from: Format, to: Format, step: &Step) {
+    let o = step.opts();
+    cmd.arg("-auto-orient");
+    if let Some(px) = o.max_size {
+        cmd.args(["-resize", &format!("{px}x{px}>")]);
+    }
+    if matches!(to, Format::Jpg | Format::Bmp) {
+        // No transparency in these formats: put it on white.
+        cmd.args(["-background", "white", "-alpha", "remove", "-alpha", "off"]);
+    }
+    if to == Format::Ico {
+        cmd.args(["-resize", "256x256>"]);
+    }
+    if matches!(to, Format::Jpg | Format::Webp | Format::Avif | Format::Heic) {
+        cmd.args(["-quality", &o.quality.image().to_string()]);
+    }
+    if o.strip_metadata {
+        cmd.arg("-strip");
+    }
+    let _ = from;
+}
+
 impl Engine for ImageMagick {
     fn name(&self) -> &'static str {
         "imagemagick"
@@ -76,38 +109,25 @@ impl Engine for ImageMagick {
         &self.edges
     }
 
-    fn convert(
-        &self,
-        input: &Path,
-        from: Format,
-        to: Format,
-        work_dir: &Path,
-        stem: &str,
-    ) -> Result<Vec<PathBuf>, Error> {
-        let out = output_path(work_dir, stem, to);
-        let keeps_frames = matches!(to, Format::Gif | Format::Webp | Format::Tiff | Format::Pdf);
+    fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
+        let out = step.output();
+        let keeps_frames = matches!(
+            step.to,
+            Format::Gif | Format::Webp | Format::Tiff | Format::Pdf
+        );
 
         // An animated GIF to a still format: take the first frame only.
-        let mut src = input.as_os_str().to_owned();
-        if from == Format::Gif && !keeps_frames {
+        let mut src = step.input.as_os_str().to_owned();
+        if step.from == Format::Gif && !keeps_frames {
             src.push("[0]");
         }
 
         let mut cmd = Command::new(&self.bin);
-        if from == Format::Svg {
+        if step.from == Format::Svg {
             cmd.args(["-background", "none", "-density", "192"]);
         }
-        cmd.arg(&src).arg("-auto-orient");
-        if matches!(to, Format::Jpg | Format::Bmp) {
-            // No transparency in these formats: put it on white.
-            cmd.args(["-background", "white", "-alpha", "remove", "-alpha", "off"]);
-        }
-        if to == Format::Ico {
-            cmd.args(["-resize", "256x256>"]);
-        }
-        if to == Format::Jpg {
-            cmd.args(["-quality", "90"]);
-        }
+        cmd.arg(&src);
+        output_args(&mut cmd, step.from, step.to, step);
         cmd.arg(&out);
         run("imagemagick", &mut cmd)?;
         Ok(vec![out])
@@ -125,10 +145,12 @@ mod tests {
                          AVIF            r--   AV1 Image File Format (1.17.6)\n\
                          HEIC            r--   Apple High efficiency Image Format\n\
                         JPEG* JPEG      rw-   Joint Photographic Experts Group\n\
+                         MP4* VIDEO     rw+   MPEG-4 Video Stream\n\
                          PNG* PNG       rw-   Portable Network Graphics\n";
         let (r, w) = parse_format_list(list);
         assert!(r.contains(&Format::Heic) && !w.contains(&Format::Heic));
         assert!(r.contains(&Format::Jpg) && w.contains(&Format::Jpg));
         assert!(w.contains(&Format::Png));
+        assert!(!r.contains(&Format::Mp4), "video is FFmpeg's job");
     }
 }

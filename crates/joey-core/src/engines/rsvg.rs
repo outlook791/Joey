@@ -1,9 +1,9 @@
 //! SVG drawings through librsvg's `rsvg-convert`.
 
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::process::Command;
 
-use crate::engine::{output_path, run, which, Engine};
+use crate::engine::{run, which, Engine, Step};
 use crate::format::Format;
 use crate::Error;
 
@@ -29,23 +29,16 @@ impl Engine for Rsvg {
         &self.edges
     }
 
-    fn convert(
-        &self,
-        input: &Path,
-        _from: Format,
-        to: Format,
-        work_dir: &Path,
-        stem: &str,
-    ) -> Result<Vec<PathBuf>, Error> {
-        let out = output_path(work_dir, stem, to);
-        let kind = if to == Format::Pdf { "pdf" } else { "png" };
-        run(
-            "rsvg",
-            Command::new(&self.bin)
-                .args(["-f", kind, "-o"])
-                .arg(&out)
-                .arg(input),
-        )?;
+    fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
+        let out = step.output();
+        let kind = if step.to == Format::Pdf { "pdf" } else { "png" };
+        let mut cmd = Command::new(&self.bin);
+        cmd.args(["-f", kind, "-o"]).arg(&out);
+        if let Some(px) = step.opts().max_size {
+            cmd.args(["-w", &px.to_string(), "-a"]);
+        }
+        cmd.arg(step.input);
+        run("rsvg", &mut cmd)?;
         Ok(vec![out])
     }
 }

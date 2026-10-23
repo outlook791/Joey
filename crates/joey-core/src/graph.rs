@@ -28,7 +28,8 @@ impl Graph {
 
     fn next(&self, from: Format) -> impl Iterator<Item = Format> + '_ {
         Format::ALL
-            .into_iter()
+            .iter()
+            .copied()
             .filter(move |&to| self.edges.contains_key(&(from, to)))
     }
 
