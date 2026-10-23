@@ -7,5 +7,8 @@
   <summary xml:lang="it">Word, Excel e PowerPoint al meglio, con LibreOffice</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MPL-2.0</project_license>
+  <developer id="io.github.outlook791">
+    <name>Umberto</name>
+  </developer>
   <url type="homepage">https://github.com/outlook791/Joey</url>
 </component>

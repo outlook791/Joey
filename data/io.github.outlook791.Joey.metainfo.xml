@@ -9,27 +9,52 @@
   <summary xml:lang="it">Converti file in due passaggi</summary>
 
   <description>
-    <p>Converts files. That's it, really. Select files in your file manager, press Alt+C, pick a format: done. The result lands next to the original, which is never touched.</p>
-    <p xml:lang="it">Converte file. Tutto qui, davvero. Seleziona i file nel file manager, premi Alt+C, scegli il formato: fatto. Il risultato finisce accanto all'originale, che non viene mai toccato.</p>
+    <p>Converts files. That's it, really. Select files, press Alt+C (or copy them and press Meta+C anywhere, the desktop included), pick a format: done. The result lands next to the original, which is never touched.</p>
+    <p xml:lang="it">Converte file. Tutto qui, davvero. Seleziona i file, premi Alt+C (oppure copiali e premi Meta+C ovunque, anche sul desktop), scegli il formato: fatto. Il risultato finisce accanto all'originale, che non viene mai toccato.</p>
     <ul>
       <li>Images: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones</li>
       <li xml:lang="it">Immagini: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO e foto HEIC dei telefoni</li>
-      <li>Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF, WMA; sound from videos</li>
-      <li xml:lang="it">Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF, WMA; audio dai video</li>
-      <li>Video: MP4, MKV, WebM, MOV, AVI, WMV, and animated GIFs</li>
-      <li xml:lang="it">Video: MP4, MKV, WebM, MOV, AVI, WMV e GIF animate</li>
-      <li>PDF pages to images, images to PDF; subtitles; ZIP, TAR, 7Z and RAR archives</li>
-      <li xml:lang="it">Pagine PDF in immagini, immagini in PDF; sottotitoli; archivi ZIP, TAR, 7Z e RAR</li>
+      <li>Audio and video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV and more; sound from videos; animated GIFs</li>
+      <li xml:lang="it">Audio e video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV e altri; audio dai video; GIF animate</li>
+      <li>Documents: Word, ODT, RTF, Markdown, HTML, EPUB, and all of them to PDF</li>
+      <li xml:lang="it">Documenti: Word, ODT, RTF, Markdown, HTML, EPUB, e tutti in PDF</li>
+      <li>Spreadsheets: Excel, ODS, CSV, also to PDF; PDF tables to Excel; PDF to text</li>
+      <li xml:lang="it">Fogli di calcolo: Excel, ODS, CSV, anche in PDF; tabelle PDF in Excel; PDF in testo</li>
+      <li>PowerPoint and exact Office layouts with the optional Joey Office add-on (LibreOffice)</li>
+      <li xml:lang="it">PowerPoint e impaginazione Office esatta con l'estensione facoltativa Joey Office (LibreOffice)</li>
       <li>Quick tools: compress, rotate, crop, trim, split or merge PDFs, protect with a password, join tracks and videos, and more</li>
       <li xml:lang="it">Strumenti rapidi: comprimi, ruota, ritaglia, taglia, dividi o unisci PDF, proteggi con password, unisci tracce e video, e altro</li>
-      <li>File actions for any file or folder: copy the path, copy or move to a folder, put in a ZIP</li>
-      <li xml:lang="it">Azioni per qualsiasi file o cartella: copia il percorso, copia o sposta in una cartella, metti in uno ZIP</li>
-      <li>Mixed selections in one go, only the formats that make sense for each file</li>
-      <li xml:lang="it">Selezioni miste in un colpo solo, solo i formati sensati per ogni file</li>
+      <li>Send to your phone with KDE Connect or GSConnect, or to any nearby device with LocalSend</li>
+      <li xml:lang="it">Invia al telefono con KDE Connect o GSConnect, o a qualsiasi dispositivo vicino con LocalSend</li>
+      <li>Keyboard, mouse and touch; light and dark theme; clear error codes and reports you check before sending</li>
+      <li xml:lang="it">Tastiera, mouse e touch; tema chiaro e scuro; codici di errore chiari e segnalazioni che controlli prima dell'invio</li>
       <li>Everything happens on your computer: nothing is uploaded</li>
       <li xml:lang="it">Tutto avviene sul tuo computer: nulla viene caricato online</li>
     </ul>
   </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>A photo and what it can become</caption>
+      <caption xml:lang="it">Una foto e cosa può diventare</caption>
+      <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/menu.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Files of different kinds at once</caption>
+      <caption xml:lang="it">File di tipi diversi insieme</caption>
+      <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/mixed.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Settings in plain words, with the estimated size</caption>
+      <caption xml:lang="it">Impostazioni a parole, con il peso stimato</caption>
+      <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/adjust.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Follows the dark theme</caption>
+      <caption xml:lang="it">Segue il tema scuro</caption>
+      <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/dark.png</image>
+    </screenshot>
+  </screenshots>
 
   <launchable type="desktop-id">io.github.outlook791.Joey.desktop</launchable>
   <url type="homepage">https://github.com/outlook791/Joey</url>

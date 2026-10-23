@@ -6,9 +6,11 @@
 
 Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i file, premi un tasto, scegli il formato: fatto. Il risultato finisce accanto all'originale, che non viene mai toccato. Tutto avviene sul tuo computer: nulla viene caricato online.
 
-<p align="center"><img src="docs/screenshots/it/menu.png" width="380" alt="La finestra di Joey: una foto, i formati in cui può diventare e gli strumenti rapidi"></p>
+<p align="center"><img src="docs/images/demo-it.gif" width="620" alt="Una foto diventa PDF: si apre Joey, Invio, fatto"></p>
 
 > Stato: versione attuale (26.10.1). Funziona dall'inizio alla fine; le rifiniture arrivano dopo.
+>
+> **Fatto con l'AI:** Joey è scritto con un assistente AI. Vedi [Come è fatto Joey](#come-è-fatto-joey).
 >
 > Le versioni sono numerate per data: **anno.mese.uscita del mese**. 26.10.1 è la prima uscita di ottobre 2026; le successive dello stesso mese sono 26.10.2, 26.10.3…, poi 26.11.1.
 
@@ -328,6 +330,10 @@ joey-gtk --remove-file-managers    # li toglie
 - **Niente PowerPoint, o Word/Excel con impaginazione semplice:** installa Joey Office (vedi [Installazione](#installazione)) o LibreOffice.
 - **Manca un formato:** `joey --engines` mostra quali programmi ha trovato Joey. Installa quello che manca (vedi [Installazione](#installazione)) e il formato compare.
 - **Altro:** [segnalalo](#feedback-e-segnalazioni); la segnalazione dice cosa serve.
+
+## Come è fatto Joey
+
+Joey è scritto con un assistente AI (Claude, di Anthropic), guidato, provato e mantenuto dal suo autore, Umberto. Quasi tutto il codice, il pacchetto Flatpak e queste guide sono stati generati dall'AI a partire dalle sue richieste. Ogni modifica viene verificata automaticamente su cinque distribuzioni, e l'autore lo prova su Fedora KDE. Se qualcosa non funziona, [segnalalo](#feedback-e-segnalazioni).
 
 ## Licenza
 
