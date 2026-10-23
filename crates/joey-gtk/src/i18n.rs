@@ -64,6 +64,8 @@ const IT: &[(&str, &str)] = &[
     ("Next to the originals", "Accanto agli originali"),
     ("Show in folder", "Mostra nella cartella"),
     ("Close", "Chiudi"),
+    ("Back to the menu", "Torna al menu"),
+    ("Other files", "Altri file"),
     ("unexpected error", "errore imprevisto"),
     ("{tool} couldn't convert it", "{tool} non è riuscito a convertirlo"),
     ("already as small as it gets", "è già al minimo, non si riduce di più"),

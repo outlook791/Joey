@@ -148,6 +148,9 @@ pub struct Ui {
     pub state: RefCell<State>,
     first_output: RefCell<Option<PathBuf>>,
     hovered: Cell<bool>,
+    /// Bumped when leaving the done screen, so a pending auto-close from
+    /// an earlier conversion doesn't shut the window.
+    run: Cell<u32>,
 }
 
 fn main() -> glib::ExitCode {
@@ -310,18 +313,29 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     let buttons = gtk::Box::new(gtk::Orientation::Horizontal, 8);
     buttons.set_halign(gtk::Align::Center);
     buttons.set_margin_top(10);
-    let show_folder = gtk::Button::with_label(&t("Show in folder"));
+    let back_menu = gtk::Button::with_label(&t("Back to the menu"));
     let close = gtk::Button::with_label(&t("Close"));
-    show_folder.add_css_class("pill");
+    back_menu.add_css_class("pill");
     close.add_css_class("pill");
-    buttons.append(&show_folder);
+    buttons.append(&back_menu);
     buttons.append(&close);
+    let links = gtk::Box::new(gtk::Orientation::Horizontal, 4);
+    links.set_halign(gtk::Align::Center);
+    links.set_margin_top(4);
+    let show_folder = gtk::Button::with_label(&t("Show in folder"));
+    let new_files = gtk::Button::with_label(&t("Other files"));
+    for b in [&show_folder, &new_files] {
+        b.add_css_class("flat");
+        b.add_css_class("more");
+        links.append(b);
+    }
     for w in [
         done_icon.upcast_ref::<gtk::Widget>(),
         done_title.upcast_ref(),
         done_sub.upcast_ref(),
         done_errors.upcast_ref(),
         buttons.upcast_ref(),
+        links.upcast_ref(),
     ] {
         done.append(w);
     }
@@ -355,7 +369,19 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         }),
         first_output: RefCell::new(None),
         hovered: Cell::new(false),
+        run: Cell::new(0),
     });
+
+    {
+        // Same files, choose something else (or add more files).
+        let ui = ui.clone();
+        back_menu.connect_clicked(move |_| back_to_menu(&ui, false));
+    }
+    {
+        // Start over with other files.
+        let ui = ui.clone();
+        new_files.connect_clicked(move |_| back_to_menu(&ui, true));
+    }
 
     {
         let ui = ui.clone();
@@ -831,6 +857,10 @@ fn on_key(ui: &Rc<Ui>, key: gdk::Key, code: u32, mods: gdk::ModifierType) -> gli
         }
         return glib::Propagation::Stop;
     }
+    if page == Some("done") && key == gdk::Key::BackSpace {
+        back_to_menu(ui, false);
+        return glib::Propagation::Stop;
+    }
     if !matches!(page, Some("list") | Some("adjust")) {
         return glib::Propagation::Proceed;
     }
@@ -1000,10 +1030,26 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>) {
     // All went well and nobody is looking: close by itself.
     if ok {
         let ui = ui.clone();
+        let run = ui.run.get();
         glib::timeout_add_seconds_local_once(3, move || {
-            if !ui.hovered.get() {
+            let still_done = ui.stack.visible_child_name().as_deref() == Some("done");
+            if !ui.hovered.get() && ui.run.get() == run && still_done {
                 ui.window.close();
             }
         });
     }
+}
+
+/// Leaves the done screen: back to the same files, or empty for new ones.
+fn back_to_menu(ui: &Rc<Ui>, clear: bool) {
+    ui.run.set(ui.run.get() + 1);
+    {
+        let mut st = ui.state.borrow_mut();
+        st.busy = false;
+        if clear {
+            st.groups.clear();
+            st.skipped.clear();
+        }
+    }
+    render(ui);
 }
