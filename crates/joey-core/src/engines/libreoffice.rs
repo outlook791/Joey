@@ -46,12 +46,26 @@ const SLIDE_OUT: [Format; 3] = [Format::Pdf, Format::Pptx, Format::Odp];
 impl LibreOffice {
     pub fn probe() -> Option<Self> {
         let bin = which("soffice").or_else(|| which("libreoffice"))?;
+        // Distributions split LibreOffice into parts (Writer, Calc,
+        // Impress, PDF import); only offer what the installed parts can do.
+        let program = std::fs::canonicalize(&bin)
+            .ok()
+            .and_then(|p| p.parent().map(PathBuf::from))
+            .filter(|d| d.join("soffice.bin").exists());
+        let has = |lib: &str| program.as_ref().is_none_or(|d| d.join(lib).exists());
+        let writer = has("libswlo.so");
+        let calc = has("libsclo.so");
+        let impress = has("libsdlo.so");
+        let pdf_import = has("libpdfimportlo.so");
         let mut edges = Vec::new();
-        for (ins, outs) in [
-            (&DOCUMENTS[..], &DOCUMENT_OUT[..]),
-            (&SHEETS[..], &SHEET_OUT[..]),
-            (&SLIDES[..], &SLIDE_OUT[..]),
+        for (ins, outs, part) in [
+            (&DOCUMENTS[..], &DOCUMENT_OUT[..], writer),
+            (&SHEETS[..], &SHEET_OUT[..], calc),
+            (&SLIDES[..], &SLIDE_OUT[..], impress),
         ] {
+            if !part {
+                continue;
+            }
             for &from in ins {
                 for &to in outs {
                     if from != to {
@@ -62,8 +76,16 @@ impl LibreOffice {
         }
         // PDF opened as an editable document or slides. The layout is
         // rebuilt as boxes, so it's offered but never preferred.
-        for to in [Format::Docx, Format::Odt, Format::Pptx, Format::Odp] {
-            edges.push((Format::Pdf, to));
+        if pdf_import {
+            if writer {
+                edges.extend([(Format::Pdf, Format::Docx), (Format::Pdf, Format::Odt)]);
+            }
+            if impress {
+                edges.extend([(Format::Pdf, Format::Pptx), (Format::Pdf, Format::Odp)]);
+            }
+        }
+        if edges.is_empty() {
+            return None;
         }
         Some(Self { bin, edges })
     }

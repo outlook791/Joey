@@ -37,7 +37,8 @@ Su Fedora:
 ```sh
 sudo dnf install rust cargo gtk4-devel libadwaita-devel \
     ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
-    libreoffice-core pandoc bsdtar python3-pdfplumber python3-openpyxl
+    libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-pdfimport \
+    pandoc bsdtar python3-pdfplumber python3-openpyxl
 git clone https://github.com/outlook791/Joey joey && cd joey
 ./install.sh
 ```

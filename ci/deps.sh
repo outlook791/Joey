@@ -25,22 +25,20 @@ fedora)
         git python3 xorg-x11-server-Xvfb dbus-daemon dbus-tools desktop-file-utils appstream
     set +e
     optional ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
-        libreoffice-core pandoc bsdtar python3-pdfplumber python3-openpyxl perl-Image-ExifTool xvfb-run
+        libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-pdfimport \
+        pandoc bsdtar python3-pdfplumber python3-openpyxl perl-Image-ExifTool xvfb-run
     ;;
 ubuntu|debian)
     export DEBIAN_FRONTEND=noninteractive
     apt-get update -qq
     apt-get install -y -qq build-essential pkg-config curl git ca-certificates python3 \
         libgtk-4-dev libadwaita-1-dev xvfb xauth dbus dbus-x11 desktop-file-utils appstream
-    if [ "$distro" = debian ]; then
-        apt-get install -y -qq cargo rustc
-    else
-        # Ubuntu's own Rust is too old for GTK's Rust bindings.
-        curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
-    fi
+    # Their own Rust is too old for GTK's Rust bindings (1.92 or newer).
+    curl -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
     set +e
     optional imagemagick poppler-utils img2pdf librsvg2-bin ffmpeg qpdf ghostscript \
-        libreoffice-core pandoc libarchive-tools python3-pdfplumber python3-openpyxl libimage-exiftool-perl
+        libreoffice-writer-nogui libreoffice-calc-nogui libreoffice-impress-nogui \
+        pandoc libarchive-tools python3-pdfplumber python3-openpyxl libimage-exiftool-perl
     ;;
 arch)
     pacman -Syu --noconfirm --needed base-devel rust gtk4 libadwaita git python \
@@ -51,7 +49,9 @@ arch)
     ;;
 opensuse)
     zypper -n -q ref
-    zypper -n -q in rust cargo gcc pkgconf gtk4-devel libadwaita-devel git python3 \
+    # The container's busybox awk blocks the real one some tools need.
+    zypper -n -q in --force-resolution gawk
+    zypper -n -q in --force-resolution rust cargo gcc pkgconf gtk4-devel libadwaita-devel git python3 \
         xvfb-run dbus-1 desktop-file-utils AppStream
     set +e
     optional ImageMagick poppler-tools python3-img2pdf rsvg-convert ffmpeg-7 qpdf ghostscript \
