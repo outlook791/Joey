@@ -16,6 +16,15 @@ git clone https://github.com/outlook791/joey && cd joey
 cargo build --release
 ```
 
+### Install it in your app menu
+
+```sh
+./install.sh              # builds Joey and adds it to your app menu (no sudo)
+./install.sh --uninstall  # removes it
+```
+
+Joey also appears under "Open with…" for images and PDFs.
+
 ### The window
 
 ```sh

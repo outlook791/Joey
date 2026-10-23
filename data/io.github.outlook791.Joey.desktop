@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Joey
+GenericName=File Converter
+GenericName[it]=Convertitore di file
+Comment=Converts files. That's it, really.
+Comment[it]=Converte file. Tutto qui, davvero.
+Exec=joey-gtk %F
+Icon=io.github.outlook791.Joey
+Terminal=false
+Categories=Utility;
+Keywords=convert;converter;format;image;pdf;jpg;png;webp;heic;converti;convertitore;
+MimeType=image/jpeg;image/png;image/webp;image/avif;image/heic;image/heif;image/gif;image/tiff;image/bmp;image/vnd.microsoft.icon;image/svg+xml;application/pdf;
+StartupNotify=true

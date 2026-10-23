@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Joey: a pocket with its curved, stitched opening and a hop arrow. -->
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f08a4b"/>
+      <stop offset="1" stop-color="#d9622b"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 26 Q64 40 112 26 L112 76 Q112 116 72 116 L56 116 Q16 116 16 76 Z" fill="#b84d1f" transform="translate(0 4)"/>
+  <path d="M16 26 Q64 40 112 26 L112 76 Q112 116 72 116 L56 116 Q16 116 16 76 Z" fill="url(#body)"/>
+  <path d="M24 34 Q64 46 104 34" fill="none" stroke="#fff4ea" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 7" opacity="0.85"/>
+  <path d="M40 92 Q52 60 72 70 Q82 75 86 64" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <path d="M76 60 L90 58 L90 72" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
