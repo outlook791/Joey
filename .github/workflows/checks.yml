@@ -80,10 +80,6 @@ jobs:
           ci/run.sh "Flatpak build"
           flatpak-builder --user --install-deps-from=flathub --disable-rofiles-fuse
           --force-clean --repo=repo build-dir flatpak/io.github.outlook791.Joey.yml
-      - name: Try it
-        run: >
-          ci/run.sh "Flatpak try"
-          flatpak-builder --run build-dir flatpak/io.github.outlook791.Joey.yml joey --engines
       - name: Make the installable file
         run: flatpak build-bundle repo joey.flatpak io.github.outlook791.Joey --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
       - uses: actions/upload-artifact@v4
@@ -91,3 +87,9 @@ jobs:
           name: joey-flatpak
           path: joey.flatpak
           retention-days: 30
+      - name: Try it
+        run: |
+          # Containers have no machine id, which D-Bus needs.
+          [ -s /etc/machine-id ] || dbus-uuidgen > /etc/machine-id
+          ci/run.sh "Flatpak try" flatpak-builder --disable-rofiles-fuse --run build-dir \
+            flatpak/io.github.outlook791.Joey.yml joey --engines
