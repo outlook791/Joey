@@ -10,6 +10,7 @@
 //! let written = joey.convert("photo.heic".as_ref(), Format::Jpg, None).unwrap();
 //! ```
 
+pub mod diag;
 pub mod engine;
 pub mod engines;
 pub mod estimate;

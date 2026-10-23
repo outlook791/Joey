@@ -92,8 +92,13 @@ impl Engine for Ghostscript {
         let _ = std::fs::remove_dir_all(&pages_dir);
         if written.is_empty() {
             return Err(Error::Tool {
-                tool: "ghostscript",
-                message: "no pages to convert (check the page numbers)".into(),
+                tool: "joey",
+                message: if step.opts().pages.is_some() {
+                    "no pages to convert (check the page numbers)"
+                } else {
+                    "the PDF looks damaged or empty"
+                }
+                .into(),
             });
         }
         Ok(written)

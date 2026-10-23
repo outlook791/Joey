@@ -190,6 +190,25 @@ const IT: &[(&str, &str)] = &[
     ("{device} didn't answer", "{device} non risponde"),
     ("Opened in LocalSend: pick the device there", "Aperto in LocalSend: scegli lì il dispositivo"),
     ("no tables found in this PDF", "nessuna tabella trovata in questo PDF"),
+    ("no pages to convert (check the page numbers)", "nessuna pagina da convertire (controlla i numeri di pagina)"),
+    ("the PDF looks damaged or empty", "il PDF sembra danneggiato o vuoto"),
+    // Feedback
+    ("Ideas or problems? Tell us", "Idee o problemi? Faccelo sapere"),
+    ("Report the problem", "Segnala il problema"),
+    ("You see the report before anything is sent", "Vedi la segnalazione prima che venga inviato qualcosa"),
+    ("Feedback", "Dicci la tua"),
+    ("Last time Joey closed because of an error", "L'ultima volta Joey si è chiuso per un errore"),
+    ("Report", "Segnala"),
+    ("What were you doing?", "Cosa stavi facendo?"),
+    ("(optional) Write it here.", "(facoltativo) Scrivilo qui."),
+    ("Your idea, request or opinion", "La tua idea, richiesta o opinione"),
+    ("Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.", "Non viene inviato nulla da solo. Leggi il testo, cambia o togli quello che vuoi: i nomi dei tuoi file e il tuo nome utente sono già nascosti."),
+    ("Title, in a few words", "Titolo, in poche parole"),
+    ("Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.", "L'invio apre GitHub nel browser, dove lo ricontrolli: serve un account gratuito. Senza, copia il testo e mandalo come preferisci."),
+    ("Copy", "Copia"),
+    ("Open on GitHub", "Apri su GitHub"),
+    ("Copied", "Copiato"),
+    ("The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.", "Il testo è lungo: GitHub si apre con l'inizio. Il testo intero è copiato: sostituiscilo con Ctrl+V."),
 ];
 
 /// Translates a fixed string.

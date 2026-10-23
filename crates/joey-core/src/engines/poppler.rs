@@ -99,8 +99,13 @@ impl Engine for Poppler {
         let _ = std::fs::remove_dir_all(&pages_dir);
         if out.is_empty() {
             return Err(Error::Tool {
-                tool: "poppler",
-                message: "no pages to convert (check the page numbers)".into(),
+                tool: "joey",
+                message: if step.opts().pages.is_some() {
+                    "no pages to convert (check the page numbers)"
+                } else {
+                    "the PDF looks damaged or empty"
+                }
+                .into(),
             });
         }
         Ok(out)

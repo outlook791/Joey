@@ -9,6 +9,7 @@ mod actions;
 mod adjust;
 mod ask;
 mod choices;
+mod feedback;
 mod i18n;
 mod integration;
 
@@ -159,6 +160,10 @@ pub struct Ui {
     done_sub: gtk::Label,
     done_errors: gtk::Label,
     show_folder: gtk::Button,
+    report: gtk::Button,
+    feedback_link: gtk::Button,
+    /// What went wrong in the last run, for the report.
+    problems: RefCell<Vec<feedback::Problem>>,
     joey: Arc<Joey>,
     pub state: RefCell<State>,
     first_output: RefCell<Option<PathBuf>>,
@@ -169,6 +174,7 @@ pub struct Ui {
 }
 
 fn main() -> glib::ExitCode {
+    feedback::install_panic_hook();
     // Plain command-line actions, no window.
     match std::env::args().nth(1).as_deref() {
         Some("--setup-file-managers") => {
@@ -346,6 +352,10 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         .visible(false)
         .build();
     empty.append(&empty_setup_result);
+    let empty_feedback = gtk::Button::with_label(&t("Ideas or problems? Tell us"));
+    empty_feedback.add_css_class("flat");
+    empty_feedback.add_css_class("more");
+    empty.append(&empty_feedback);
     empty.append(&hint(&t("Esc to close")));
     stack.add_named(&empty, Some("empty"));
 
@@ -398,9 +408,16 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     let links = gtk::Box::new(gtk::Orientation::Horizontal, 4);
     links.set_halign(gtk::Align::Center);
     links.set_margin_top(4);
+    let report = gtk::Button::with_label(&t("Report the problem"));
+    report.add_css_class("pill");
+    report.add_css_class("suggested-action");
+    report.set_halign(gtk::Align::Center);
+    report.set_margin_top(8);
+    report.set_tooltip_text(Some(&t("You see the report before anything is sent")));
     let show_folder = gtk::Button::with_label(&t("Show in folder"));
     let new_files = gtk::Button::with_label(&t("Other files"));
-    for b in [&show_folder, &new_files] {
+    let feedback_link = gtk::Button::with_label(&t("Feedback"));
+    for b in [&show_folder, &new_files, &feedback_link] {
         b.add_css_class("flat");
         b.add_css_class("more");
         links.append(b);
@@ -410,6 +427,7 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         done_title.upcast_ref(),
         done_sub.upcast_ref(),
         done_errors.upcast_ref(),
+        report.upcast_ref(),
         buttons.upcast_ref(),
         links.upcast_ref(),
     ] {
@@ -417,6 +435,14 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     }
     stack.add_named(&done, Some("done"));
 
+    // Joey closed because of an error last time: offer to report it, once.
+    let crash = feedback::take_last_crash();
+    let banner = adw::Banner::builder()
+        .title(t("Last time Joey closed because of an error"))
+        .button_label(t("Report"))
+        .revealed(crash.is_some())
+        .build();
+    pocket.append(&banner);
     pocket.append(&stack);
     let handle = gtk::WindowHandle::new();
     handle.set_child(Some(&pocket));
@@ -437,6 +463,9 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         done_sub,
         done_errors,
         show_folder: show_folder.clone(),
+        report: report.clone(),
+        feedback_link: feedback_link.clone(),
+        problems: RefCell::new(Vec::new()),
         joey: Arc::new(Joey::new()),
         state: RefCell::new(State {
             choices: choices::load(),
@@ -462,6 +491,29 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     {
         let ui = ui.clone();
         choose.connect_clicked(move |_| choose_files(&ui));
+    }
+    {
+        let ui = ui.clone();
+        report.connect_clicked(move |_| {
+            let problems = ui.problems.borrow().clone();
+            let (title, body) = feedback::problem_report(&ui, &problems);
+            feedback::show(&ui, &t("Report the problem"), &title, &body);
+        });
+    }
+    for b in [&empty_feedback, &feedback_link] {
+        let ui = ui.clone();
+        b.connect_clicked(move |_| {
+            let (title, body) = feedback::idea_report(&ui);
+            feedback::show(&ui, &t("Feedback"), &title, &body);
+        });
+    }
+    if let Some(crash) = crash {
+        let ui = ui.clone();
+        banner.connect_button_clicked(move |b| {
+            b.set_revealed(false);
+            let (title, body) = feedback::crash_report(&ui, &crash);
+            feedback::show(&ui, &t("Report the problem"), &title, &body);
+        });
     }
     {
         let ui = ui.clone();
@@ -1212,7 +1264,22 @@ pub fn start(ui: &Rc<Ui>) {
         let total = jobs.len();
         let mut written = Vec::new();
         let mut errors = Vec::new();
+        let mut problems = Vec::new();
         for (i, job) in jobs.into_iter().enumerate() {
+            let what = match &job {
+                Job::Convert(f, to, _) => {
+                    let from = ui
+                        .joey
+                        .detect(f)
+                        .map(|f| f.extension().to_uppercase())
+                        .unwrap_or_else(|_| "?".into());
+                    format!("{from} → {}", to.extension().to_uppercase())
+                }
+                Job::Tool(tool, fs, _) => format!("tool {tool:?} on {} file(s)", fs.len()),
+                Job::Zip(fs) => format!("ZIP of {} item(s)", fs.len()),
+                Job::Copy(_, _, moving) => (if *moving { "move" } else { "copy" }).into(),
+            };
+            joey_core::diag::take_failures();
             let first = match &job {
                 Job::Convert(f, ..) => f.clone(),
                 Job::Tool(_, fs, _) | Job::Zip(fs) | Job::Copy(fs, ..) => fs[0].clone(),
@@ -1241,15 +1308,33 @@ pub fn start(ui: &Rc<Ui>) {
                         match o {
                             Ok(out) => written.extend(out),
                             Err(e) => {
-                                errors.push(format!("{}: {}", file_name(&first), friendly(&e)))
+                                let message = friendly(&e);
+                                errors.push(format!("{}: {}", file_name(&first), message));
+                                problems.push(feedback::Problem {
+                                    file: first.clone(),
+                                    what: what.clone(),
+                                    message,
+                                    error: e.to_string(),
+                                    failures: joey_core::diag::take_failures(),
+                                });
                             }
                         }
                     }
                 }
-                Err(_) => errors.push(format!("{}: {}", file_name(&first), t("unexpected error"))),
+                Err(_) => {
+                    errors.push(format!("{}: {}", file_name(&first), t("unexpected error")));
+                    problems.push(feedback::Problem {
+                        file: first.clone(),
+                        what: what.clone(),
+                        message: t("unexpected error"),
+                        error: feedback::take_job_panic().unwrap_or_else(|| "panic".into()),
+                        failures: joey_core::diag::take_failures(),
+                    });
+                }
             }
         }
         ui.progress.set_fraction(1.0);
+        *ui.problems.borrow_mut() = problems;
         finish(&ui, written, errors, notes);
     });
 }
@@ -1300,6 +1385,9 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<St
     ui.done_sub.set_visible(n > 0);
     ui.done_errors.set_text(&errors.join("\n"));
     ui.done_errors.set_visible(!ok);
+    // Errors can be reported; a clean run offers general feedback instead.
+    ui.report.set_visible(!ui.problems.borrow().is_empty());
+    ui.feedback_link.set_visible(ok);
     ui.show_folder.set_visible(n > 0);
     ui.stack.set_visible_child_name("done");
 

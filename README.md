@@ -37,6 +37,16 @@ That's it. A few extras:
 
 Alt+C works in **Nautilus** (GNOME), **Dolphin** 26.04+ (KDE) and **Thunar** (Xfce). **Nemo** (Cinnamon), **Caja** (MATE), **PCManFM** and **PCManFM-Qt** (LXDE/LXQt) get a right-click entry. With any other file manager, drop files on Joey's window.
 
+**Anywhere else, the desktop included:** copy the files with **Ctrl+C**, then press **Meta+C** (Super+C on GNOME). Joey opens with the files you copied. The setup adds this shortcut on KDE Plasma and GNOME; elsewhere, bind `joey-gtk --clipboard` to a key in your desktop's settings.
+
+## Feedback and problem reports
+
+- **Something went wrong?** The result screen shows *Report the problem*. Joey writes a report with what's needed to fix it: Joey's version, distribution, desktop, which tools it found, the conversion, and the exact command that failed with its error output.
+- **Joey closed unexpectedly?** At the next start it offers to report it, once.
+- **An idea or an opinion?** *Ideas or problems? Tell us* on the start screen, or *Feedback* after a conversion.
+
+Nothing is ever sent by itself. Before you see the report, your file names become `file1`, `file2`…, your home folder becomes `~` and your user name `user`. You can read and edit everything, then copy it or open it as a GitHub issue (a free account is needed); no data goes anywhere else. The `joey` command prints the same details when a conversion fails.
+
 ## Install
 
 ### From source (any distribution)

@@ -67,14 +67,32 @@ pub fn which(bin: &str) -> Option<PathBuf> {
 
 /// Runs a command; on failure returns the end of its stderr as the error.
 pub fn run(tool: &'static str, cmd: &mut Command) -> Result<String, Error> {
-    let out = cmd.output().map_err(|e| Error::Tool {
-        tool,
-        message: e.to_string(),
+    let out = cmd.output().map_err(|e| {
+        crate::diag::record(crate::diag::Failure {
+            tool,
+            command: crate::diag::command_line(cmd),
+            status: "didn't start".into(),
+            output: e.to_string(),
+        });
+        Error::Tool {
+            tool,
+            message: e.to_string(),
+        }
     })?;
     if out.status.success() {
         Ok(String::from_utf8_lossy(&out.stdout).into_owned())
     } else {
         let err = String::from_utf8_lossy(&out.stderr);
+        let mut full = crate::diag::tail(&err, 40);
+        if full.is_empty() {
+            full = crate::diag::tail(&String::from_utf8_lossy(&out.stdout), 20);
+        }
+        crate::diag::record(crate::diag::Failure {
+            tool,
+            command: crate::diag::command_line(cmd),
+            status: out.status.to_string(),
+            output: full,
+        });
         let mut message: String = err
             .lines()
             .rev()

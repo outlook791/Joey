@@ -113,6 +113,24 @@ fn main() -> ExitCode {
     if failed == 0 {
         ExitCode::SUCCESS
     } else {
+        print_report(&joey, &cli.files);
         ExitCode::FAILURE
     }
+}
+
+/// What to paste into a bug report, with personal details hidden.
+fn print_report(joey: &Joey, files: &[PathBuf]) {
+    use joey_core::diag;
+    let names: Vec<&std::path::Path> = files.iter().map(PathBuf::as_path).collect();
+    let mut text = String::from("\nIf this looks like a bug, please report it with the lines below:\nhttps://github.com/outlook791/Joey/issues/new\n\n");
+    for (k, v) in diag::environment(&joey.engine_names()) {
+        text.push_str(&format!("{k}: {v}\n"));
+    }
+    for f in diag::take_failures() {
+        text.push_str(&format!(
+            "\n$ {}\n[{} · {}]\n{}\n",
+            f.command, f.tool, f.status, f.output
+        ));
+    }
+    eprint!("{}", diag::scrub(&text, &names));
 }
