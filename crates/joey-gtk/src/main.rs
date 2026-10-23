@@ -5,7 +5,9 @@
 //! `joey-gtk --setup-file-managers` adds Joey to the file managers;
 //! `--remove-file-managers` takes it out again.
 
+mod actions;
 mod adjust;
+mod ask;
 mod choices;
 mod i18n;
 mod integration;
@@ -16,11 +18,12 @@ use std::path::PathBuf;
 use std::rc::Rc;
 use std::sync::Arc;
 
+use actions::Action;
 use adw::prelude::*;
 use choices::Choice;
 use gtk::{gdk, gio, glib};
 use i18n::{t, tf};
-use joey_core::{estimate, Format, Joey, Options, Tool};
+use joey_core::{estimate, Format, Joey, Options, Tool, ToolParams};
 
 const APP_ID: &str = integration::APP_ID;
 
@@ -35,15 +38,21 @@ fn visible_per_group(groups: usize) -> usize {
 }
 
 pub struct Group {
+    /// Placeholder for `other` groups, which have no format.
     pub from: Format,
+    /// Folders and files Joey can't convert: file actions only.
+    pub other: bool,
     pub files: Vec<PathBuf>,
     pub bytes: u64,
-    /// Formats first, then quick tools.
+    /// Formats first, then quick tools, then file actions.
     pub items: Vec<Choice>,
     pub n_formats: usize,
+    pub n_tools: usize,
     pub selected: usize,
     pub expanded: bool,
     pub options: Options,
+    /// Answers for a tool that asks something (trim, pages…).
+    pub params: ToolParams,
 }
 
 impl Group {
@@ -54,6 +63,8 @@ impl Group {
     pub fn name(&self) -> String {
         if self.files.len() == 1 {
             file_name(&self.files[0])
+        } else if self.other {
+            tf("{n} other items", &[("n", &self.files.len())])
         } else {
             tf(
                 "{n} {fmt} files",
@@ -64,12 +75,14 @@ impl Group {
 
     /// Indices of the items on screen. The selected one is always there.
     fn shown(&self, limit: usize, single: bool) -> Vec<usize> {
-        if self.expanded {
+        if self.expanded || self.other {
             return (0..self.items.len()).collect();
         }
         let mut v: Vec<usize> = (0..self.n_formats.min(limit)).collect();
         if single {
-            v.extend(self.n_formats..self.items.len());
+            // A few quick tools; the rest and the file actions under "more".
+            let tools = self.n_formats..self.n_formats + self.n_tools.min(3);
+            v.extend(tools);
         }
         if !v.contains(&self.selected) {
             if let Some(last) = v.iter().rposition(|&i| i < self.n_formats) {
@@ -92,6 +105,8 @@ pub struct State {
     pub settings: HashMap<Format, Options>,
     /// "Remember these settings" is ticked on the Adjust screen.
     pub remember: bool,
+    /// Folder chosen for Copy to… / Move to…, used by the next run.
+    dest: Option<PathBuf>,
 }
 
 impl State {
@@ -124,7 +139,7 @@ impl State {
     pub fn options_for(&self, choice: Choice) -> Options {
         match choice {
             Choice::To(f) => self.settings.get(&f).cloned().unwrap_or_default(),
-            Choice::Tool(_) => Options::default(),
+            _ => Options::default(),
         }
     }
 }
@@ -547,35 +562,36 @@ fn add_files(ui: &Rc<Ui>, files: Vec<PathBuf>) {
             }
             let name = file_name(&file);
             let from = match ui.joey.detect(&file) {
-                Ok(f) => f,
-                Err(joey_core::Error::IsFolder(_)) => {
-                    st.skipped.push((name, t("folders aren't supported yet")));
-                    continue;
-                }
+                Ok(f) => Some(f),
                 Err(joey_core::Error::NotFound(_)) => {
                     st.skipped.push((name, t("not found")));
                     continue;
                 }
-                Err(_) => {
-                    st.skipped.push((name, t("file type not recognised")));
-                    continue;
-                }
+                // Folders and unknown files still get the file actions.
+                Err(_) => None,
             };
             let bytes = std::fs::metadata(&file).map(|m| m.len()).unwrap_or(0);
-            if let Some(g) = st.groups.iter_mut().find(|g| g.from == from) {
+            let Some(from) = from else {
+                push_other(&mut st, file);
+                continue;
+            };
+            if let Some(g) = st.groups.iter_mut().find(|g| !g.other && g.from == from) {
                 g.files.push(file);
                 g.bytes += bytes;
                 continue;
             }
             st.groups.push(Group {
                 from,
+                other: false,
                 files: vec![file],
                 bytes,
                 items: Vec::new(),
                 n_formats: 0,
+                n_tools: 0,
                 selected: 0,
                 expanded: false,
                 options: Options::default(),
+                params: ToolParams::default(),
             });
         }
         // Tools depend on how many files a group has (merging needs two),
@@ -584,15 +600,34 @@ fn add_files(ui: &Rc<Ui>, files: Vec<PathBuf>) {
         let mut empty = Vec::new();
         for (gi, g) in st.groups.iter_mut().enumerate() {
             let previous = (!g.items.is_empty()).then(|| g.choice());
+            if g.other {
+                g.items = actions::available(ui.joey.can_zip())
+                    .into_iter()
+                    .map(Choice::Action)
+                    .collect();
+                g.n_formats = 0;
+                g.n_tools = 0;
+                g.selected = previous
+                    .and_then(|w| g.items.iter().position(|&i| i == w))
+                    .unwrap_or(0);
+                continue;
+            }
             let formats = ui.joey.suggested_targets(g.from);
-            let tools = ui.joey.tools_for(g.from, g.files.len());
+            let mut tools = ui.joey.tools_for(g.from, g.files.len());
+            // Most wanted first for this kind of file; with several files,
+            // joining them is the likely wish.
+            let several = g.files.len() > 1;
+            let cat = g.from.category();
+            tools.sort_by_key(|&t| tool_rank(cat, t, several));
             g.n_formats = formats.len();
+            g.n_tools = tools.len();
             g.items = formats
                 .into_iter()
                 .map(Choice::To)
                 .chain(tools.into_iter().map(Choice::Tool))
+                .chain(actions::available(false).into_iter().map(Choice::Action))
                 .collect();
-            if g.items.is_empty() {
+            if g.n_formats + g.n_tools == 0 {
                 empty.push(gi);
                 continue;
             }
@@ -603,21 +638,49 @@ fn add_files(ui: &Rc<Ui>, files: Vec<PathBuf>) {
             if previous.is_none() {
                 g.options = match g.choice() {
                     Choice::To(f) => st.settings.get(&f).cloned().unwrap_or_default(),
-                    Choice::Tool(_) => Options::default(),
+                    _ => Options::default(),
                 };
             }
         }
+        // Nothing to convert them to: they become "other" items.
         for gi in empty.into_iter().rev() {
             let g = st.groups.remove(gi);
             for f in g.files {
-                st.skipped.push((
-                    file_name(&f),
-                    tf("nothing to convert {fmt} to here", &[("fmt", &g.from)]),
-                ));
+                push_other(st, f);
             }
         }
+        if let Some(g) = st.groups.iter_mut().find(|g| g.other) {
+            if g.items.is_empty() {
+                g.items = actions::available(ui.joey.can_zip())
+                    .into_iter()
+                    .map(Choice::Action)
+                    .collect();
+            }
+        }
+        // "Other" items always come last.
+        st.groups.sort_by_key(|g| g.other);
     }
     render(ui);
+}
+
+fn push_other(st: &mut State, file: PathBuf) {
+    if let Some(g) = st.groups.iter_mut().find(|g| g.other) {
+        g.files.push(file);
+        return;
+    }
+    st.groups.push(Group {
+        from: Format::Zip,
+        other: true,
+        files: vec![file],
+        bytes: 0,
+        items: Vec::new(),
+        n_formats: 0,
+        n_tools: 0,
+        selected: 0,
+        expanded: false,
+        options: Options::default(),
+        params: ToolParams::default(),
+    });
 }
 
 pub fn file_name(p: &std::path::Path) -> String {
@@ -628,18 +691,73 @@ pub fn file_name(p: &std::path::Path) -> String {
 
 pub fn choice_label(c: Choice) -> String {
     match c {
-        Choice::To(f) => f.display_name().to_string(),
+        Choice::To(f) => t(f.display_name()),
         Choice::Tool(tool) => t(tool.label()),
+        Choice::Action(a) => t(a.label()),
     }
+}
+
+/// Order of quick tools: the first three show up without "more…".
+fn tool_rank(cat: joey_core::Category, tool: Tool, several: bool) -> u8 {
+    use joey_core::Category as C;
+    if several && tool.merges() && tool != Tool::MakeZip {
+        return 0;
+    }
+    let order: &[Tool] = match cat {
+        C::Image => &[
+            Tool::Compress,
+            Tool::Crop,
+            Tool::RotateRight,
+            Tool::RotateLeft,
+            Tool::Grayscale,
+            Tool::RemoveMetadata,
+        ],
+        C::Video => &[
+            Tool::Trim,
+            Tool::Compress,
+            Tool::RemoveAudio,
+            Tool::RotateRight,
+            Tool::RotateLeft,
+            Tool::RemoveMetadata,
+        ],
+        C::Audio => &[Tool::Trim, Tool::NormalizeAudio, Tool::RemoveMetadata],
+        C::Pdf => &[
+            Tool::Compress,
+            Tool::ExtractPages,
+            Tool::SplitPdf,
+            Tool::RotateRight,
+            Tool::RotateLeft,
+            Tool::ProtectPdf,
+            Tool::UnlockPdf,
+        ],
+        C::Archive => &[Tool::ExtractArchive],
+        _ => &[],
+    };
+    order
+        .iter()
+        .position(|&t| t == tool)
+        .map(|p| p as u8 + 1)
+        .unwrap_or(50)
 }
 
 fn tool_icon(tool: Tool) -> &'static str {
     match tool {
         Tool::Compress => "zoom-out-symbolic",
         Tool::RemoveMetadata => "edit-clear-symbolic",
-        Tool::MergePdf | Tool::MergeAudio => "list-add-symbolic",
+        Tool::RotateLeft => "object-rotate-left-symbolic",
+        Tool::RotateRight => "object-rotate-right-symbolic",
+        Tool::Grayscale => "color-select-symbolic",
+        Tool::Crop => "image-crop-symbolic",
+        Tool::Trim => "edit-cut-symbolic",
         Tool::NormalizeAudio => "audio-volume-medium-symbolic",
         Tool::RemoveAudio => "audio-volume-muted-symbolic",
+        Tool::SplitPdf => "view-paged-symbolic",
+        Tool::ExtractPages => "edit-select-all-symbolic",
+        Tool::ProtectPdf => "changes-prevent-symbolic",
+        Tool::UnlockPdf => "changes-allow-symbolic",
+        Tool::ExtractArchive => "folder-open-symbolic",
+        Tool::MergePdf | Tool::MergeAudio | Tool::MergeVideo => "list-add-symbolic",
+        Tool::MakeZip => "package-x-generic-symbolic",
     }
 }
 
@@ -678,8 +796,10 @@ pub fn render(ui: &Rc<Ui>) {
             .ellipsize(gtk::pango::EllipsizeMode::Middle)
             .css_classes(["dim-label"])
             .build();
-        let kind_text = if g.from == Format::Pdf {
-            t("PDF · one image per page")
+        let kind_text = if g.other {
+            t("other")
+        } else if g.from == Format::Pdf {
+            t("PDF")
         } else {
             t(g.from.category().label())
         };
@@ -692,12 +812,17 @@ pub fn render(ui: &Rc<Ui>) {
         list.append(&title);
 
         let shown = g.shown(limit, single);
-        let mut tools_titled = false;
+        let mut section = None;
         for &i in &shown {
-            if i >= g.n_formats && !tools_titled {
-                tools_titled = true;
+            let here = match g.items[i] {
+                Choice::To(_) => None,
+                Choice::Tool(_) => Some("Quick tools"),
+                Choice::Action(_) => Some("File actions"),
+            };
+            if here.is_some() && here != section && !g.other {
+                section = here;
                 let l = gtk::Label::builder()
-                    .label(t("Quick tools"))
+                    .label(t(here.unwrap_or_default()))
                     .xalign(0.0)
                     .css_classes(["tools-title", "dim-label"])
                     .build();
@@ -785,8 +910,13 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
     key_label.add_css_class("key");
     key_label.set_opacity(if key.is_some() { 1.0 } else { 0.0 });
     row.append(&key_label);
-    if let Choice::Tool(tool) = choice {
-        let icon = gtk::Image::from_icon_name(tool_icon(tool));
+    let icon = match choice {
+        Choice::Tool(tool) => Some(tool_icon(tool)),
+        Choice::Action(a) => Some(a.icon()),
+        Choice::To(_) => None,
+    };
+    if let Some(icon) = icon {
+        let icon = gtk::Image::from_icon_name(icon);
         icon.add_css_class("dim-label");
         row.append(&icon);
     }
@@ -827,7 +957,7 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
 /// Selects an item. With a single kind of file, choosing is the whole job:
 /// convert right away (unless the user asked to adjust first).
 fn pick(ui: &Rc<Ui>, gi: usize, i: usize, adjust_first: bool) {
-    let single = {
+    let (single, asks) = {
         let mut st = ui.state.borrow_mut();
         let changed = st.groups[gi].selected != i;
         st.groups[gi].selected = i;
@@ -835,9 +965,13 @@ fn pick(ui: &Rc<Ui>, gi: usize, i: usize, adjust_first: bool) {
             let choice = st.groups[gi].choice();
             st.groups[gi].options = st.options_for(choice);
         }
-        st.single()
+        let asks =
+            matches!(st.groups[gi].choice(), Choice::Tool(t) if t.ask() != joey_core::Ask::Nothing);
+        (st.single(), asks)
     };
-    if adjust_first {
+    if asks {
+        ask::show(ui, gi);
+    } else if adjust_first {
         adjust::show(ui);
     } else if single {
         start(ui);
@@ -895,17 +1029,60 @@ fn on_key(ui: &Rc<Ui>, key: gdk::Key, code: u32, mods: gdk::ModifierType) -> gli
 
 enum Job {
     Convert(PathBuf, Format, Options),
-    Tool(Tool, Vec<PathBuf>),
+    Tool(Tool, Vec<PathBuf>, ToolParams),
+    Zip(Vec<PathBuf>),
+    Copy(Vec<PathBuf>, PathBuf, bool),
 }
 
 pub fn start(ui: &Rc<Ui>) {
+    // A tool still waiting for its answer: ask first.
+    let waiting = ui.state.borrow().groups.iter().position(ask::missing);
+    if let Some(gi) = waiting {
+        ask::show(ui, gi);
+        return;
+    }
+    // Copy/Move need a destination folder before anything runs.
+    let wants_folder = {
+        let st = ui.state.borrow();
+        st.dest.is_none()
+            && st
+                .groups
+                .iter()
+                .any(|g| matches!(g.choice(), Choice::Action(a) if a.needs_folder()))
+    };
+    if wants_folder && !ui.state.borrow().busy {
+        let dialog = gtk::FileDialog::builder()
+            .title(t("Choose a folder"))
+            .build();
+        let ui2 = ui.clone();
+        dialog.select_folder(
+            Some(&ui.window.clone()),
+            None::<&gio::Cancellable>,
+            move |res| {
+                if let Ok(folder) = res {
+                    if let Some(path) = folder.path() {
+                        ui2.state.borrow_mut().dest = Some(path);
+                        start(&ui2);
+                    }
+                }
+            },
+        );
+        return;
+    }
+
+    let mut notes = Vec::new();
     let jobs: Vec<Job> = {
         let mut st = ui.state.borrow_mut();
         if st.busy || st.groups.is_empty() {
             return;
         }
         st.busy = true;
-        let picks: Vec<(Format, Choice)> = st.groups.iter().map(|g| (g.from, g.choice())).collect();
+        let picks: Vec<(Format, Choice)> = st
+            .groups
+            .iter()
+            .filter(|g| !g.other)
+            .map(|g| (g.from, g.choice()))
+            .collect();
         for (from, c) in picks {
             st.choices.insert(from, c);
         }
@@ -916,13 +1093,15 @@ pub fn start(ui: &Rc<Ui>) {
                 .iter()
                 .filter_map(|g| match g.choice() {
                     Choice::To(to) => Some((to, g.options.clone())),
-                    Choice::Tool(_) => None,
+                    _ => None,
                 })
                 .collect();
             st.settings.extend(saved);
             choices::save_settings(&st.settings);
         }
+        let dest = st.dest.take();
         let mut jobs = Vec::new();
+        let mut paths_to_copy = Vec::new();
         for g in &st.groups {
             match g.choice() {
                 Choice::To(to) => {
@@ -930,13 +1109,32 @@ pub fn start(ui: &Rc<Ui>) {
                         jobs.push(Job::Convert(f.clone(), to, g.options.clone()));
                     }
                 }
-                Choice::Tool(tool) if tool.merges() => jobs.push(Job::Tool(tool, g.files.clone())),
+                Choice::Tool(tool) if tool.merges() => {
+                    jobs.push(Job::Tool(tool, g.files.clone(), g.params.clone()))
+                }
                 Choice::Tool(tool) => {
                     for f in &g.files {
-                        jobs.push(Job::Tool(tool, vec![f.clone()]));
+                        jobs.push(Job::Tool(tool, vec![f.clone()], g.params.clone()));
                     }
                 }
+                Choice::Action(Action::Zip) => jobs.push(Job::Zip(g.files.clone())),
+                Choice::Action(a @ (Action::CopyTo | Action::MoveTo)) => {
+                    if let Some(d) = &dest {
+                        jobs.push(Job::Copy(g.files.clone(), d.clone(), a == Action::MoveTo));
+                    }
+                }
+                Choice::Action(Action::CopyPath) => {
+                    paths_to_copy.extend(g.files.iter().map(|f| f.display().to_string()));
+                }
+                Choice::Action(Action::Terminal) => match actions::open_terminal(&g.files[0]) {
+                    Ok(()) => notes.push(t("Terminal opened")),
+                    Err(e) => notes.push(e.to_string()),
+                },
             }
+        }
+        if !paths_to_copy.is_empty() {
+            ui.window.clipboard().set_text(&paths_to_copy.join("\n"));
+            notes.push(t("Path copied"));
         }
         jobs
     };
@@ -950,7 +1148,7 @@ pub fn start(ui: &Rc<Ui>) {
         for (i, job) in jobs.into_iter().enumerate() {
             let first = match &job {
                 Job::Convert(f, ..) => f.clone(),
-                Job::Tool(_, fs) => fs[0].clone(),
+                Job::Tool(_, fs, _) | Job::Zip(fs) | Job::Copy(fs, ..) => fs[0].clone(),
             };
             ui.progress_label.set_text(&if total == 1 {
                 tf("Converting {name}…", &[("name", &file_name(&first))])
@@ -961,7 +1159,13 @@ pub fn start(ui: &Rc<Ui>) {
             let joey = ui.joey.clone();
             let outcomes = gio::spawn_blocking(move || match job {
                 Job::Convert(f, to, o) => vec![joey.convert_with(&f, to, None, &o)],
-                Job::Tool(tool, fs) => joey.run_tool(tool, &fs),
+                Job::Tool(tool, fs, p) => joey.run_tool_with(tool, &fs, &p),
+                Job::Zip(fs) => vec![joey.zip(&fs)],
+                Job::Copy(fs, dest, moving) => vec![actions::copy_or_move(&fs, &dest, moving)
+                    .map_err(|m| joey_core::Error::Tool {
+                        tool: "joey",
+                        message: m,
+                    })],
             })
             .await;
             match outcomes {
@@ -979,7 +1183,7 @@ pub fn start(ui: &Rc<Ui>) {
             }
         }
         ui.progress.set_fraction(1.0);
-        finish(&ui, written, errors);
+        finish(&ui, written, errors, notes);
     });
 }
 
@@ -998,7 +1202,7 @@ fn friendly(e: &joey_core::Error) -> String {
     }
 }
 
-fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>) {
+fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<String>) {
     *ui.first_output.borrow_mut() = written.first().cloned();
     let n = written.len();
     let ok = errors.is_empty();
@@ -1010,11 +1214,22 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>) {
     ui.done_icon
         .set_css_classes(if ok { &["success"] } else { &["warning"] });
     ui.done_title.set_text(&match n {
+        0 if !notes.is_empty() => notes.join(" · "),
         0 => t("Nothing converted"),
         1 => t("1 file ready"),
         n => tf("{n} files ready", &[("n", &n)]),
     });
-    ui.done_sub.set_text(&t("Next to the originals"));
+    let moved = ui
+        .state
+        .borrow()
+        .groups
+        .iter()
+        .any(|g| matches!(g.choice(), Choice::Action(Action::CopyTo | Action::MoveTo)));
+    ui.done_sub.set_text(&if moved {
+        t("In the folder you chose")
+    } else {
+        t("Next to the originals")
+    });
     ui.done_sub.set_visible(n > 0);
     ui.done_errors.set_text(&errors.join("\n"));
     ui.done_errors.set_visible(!ok);
@@ -1049,6 +1264,12 @@ fn back_to_menu(ui: &Rc<Ui>, clear: bool) {
         if clear {
             st.groups.clear();
             st.skipped.clear();
+        } else {
+            // Moved files aren't here any more.
+            for g in st.groups.iter_mut() {
+                g.files.retain(|f| f.exists());
+            }
+            st.groups.retain(|g| !g.files.is_empty());
         }
     }
     render(ui);

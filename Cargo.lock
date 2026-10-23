@@ -550,6 +550,7 @@ dependencies = [
  "gtk4",
  "joey-core",
  "libadwaita",
+ "tempfile",
  "xattr",
 ]
 

@@ -8,15 +8,19 @@ Joey is a free, open-source file converter for Linux. Select files in your file 
 
 ## What it does
 
-- **Images**: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones
-- **Drawings**: SVG to PNG or PDF
-- **Audio**: MP3, M4A (AAC), OGG, Opus, FLAC, WAV, AIFF; the sound from any video
-- **Video**: MP4, MKV, WebM, MOV, AVI; video to animated GIF and back
-- **PDF**: pages to images (one per page, or the pages you choose), images to PDF
-- **Documents** (install.sh build): Word, ODT, RTF, TXT, Excel, ODS, CSV, PowerPoint, ODP, to each other and to PDF or images
-- **Quick tools**: compress, remove metadata, merge PDFs, join audio tracks, even out the volume, remove a video's sound
+- **Images**: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones; SVG drawings
+- **Audio**: MP3, M4A (AAC), OGG, Opus, FLAC, WAV, AIFF, WMA; the sound from any video
+- **Video**: MP4, MKV, WebM, MOV, AVI, WMV; video to animated GIF and back
+- **PDF**: pages to images, images to PDF; PDF to Word, ODT, PowerPoint, text, Markdown, EPUB
+- **Documents**: Word, ODT, RTF, TXT, Markdown, web pages (HTML), EPUB; Excel, ODS, CSV, TSV; PowerPoint, ODP
+- **Subtitles**: SRT, WebVTT, ASS, and subtitles to plain text
+- **Archives**: ZIP, TAR, TAR.GZ, 7Z, and RAR (opening only)
+- **Quick tools**: compress, remove metadata, rotate, black and white, crop to a shape, trim audio/video, even out the volume, remove the sound, split a PDF, keep only some pages, protect or unlock a PDF, extract an archive, join PDFs/tracks/videos, put anything in a ZIP
+- **File actions** for any file or folder, even ones Joey can't convert: copy the path, copy to…, move to…, open a terminal here, put in a ZIP
 
-Select files of different kinds at once: each kind gets its own group, with only the formats that make sense for it.
+Select files of different kinds at once: each kind gets its own group, with only the choices that make sense for it. Tools that need one answer (trim, pages, shape, password) ask it on a single small screen.
+
+Not included, on purpose: Apple Pages (a closed format with no free engine), AirDrop (Apple only), and PDF to Excel (no free tool rebuilds tables reliably). PDF to Word and PowerPoint work, but the layout is rebuilt as boxes and may need touching up.
 
 ## Using it
 
@@ -30,7 +34,7 @@ That's it. A few extras:
 - **Esc** closes; the pocket also closes by itself when all went well.
 - You can also open Joey from the app menu and drop files on it.
 
-Alt+C works in **Nautilus** (GNOME Files) and **Thunar**. In **Dolphin**, **Nemo** and **Caja** there's a right-click entry; Dolphin 26.04 and later let you give it a shortcut in *Configure Keyboard Shortcuts*.
+Alt+C works in **Nautilus** (GNOME), **Dolphin** 26.04+ (KDE) and **Thunar** (Xfce). **Nemo** (Cinnamon), **Caja** (MATE), **PCManFM** and **PCManFM-Qt** (LXDE/LXQt) get a right-click entry. With any other file manager, drop files on Joey's window.
 
 ## Install
 
@@ -40,7 +44,8 @@ On Fedora:
 
 ```sh
 sudo dnf install rust cargo gtk4-devel libadwaita-devel \
-    ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript libreoffice-core
+    ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
+    libreoffice-core pandoc bsdtar
 git clone https://github.com/outlook791/Joey joey && cd joey
 ./install.sh
 ```
@@ -62,7 +67,7 @@ flatpak-builder --user --install-deps-from=flathub --force-clean \
 flatpak run io.github.outlook791.Joey --setup-file-managers   # Alt+C and right-click
 ```
 
-The Flatpak bundles FFmpeg, ImageMagick, Ghostscript and qpdf. It does not include LibreOffice (far too big to bundle), so documents need the source install.
+The Flatpak bundles FFmpeg, ImageMagick, Ghostscript, qpdf and libarchive. It does not include LibreOffice or Pandoc (far too big to bundle), so Office documents, Markdown, HTML and EPUB need the source install. "Open a terminal here" is not available inside the Flatpak.
 
 ## The command line
 
@@ -78,7 +83,7 @@ joey --engines                 # which tools were found
 
 1. **Recognises** each file by its content, not its extension: a JPG renamed `.png` is still a JPG.
 2. **Finds a route** in a graph of conversions, chaining up to three steps when no tool converts directly (WebP → PNG → PDF, DOCX → PDF → PNG), and offers only conversions a person would want.
-3. **Drives proven tools**: ImageMagick, FFmpeg, LibreOffice, Poppler, Ghostscript, img2pdf, librsvg, qpdf. If one fails on a step, it tries the next able to do it. Settings apply on the last step only, so intermediate steps lose nothing.
+3. **Drives proven tools**: ImageMagick, FFmpeg, LibreOffice, Pandoc, Poppler, Ghostscript, img2pdf, librsvg, qpdf, libarchive. If one fails on a step, it tries the next able to do it. Settings apply on the last step only, so intermediate steps lose nothing.
 
 ## Project layout
 

@@ -8,9 +8,10 @@
 # Regenerate cargo-sources.json after changing dependencies:
 #   python3 flatpak-cargo-generator.py Cargo.lock -o flatpak/cargo-sources.json
 #
-# Office documents are not included: LibreOffice is far too big to bundle.
-# The Flatpak converts images, drawings, PDFs, audio and video; the
-# install.sh build also handles documents through the system LibreOffice.
+# Office documents and Pandoc formats (Markdown, HTML, EPUB) are not
+# included: LibreOffice and Pandoc are far too big to bundle. The Flatpak
+# converts images, drawings, PDFs, audio, video, subtitles and archives;
+# the install.sh build also handles documents through the system tools.
 
 id: io.github.outlook791.Joey
 runtime: org.gnome.Platform
@@ -148,6 +149,21 @@ modules:
         url: https://github.com/qpdf/qpdf.git
         tag: v12.4.2
         commit: 4eba95899886e851cc41d76886483b347612f2a8
+
+  # ---- Archives: ZIP, TAR, 7Z, RAR (read) ----
+  - name: libarchive
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_TEST=OFF
+      - -DENABLE_CPIO=OFF
+      - -DENABLE_CAT=OFF
+      - -DENABLE_UNZIP=OFF
+    sources:
+      - type: git
+        url: https://github.com/libarchive/libarchive.git
+        tag: v3.8.9
+        commit: 27cbc7827172698143e440801fc0ba39ccb4f1f5
 
   # ---- Joey itself ----
   - name: joey

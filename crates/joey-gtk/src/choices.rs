@@ -8,11 +8,14 @@ use std::path::PathBuf;
 
 use joey_core::{Format, Options, Tool};
 
+use crate::actions::Action;
+
 /// One thing to do with a group of files.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Choice {
     To(Format),
     Tool(Tool),
+    Action(Action),
 }
 
 impl Choice {
@@ -20,14 +23,18 @@ impl Choice {
         match self {
             Choice::To(f) => f.extension().to_string(),
             Choice::Tool(t) => format!("tool:{}", t.key()),
+            Choice::Action(a) => format!("action:{}", a.key()),
         }
     }
 
     fn parse(s: &str) -> Option<Choice> {
-        match s.strip_prefix("tool:") {
-            Some(k) => Tool::from_key(k).map(Choice::Tool),
-            None => Format::parse(s).map(Choice::To),
+        if let Some(k) = s.strip_prefix("tool:") {
+            return Tool::from_key(k).map(Choice::Tool);
         }
+        if let Some(k) = s.strip_prefix("action:") {
+            return Action::from_key(k).map(Choice::Action);
+        }
+        Format::parse(s).map(Choice::To)
     }
 }
 

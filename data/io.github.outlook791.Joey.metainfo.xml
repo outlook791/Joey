@@ -13,19 +13,21 @@
     <p xml:lang="it">Converte file. Tutto qui, davvero. Seleziona i file nel file manager, premi Alt+C, scegli il formato: fatto. Il risultato finisce accanto all'originale, che non viene mai toccato.</p>
     <ul>
       <li>Images: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones</li>
-      <li>Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF; sound from videos</li>
-      <li>Video: MP4, MKV, WebM, MOV, AVI, and animated GIFs</li>
-      <li>PDF pages to images, images to PDF</li>
-      <li>Quick tools: compress, remove metadata, merge PDFs, join audio, even out the volume</li>
+      <li>Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF, WMA; sound from videos</li>
+      <li>Video: MP4, MKV, WebM, MOV, AVI, WMV, and animated GIFs</li>
+      <li>PDF pages to images, images to PDF; subtitles; ZIP, TAR, 7Z and RAR archives</li>
+      <li>Quick tools: compress, rotate, crop, trim, split or merge PDFs, protect with a password, join tracks and videos, and more</li>
+      <li>File actions for any file or folder: copy the path, copy or move to a folder, put in a ZIP</li>
       <li>Mixed selections in one go, only the formats that make sense for each file</li>
       <li>Everything happens on your computer: nothing is uploaded</li>
     </ul>
     <ul xml:lang="it">
       <li>Immagini: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO e foto HEIC dei telefoni</li>
-      <li>Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF; audio dai video</li>
-      <li>Video: MP4, MKV, WebM, MOV, AVI e GIF animate</li>
-      <li>Pagine PDF in immagini, immagini in PDF</li>
-      <li>Strumenti rapidi: comprimi, rimuovi metadati, unisci PDF, unisci audio, uniforma il volume</li>
+      <li>Audio: MP3, M4A, OGG, Opus, FLAC, WAV, AIFF, WMA; audio dai video</li>
+      <li>Video: MP4, MKV, WebM, MOV, AVI, WMV e GIF animate</li>
+      <li>Pagine PDF in immagini, immagini in PDF; sottotitoli; archivi ZIP, TAR, 7Z e RAR</li>
+      <li>Strumenti rapidi: comprimi, ruota, ritaglia, taglia, dividi o unisci PDF, proteggi con password, unisci tracce e video, e altro</li>
+      <li>Azioni per qualsiasi file o cartella: copia il percorso, copia o sposta in una cartella, metti in uno ZIP</li>
       <li>Selezioni miste in un colpo solo, solo i formati sensati per ogni file</li>
       <li>Tutto avviene sul tuo computer: nulla viene caricato online</li>
     </ul>

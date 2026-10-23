@@ -81,7 +81,7 @@ fn parse_format_list(list: &str) -> (Vec<Format>, Vec<Format>) {
 pub(crate) fn output_args(cmd: &mut Command, from: Format, to: Format, step: &Step) {
     let o = step.opts();
     cmd.arg("-auto-orient");
-    if o.rotate % 360 != 0 {
+    if !o.rotate.is_multiple_of(360) {
         cmd.args(["-rotate", &(o.rotate % 360).to_string()]);
     }
     if let Some((w, h)) = o.crop {

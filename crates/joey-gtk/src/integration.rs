@@ -264,15 +264,33 @@ fn nemo() -> std::io::Result<bool> {
     Ok(false)
 }
 
+/// PCManFM (LXDE) and PCManFM-Qt (LXQt) read the shared "file manager
+/// actions" format.
+fn pcmanfm() -> std::io::Result<bool> {
+    let action = format!(
+        "[Desktop Entry]\nType=Action\nName={}\nTooltip={MARK}\nIcon={APP_ID}\nProfiles=files;\n\n[X-Action-Profile files]\nMimeTypes=all/allfiles;\nSelectionCount=>0\nExec={}\n",
+        t("Convert with Joey"),
+        command("%F")
+    );
+    let path = home().join(".local/share/file-manager/actions/joey.desktop");
+    if let Some(d) = path.parent() {
+        fs::create_dir_all(d)?;
+    }
+    fs::write(path, action)?;
+    Ok(false)
+}
+
 /// Sets Joey up in every file manager found. Safe to run again.
 pub fn setup() -> Report {
     let mut done = Vec::new();
-    let all: [(&str, &'static str, Setup); 5] = [
+    let all: [(&str, &'static str, Setup); 7] = [
         ("nautilus", "Nautilus", nautilus),
         ("dolphin", "Dolphin", dolphin),
         ("thunar", "Thunar", thunar),
         ("nemo", "Nemo", nemo),
         ("caja", "Caja", caja),
+        ("pcmanfm-qt", "PCManFM-Qt", pcmanfm),
+        ("pcmanfm", "PCManFM", pcmanfm),
     ];
     for (bin, name, f) in all {
         if installed(bin) {
@@ -292,6 +310,7 @@ pub fn is_set_up() -> bool {
         h.join(".local/share/kio/servicemenus/joey.desktop"),
         h.join(".local/share/nemo/actions/joey.nemo_action"),
         h.join(".config/caja/scripts").join(SCRIPT),
+        h.join(".local/share/file-manager/actions/joey.desktop"),
     ]
     .iter()
     .any(|p| p.exists())
@@ -307,6 +326,7 @@ pub fn remove() {
         h.join(".local/share/kio/servicemenus/joey.desktop"),
         h.join(".local/share/kservices5/ServiceMenus/joey.desktop"),
         h.join(".local/share/nemo/actions/joey.nemo_action"),
+        h.join(".local/share/file-manager/actions/joey.desktop"),
     ] {
         let _ = fs::remove_file(p);
     }
