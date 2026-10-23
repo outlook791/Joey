@@ -38,6 +38,23 @@ flatpak run io.github.outlook791.Joey --setup-file-managers
 
 and log out and back in: Alt+C, right-click and Meta+C are ready.
 
+From a terminal, the same thing:
+
+```sh
+flatpak install --user https://outlook791.github.io/Joey/joey.flatpakref
+flatpak install --user https://outlook791.github.io/Joey/joey-office.flatpakref   # optional
+flatpak run io.github.outlook791.Joey --setup-file-managers
+```
+
+**Updates** come through Discover / GNOME Software, or `flatpak update`. **To remove Joey:**
+
+```sh
+flatpak run io.github.outlook791.Joey --remove-file-managers
+flatpak uninstall --user io.github.outlook791.Joey io.github.outlook791.Joey.Office
+```
+
+What's inside: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc and Typst (Word, ODT, RTF, Markdown, HTML and EPUB, also to PDF), openpyxl and xlrd (Excel, ODS and CSV, also to PDF; PDF tables to Excel; PDF to text). **Joey Office** adds the official LibreOffice build, for PowerPoint and for Office files with their exact layout. Without it, Joey also uses LibreOffice if it's on your computer. KDE Connect, GSConnect, LocalSend and "Open a terminal here" work too: for these the Flatpak starts the programs on your computer, only when you choose them.
+
 ### From source (any distribution)
 
 On Fedora:
@@ -96,11 +113,11 @@ Then **log out and back in once**, so the file manager and the desktop pick up t
 
 To update: `cd ~/joey && git pull && ./install.sh`.
 
-Joey uses whatever programs are installed and only offers what they can do: without LibreOffice there are no Office documents, without FFmpeg no audio or video. `joey --engines` shows what it found. Fedora's `ffmpeg-free` lacks some codecs (e.g. H.264 MP4 output); the full FFmpeg from RPM Fusion covers them. For sending to devices, pair your phone in KDE Connect and/or install LocalSend (`flatpak install flathub org.localsend.localsend_app`).
+Joey uses whatever programs are installed and only offers what they can do: without LibreOffice, Office files go through Pandoc, Typst and openpyxl (no PowerPoint); without FFmpeg there's no audio or video. `joey --engines` shows what it found. Fedora's `ffmpeg-free` lacks some codecs (e.g. H.264 MP4 output); the full FFmpeg from RPM Fusion covers them. For sending to devices, pair your phone in KDE Connect and/or install LocalSend (`flatpak install flathub org.localsend.localsend_app`).
 
-### Flatpak
+### Build the Flatpak yourself
 
-The manifest is in [`flatpak/`](flatpak/). To build and install it locally:
+The manifests are in [`flatpak/`](flatpak/) (Joey, and Joey Office as an add-on). To build and install Joey locally:
 
 ```sh
 sudo dnf install flatpak-builder
@@ -109,7 +126,7 @@ flatpak-builder --user --install-deps-from=flathub --force-clean \
 flatpak run io.github.outlook791.Joey --setup-file-managers   # Alt+C, right-click, Meta+C
 ```
 
-The Flatpak includes everything except LibreOffice: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc and Typst (Word, ODT, RTF, Markdown, HTML and EPUB, also to PDF), and openpyxl (Excel ↔ CSV, PDF tables to Excel, PDF to text). LibreOffice is far too big to bundle: if it's on your computer (as a normal program or a Flatpak), Joey uses it for the best Office conversions, PowerPoint included. KDE Connect, GSConnect, LocalSend and "Open a terminal here" work too. For this the Flatpak may start those programs outside its sandbox, only when you choose them.
+Joey Office needs the official LibreOffice archive next to its manifest; [`.github/workflows/checks.yml`](.github/workflows/checks.yml) shows how the checks download and verify it.
 
 ## Converting
 
@@ -201,6 +218,8 @@ The free alternative to AirDrop:
 
 - **KDE Connect** (KDE and other desktops) or **GSConnect** (its GNOME version, a GNOME Shell extension): pair your phone or PC once in the KDE Connect app on the phone. Each paired device that is reachable appears as *Send to Pixel 8* (with its name). The file arrives on the device; KDE Connect or GSConnect shows the progress.
 - **LocalSend**: works with Android, iPhone, Windows, Mac and Linux on the same Wi-Fi, without pairing. *Send with LocalSend…* opens LocalSend with your files already selected: pick the device there.
+
+These entries appear only when they can work: a device only while it's paired and reachable, LocalSend only if it's installed.
 
 ## PDF to Excel
 
@@ -305,7 +324,8 @@ joey-gtk --remove-file-managers    # take them out
 
 - **Alt+C does nothing in the file manager:** log out and back in after installing. Dolphin needs version 26.04 or newer (`dolphin --version`); in older ones use right-click → *Joey* or Meta+C. Check that Alt+C isn't assigned to something else in the file manager's shortcut settings.
 - **Meta+C does nothing:** copy the files with Ctrl+C first, then log out and back in once. On KDE, System Settings → Keyboard → Shortcuts lists it as *Joey (copied files)*: there you can also choose another key.
-- **The icon is a question mark:** log out and back in; if it stays, run `./install.sh` again.
+- **The icon is a question mark:** log out and back in; if it stays, run `./install.sh` again (or reinstall the Flatpak).
+- **No PowerPoint, or Word/Excel layouts look plain:** install Joey Office (see [Install](#install)) or LibreOffice.
 - **A format is missing:** `joey --engines` shows which programs Joey found. Install the missing one (see [Install](#install)) and it appears.
 - **Anything else:** [report it](#feedback-and-problem-reports); the report says what's needed.
 
@@ -328,7 +348,7 @@ flatpak/           Flatpak manifest and offline Rust sources
 
 Run the tests with `cargo test`. Conversions the installed programs can't do are reported as skipped.
 
-Every change is checked automatically on GitHub ([Checks](.github/workflows/checks.yml)): Joey is built and tested on Fedora, Ubuntu 24.04, Debian 13, Arch Linux and openSUSE Tumbleweed, including the command line, the AI server, the window and `install.sh`; the code style and store metadata are checked, and the Flatpak is built. The Flatpak built for each change can be downloaded from the run's *Artifacts*. `ci/check.sh` runs the same checks on your computer.
+Every change is checked automatically on GitHub ([Checks](.github/workflows/checks.yml)): Joey is built and tested on Fedora, Ubuntu 24.04, Debian 13, Arch Linux and openSUSE Tumbleweed, including the command line, the AI server, the window and `install.sh`; the code style and store metadata are checked; the Flatpak and Joey Office are built, installed and used to convert files (Word, Excel, PowerPoint, PDF, images). When everything passes on `main`, the signed repository is published on [outlook791.github.io/Joey](https://outlook791.github.io/Joey/). Each run's Flatpak files can also be downloaded from its *Artifacts*. `ci/check.sh` runs the same checks on your computer.
 
 ## License
 

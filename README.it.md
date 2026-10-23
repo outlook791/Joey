@@ -38,6 +38,23 @@ flatpak run io.github.outlook791.Joey --setup-file-managers
 
 ed esci e rientra nella sessione: Alt+C, tasto destro e Meta+C sono pronti.
 
+Dal terminale, la stessa cosa:
+
+```sh
+flatpak install --user https://outlook791.github.io/Joey/joey.flatpakref
+flatpak install --user https://outlook791.github.io/Joey/joey-office.flatpakref   # facoltativo
+flatpak run io.github.outlook791.Joey --setup-file-managers
+```
+
+Gli **aggiornamenti** arrivano da Discover / GNOME Software, oppure con `flatpak update`. **Per togliere Joey:**
+
+```sh
+flatpak run io.github.outlook791.Joey --remove-file-managers
+flatpak uninstall --user io.github.outlook791.Joey io.github.outlook791.Joey.Office
+```
+
+Cosa c'è dentro: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc e Typst (Word, ODT, RTF, Markdown, HTML ed EPUB, anche in PDF), openpyxl e xlrd (Excel, ODS e CSV, anche in PDF; tabelle PDF in Excel; PDF in testo). **Joey Office** aggiunge LibreOffice ufficiale, per PowerPoint e per i file Office con l'impaginazione esatta. Senza, Joey usa anche il LibreOffice del tuo computer, se c'è. Funzionano anche KDE Connect, GSConnect, LocalSend e "Apri un terminale qui": per questi il Flatpak avvia i programmi del tuo computer, solo quando li scegli.
+
 ### Dal codice sorgente (qualsiasi distribuzione)
 
 Su Fedora:
@@ -96,11 +113,11 @@ Poi **esci e rientra nella sessione una volta**, così file manager e desktop ca
 
 Per aggiornare: `cd ~/joey && git pull && ./install.sh`.
 
-Joey usa i programmi installati e offre solo quello che sanno fare: senza LibreOffice niente documenti Office, senza FFmpeg niente audio e video. `joey --engines` mostra cosa ha trovato. L'`ffmpeg-free` di Fedora non ha alcuni codec (per esempio l'MP4 H.264 in uscita); l'FFmpeg completo di RPM Fusion li aggiunge. Per l'invio ai dispositivi, associa il telefono in KDE Connect e/o installa LocalSend (`flatpak install flathub org.localsend.localsend_app`).
+Joey usa i programmi installati e offre solo quello che sanno fare: senza LibreOffice i file Office passano da Pandoc, Typst e openpyxl (niente PowerPoint); senza FFmpeg niente audio e video. `joey --engines` mostra cosa ha trovato. L'`ffmpeg-free` di Fedora non ha alcuni codec (per esempio l'MP4 H.264 in uscita); l'FFmpeg completo di RPM Fusion li aggiunge. Per l'invio ai dispositivi, associa il telefono in KDE Connect e/o installa LocalSend (`flatpak install flathub org.localsend.localsend_app`).
 
-### Flatpak
+### Compilare il Flatpak da sé
 
-Il manifest è in [`flatpak/`](flatpak/). Per compilarlo e installarlo:
+I manifest sono in [`flatpak/`](flatpak/) (Joey, e Joey Office come estensione). Per compilare e installare Joey:
 
 ```sh
 sudo dnf install flatpak-builder
@@ -109,7 +126,7 @@ flatpak-builder --user --install-deps-from=flathub --force-clean \
 flatpak run io.github.outlook791.Joey --setup-file-managers   # Alt+C, tasto destro, Meta+C
 ```
 
-Il Flatpak include tutto tranne LibreOffice: FFmpeg, ImageMagick (HEIC, AVIF), Ghostscript, qpdf, libarchive, Pandoc e Typst (Word, ODT, RTF, Markdown, HTML ed EPUB, anche in PDF) e openpyxl (Excel ↔ CSV, tabelle PDF in Excel, PDF in testo). LibreOffice è troppo grande da includere: se è sul tuo computer (normale o Flatpak), Joey lo usa per le conversioni Office migliori, PowerPoint compreso. Funzionano anche KDE Connect, GSConnect, LocalSend e "Apri un terminale qui". Per questo il Flatpak può avviare quei programmi fuori dalla sua sandbox, solo quando li scegli.
+Joey Office ha bisogno dell'archivio ufficiale di LibreOffice accanto al suo manifest; [`.github/workflows/checks.yml`](.github/workflows/checks.yml) mostra come le verifiche lo scaricano e lo controllano.
 
 ## Convertire
 
@@ -201,6 +218,8 @@ L'alternativa gratuita ad AirDrop:
 
 - **KDE Connect** (KDE e altri desktop) o **GSConnect** (la sua versione per GNOME, un'estensione di GNOME Shell): associa una volta il telefono o il PC con l'app KDE Connect sul telefono. Ogni dispositivo associato e raggiungibile compare come *Invia a Pixel 8* (con il suo nome). Il file arriva sul dispositivo; KDE Connect o GSConnect mostrano l'avanzamento.
 - **LocalSend**: funziona con Android, iPhone, Windows, Mac e Linux sulla stessa rete Wi-Fi, senza associazione. *Invia con LocalSend…* apre LocalSend con i file già selezionati: lì scegli il dispositivo.
+
+Queste voci compaiono solo quando possono funzionare: un dispositivo solo se è associato e raggiungibile, LocalSend solo se è installato.
 
 ## Da PDF a Excel
 
@@ -305,7 +324,8 @@ joey-gtk --remove-file-managers    # li toglie
 
 - **Alt+C non fa nulla nel file manager:** esci e rientra nella sessione dopo l'installazione. Dolphin deve essere alla versione 26.04 o successiva (`dolphin --version`); in quelle precedenti usa tasto destro → *Joey* o Meta+C. Controlla che Alt+C non sia assegnato ad altro nelle scorciatoie del file manager.
 - **Meta+C non fa nulla:** prima copia i file con Ctrl+C, poi esci e rientra nella sessione una volta. Su KDE, Impostazioni di sistema → Tastiera → Scorciatoie lo elenca come *Joey (file copiati)*: lì puoi anche scegliere un altro tasto.
-- **L'icona è un punto interrogativo:** esci e rientra; se resta, rilancia `./install.sh`.
+- **L'icona è un punto interrogativo:** esci e rientra; se resta, rilancia `./install.sh` (o reinstalla il Flatpak).
+- **Niente PowerPoint, o Word/Excel con impaginazione semplice:** installa Joey Office (vedi [Installazione](#installazione)) o LibreOffice.
 - **Manca un formato:** `joey --engines` mostra quali programmi ha trovato Joey. Installa quello che manca (vedi [Installazione](#installazione)) e il formato compare.
 - **Altro:** [segnalalo](#feedback-e-segnalazioni); la segnalazione dice cosa serve.
 
