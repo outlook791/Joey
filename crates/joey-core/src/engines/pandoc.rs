@@ -81,7 +81,7 @@ impl Engine for Pandoc {
     }
 
     fn convert(&self, step: &Step) -> Result<Vec<PathBuf>, Error> {
-        let out = step.output();
+        let out = std::path::absolute(step.output())?;
         let mut cmd = Command::new(&self.bin);
         cmd.args(["-f", reader(step.from), "-t", writer(step.to), "-o"])
             .arg(&out);
@@ -103,11 +103,17 @@ impl Engine for Pandoc {
             }
             _ => {}
         }
+        // Absolute: Pandoc runs in the work folder (below).
+        let input = std::path::absolute(step.input)?;
         // Images referenced by the document are found next to it.
-        if let Some(dir) = step.input.parent() {
+        if let Some(dir) = input.parent() {
             cmd.arg(format!("--resource-path={}", dir.display()));
         }
-        cmd.arg(step.input);
+        cmd.arg(&input);
+        // Pandoc writes temporary files (e.g. for PDF) in the current
+        // folder, which may be read-only (as in the Flatpak): use ours.
+        let work = std::path::absolute(step.work_dir)?;
+        cmd.current_dir(&work).env("TMPDIR", &work);
         run("pandoc", &mut cmd)?;
         Ok(vec![out])
     }
