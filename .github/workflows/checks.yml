@@ -36,9 +36,9 @@ jobs:
           esac
       - uses: actions/checkout@v4
       - name: Install what Joey needs
-        run: ci/run.sh "${{ matrix.name }}: install" ci/deps.sh ${{ matrix.distro }}
+        run: 'ci/run.sh "${{ matrix.name }} - install" ci/deps.sh ${{ matrix.distro }}'
       - name: Build, test and try everything
-        run: ci/run.sh "${{ matrix.name }}: checks" ci/check.sh
+        run: 'ci/run.sh "${{ matrix.name }} - checks" ci/check.sh'
 
   style:
     name: Code style and store metadata
