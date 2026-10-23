@@ -4,6 +4,8 @@
 # and install.sh (in a throwaway home folder).
 set -eu
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+# install.sh runs with another home folder later: keep Rust findable.
+export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.rustup}" CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
 step() { printf '\n=== %s ===\n' "$1"; }
 
 step "Versions"

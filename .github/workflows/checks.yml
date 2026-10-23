@@ -73,6 +73,8 @@ jobs:
           path: .flatpak-builder
           key: flatpak-${{ hashFiles('flatpak/**') }}-${{ github.sha }}
           restore-keys: flatpak-${{ hashFiles('flatpak/**') }}-
+      - name: Flathub, where the runtime comes from
+        run: flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
       - name: Build
         run: >
           ci/run.sh "Flatpak build"
