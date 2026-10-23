@@ -93,6 +93,48 @@ pub struct Options {
     pub pages: Option<String>,
     /// Sharpness of PDF pages turned into images. None means 150.
     pub dpi: Option<u32>,
+    /// Turn by this many degrees clockwise (90, 180, 270). 0 keeps it.
+    pub rotate: u16,
+    /// Black and white.
+    pub grayscale: bool,
+    /// Cut to this size in pixels, centred. Set by the crop tool.
+    pub crop: Option<(u32, u32)>,
+    /// Keep only this part of audio or video, in milliseconds.
+    pub trim: Option<(u64, u64)>,
+}
+
+/// Reads a time like "90", "1:30", "1:02:30" or "1:30.5" as milliseconds.
+pub fn parse_time(s: &str) -> Option<u64> {
+    let s = s.trim().replace(',', ".");
+    if s.is_empty() {
+        return None;
+    }
+    let mut total = 0.0f64;
+    for part in s.split(':') {
+        let v: f64 = part.trim().parse().ok()?;
+        if v < 0.0 {
+            return None;
+        }
+        total = total * 60.0 + v;
+    }
+    Some((total * 1000.0).round() as u64)
+}
+
+/// "1:05.250" style text for a time in milliseconds.
+pub fn format_time(ms: u64) -> String {
+    let secs = ms / 1000;
+    let frac = ms % 1000;
+    let (h, m, s) = (secs / 3600, (secs / 60) % 60, secs % 60);
+    let base = if h > 0 {
+        format!("{h}:{m:02}:{s:02}")
+    } else {
+        format!("{m}:{s:02}")
+    };
+    if frac > 0 {
+        format!("{base}.{frac:03}")
+    } else {
+        base
+    }
 }
 
 impl Options {
@@ -186,6 +228,17 @@ mod tests {
             ..Default::default()
         };
         assert_eq!(o.page_ranges(), vec![(1, 3), (7, 7)]);
+    }
+
+    #[test]
+    fn times_parse_like_people_write_them() {
+        assert_eq!(parse_time("90"), Some(90_000));
+        assert_eq!(parse_time("1:30"), Some(90_000));
+        assert_eq!(parse_time("1:02:30"), Some(3_750_000));
+        assert_eq!(parse_time("0:01,5"), Some(1_500));
+        assert_eq!(parse_time("x"), None);
+        assert_eq!(format_time(3_750_000), "1:02:30");
+        assert_eq!(format_time(1_500), "0:01.500");
     }
 
     #[test]

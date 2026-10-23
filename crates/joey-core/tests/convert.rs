@@ -472,3 +472,145 @@ fn tar_gz_keeps_a_clean_name() {
     assert_eq!(back[0].file_name().unwrap(), "bundle (1).zip");
     drop(dir);
 }
+
+// ---- More quick tools ----
+
+fn dims(p: &Path) -> (u32, u32) {
+    let out = std::process::Command::new("identify")
+        .args(["-format", "%w %h"])
+        .arg(p)
+        .output()
+        .unwrap();
+    let s = String::from_utf8_lossy(&out.stdout);
+    let mut it = s.split_whitespace().map(|n| n.parse().unwrap());
+    (it.next().unwrap(), it.next().unwrap())
+}
+
+#[test]
+fn rotate_crop_and_gray_images() {
+    use joey_core::ToolParams;
+    let joey = Joey::new();
+    let (dir, input) = sample("big.jpg"); // 240x160
+    let rot = joey
+        .run_tool(Tool::RotateRight, std::slice::from_ref(&input))
+        .remove(0)
+        .unwrap();
+    assert_eq!(dims(&rot[0]), (160, 240));
+    let p = ToolParams {
+        shape: Some((1, 1)),
+        ..Default::default()
+    };
+    let sq = joey
+        .run_tool_with(Tool::Crop, std::slice::from_ref(&input), &p)
+        .remove(0)
+        .unwrap();
+    assert_eq!(dims(&sq[0]), (160, 160));
+    let gray = joey
+        .run_tool(Tool::Grayscale, std::slice::from_ref(&input))
+        .remove(0)
+        .unwrap();
+    assert!(gray[0]
+        .file_name()
+        .unwrap()
+        .to_string_lossy()
+        .contains("black and white"));
+    drop(dir);
+}
+
+#[test]
+fn trim_audio_and_video() {
+    use joey_core::ToolParams;
+    let joey = Joey::new();
+    let p = ToolParams {
+        trim: Some((100, 400)),
+        ..Default::default()
+    };
+    for name in ["tone.wav", "clip.mp4"] {
+        let (dir, input) = sample(name);
+        let out = joey
+            .run_tool_with(Tool::Trim, std::slice::from_ref(&input), &p)
+            .remove(0)
+            .unwrap();
+        assert!(
+            std::fs::metadata(&out[0]).unwrap().len() < std::fs::metadata(&input).unwrap().len()
+        );
+        drop(dir);
+    }
+}
+
+#[test]
+fn pdf_split_extract_rotate_protect_unlock() {
+    use joey_core::ToolParams;
+    let joey = Joey::new();
+    if !joey.tools_for(Format::Pdf, 1).contains(&Tool::SplitPdf) {
+        return eprintln!("skipped: qpdf missing");
+    }
+    let (dir, input) = sample("two-pages.pdf");
+    let one = std::slice::from_ref(&input);
+    let split = joey.run_tool(Tool::SplitPdf, one).remove(0).unwrap();
+    assert_eq!(split.len(), 2);
+    let p = ToolParams {
+        pages: Some("2".into()),
+        ..Default::default()
+    };
+    let page2 = joey
+        .run_tool_with(Tool::ExtractPages, one, &p)
+        .remove(0)
+        .unwrap();
+    assert_eq!(joey.convert(&page2[0], Format::Png, None).unwrap().len(), 1);
+    joey.run_tool(Tool::RotateLeft, one).remove(0).unwrap();
+    let pw = ToolParams {
+        password: Some("hop".into()),
+        ..Default::default()
+    };
+    let locked = joey
+        .run_tool_with(Tool::ProtectPdf, one, &pw)
+        .remove(0)
+        .unwrap();
+    let wrong = ToolParams {
+        password: Some("nope".into()),
+        ..Default::default()
+    };
+    assert!(joey
+        .run_tool_with(Tool::UnlockPdf, &locked, &wrong)
+        .remove(0)
+        .is_err());
+    joey.run_tool_with(Tool::UnlockPdf, &locked, &pw)
+        .remove(0)
+        .unwrap();
+    drop(dir);
+}
+
+#[test]
+fn zip_and_extract_any_files() {
+    let joey = Joey::new();
+    if !joey.can_zip() {
+        return eprintln!("skipped: bsdtar missing");
+    }
+    let dir = tempfile::tempdir().unwrap();
+    let a = dir.path().join("notes.xyz");
+    let b = dir.path().join("folder");
+    std::fs::write(&a, b"whatever").unwrap();
+    std::fs::create_dir(&b).unwrap();
+    std::fs::write(b.join("inside.txt"), b"hi").unwrap();
+    let zip = joey.zip(&[a, b]).unwrap();
+    assert_eq!(zip[0].file_name().unwrap(), "notes.zip");
+    let out = joey.run_tool(Tool::ExtractArchive, &zip).remove(0).unwrap();
+    assert!(out[0].join("folder/inside.txt").exists());
+    assert!(out[0].join("notes.xyz").exists());
+}
+
+#[test]
+fn join_videos() {
+    let joey = Joey::new();
+    let dir = tempfile::tempdir().unwrap();
+    let a = dir.path().join("a.mp4");
+    let b = dir.path().join("b.mp4");
+    std::fs::copy(fixture("clip.mp4"), &a).unwrap();
+    std::fs::copy(fixture("clip.mp4"), &b).unwrap();
+    let out = joey
+        .run_tool(Tool::MergeVideo, &[a.clone(), b])
+        .remove(0)
+        .unwrap();
+    assert!(std::fs::metadata(&out[0]).unwrap().len() > std::fs::metadata(&a).unwrap().len());
+}

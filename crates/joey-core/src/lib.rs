@@ -26,7 +26,7 @@ pub use engine::{Engine, Step};
 pub use format::{Category, Format};
 use graph::Graph;
 pub use options::{Options, Quality};
-pub use tools::Tool;
+pub use tools::{Ask, Tool, ToolParams};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -119,8 +119,28 @@ impl Joey {
         self.toolbox.tools_for(from, count)
     }
 
-    /// Runs a quick tool on files of the same format.
+    /// Runs a quick tool that asks nothing on files of the same format.
     pub fn run_tool(&self, tool: Tool, files: &[PathBuf]) -> Vec<Outcome> {
+        self.run_tool_with(tool, files, &ToolParams::default())
+    }
+
+    /// Puts any files or folders into one ZIP next to the first.
+    pub fn zip(&self, paths: &[PathBuf]) -> Outcome {
+        self.toolbox.zip(paths)
+    }
+
+    /// True if files of any kind (and folders) can be zipped here.
+    pub fn can_zip(&self) -> bool {
+        self.toolbox.can_zip()
+    }
+
+    /// Runs a quick tool on files of the same format, with its answers.
+    pub fn run_tool_with(
+        &self,
+        tool: Tool,
+        files: &[PathBuf],
+        params: &ToolParams,
+    ) -> Vec<Outcome> {
         let mut formats = Vec::with_capacity(files.len());
         for f in files {
             match self.detect(f) {
@@ -128,7 +148,7 @@ impl Joey {
                 Err(e) => return vec![Err(e)],
             }
         }
-        self.toolbox.run(tool, files, &formats)
+        self.toolbox.run(tool, files, &formats, params)
     }
 
     /// Converts one file with default settings. See [`Joey::convert_with`].

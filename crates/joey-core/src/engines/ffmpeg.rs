@@ -178,6 +178,13 @@ impl Engine for Ffmpeg {
         let mut cmd = Command::new(&self.bin);
         cmd.args(["-hide_banner", "-nostdin", "-y", "-i"])
             .arg(step.input);
+        if let Some((from_ms, to_ms)) = o.trim {
+            // After -i: slower but exact to the frame.
+            cmd.args(["-ss", &format!("{:.3}", from_ms as f64 / 1000.0)]);
+            if to_ms > from_ms {
+                cmd.args(["-to", &format!("{:.3}", to_ms as f64 / 1000.0)]);
+            }
+        }
         if o.strip_metadata {
             cmd.args(["-map_metadata", "-1", "-map_chapters", "-1"]);
         }
@@ -207,13 +214,19 @@ impl Engine for Ffmpeg {
                     to: step.to,
                 })?;
                 // Even sizes are required by most video codecs.
+                let turn = match o.rotate % 360 {
+                    90 => "transpose=1,",
+                    180 => "transpose=1,transpose=1,",
+                    270 => "transpose=2,",
+                    _ => "",
+                };
                 let scale = match o.max_size {
                     Some(px) => format!(
                         "scale=w='min(iw,{px})':h='min(ih,{px})':force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2"
                     ),
                     None => "scale=trunc(iw/2)*2:trunc(ih/2)*2".into(),
                 };
-                cmd.args(["-vf", &scale, "-c:v", codec]);
+                cmd.args(["-vf", &format!("{turn}{scale}"), "-c:v", codec]);
                 match codec {
                     "libx264" => {
                         cmd.args(["-crf", &o.quality.h264_crf().to_string()]);

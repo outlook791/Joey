@@ -81,6 +81,21 @@ fn parse_format_list(list: &str) -> (Vec<Format>, Vec<Format>) {
 pub(crate) fn output_args(cmd: &mut Command, from: Format, to: Format, step: &Step) {
     let o = step.opts();
     cmd.arg("-auto-orient");
+    if o.rotate % 360 != 0 {
+        cmd.args(["-rotate", &(o.rotate % 360).to_string()]);
+    }
+    if let Some((w, h)) = o.crop {
+        cmd.args([
+            "-gravity",
+            "center",
+            "-crop",
+            &format!("{w}x{h}+0+0"),
+            "+repage",
+        ]);
+    }
+    if o.grayscale {
+        cmd.args(["-colorspace", "Gray"]);
+    }
     if let Some(px) = o.max_size {
         cmd.args(["-resize", &format!("{px}x{px}>")]);
     }
