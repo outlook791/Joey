@@ -1,0 +1,74 @@
+# Automatic checks, on every change: builds Joey and runs the tests, the
+# command line, the AI server, the window and install.sh on five
+# distributions, checks the code style and the store metadata, and
+# builds the Flatpak. Free for public repositories.
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  distro:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { name: Fedora, distro: fedora, image: "fedora:latest" }
+          - { name: Ubuntu 24.04 LTS, distro: ubuntu, image: "ubuntu:24.04" }
+          - { name: Debian 13, distro: debian, image: "debian:trixie" }
+          - { name: Arch Linux, distro: arch, image: "archlinux:latest" }
+          - { name: openSUSE Tumbleweed, distro: opensuse, image: "opensuse/tumbleweed:latest" }
+    container: ${{ matrix.image }}
+    steps:
+      - name: Git (needed to fetch the code)
+        run: |
+          case ${{ matrix.distro }} in
+            fedora) dnf -y -q install git ;;
+            ubuntu|debian) apt-get update -qq && apt-get install -y -qq git ca-certificates ;;
+            arch) pacman -Sy --noconfirm --needed git ;;
+            opensuse) zypper -n -q in git tar gzip ;;
+          esac
+      - uses: actions/checkout@v4
+      - name: Install what Joey needs
+        run: ci/deps.sh ${{ matrix.distro }}
+      - name: Build, test and try everything
+        run: ci/check.sh
+
+  style:
+    name: Code style and store metadata
+    runs-on: ubuntu-latest
+    container: "fedora:latest"
+    steps:
+      - run: dnf -y -q install git
+      - uses: actions/checkout@v4
+      - run: ci/deps.sh fedora
+      - run: dnf -y -q install rustfmt clippy
+      - name: Formatting
+        run: cargo fmt --all --check
+      - name: Lints
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Menu entry
+        run: desktop-file-validate data/io.github.outlook791.Joey.desktop
+      - name: Store metadata
+        run: appstreamcli validate --no-net --explain data/io.github.outlook791.Joey.metainfo.xml
+
+  flatpak:
+    name: Flatpak
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: joey.flatpak
+          manifest-path: flatpak/io.github.outlook791.Joey.yml
+          artifact-name: joey-flatpak

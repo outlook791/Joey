@@ -280,6 +280,8 @@ flatpak/           Flatpak manifest and offline Rust sources
 
 Run the tests with `cargo test`. Conversions the installed programs can't do are reported as skipped.
 
+Every change is checked automatically on GitHub ([Checks](.github/workflows/checks.yml)): Joey is built and tested on Fedora, Ubuntu 24.04, Debian 13, Arch Linux and openSUSE Tumbleweed, including the command line, the AI server, the window and `install.sh`; the code style and store metadata are checked, and the Flatpak is built. The Flatpak built for each change can be downloaded from the run's *Artifacts*. `ci/check.sh` runs the same checks on your computer.
+
 ## License
 
 GPL-3.0-or-later. See [LICENSE](LICENSE).
