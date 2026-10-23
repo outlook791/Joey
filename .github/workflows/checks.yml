@@ -91,5 +91,10 @@ jobs:
         run: |
           # Containers have no machine id, which D-Bus needs.
           [ -s /etc/machine-id ] || dbus-uuidgen > /etc/machine-id
-          ci/run.sh "Flatpak try" flatpak-builder --disable-rofiles-fuse --run build-dir \
-            flatpak/io.github.outlook791.Joey.yml joey --engines
+          # Install the file as a person would, then use it.
+          ci/run.sh "Flatpak install" flatpak install --user -y --noninteractive joey.flatpak
+          ci/run.sh "Flatpak engines" flatpak run --command=joey io.github.outlook791.Joey --engines
+          cp crates/joey-core/tests/fixtures/photo.jpg crates/joey-core/tests/fixtures/two-pages.pdf "$HOME/"
+          ci/run.sh "Flatpak convert" flatpak run --command=joey io.github.outlook791.Joey "$HOME/photo.jpg" --to webp
+          ci/run.sh "Flatpak PDF pages" flatpak run --command=joey io.github.outlook791.Joey "$HOME/two-pages.pdf" --to png
+          ls -l "$HOME"/photo.webp "$HOME"/two-pages-1.png
