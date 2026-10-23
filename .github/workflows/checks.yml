@@ -94,7 +94,12 @@ jobs:
           # Install the file as a person would, then use it.
           ci/run.sh "Flatpak install" flatpak install --user -y --noninteractive joey.flatpak
           ci/run.sh "Flatpak engines" flatpak run --command=joey io.github.outlook791.Joey --engines
-          cp crates/joey-core/tests/fixtures/photo.jpg crates/joey-core/tests/fixtures/two-pages.pdf "$HOME/"
-          ci/run.sh "Flatpak convert" flatpak run --command=joey io.github.outlook791.Joey "$HOME/photo.jpg" --to webp
-          ci/run.sh "Flatpak PDF pages" flatpak run --command=joey io.github.outlook791.Joey "$HOME/two-pages.pdf" --to png
-          ls -l "$HOME"/photo.webp "$HOME"/two-pages-1.png
+          # The account's real home (the CI's $HOME is elsewhere): the
+          # Flatpak may write there, as on a person's computer.
+          home=$(getent passwd "$(id -u)" | cut -d: -f6)
+          mkdir -p "$home/Joey test"
+          cp crates/joey-core/tests/fixtures/photo.jpg crates/joey-core/tests/fixtures/two-pages.pdf "$home/Joey test/"
+          ci/run.sh "Flatpak convert" flatpak run --command=joey io.github.outlook791.Joey "$home/Joey test/photo.jpg" --to webp
+          ci/run.sh "Flatpak PDF pages" flatpak run --command=joey io.github.outlook791.Joey "$home/Joey test/two-pages.pdf" --to png
+          ls -l "$home/Joey test"
+          test -s "$home/Joey test/photo.webp" && test -s "$home/Joey test/two-pages-1.png"
