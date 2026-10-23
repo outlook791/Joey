@@ -188,6 +188,8 @@ pub fn sensible(from: Format, to: Format) -> bool {
             Format::Docx | Format::Odt | Format::Txt | Format::Md | Format::Epub
         ),
         (Pdf, Presentation) => matches!(to, Format::Pptx | Format::Odp),
+        // Tables found in the PDF, one sheet each.
+        (Pdf, Spreadsheet) => matches!(to, Format::Xlsx | Format::Ods | Format::Csv),
         (Subtitle, Subtitle) => true,
         (Subtitle, Document) => to == Format::Txt,
         (Archive, Archive) => to != Format::Rar,

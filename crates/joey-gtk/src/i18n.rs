@@ -183,6 +183,12 @@ const IT: &[(&str, &str)] = &[
     ("the archive is empty", "l'archivio è vuoto"),
     ("Text (TXT)", "Testo (TXT)"),
     ("Web page (HTML)", "Pagina web (HTML)"),
+    ("Send to {device}", "Invia a {device}"),
+    ("Send with LocalSend…", "Invia con LocalSend…"),
+    ("Sent to {device}", "Inviato a {device}"),
+    ("{device} didn't answer", "{device} non risponde"),
+    ("Opened in LocalSend: pick the device there", "Aperto in LocalSend: scegli lì il dispositivo"),
+    ("no tables found in this PDF", "nessuna tabella trovata in questo PDF"),
 ];
 
 /// Translates a fixed string.

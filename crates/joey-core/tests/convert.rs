@@ -614,3 +614,21 @@ fn join_videos() {
         .unwrap();
     assert!(std::fs::metadata(&out[0]).unwrap().len() > std::fs::metadata(&a).unwrap().len());
 }
+
+#[test]
+fn pdf_tables_to_excel() {
+    let joey = Joey::new();
+    let (dir, input) = sample("invoice.pdf");
+    match joey.convert(&input, Format::Xlsx, None) {
+        Err(Error::NoRoute { .. }) => eprintln!("skipped: no table extractor"),
+        Err(e) => panic!("{e}"),
+        Ok(out) => {
+            assert_eq!(Format::detect(&out[0]), Some(Format::Xlsx));
+            // Read it back through CSV to check the cells.
+            let csv = joey.convert(&out[0], Format::Csv, None).unwrap();
+            let text = std::fs::read_to_string(&csv[0]).unwrap();
+            assert!(text.contains("Pouch") && text.contains("24"), "{text}");
+        }
+    }
+    drop(dir);
+}

@@ -1,9 +1,13 @@
 //! File actions: things to do with files that aren't conversions, for any
-//! kind of file, folders included (like Tangerine's Copy, Move, Copy Path
-//! and Terminal).
+//! kind of file, folders included (like Tangerine's Copy, Move, Copy Path,
+//! Terminal and AirDrop — here KDE Connect and LocalSend).
 
 use std::path::{Path, PathBuf};
-use std::process::Command;
+use std::process::{Command, Stdio};
+use std::sync::OnceLock;
+use std::time::Duration;
+
+use crate::i18n::{t, tf};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Action {
@@ -12,36 +16,55 @@ pub enum Action {
     MoveTo,
     Terminal,
     Zip,
+    /// Send to a phone or PC paired with KDE Connect (index in `phones()`).
+    Phone(u8),
+    /// Open LocalSend with the files, ready to pick a nearby device.
+    LocalSend,
 }
 
 impl Action {
-    pub fn label(self) -> &'static str {
+    /// Label in the interface language.
+    pub fn title(self) -> String {
         match self {
-            Action::CopyPath => "Copy the path",
-            Action::CopyTo => "Copy to…",
-            Action::MoveTo => "Move to…",
-            Action::Terminal => "Open a terminal here",
-            Action::Zip => "Put in a ZIP",
+            Action::CopyPath => t("Copy the path"),
+            Action::CopyTo => t("Copy to…"),
+            Action::MoveTo => t("Move to…"),
+            Action::Terminal => t("Open a terminal here"),
+            Action::Zip => t("Put in a ZIP"),
+            Action::Phone(i) => {
+                let name = phones()
+                    .get(i as usize)
+                    .map(|(_, n)| n.as_str())
+                    .unwrap_or("?");
+                tf("Send to {device}", &[("device", &name)])
+            }
+            Action::LocalSend => t("Send with LocalSend…"),
         }
     }
 
-    pub fn key(self) -> &'static str {
+    pub fn key(self) -> String {
         match self {
-            Action::CopyPath => "copy-path",
-            Action::CopyTo => "copy-to",
-            Action::MoveTo => "move-to",
-            Action::Terminal => "terminal",
-            Action::Zip => "zip",
+            Action::CopyPath => "copy-path".into(),
+            Action::CopyTo => "copy-to".into(),
+            Action::MoveTo => "move-to".into(),
+            Action::Terminal => "terminal".into(),
+            Action::Zip => "zip".into(),
+            Action::Phone(i) => format!("phone-{i}"),
+            Action::LocalSend => "localsend".into(),
         }
     }
 
     pub fn from_key(s: &str) -> Option<Action> {
+        if let Some(i) = s.strip_prefix("phone-") {
+            return i.parse().ok().map(Action::Phone);
+        }
         [
             Action::CopyPath,
             Action::CopyTo,
             Action::MoveTo,
             Action::Terminal,
             Action::Zip,
+            Action::LocalSend,
         ]
         .into_iter()
         .find(|a| a.key() == s)
@@ -54,6 +77,8 @@ impl Action {
             Action::MoveTo => "folder-move-symbolic",
             Action::Terminal => "utilities-terminal-symbolic",
             Action::Zip => "package-x-generic-symbolic",
+            Action::Phone(_) => "phone-symbolic",
+            Action::LocalSend => "send-to-symbolic",
         }
     }
 
@@ -73,7 +98,113 @@ pub fn available(zip: bool) -> Vec<Action> {
     if zip {
         v.push(Action::Zip);
     }
+    // Like AirDrop: KDE Connect for paired phones and PCs, LocalSend for
+    // any nearby device (Android, iPhone, Windows, Mac, Linux).
+    for i in 0..phones().len().min(3) {
+        v.push(Action::Phone(i as u8));
+    }
+    if localsend().is_some() {
+        v.push(Action::LocalSend);
+    }
     v
+}
+
+fn sandboxed() -> bool {
+    std::env::var_os("FLATPAK_ID").is_some()
+}
+
+/// Runs a command and returns its output, giving up after `secs`.
+fn output_within(mut cmd: Command, secs: u64) -> Option<String> {
+    let child = cmd
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+        .ok()?;
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        let _ = tx.send(child.wait_with_output());
+    });
+    let out = rx.recv_timeout(Duration::from_secs(secs)).ok()?.ok()?;
+    out.status
+        .success()
+        .then(|| String::from_utf8_lossy(&out.stdout).into_owned())
+}
+
+/// Phones and PCs paired with KDE Connect and reachable now: (id, name).
+pub fn phones() -> &'static [(String, String)] {
+    static PHONES: OnceLock<Vec<(String, String)>> = OnceLock::new();
+    PHONES.get_or_init(|| {
+        if sandboxed() {
+            return Vec::new();
+        }
+        let Some(bin) = joey_core::engine::which("kdeconnect-cli") else {
+            return Vec::new();
+        };
+        let mut cmd = Command::new(bin);
+        cmd.args(["--list-available", "--id-name-only"]);
+        output_within(cmd, 2)
+            .unwrap_or_default()
+            .lines()
+            .filter_map(|l| {
+                let (id, name) = l.trim().split_once(' ')?;
+                Some((id.to_string(), name.trim().to_string()))
+            })
+            .collect()
+    })
+}
+
+/// Sends files to a KDE Connect device. The transfer continues in KDE
+/// Connect, which shows its own progress.
+pub fn send_to_phone(index: u8, files: &[PathBuf]) -> Result<String, String> {
+    let (id, name) = phones().get(index as usize).ok_or("device not found")?;
+    let bin = joey_core::engine::which("kdeconnect-cli").ok_or("KDE Connect isn't installed")?;
+    let status = Command::new(bin)
+        .args(["--device", id])
+        .arg("--share")
+        .args(files)
+        .status()
+        .map_err(|e| e.to_string())?;
+    if status.success() {
+        Ok(tf("Sent to {device}", &[("device", name)]))
+    } else {
+        Err(tf("{device} didn't answer", &[("device", name)]))
+    }
+}
+
+/// How to start LocalSend: a program, or its Flatpak.
+fn localsend() -> Option<Command> {
+    if sandboxed() {
+        return None;
+    }
+    for bin in ["localsend_app", "localsend"] {
+        if let Some(p) = joey_core::engine::which(bin) {
+            return Some(Command::new(p));
+        }
+    }
+    let home = std::env::var_os("HOME")
+        .map(PathBuf::from)
+        .unwrap_or_default();
+    let id = "org.localsend.localsend_app";
+    let installed = Path::new("/var/lib/flatpak/app").join(id).exists()
+        || home.join(".local/share/flatpak/app").join(id).exists();
+    installed.then(|| {
+        let mut c = Command::new("flatpak");
+        c.args(["run", "--file-forwarding", id]);
+        c
+    })
+}
+
+/// Opens LocalSend on its Send page with the files already selected.
+pub fn open_localsend(files: &[PathBuf]) -> Result<String, String> {
+    let mut cmd = localsend().ok_or("LocalSend isn't installed")?;
+    if cmd.get_program() == "flatpak" {
+        cmd.arg("@@").args(files).arg("@@");
+    } else {
+        cmd.args(files);
+    }
+    cmd.stdout(Stdio::null()).stderr(Stdio::null());
+    cmd.spawn().map_err(|e| e.to_string())?;
+    Ok(t("Opened in LocalSend: pick the device there"))
 }
 
 /// A terminal program and how to tell it the starting folder.

@@ -693,7 +693,7 @@ pub fn choice_label(c: Choice) -> String {
     match c {
         Choice::To(f) => t(f.display_name()),
         Choice::Tool(tool) => t(tool.label()),
-        Choice::Action(a) => t(a.label()),
+        Choice::Action(a) => a.title(),
     }
 }
 
@@ -1129,6 +1129,12 @@ pub fn start(ui: &Rc<Ui>) {
                 Choice::Action(Action::Terminal) => match actions::open_terminal(&g.files[0]) {
                     Ok(()) => notes.push(t("Terminal opened")),
                     Err(e) => notes.push(e.to_string()),
+                },
+                Choice::Action(Action::Phone(i)) => match actions::send_to_phone(i, &g.files) {
+                    Ok(m) | Err(m) => notes.push(m),
+                },
+                Choice::Action(Action::LocalSend) => match actions::open_localsend(&g.files) {
+                    Ok(m) | Err(m) => notes.push(m),
                 },
             }
         }

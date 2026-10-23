@@ -112,6 +112,7 @@ pub fn available_engines() -> Vec<Box<dyn Engine>> {
     add!(ffmpeg::Ffmpeg::probe());
     add!(libreoffice::LibreOffice::probe());
     add!(pandoc::Pandoc::probe());
+    add!(pdftables::PdfTables::probe());
     add!(archive::Archive::probe());
     add!(Some(text::Text::new()));
     engines

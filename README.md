@@ -11,16 +11,17 @@ Joey is a free, open-source file converter for Linux. Select files in your file 
 - **Images**: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones; SVG drawings
 - **Audio**: MP3, M4A (AAC), OGG, Opus, FLAC, WAV, AIFF, WMA; the sound from any video
 - **Video**: MP4, MKV, WebM, MOV, AVI, WMV; video to animated GIF and back
-- **PDF**: pages to images, images to PDF; PDF to Word, ODT, PowerPoint, text, Markdown, EPUB
+- **PDF**: pages to images, images to PDF; PDF to Word, ODT, PowerPoint, text, Markdown, EPUB; tables to Excel (one sheet per table)
 - **Documents**: Word, ODT, RTF, TXT, Markdown, web pages (HTML), EPUB; Excel, ODS, CSV, TSV; PowerPoint, ODP
 - **Subtitles**: SRT, WebVTT, ASS, and subtitles to plain text
 - **Archives**: ZIP, TAR, TAR.GZ, 7Z, and RAR (opening only)
 - **Quick tools**: compress, remove metadata, rotate, black and white, crop to a shape, trim audio/video, even out the volume, remove the sound, split a PDF, keep only some pages, protect or unlock a PDF, extract an archive, join PDFs/tracks/videos, put anything in a ZIP
 - **File actions** for any file or folder, even ones Joey can't convert: copy the path, copy to…, move to…, open a terminal here, put in a ZIP
+- **Send to your devices**, the free alternative to AirDrop: to phones and PCs paired with **KDE Connect** (GSConnect on GNOME uses the same app), or to anything nearby with **LocalSend** (Android, iPhone, Windows, Mac, Linux)
 
 Select files of different kinds at once: each kind gets its own group, with only the choices that make sense for it. Tools that need one answer (trim, pages, shape, password) ask it on a single small screen.
 
-Not included, on purpose: Apple Pages (a closed format with no free engine), AirDrop (Apple only), and PDF to Excel (no free tool rebuilds tables reliably). PDF to Word and PowerPoint work, but the layout is rebuilt as boxes and may need touching up.
+Not included, on purpose: Apple Pages (a closed format with no free engine; Word, ODT and the rest are the alternatives). PDF to Word and PowerPoint work, but the layout is rebuilt as boxes and may need touching up. PDF to Excel reads PDFs made by a computer, not scans; it uses Camelot if installed, otherwise pdfplumber.
 
 ## Using it
 
@@ -45,10 +46,12 @@ On Fedora:
 ```sh
 sudo dnf install rust cargo gtk4-devel libadwaita-devel \
     ImageMagick poppler-utils img2pdf librsvg2-tools ffmpeg-free qpdf ghostscript \
-    libreoffice-core pandoc bsdtar
+    libreoffice-core pandoc bsdtar python3-pdfplumber python3-openpyxl
 git clone https://github.com/outlook791/Joey joey && cd joey
 ./install.sh
 ```
+
+For sending to devices, pair your phone in KDE Connect and/or install LocalSend (`flatpak install flathub org.localsend.localsend_app`).
 
 `install.sh` builds Joey, adds it to your app menu and sets up the file managers it finds. It installs only in your home folder (no sudo). `./install.sh --uninstall` removes everything.
 

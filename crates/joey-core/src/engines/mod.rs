@@ -5,6 +5,7 @@ pub mod imagemagick;
 pub mod img2pdf;
 pub mod libreoffice;
 pub mod pandoc;
+pub mod pdftables;
 pub mod poppler;
 pub mod rsvg;
 pub mod text;
