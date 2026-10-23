@@ -8,7 +8,9 @@ Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i f
 
 <p align="center"><img src="docs/screenshots/it/menu.png" width="380" alt="La finestra di Joey: una foto, i formati in cui può diventare e gli strumenti rapidi"></p>
 
-> Stato: prima versione completa (0.1.0). Funziona dall'inizio alla fine; le rifiniture arrivano dopo.
+> Stato: versione attuale (26.10.1). Funziona dall'inizio alla fine; le rifiniture arrivano dopo.
+>
+> Le versioni sono numerate per data: **anno.mese.uscita del mese**. 26.10.1 è la prima uscita di ottobre 2026; le successive dello stesso mese sono 26.10.2, 26.10.3…, poi 26.11.1.
 
 **Indice:** [Come aprirlo](#due-modi-per-aprire-joey) · [Installazione](#installazione) · [Convertire](#convertire) · [Più file insieme](#più-file-insieme) · [Regola](#regola-qualità-dimensioni-audio) · [Strumenti rapidi](#strumenti-rapidi) · [Azioni sui file](#azioni-sui-file) · [Invio a telefono o PC](#invio-al-telefono-o-al-pc) · [Da PDF a Excel](#da-pdf-a-excel) · [Tastiera, mouse, touch](#tastiera-mouse-e-touch) · [Codici di errore](#quando-qualcosa-va-storto-codici-di-errore) · [Segnalazioni](#feedback-e-segnalazioni) · [Usare Joey da un'AI](#usare-joey-da-unai) · [Riga di comando](#riga-di-comando) · [Problemi comuni](#problemi-comuni)
 
