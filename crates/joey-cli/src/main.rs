@@ -3,6 +3,8 @@
 use std::path::PathBuf;
 use std::process::ExitCode;
 
+mod mcp;
+
 use clap::Parser;
 use joey_core::{Format, Joey};
 
@@ -32,10 +34,23 @@ struct Cli {
     /// Show the tools Joey found on this computer, then exit.
     #[arg(long)]
     engines: bool,
+
+    /// Serve AI apps over the Model Context Protocol (stdin/stdout).
+    #[arg(long)]
+    mcp: bool,
 }
 
 fn main() -> ExitCode {
     let cli = Cli::parse();
+    if cli.mcp {
+        return match mcp::serve() {
+            Ok(()) => ExitCode::SUCCESS,
+            Err(e) => {
+                eprintln!("{e}");
+                ExitCode::FAILURE
+            }
+        };
+    }
     let joey = Joey::new();
 
     if cli.engines {
@@ -106,7 +121,14 @@ fn main() -> ExitCode {
             }
             Err(e) => {
                 failed += 1;
-                eprintln!("✗ {}: {e}", file.display());
+                let code = joey_core::diag::classify(&e, &[]);
+                eprintln!(
+                    "✗ {}: {} {} — {e}\n  {}",
+                    file.display(),
+                    code.id,
+                    code.title,
+                    code.hint
+                );
             }
         }
     }

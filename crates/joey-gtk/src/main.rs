@@ -168,6 +168,13 @@ pub struct Ui {
     pub state: RefCell<State>,
     first_output: RefCell<Option<PathBuf>>,
     hovered: Cell<bool>,
+    /// The last input came from a touch screen.
+    touch: Cell<bool>,
+    /// Close as soon as the run ends: the files went to another app.
+    close_now: Cell<bool>,
+    /// Don't close by itself: something on the clipboard needs Joey open
+    /// (without a clipboard manager, it goes away with the app).
+    keep_open: Cell<bool>,
     /// Bumped when leaving the done screen, so a pending auto-close from
     /// an earlier conversion doesn't shut the window.
     run: Cell<u32>,
@@ -444,8 +451,23 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         .build();
     pocket.append(&banner);
     pocket.append(&stack);
+    // A visible way to close, for mouse and touch (Esc is for keyboards).
+    let close_x = gtk::Button::from_icon_name("window-close-symbolic");
+    close_x.add_css_class("flat");
+    close_x.add_css_class("circular");
+    close_x.add_css_class("close-x");
+    close_x.set_tooltip_text(Some(&t("Close (Esc)")));
+    close_x.set_halign(gtk::Align::End);
+    close_x.set_valign(gtk::Align::Start);
+    {
+        let w = window.clone();
+        close_x.connect_clicked(move |_| w.close());
+    }
+    let overlay = gtk::Overlay::new();
+    overlay.set_child(Some(&pocket));
+    overlay.add_overlay(&close_x);
     let handle = gtk::WindowHandle::new();
-    handle.set_child(Some(&pocket));
+    handle.set_child(Some(&overlay));
     window.set_child(Some(&handle));
 
     let ui = Rc::new(Ui {
@@ -474,6 +496,9 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         }),
         first_output: RefCell::new(None),
         hovered: Cell::new(false),
+        touch: Cell::new(false),
+        close_now: Cell::new(false),
+        keep_open: Cell::new(false),
         run: Cell::new(0),
     });
 
@@ -565,6 +590,45 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     }
     window.add_controller(drop);
 
+    // Touch or mouse/keyboard: what the last input came from.
+    let legacy = gtk::EventControllerLegacy::new();
+    legacy.set_propagation_phase(gtk::PropagationPhase::Capture);
+    {
+        let ui = ui.clone();
+        legacy.connect_event(move |_, ev| {
+            let touch = match ev.event_type() {
+                gdk::EventType::TouchBegin => Some(true),
+                gdk::EventType::ButtonPress if !ev.is_pointer_emulated() => {
+                    let src = ev.device().map(|d| d.source());
+                    (src != Some(gdk::InputSource::Touchscreen)).then_some(false)
+                }
+                gdk::EventType::KeyPress => Some(false),
+                _ => None,
+            };
+            if let Some(t) = touch {
+                if t != ui.touch.get() {
+                    ui.touch.set(t);
+                    apply_touch(&ui);
+                }
+            }
+            glib::Propagation::Proceed
+        });
+    }
+    window.add_controller(legacy);
+    {
+        let ui = ui.clone();
+        ui.stack
+            .clone()
+            .connect_visible_child_notify(move |_| apply_touch(&ui));
+    }
+
+    // JOEY_TOUCH=1 starts in touch mode (for tablets without a keyboard,
+    // and for testing).
+    if std::env::var_os("JOEY_TOUCH").is_some() {
+        ui.touch.set(true);
+        apply_touch(&ui);
+    }
+
     // Don't auto-close under the pointer of someone who's still looking.
     let motion = gtk::EventControllerMotion::new();
     {
@@ -617,7 +681,30 @@ pub fn hint(text: &str) -> gtk::Label {
     let l = gtk::Label::new(Some(text));
     l.add_css_class("hint");
     l.add_css_class("dim-label");
+    l.add_css_class("kbd");
     l
+}
+
+/// Keyboard hints make no sense on a touch screen: hides them (widgets
+/// with the `kbd` class) while the last input was a finger.
+fn apply_touch(ui: &Ui) {
+    fn walk(w: &gtk::Widget, touch: bool) {
+        if w.has_css_class("kbd") {
+            w.set_visible(!touch);
+        }
+        let mut child = w.first_child();
+        while let Some(c) = child {
+            walk(&c, touch);
+            child = c.next_sibling();
+        }
+    }
+    let touch = ui.touch.get();
+    if touch {
+        ui.window.add_css_class("touch");
+    } else {
+        ui.window.remove_css_class("touch");
+    }
+    walk(ui.window.upcast_ref(), touch);
 }
 
 fn choose_files(ui: &Rc<Ui>) {
@@ -1007,6 +1094,7 @@ pub fn convert_button(ui: &Rc<Ui>) -> gtk::Button {
     let enter = gtk::Label::new(Some(&t("Enter")));
     enter.add_css_class("dim-label");
     enter.add_css_class("size");
+    enter.add_css_class("kbd");
     inner.append(&enter);
     convert.set_child(Some(&inner));
     convert.add_css_class("suggested-action");
@@ -1021,6 +1109,7 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
     let row = gtk::Box::new(gtk::Orientation::Horizontal, 10);
     let key_label = gtk::Label::new(key.map(|k| k.to_string()).as_deref());
     key_label.add_css_class("key");
+    key_label.add_css_class("kbd");
     key_label.set_opacity(if key.is_some() { 1.0 } else { 0.0 });
     row.append(&key_label);
     let icon = match choice {
@@ -1029,7 +1118,15 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
         Choice::To(_) => None,
     };
     if let Some(icon) = icon {
-        let icon = gtk::Image::from_icon_name(icon);
+        // Not every icon theme has every icon: fall back to close ones.
+        let alt = match icon {
+            "image-crop-symbolic" => "zoom-fit-best-symbolic",
+            "folder-copy-symbolic" => "edit-copy-symbolic",
+            "folder-move-symbolic" => "folder-symbolic",
+            _ => "emblem-system-symbolic",
+        };
+        let names = [icon, alt, "emblem-system-symbolic"];
+        let icon = gtk::Image::from_gicon(&gio::ThemedIcon::from_names(&names));
         icon.add_css_class("dim-label");
         row.append(&icon);
     }
@@ -1064,6 +1161,16 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
     }
     let ui2 = ui.clone();
     button.connect_clicked(move |_| pick(&ui2, gi, i, false));
+    // Press and hold = Adjust first (Shift+number on a keyboard).
+    if matches!(choice, Choice::To(_)) {
+        let hold = gtk::GestureLongPress::new();
+        let ui2 = ui.clone();
+        hold.connect_pressed(move |g, _, _| {
+            g.set_state(gtk::EventSequenceState::Claimed);
+            pick(&ui2, gi, i, true);
+        });
+        button.add_controller(hold);
+    }
     button
 }
 
@@ -1184,6 +1291,7 @@ pub fn start(ui: &Rc<Ui>) {
     }
 
     let mut notes = Vec::new();
+    let mut handoff_failed = false;
     let jobs: Vec<Job> = {
         let mut st = ui.state.borrow_mut();
         if st.busy || st.groups.is_empty() {
@@ -1239,15 +1347,28 @@ pub fn start(ui: &Rc<Ui>) {
                 Choice::Action(Action::CopyPath) => {
                     paths_to_copy.extend(g.files.iter().map(|f| f.display().to_string()));
                 }
+                // Hand-offs: the files go on in another app, so Joey closes
+                // when they all worked.
                 Choice::Action(Action::Terminal) => match actions::open_terminal(&g.files[0]) {
                     Ok(()) => notes.push(t("Terminal opened")),
-                    Err(e) => notes.push(e.to_string()),
+                    Err(e) => {
+                        handoff_failed = true;
+                        notes.push(e.to_string())
+                    }
                 },
                 Choice::Action(Action::Phone(i)) => match actions::send_to_phone(i, &g.files) {
-                    Ok(m) | Err(m) => notes.push(m),
+                    Ok(m) => notes.push(m),
+                    Err(m) => {
+                        handoff_failed = true;
+                        notes.push(m)
+                    }
                 },
                 Choice::Action(Action::LocalSend) => match actions::open_localsend(&g.files) {
-                    Ok(m) | Err(m) => notes.push(m),
+                    Ok(m) => notes.push(m),
+                    Err(m) => {
+                        handoff_failed = true;
+                        notes.push(m)
+                    }
                 },
             }
         }
@@ -1255,6 +1376,14 @@ pub fn start(ui: &Rc<Ui>) {
             ui.window.clipboard().set_text(&paths_to_copy.join("\n"));
             notes.push(t("Path copied"));
         }
+        let only_handoffs = st.groups.iter().all(|g| {
+            matches!(
+                g.choice(),
+                Choice::Action(Action::Terminal | Action::Phone(_) | Action::LocalSend)
+            )
+        });
+        ui.close_now.set(only_handoffs && !handoff_failed);
+        ui.keep_open.set(!paths_to_copy.is_empty());
         jobs
     };
 
@@ -1308,25 +1437,34 @@ pub fn start(ui: &Rc<Ui>) {
                         match o {
                             Ok(out) => written.extend(out),
                             Err(e) => {
-                                let message = friendly(&e);
-                                errors.push(format!("{}: {}", file_name(&first), message));
+                                let failures = joey_core::diag::take_failures();
+                                let code = joey_core::diag::classify(&e, &failures);
+                                let message = if code.id == "E999" {
+                                    friendly(&e)
+                                } else {
+                                    t(code.title)
+                                };
+                                errors.push(error_line(&first, code, &message));
                                 problems.push(feedback::Problem {
                                     file: first.clone(),
                                     what: what.clone(),
+                                    code,
                                     message,
                                     error: e.to_string(),
-                                    failures: joey_core::diag::take_failures(),
+                                    failures,
                                 });
                             }
                         }
                     }
                 }
                 Err(_) => {
-                    errors.push(format!("{}: {}", file_name(&first), t("unexpected error")));
+                    let code = joey_core::diag::code_for("E900");
+                    errors.push(error_line(&first, code, &t(code.title)));
                     problems.push(feedback::Problem {
                         file: first.clone(),
                         what: what.clone(),
-                        message: t("unexpected error"),
+                        code,
+                        message: t(code.title),
                         error: feedback::take_job_panic().unwrap_or_else(|| "panic".into()),
                         failures: joey_core::diag::take_failures(),
                     });
@@ -1337,6 +1475,19 @@ pub fn start(ui: &Rc<Ui>) {
         *ui.problems.borrow_mut() = problems;
         finish(&ui, written, errors, notes);
     });
+}
+
+/// "photo.heic — E104 · Damaged or incomplete file", then what to do
+/// (Pango markup).
+fn error_line(file: &std::path::Path, code: joey_core::diag::Code, message: &str) -> String {
+    let e = |s: &str| glib::markup_escape_text(s).to_string();
+    format!(
+        "<b>{} — {} · {}</b>\n<span alpha=\"75%\">{}</span>",
+        e(&file_name(file)),
+        code.id,
+        e(message),
+        e(&t(code.hint))
+    )
 }
 
 /// Error text for people, not developers.
@@ -1383,7 +1534,7 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<St
         t("Next to the originals")
     });
     ui.done_sub.set_visible(n > 0);
-    ui.done_errors.set_text(&errors.join("\n"));
+    ui.done_errors.set_markup(&errors.join("\n"));
     ui.done_errors.set_visible(!ok);
     // Errors can be reported; a clean run offers general feedback instead.
     ui.report.set_visible(!ui.problems.borrow().is_empty());
@@ -1397,8 +1548,13 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<St
         ui.app.send_notification(Some("done"), &note);
     }
 
+    // The files went on to another app: nothing left to show here.
+    if ok && ui.close_now.get() {
+        ui.window.close();
+        return;
+    }
     // All went well and nobody is looking: close by itself.
-    if ok {
+    if ok && !ui.keep_open.get() {
         let ui = ui.clone();
         let run = ui.run.get();
         glib::timeout_add_seconds_local_once(3, move || {

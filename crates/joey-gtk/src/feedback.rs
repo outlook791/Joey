@@ -13,6 +13,10 @@ use crate::i18n::t;
 use crate::Ui;
 
 pub const REPO: &str = "outlook791/Joey";
+/// Where reports go by email, for people without a GitHub account. The
+/// address is public (it's in the code), so use one made for this.
+/// `None` hides the Email button.
+pub const EMAIL: Option<&str> = None;
 /// Longest issue text that still fits in a link browsers and GitHub accept.
 const MAX_URL_BODY: usize = 6000;
 
@@ -22,6 +26,8 @@ pub struct Problem {
     pub file: PathBuf,
     /// "PDF → XLSX", "Tool: CompressPdf"…
     pub what: String,
+    /// What kind of problem (E104…).
+    pub code: diag::Code,
     /// The message the person saw.
     pub message: String,
     /// The error as the engine reported it.
@@ -116,11 +122,13 @@ pub fn problem_report(ui: &Ui, problems: &[Problem]) -> (String, String) {
     body.push_str("\n\n### Problems\n");
     for (i, p) in problems.iter().enumerate() {
         body.push_str(&format!(
-            "\n**{}. {}** ({}) · {}\n\n- Shown: {}\n- Error: `{}`\n",
+            "\n**{}. {}** ({}) · {}\n\n- Code: **{}** ({})\n- Shown: {}\n- Error: `{}`\n",
             i + 1,
             crate::file_name(&p.file),
             size(&p.file),
             p.what,
+            p.code.id,
+            p.code.title,
             p.message,
             p.error.replace('`', "'").replace('\n', " ⏎ ")
         ));
@@ -133,10 +141,11 @@ pub fn problem_report(ui: &Ui, problems: &[Problem]) -> (String, String) {
     }
     let body = diag::scrub(&body, &files);
     let what = problems.first().map(|p| p.what.clone()).unwrap_or_default();
+    let code = problems.first().map(|p| p.code.id).unwrap_or("E999");
     let title = if problems.len() == 1 {
-        format!("Error: {what}")
+        format!("{code}: {what}")
     } else {
-        format!("{} errors, first: {what}", problems.len())
+        format!("{code}: {what} (+{} more)", problems.len() - 1)
     };
     (diag::scrub(&title, &files), body)
 }
@@ -233,11 +242,15 @@ pub fn show(ui: &Rc<Ui>, heading: &str, title: &str, body: &str) {
     let buttons = gtk::Box::new(gtk::Orientation::Horizontal, 8);
     buttons.set_halign(gtk::Align::End);
     let copy = gtk::Button::with_label(&t("Copy"));
+    let mail = gtk::Button::with_label(&t("Send by email"));
+    mail.add_css_class("pill");
+    mail.set_visible(EMAIL.is_some());
     let send = gtk::Button::with_label(&t("Open on GitHub"));
     send.add_css_class("suggested-action");
     copy.add_css_class("pill");
     send.add_css_class("pill");
     buttons.append(&copy);
+    buttons.append(&mail);
     buttons.append(&send);
     content.append(&buttons);
 
@@ -254,6 +267,26 @@ pub fn show(ui: &Rc<Ui>, heading: &str, title: &str, body: &str) {
         }
     };
     let read = Rc::new(read);
+    if let Some(address) = EMAIL {
+        let read = read.clone();
+        let win = win.clone();
+        mail.connect_clicked(move |_| {
+            let (title, body) = read();
+            // Mail apps accept shorter links than browsers: the whole text
+            // also goes on the clipboard.
+            win.clipboard().set_text(&body);
+            let mut short: String = body.chars().take(1800).collect();
+            if short.len() < body.len() {
+                short.push_str("\n\n[…] Ctrl+V");
+            }
+            let url = format!(
+                "mailto:{address}?subject={}&body={}",
+                diag::encode(&format!("[Joey] {title}")),
+                diag::encode(&short)
+            );
+            gtk::UriLauncher::new(&url).launch(Some(&win), None::<&gtk::gio::Cancellable>, |_| {});
+        });
+    }
     {
         let read = read.clone();
         let status = status.clone();

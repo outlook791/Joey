@@ -315,7 +315,7 @@ fn clipboard_launcher() -> std::io::Result<()> {
         command("--clipboard")
     };
     let entry = format!(
-        "[Desktop Entry]\nType=Application\nName=Joey\nComment={MARK}: open the copied files\nExec={exec}\nIcon={APP_ID}\nNoDisplay=true\nTerminal=false\n"
+        "[Desktop Entry]\nType=Application\nName=Joey (copied files)\nName[it]=Joey (file copiati)\nComment={MARK}: open the copied files\nExec={exec}\nIcon={APP_ID}\nNoDisplay=true\nTerminal=false\n"
     );
     let path = home()
         .join(".local/share/applications")

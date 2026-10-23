@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="190" viewBox="0 0 900 190" font-family="Inter, Cantarell, Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="1" y="1" width="898" height="188" rx="16" fill="#f6f8fa" stroke="#d0d7de"/>
+<text x="24" y="34" font-size="17" font-weight="700" fill="#1f2328">Nel file manager (Dolphin, File, Thunar…)</text>
+<rect x="20.0" y="52" width="200" height="118" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<circle cx="40.0" cy="72" r="12" fill="#e8743b"/><text x="40.0" y="77" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">1</text>
+<rect x="82.0" y="88.0" width="56" height="40" rx="4" fill="#e8743b" fill-opacity="0.15" stroke="#e8743b" stroke-dasharray="4 3"/><path transform="translate(126.0,112.0)" d="M0 0 L0 22 L6 17 L10 26 L14 24 L10 15 L17 15 Z" fill="#1f2328" stroke="#fff" stroke-width="1.5"/>
+<text x="120.0" y="154" text-anchor="middle" font-size="14" fill="#1f2328">Seleziona i file</text>
+<path d="M226.0 111 L234.0 111" stroke="#8c959f" stroke-width="2"/><path d="M234.0 106 L240.0 111 L234.0 116" fill="#8c959f"/>
+<rect x="240.0" y="52" width="200" height="118" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<circle cx="260.0" cy="72" r="12" fill="#e8743b"/><text x="260.0" y="77" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">2</text>
+<rect x="285.5" y="92" width="47" height="36" rx="7" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><rect x="285.5" y="122" width="47" height="6" rx="3" fill="#d5dae0"/><text x="309.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">Alt</text>
+<text x="341.5" y="116" text-anchor="middle" font-size="16" fill="#57606a">+</text>
+<rect x="350.5" y="92" width="44" height="36" rx="7" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><rect x="350.5" y="122" width="44" height="6" rx="3" fill="#d5dae0"/><text x="372.5" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">C</text>
+<text x="340.0" y="154" text-anchor="middle" font-size="14" fill="#1f2328">Si apre Joey</text>
+<path d="M446.0 111 L454.0 111" stroke="#8c959f" stroke-width="2"/><path d="M454.0 106 L460.0 111 L454.0 116" fill="#8c959f"/>
+<rect x="460.0" y="52" width="200" height="118" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<circle cx="480.0" cy="72" r="12" fill="#e8743b"/><text x="480.0" y="77" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">3</text>
+<rect x="494.0" y="92" width="44" height="36" rx="7" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><rect x="494.0" y="122" width="44" height="6" rx="3" fill="#d5dae0"/><text x="516.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">1</text>
+<text x="560.0" y="116" text-anchor="middle" font-size="18" fill="#57606a">…</text>
+<rect x="582.0" y="92" width="44" height="36" rx="7" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><rect x="582.0" y="122" width="44" height="6" rx="3" fill="#d5dae0"/><text x="604.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">9</text>
+<text x="560.0" y="154" text-anchor="middle" font-size="14" fill="#1f2328">Premi un numero</text>
+<path d="M666.0 111 L674.0 111" stroke="#8c959f" stroke-width="2"/><path d="M674.0 106 L680.0 111 L674.0 116" fill="#8c959f"/>
+<rect x="680.0" y="52" width="200" height="118" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<circle cx="700.0" cy="72" r="12" fill="#e8743b"/><text x="700.0" y="77" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">4</text>
+<rect x="745.5" y="92" width="69" height="36" rx="7" fill="#fff" stroke="#9aa3ad" stroke-width="1.5"/><rect x="745.5" y="122" width="69" height="6" rx="3" fill="#d5dae0"/><text x="780.0" y="116" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">Invio</text>
+<text x="780.0" y="154" text-anchor="middle" font-size="14" fill="#1f2328">o Invio: fatto</text>
+</svg>

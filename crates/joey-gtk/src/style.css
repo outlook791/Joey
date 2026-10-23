@@ -98,3 +98,30 @@ window.joey {
 .adjust-page {
   padding: 4px 8px 0 8px;
 }
+
+/* Close button, top right of the pocket. */
+.close-x {
+  margin: 16px 18px 0 0;
+  min-width: 26px;
+  min-height: 26px;
+  padding: 0;
+  opacity: 0.6;
+}
+
+.close-x:hover {
+  opacity: 1;
+}
+
+/* Fingers need bigger targets. */
+window.joey.touch .fmt-row {
+  min-height: 32px;
+}
+
+window.joey.touch .more {
+  min-height: 32px;
+}
+
+window.joey.touch .close-x {
+  min-width: 40px;
+  min-height: 40px;
+}
