@@ -12,7 +12,7 @@ Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i f
 >
 > **Fatto con l'AI:** Joey è scritto con un assistente AI. Vedi [Come è fatto Joey](#come-è-fatto-joey).
 >
-> Le versioni sono numerate per data: **anno.mese.uscita del mese**. 26.10.1 è la prima uscita di ottobre 2026; le successive dello stesso mese sono 26.10.2, 26.10.3…, poi 26.11.1.
+> Le versioni sono numerate per data: **anno.mese.uscita del mese** (26.10.2 è la seconda uscita di ottobre 2026). Non c'è un calendario fisso: gli aggiornamenti escono quando servono.
 
 **Indice:** [Come aprirlo](#due-modi-per-aprire-joey) · [Installazione](#installazione) · [Convertire](#convertire) · [Più file insieme](#più-file-insieme) · [Regola](#regola-qualità-dimensioni-audio) · [Strumenti rapidi](#strumenti-rapidi) · [Azioni sui file](#azioni-sui-file) · [Invio a telefono o PC](#invio-al-telefono-o-al-pc) · [Da PDF a Excel](#da-pdf-a-excel) · [Tastiera, mouse, touch](#tastiera-mouse-e-touch) · [Codici di errore](#quando-qualcosa-va-storto-codici-di-errore) · [Segnalazioni](#feedback-e-segnalazioni) · [Usare Joey da un'AI](#usare-joey-da-unai) · [Riga di comando](#riga-di-comando) · [Problemi comuni](#problemi-comuni)
 
@@ -333,7 +333,7 @@ joey-gtk --remove-file-managers    # li toglie
 
 ## Come è fatto Joey
 
-Joey è scritto con un assistente AI (Claude, di Anthropic), guidato, provato e mantenuto dal suo autore, Umberto. Quasi tutto il codice, il pacchetto Flatpak e queste guide sono stati generati dall'AI a partire dalle sue richieste. Ogni modifica viene verificata automaticamente su cinque distribuzioni, e l'autore lo prova su Fedora KDE. Se qualcosa non funziona, [segnalalo](#feedback-e-segnalazioni).
+Joey è scritto con un assistente AI (Claude, di Anthropic), guidato, provato e mantenuto dal suo autore, outlook791. Quasi tutto il codice, il pacchetto Flatpak e queste guide sono stati generati dall'AI a partire dalle sue richieste. Ogni modifica viene verificata automaticamente su cinque distribuzioni, e l'autore lo prova su Fedora KDE. Se qualcosa non funziona, [segnalalo](#feedback-e-segnalazioni).
 
 ## Licenza
 
