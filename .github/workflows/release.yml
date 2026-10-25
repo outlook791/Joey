@@ -1,0 +1,74 @@
+# Releases without manual steps.
+#
+# - When the version in Cargo.toml changes on main (scripts/release.sh),
+#   this creates the tag and the release page, with the notes from the
+#   store metadata.
+# - "Run workflow" (Actions → Release) makes a new release from the
+#   browser: type what changed, and it numbers, commits, tags and publishes.
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: [Cargo.toml]
+  workflow_dispatch:
+    inputs:
+      note:
+        description: "What changed, in one line / Cosa è cambiato, in una riga"
+        required: true
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: New version (from the browser)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          NOTE: ${{ inputs.note }}
+        run: |
+          git config user.name outlook791
+          git config user.email outlook791@users.noreply.github.com
+          scripts/release.sh "$NOTE"
+          git push
+      - name: Tag and release page
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)
+          if gh release view "v$v" >/dev/null 2>&1; then
+            echo "v$v already released"
+            exit 0
+          fi
+          note=$(python3 - "$v" <<'PY'
+          import sys, re, html
+          v = sys.argv[1]
+          s = open("data/io.github.outlook791.Joey.metainfo.xml").read()
+          m = re.search(r'<release version="%s"[^>]*>.*?<p>(.*?)</p>' % re.escape(v), s, re.S)
+          print(html.unescape(m.group(1)) if m else "")
+          PY
+          )
+          body="$note
+
+          Install / Installa: https://outlook791.github.io/Joey/
+          Guide: https://github.com/outlook791/Joey#readme · Guida: https://github.com/outlook791/Joey/blob/main/README.it.md
+
+          Joey is written with an AI assistant. / Joey è scritto con un assistente AI."
+          gh release create "v$v" --target "$(git rev-parse HEAD)" --title "Joey $v" --notes "$body"
+      - name: Publish the new version (checks and Flatpak repository)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # A push made by this workflow doesn't start other workflows by
+        # itself; asking for one explicitly does.
+        run: gh workflow run checks.yml --ref main
