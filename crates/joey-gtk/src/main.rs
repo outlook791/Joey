@@ -12,6 +12,7 @@ mod choices;
 mod feedback;
 mod i18n;
 mod integration;
+mod welcome;
 
 use std::cell::{Cell, RefCell};
 use std::collections::HashMap;
@@ -151,8 +152,9 @@ pub struct Ui {
     pub stack: gtk::Stack,
     list: gtk::Box,
     pub adjust: gtk::Box,
+    /// The first start: which keys open Joey.
+    pub welcome: gtk::Box,
     empty_setup: gtk::Button,
-    empty_setup_result: gtk::Label,
     progress: gtk::ProgressBar,
     progress_label: gtk::Label,
     done_icon: gtk::Image,
@@ -211,6 +213,9 @@ fn main() -> glib::ExitCode {
     app.connect_activate(move |app| {
         let ui = build(app);
         ui.window.present();
+        if !from_clipboard && welcome::should_show() {
+            welcome::show(&ui);
+        }
         if from_clipboard {
             // Wait until the window has focus: Wayland only lets a focused
             // window read the clipboard.
@@ -270,6 +275,25 @@ fn read_clipboard(ui: &Rc<Ui>) {
     });
 }
 
+/// The start page's link to the shortcuts screen.
+fn setup_label() -> String {
+    if integration::is_set_up() {
+        t("Change the shortcuts")
+    } else {
+        t("Set up the shortcuts")
+    }
+}
+
+/// Back from the welcome screen: the files, or the empty start page.
+pub fn show_start(ui: &Rc<Ui>) {
+    ui.empty_setup.set_label(&setup_label());
+    if ui.state.borrow().groups.is_empty() {
+        ui.stack.set_visible_child_name("empty");
+    } else {
+        render(ui);
+    }
+}
+
 fn report_lines(r: &integration::Report) -> Vec<String> {
     if r.done.is_empty() {
         return vec![t("No supported file manager found")];
@@ -279,7 +303,7 @@ fn report_lines(r: &integration::Report) -> Vec<String> {
         .iter()
         .map(|(fm, shortcut)| {
             if *shortcut {
-                tf("Alt+C is ready in {fm}", &[("fm", fm)])
+                tf("{keys} is ready in {fm}", &[("keys", &r.keys), ("fm", fm)])
             } else {
                 tf(
                     "Right-click → Convert with Joey works in {fm}",
@@ -294,7 +318,7 @@ fn report_lines(r: &integration::Report) -> Vec<String> {
             &[("keys", keys)],
         ));
     }
-    lines.push(t("Restart the file manager once to use it"));
+    lines.push(t("Log out and back in once to use them"));
     lines
 }
 
@@ -349,19 +373,10 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     choose.set_halign(gtk::Align::Center);
     choose.set_margin_top(6);
     empty.append(&choose);
-    let empty_setup = gtk::Button::with_label(&t("Set up Alt+C in your file manager"));
+    let empty_setup = gtk::Button::with_label(&setup_label());
     empty_setup.add_css_class("flat");
     empty_setup.add_css_class("more");
-    empty_setup.set_tooltip_text(Some(&t("Select files, press Alt+C, pick a format")));
-    empty_setup.set_visible(!integration::is_set_up());
     empty.append(&empty_setup);
-    let empty_setup_result = gtk::Label::builder()
-        .wrap(true)
-        .justify(gtk::Justification::Center)
-        .css_classes(["hint"])
-        .visible(false)
-        .build();
-    empty.append(&empty_setup_result);
     let empty_feedback = gtk::Button::with_label(&t("Ideas or problems? Tell us"));
     empty_feedback.add_css_class("flat");
     empty_feedback.add_css_class("more");
@@ -373,6 +388,11 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     // the screen.
     let list = gtk::Box::new(gtk::Orientation::Vertical, 2);
     stack.add_named(&scroller(&list), Some("list"));
+
+    // Welcome: the keys that open Joey (first start, or to change them).
+    let welcome = gtk::Box::new(gtk::Orientation::Vertical, 10);
+    welcome.add_css_class("welcome-page");
+    stack.add_named(&scroller(&welcome), Some("welcome"));
 
     // Adjust: settings for the chosen conversions.
     let adjust = gtk::Box::new(gtk::Orientation::Vertical, 10);
@@ -479,8 +499,8 @@ fn build(app: &adw::Application) -> Rc<Ui> {
         stack,
         list,
         adjust,
+        welcome,
         empty_setup: empty_setup.clone(),
-        empty_setup_result,
         progress,
         progress_label,
         done_icon,
@@ -545,12 +565,7 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     }
     {
         let ui = ui.clone();
-        empty_setup.connect_clicked(move |_| {
-            let lines = report_lines(&integration::setup());
-            ui.empty_setup.set_visible(false);
-            ui.empty_setup_result.set_text(&lines.join("\n"));
-            ui.empty_setup_result.set_visible(true);
-        });
+        empty_setup.connect_clicked(move |_| welcome::show(&ui));
     }
     {
         let w = window.clone();
@@ -1204,6 +1219,9 @@ fn pick(ui: &Rc<Ui>, gi: usize, i: usize, adjust_first: bool) {
 }
 
 fn on_key(ui: &Rc<Ui>, key: gdk::Key, code: u32, mods: gdk::ModifierType) -> glib::Propagation {
+    if welcome::recording() {
+        return welcome::key(ui, key, mods);
+    }
     let page = ui.stack.visible_child_name();
     let page = page.as_deref();
     if key == gdk::Key::Escape {

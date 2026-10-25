@@ -66,6 +66,7 @@ window.joey {
 }
 
 .empty-page,
+.welcome-page,
 .done-page,
 .progress-page {
   padding: 18px 16px 4px 16px;

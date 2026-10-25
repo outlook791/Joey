@@ -1,6 +1,6 @@
 //! Puts Joey into the file managers: a right-click entry everywhere it's
-//! possible, and Alt+C where the file manager lets a shortcut be attached
-//! to it (Nautilus, Thunar). Everything goes in the user's home folder and
+//! possible, and a shortcut (Alt+C unless chosen otherwise) where the file
+//! manager lets one be attached to it (Dolphin, Nautilus, Thunar). Everything goes in the user's home folder and
 //! is removed by `remove()`.
 //!
 //! Works both from a normal install and from the Flatpak: inside the
@@ -19,13 +19,188 @@ const SCRIPT: &str = "Joey";
 const THUNAR_ID: &str = "joey-convert-1";
 const MARK: &str = "Added by Joey";
 
-type Setup = fn() -> std::io::Result<bool>;
+type Setup = fn(&Shortcut) -> std::io::Result<bool>;
+
+/// A key combination: modifiers and one letter or digit.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Shortcut {
+    pub ctrl: bool,
+    pub alt: bool,
+    pub shift: bool,
+    /// The key with the Windows logo: Meta in KDE, Super in GNOME.
+    pub meta: bool,
+    /// Lowercase letter or digit.
+    pub key: char,
+}
+
+impl Shortcut {
+    pub const FILE_MANAGER: Shortcut = Shortcut {
+        ctrl: false,
+        alt: true,
+        shift: false,
+        meta: false,
+        key: 'c',
+    };
+    pub const ANYWHERE: Shortcut = Shortcut {
+        ctrl: false,
+        alt: false,
+        shift: false,
+        meta: true,
+        key: 'c',
+    };
+
+    /// "Alt+C", "Ctrl+Meta+J" (Qt, KDE, and what people read).
+    pub fn qt(&self) -> String {
+        let mut s = String::new();
+        for (on, name) in [
+            (self.ctrl, "Ctrl+"),
+            (self.alt, "Alt+"),
+            (self.shift, "Shift+"),
+            (self.meta, "Meta+"),
+        ] {
+            if on {
+                s.push_str(name);
+            }
+        }
+        s.push(self.key.to_ascii_uppercase());
+        s
+    }
+
+    /// "<Alt>c", "<Control><Super>j" (GTK, GNOME, Thunar).
+    pub fn gtk(&self) -> String {
+        let mut s = String::new();
+        for (on, name) in [
+            (self.ctrl, "<Control>"),
+            (self.alt, "<Alt>"),
+            (self.shift, "<Shift>"),
+            (self.meta, "<Super>"),
+        ] {
+            if on {
+                s.push_str(name);
+            }
+        }
+        s.push(self.key);
+        s
+    }
+
+    /// As people call it on this desktop (Super on GNOME, Meta elsewhere).
+    pub fn label(&self) -> String {
+        let qt = self.qt();
+        if desktop_is("GNOME") {
+            qt.replace("Meta+", "Super+")
+        } else {
+            qt
+        }
+    }
+
+    /// Reads "Alt+C" style text.
+    pub fn parse(text: &str) -> Option<Shortcut> {
+        let mut sc = Shortcut {
+            ctrl: false,
+            alt: false,
+            shift: false,
+            meta: false,
+            key: ' ',
+        };
+        for part in text.trim().split('+') {
+            match part.to_ascii_lowercase().as_str() {
+                "ctrl" | "control" => sc.ctrl = true,
+                "alt" => sc.alt = true,
+                "shift" => sc.shift = true,
+                "meta" | "super" => sc.meta = true,
+                k if k.chars().count() == 1 => sc.key = k.chars().next()?,
+                _ => return None,
+            }
+        }
+        sc.usable().then_some(sc)
+    }
+
+    /// A letter or digit with Alt or Meta (alone or with others). Ctrl or
+    /// Shift alone would clash with every app's own shortcuts (Ctrl+C…).
+    pub fn usable(&self) -> bool {
+        self.key.is_ascii_alphanumeric() && (self.alt || self.meta)
+    }
+}
+
+/// The shortcuts chosen at the first start (or the usual ones).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Keys {
+    /// Selected files, in the file managers that support it.
+    pub files: Shortcut,
+    /// Files copied with Ctrl+C, anywhere (desktop included).
+    pub anywhere: Shortcut,
+}
+
+impl Default for Keys {
+    fn default() -> Self {
+        Keys {
+            files: Shortcut::FILE_MANAGER,
+            anywhere: Shortcut::ANYWHERE,
+        }
+    }
+}
+
+fn keys_file() -> PathBuf {
+    gtk::glib::user_config_dir().join("joey").join("keys")
+}
+
+/// The saved shortcuts, or the usual ones.
+pub fn load_keys() -> Keys {
+    let mut keys = Keys::default();
+    if let Ok(text) = fs::read_to_string(keys_file()) {
+        for line in text.lines() {
+            match line.split_once('=') {
+                Some(("files", v)) => {
+                    if let Some(sc) = Shortcut::parse(v) {
+                        keys.files = sc;
+                    }
+                }
+                Some(("anywhere", v)) => {
+                    if let Some(sc) = Shortcut::parse(v) {
+                        keys.anywhere = sc;
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    keys
+}
+
+pub fn save_keys(keys: &Keys) {
+    let path = keys_file();
+    if let Some(dir) = path.parent() {
+        let _ = fs::create_dir_all(dir);
+    }
+    let _ = fs::write(
+        path,
+        format!(
+            "files={}\nanywhere={}\n",
+            keys.files.qt(),
+            keys.anywhere.qt()
+        ),
+    );
+}
+
+/// A program on the computer: directly, or from the Flatpak through
+/// flatpak-spawn (settings like GNOME's live outside the sandbox).
+fn host_command(bin: &str) -> Option<std::process::Command> {
+    if in_flatpak() {
+        joey_core::engine::which("flatpak-spawn")?;
+        let mut c = std::process::Command::new("flatpak-spawn");
+        c.args(["--host", bin]);
+        return Some(c);
+    }
+    joey_core::engine::which(bin).map(std::process::Command::new)
+}
 
 pub struct Report {
-    /// (file manager, has the Alt+C shortcut)
+    /// (file manager, has the shortcut)
     pub done: Vec<(&'static str, bool)>,
     /// Keys of the system-wide "files on the clipboard" shortcut, if set.
     pub global: Option<String>,
+    /// The file-manager shortcut, as people read it.
+    pub keys: String,
 }
 
 fn home() -> PathBuf {
@@ -112,7 +287,7 @@ fn remove_line(path: &Path, matches: impl Fn(&str) -> bool) {
     }
 }
 
-fn nautilus() -> std::io::Result<bool> {
+fn nautilus(keys: &Shortcut) -> std::io::Result<bool> {
     let h = home();
     write_exec(
         &h.join(".local/share/nautilus/scripts").join(SCRIPT),
@@ -121,17 +296,17 @@ fn nautilus() -> std::io::Result<bool> {
     set_line(
         &h.join(".config/nautilus/scripts-accels"),
         |l| l.split_whitespace().nth(1) == Some(SCRIPT),
-        &format!("<Alt>c {SCRIPT}"),
+        &format!("{} {SCRIPT}", keys.gtk()),
     )?;
     Ok(true)
 }
 
-fn caja() -> std::io::Result<bool> {
+fn caja(_: &Shortcut) -> std::io::Result<bool> {
     write_exec(&home().join(".config/caja/scripts").join(SCRIPT), &script())?;
     Ok(false)
 }
 
-fn thunar() -> std::io::Result<bool> {
+fn thunar(keys: &Shortcut) -> std::io::Result<bool> {
     let dir = home().join(".config/Thunar");
     fs::create_dir_all(&dir)?;
     let uca = dir.join("uca.xml");
@@ -152,7 +327,10 @@ fn thunar() -> std::io::Result<bool> {
     set_line(
         &dir.join("accels.scm"),
         |l| l.contains(THUNAR_ID),
-        &format!("(gtk_accel_path \"<Actions>/ThunarActions/uca-action-{THUNAR_ID}\" \"<Alt>c\")"),
+        &format!(
+            "(gtk_accel_path \"<Actions>/ThunarActions/uca-action-{THUNAR_ID}\" \"{}\")",
+            keys.gtk()
+        ),
     )?;
     Ok(true)
 }
@@ -226,7 +404,7 @@ fn dolphin_shortcut(xml: Option<&str>, shortcut: Option<&str>) -> Option<String>
     Some(out)
 }
 
-fn dolphin() -> std::io::Result<bool> {
+fn dolphin(keys: &Shortcut) -> std::io::Result<bool> {
     let entry = format!(
         "[Desktop Entry]\nType=Service\nMimeType=all/allfiles;\nActions=convert;\nX-KDE-Priority=TopLevel\nX-Joey={MARK}\n\n[Desktop Action convert]\nName={}\nIcon={APP_ID}\nExec={}\n",
         t("Convert with Joey"),
@@ -243,7 +421,7 @@ fn dolphin() -> std::io::Result<bool> {
     )?;
     let rc = dolphin_ui_rc();
     let old = fs::read_to_string(&rc).ok();
-    if let Some(new) = dolphin_shortcut(old.as_deref(), Some("Alt+C")) {
+    if let Some(new) = dolphin_shortcut(old.as_deref(), Some(&keys.qt())) {
         if let Some(dir) = rc.parent() {
             fs::create_dir_all(dir)?;
         }
@@ -252,7 +430,7 @@ fn dolphin() -> std::io::Result<bool> {
     Ok(true)
 }
 
-fn nemo() -> std::io::Result<bool> {
+fn nemo(_: &Shortcut) -> std::io::Result<bool> {
     let action = format!(
         "[Nemo Action]\nName={}\nComment={MARK}\nExec={}\nIcon-Name={APP_ID}\nSelection=notnone\nExtensions=nodirs;\nQuote=double\n",
         t("Convert with Joey"),
@@ -268,7 +446,7 @@ fn nemo() -> std::io::Result<bool> {
 
 /// PCManFM (LXDE) and PCManFM-Qt (LXQt) read the shared "file manager
 /// actions" format.
-fn pcmanfm() -> std::io::Result<bool> {
+fn pcmanfm(_: &Shortcut) -> std::io::Result<bool> {
     let action = format!(
         "[Desktop Entry]\nType=Action\nName={}\nTooltip={MARK}\nIcon={APP_ID}\nProfiles=files;\n\n[X-Action-Profile files]\nMimeTypes=all/allfiles;\nSelectionCount=>0\nExec={}\n",
         t("Convert with Joey"),
@@ -282,8 +460,14 @@ fn pcmanfm() -> std::io::Result<bool> {
     Ok(false)
 }
 
-/// Sets Joey up in every file manager found. Safe to run again.
+/// Sets Joey up in every file manager found, with the saved shortcuts.
+/// Safe to run again.
 pub fn setup() -> Report {
+    setup_with(&load_keys())
+}
+
+/// Sets Joey up with these shortcuts. Safe to run again.
+pub fn setup_with(keys: &Keys) -> Report {
     let mut done = Vec::new();
     let all: [(&str, &'static str, Setup); 7] = [
         ("nautilus", "Nautilus", nautilus),
@@ -296,13 +480,17 @@ pub fn setup() -> Report {
     ];
     for (bin, name, f) in all {
         if installed(bin) {
-            if let Ok(shortcut) = f() {
+            if let Ok(shortcut) = f(&keys.files) {
                 done.push((name, shortcut));
             }
         }
     }
-    let global = global_shortcut().ok().flatten();
-    Report { done, global }
+    let global = global_shortcut(&keys.anywhere).ok().flatten();
+    Report {
+        done,
+        global,
+        keys: keys.files.label(),
+    }
 }
 
 const CLIP_ID: &str = "io.github.outlook791.Joey.Clipboard";
@@ -332,10 +520,10 @@ fn desktop_is(name: &str) -> bool {
         .unwrap_or(false)
 }
 
-/// System-wide Meta+C: opens Joey with the files last copied with Ctrl+C,
+/// System-wide shortcut (Meta+C unless chosen otherwise): opens Joey with the files last copied with Ctrl+C,
 /// so the desktop and file managers without shortcuts work too.
 /// KDE Plasma and GNOME; returns the keys set, if any.
-fn global_shortcut() -> std::io::Result<Option<String>> {
+fn global_shortcut(keys: &Shortcut) -> std::io::Result<Option<String>> {
     let h = home();
     if desktop_is("KDE") || h.join(".config/kglobalshortcutsrc").exists() {
         clipboard_launcher()?;
@@ -347,56 +535,50 @@ fn global_shortcut() -> std::io::Result<Option<String>> {
         if !new.is_empty() {
             new.push_str("\n\n");
         }
-        new.push_str(&format!("{section}\n_launch=Meta+C\n"));
+        new.push_str(&format!("{section}\n_launch={}\n", keys.qt()));
         fs::write(&rc, new)?;
         // The shortcut service reads its settings when it starts.
-        if let Some(q) = joey_core::engine::which("kquitapp6") {
-            let _ = std::process::Command::new(q).arg("kglobalaccel").status();
+        if let Some(mut q) = host_command("kquitapp6") {
+            let _ = q.arg("kglobalaccel").status();
         }
-        return Ok(Some("Meta+C".into()));
+        return Ok(Some(keys.label()));
     }
-    if desktop_is("GNOME") {
-        if let Some(gs) = joey_core::engine::which("gsettings") {
-            clipboard_launcher()?;
-            let base = "org.gnome.settings-daemon.plugins.media-keys";
-            let path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/joey/";
-            let out = std::process::Command::new(&gs)
-                .args(["get", base, "custom-keybindings"])
-                .output()?;
-            let current = String::from_utf8_lossy(&out.stdout).trim().to_string();
-            if !current.contains(path) {
-                let inner = current
-                    .trim_start_matches("@as")
-                    .trim()
-                    .trim_start_matches('[')
-                    .trim_end_matches(']')
-                    .trim();
-                let list = if inner.is_empty() {
-                    format!("['{path}']")
-                } else {
-                    format!("[{inner}, '{path}']")
-                };
-                std::process::Command::new(&gs)
-                    .args(["set", base, "custom-keybindings", &list])
-                    .status()?;
-            }
-            let key = format!("{base}.custom-keybinding:{path}");
-            let cmd = if in_flatpak() {
-                format!("flatpak run {APP_ID} --clipboard")
+    if desktop_is("GNOME") && host_command("gsettings").is_some() {
+        let gs = || host_command("gsettings").expect("checked above");
+        clipboard_launcher()?;
+        let base = "org.gnome.settings-daemon.plugins.media-keys";
+        let path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/joey/";
+        let out = gs().args(["get", base, "custom-keybindings"]).output()?;
+        let current = String::from_utf8_lossy(&out.stdout).trim().to_string();
+        if !current.contains(path) {
+            let inner = current
+                .trim_start_matches("@as")
+                .trim()
+                .trim_start_matches('[')
+                .trim_end_matches(']')
+                .trim();
+            let list = if inner.is_empty() {
+                format!("['{path}']")
             } else {
-                command("--clipboard")
+                format!("[{inner}, '{path}']")
             };
-            for (k, v) in [
-                ("name", "Joey".to_string()),
-                ("command", cmd),
-                ("binding", "<Super>c".to_string()),
-            ] {
-                std::process::Command::new(&gs)
-                    .args(["set", &key, k, &v])
-                    .status()?;
-            }
-            return Ok(Some("Super+C".into()));
+            gs().args(["set", base, "custom-keybindings", &list])
+                .status()?;
         }
+        let key = format!("{base}.custom-keybinding:{path}");
+        let cmd = if in_flatpak() {
+            format!("flatpak run {APP_ID} --clipboard")
+        } else {
+            command("--clipboard")
+        };
+        for (k, v) in [
+            ("name", "Joey".to_string()),
+            ("command", cmd),
+            ("binding", keys.gtk()),
+        ] {
+            gs().args(["set", &key, k, &v]).status()?;
+        }
+        return Ok(Some(keys.label()));
     }
     Ok(None)
 }
@@ -465,6 +647,37 @@ pub fn remove() {
         h.join(".local/share/applications")
             .join(format!("{CLIP_ID}.desktop")),
     );
+    // GNOME's custom shortcut.
+    if desktop_is("GNOME") {
+        let base = "org.gnome.settings-daemon.plugins.media-keys";
+        let path = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/joey/";
+        if let Some(out) = host_command("gsettings")
+            .and_then(|mut c| c.args(["get", base, "custom-keybindings"]).output().ok())
+        {
+            let current = String::from_utf8_lossy(&out.stdout).to_string();
+            if current.contains(path) {
+                let kept: Vec<&str> = current
+                    .trim()
+                    .trim_start_matches("@as")
+                    .trim()
+                    .trim_matches(|c| c == '[' || c == ']')
+                    .split(',')
+                    .map(str::trim)
+                    .filter(|p| !p.is_empty() && !p.contains(path))
+                    .collect();
+                if let Some(mut c) = host_command("gsettings") {
+                    let _ = c
+                        .args([
+                            "set",
+                            base,
+                            "custom-keybindings",
+                            &format!("[{}]", kept.join(", ")),
+                        ])
+                        .status();
+                }
+            }
+        }
+    }
     let kde = h.join(".config/kglobalshortcutsrc");
     if let Ok(old) = fs::read_to_string(&kde) {
         let section = format!("[services][{CLIP_ID}.desktop]");
@@ -477,6 +690,18 @@ pub fn remove() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn shortcuts_read_and_write_both_ways() {
+        let sc = Shortcut::parse("Ctrl+Meta+J").unwrap();
+        assert_eq!(sc.qt(), "Ctrl+Meta+J");
+        assert_eq!(sc.gtk(), "<Control><Super>j");
+        assert_eq!(Shortcut::FILE_MANAGER.gtk(), "<Alt>c");
+        assert_eq!(Shortcut::parse("alt+c"), Some(Shortcut::FILE_MANAGER));
+        // Ctrl or Shift alone would clash with Copy, Paste…
+        assert!(Shortcut::parse("Ctrl+C").is_none());
+        assert!(Shortcut::parse("Alt+F4").is_none());
+    }
 
     #[test]
     fn dolphin_shortcut_is_added_replaced_and_removed() {

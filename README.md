@@ -32,20 +32,18 @@ Joey is a free, open-source file converter for Linux. Select files, press a key,
 
 ## Install
 
-**The easy way:** open **[outlook791.github.io/Joey](https://outlook791.github.io/Joey/)** and press **Joey**: Discover or GNOME Software install it, and updates arrive by themselves. Press **Joey Office** too if you want PowerPoint, and Word and Excel at their best (it adds LibreOffice, about 230 MB). Then, once, in a terminal:
+**The easy way:** open **[outlook791.github.io/Joey](https://outlook791.github.io/Joey/)** and press **Joey**: Discover or GNOME Software install it, and updates arrive by themselves. Press **Joey Office** too if you want PowerPoint, and Word and Excel at their best (it adds LibreOffice, about 230 MB).
 
-```sh
-flatpak run io.github.outlook791.Joey --setup-file-managers
-```
+Then open Joey from the app menu. The first time, it shows which keys will open it: keep **Alt+C** and **Meta+C**, or click them to choose your own, and press **Turn on**. Log out and back in once, and they're ready. You can change them later from Joey's start page (*Change the shortcuts*).
 
-and log out and back in: Alt+C, right-click and Meta+C are ready.
+<p align="center"><img src="docs/screenshots/en/welcome.png" width="360" alt="The first start: the two shortcuts, with Turn on"></p>
 
 From a terminal, the same thing:
 
 ```sh
 flatpak install --user https://outlook791.github.io/Joey/joey.flatpakref
 flatpak install --user https://outlook791.github.io/Joey/joey-office.flatpakref   # optional
-flatpak run io.github.outlook791.Joey --setup-file-managers
+flatpak run io.github.outlook791.Joey --setup-file-managers   # instead of the first-start screen
 ```
 
 **Updates** come through Discover / GNOME Software, or `flatpak update`. **To remove Joey:**
@@ -318,14 +316,14 @@ joey --mcp                         # serve AI apps (see above)
 
 joey-gtk FILE…                     # open the window with these files
 joey-gtk --clipboard               # open it with the files last copied
-joey-gtk --setup-file-managers     # add Alt+C, right-click and Meta+C again
+joey-gtk --setup-file-managers     # add the shortcuts and right-click again (saved keys)
 joey-gtk --remove-file-managers    # take them out
 ```
 
 ## Troubleshooting
 
 - **Alt+C does nothing in the file manager:** log out and back in after installing. Dolphin needs version 26.04 or newer (`dolphin --version`); in older ones use right-click → *Joey* or Meta+C. Check that Alt+C isn't assigned to something else in the file manager's shortcut settings.
-- **Meta+C does nothing:** copy the files with Ctrl+C first, then log out and back in once. On KDE, System Settings → Keyboard → Shortcuts lists it as *Joey (copied files)*: there you can also choose another key.
+- **Meta+C does nothing:** copy the files with Ctrl+C first, then log out and back in once. Another app may already use the same keys: choose others on Joey's start page (*Change the shortcuts*).
 - **The icon is a question mark:** log out and back in; if it stays, run `./install.sh` again (or reinstall the Flatpak).
 - **No PowerPoint, or Word/Excel layouts look plain:** install Joey Office (see [Install](#install)) or LibreOffice.
 - **A format is missing:** `joey --engines` shows which programs Joey found. Install the missing one (see [Install](#install)) and it appears.
