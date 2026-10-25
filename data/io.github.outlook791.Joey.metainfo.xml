@@ -96,6 +96,11 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="26.10.3" date="2026-10-25">
+      <description>
+        <p>First start: choose the keys that open Joey (no terminal needed); change them later from the start page.</p>
+      </description>
+    </release>
     <release version="26.10.2" date="2026-10-24">
       <description>
         <p>Documents, spreadsheets and PDF tables without LibreOffice; Joey Office add-on for PowerPoint; send to phones with KDE Connect, GSConnect and LocalSend; error codes and problem reports; touch; use from AI apps; our own Flatpak repository.</p>
