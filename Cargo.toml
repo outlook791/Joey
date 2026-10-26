@@ -3,7 +3,7 @@ resolver = "2"
 members = ["crates/joey-core", "crates/joey-cli", "crates/joey-gtk"]
 
 [workspace.package]
-version = "26.10.3"
+version = "26.10.4"
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/outlook791/joey"

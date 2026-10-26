@@ -96,6 +96,11 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="26.10.4" date="2026-10-26">
+      <description>
+        <p>Joey speaks 16 languages: the 15 most spoken in the world plus Italian (AI translations, corrections welcome); right-to-left layout for Arabic and Urdu.</p>
+      </description>
+    </release>
     <release version="26.10.3" date="2026-10-25">
       <description>
         <p>First start: choose the keys that open Joey (no terminal needed); change them later from the start page.</p>
