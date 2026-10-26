@@ -1,0 +1,241 @@
+# العربية. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	أفلت الملفات هنا
+Choose files…	اختر ملفات…
+Choose files to convert	اختر الملفات المراد تحويلها
+Esc to close	Esc للإغلاق
+1 file	ملف واحد
+{n} files	الملفات: {n}
+{n} {fmt} files	ملفات {fmt}: {n}
+{n} more…	{n} أخرى…
+Quick tools	أدوات سريعة
+Convert	تحويل
+Adjust	ضبط
+Enter	Enter
+PDF · one image per page	PDF · صورة لكل صفحة
+image	صورة
+drawing	رسم
+audio	صوت
+video	فيديو
+PDF	PDF
+document	مستند
+spreadsheet	جدول بيانات
+presentation	عرض تقديمي
+folders aren't supported yet	المجلدات غير مدعومة بعد
+not found	غير موجود
+file type not recognised	لم يُتعرَّف على نوع الملف
+nothing to convert {fmt} to here	لا يمكن تحويل {fmt} إلى أي شيء هنا
+Compress	ضغط
+Remove metadata	إزالة البيانات الوصفية
+Merge into one PDF	دمج في ملف PDF واحد
+Join into one track	دمج في مقطع صوتي واحد
+Even out the volume	موازنة مستوى الصوت
+Remove the sound	إزالة الصوت
+Converting…	جارٍ التحويل…
+Converting {name}…	جارٍ تحويل {name}…
+Converting {i} of {n}…	جارٍ تحويل {i} من {n}…
+Nothing converted	لم يُحوَّل أي شيء
+1 file ready	ملف واحد جاهز
+{n} files ready	الملفات الجاهزة: {n}
+Next to the originals	بجانب الملفات الأصلية
+Show in folder	إظهار في المجلد
+Close	إغلاق
+Back to the menu	العودة إلى القائمة
+Other files	ملفات أخرى
+unexpected error	خطأ غير متوقع
+{tool} couldn't convert it	تعذّر على {tool} تحويله
+already as small as it gets	أصغر حجم ممكن بالفعل
+the file has no audio track	الملف لا يحتوي على مسار صوتي
+Back	رجوع
+Reset to defaults	استعادة الإعدادات الافتراضية
+Remember these settings	تذكّر هذه الإعدادات
+Advanced	متقدم
+No settings for this one.	لا توجد إعدادات لهذا.
+Estimated size: {size}	الحجم التقديري: {size}
+Size can't be estimated for this conversion	لا يمكن تقدير الحجم لهذا التحويل
+Quality	الجودة
+Lower quality makes smaller files	جودة أقل، ملفات أصغر
+Low	منخفضة
+Medium	متوسطة
+High (recommended)	عالية (موصى بها)
+Maximum	قصوى
+Size	الحجم
+Longest side. Never enlarges.	الضلع الأطول. لا يُكبَّر أبدًا.
+Original	الأصلي
+Very large · 3840 px	كبير جدًا · 3840 px
+Large · 1920 px	كبير · 1920 px
+Medium · 1280 px	متوسط · 1280 px
+Small · 800 px	صغير · 800 px
+Remove camera and location info	إزالة معلومات الكاميرا والموقع
+Date, place and camera model saved inside the photo	التاريخ والمكان وطراز الكاميرا المحفوظة في الصورة
+Channels	القنوات
+Mono halves the size; fine for voice	الأحادي يقلّص الحجم إلى النصف؛ مناسب للصوت البشري
+Mono	أحادي
+Stereo	ستيريو
+Bitrate	معدل البت
+Data per second: higher means better sound and a bigger file. Replaces Quality.	البيانات في الثانية: كلما ارتفع كان الصوت أفضل والملف أكبر. يحل محل الجودة.
+Automatic	تلقائي
+Sample rate	معدل العينة
+How often the sound is measured each second. Change it only if a device asks.	عدد مرات قياس الصوت في الثانية. غيّره فقط إذا طلبه جهاز.
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · فيديو
+Remove song info	إزالة معلومات الأغنية
+Title, artist, album and similar tags	العنوان والفنان والألبوم ووسوم مشابهة
+Resolution	الدقة
+Smaller resolution, much smaller file	دقة أقل، ملف أصغر بكثير
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	صغيرة · 480p
+Keep the sound	الإبقاء على الصوت
+Frames per second	الإطارات في الثانية
+How smooth the motion is. 30 is fine for most videos.	مدى سلاسة الحركة. 30 تكفي لمعظم مقاطع الفيديو.
+Remove video info	إزالة معلومات الفيديو
+Date, place and device saved inside the video	التاريخ والمكان والجهاز المحفوظة في الفيديو
+Width	العرض
+Small · 320 px	صغير · 320 px
+Medium · 480 px	متوسط · 480 px
+Large · 720 px	كبير · 720 px
+Pages	الصفحات
+For example 1-3, 7. Empty means all.	مثلًا 1-3, 7. الفراغ يعني الكل.
+all	الكل
+Sharpness	الوضوح
+Dots per inch: higher is sharper and bigger	نقاط لكل بوصة: الأعلى أوضح وأكبر
+Screen · 72 dpi	شاشة · 72 dpi
+Normal · 150 dpi	عادي · 150 dpi
+Print · 300 dpi	طباعة · 300 dpi
+Very sharp · 600 dpi	واضح جدًا · 600 dpi
+Set up Alt+C in your file manager	إعداد Alt+C في مدير الملفات
+Select files, press Alt+C, pick a format	حدّد الملفات، اضغط Alt+C، اختر صيغة
+Alt+C is ready in {fm}	Alt+C جاهز في {fm}
+Right-click → Convert with Joey works in {fm}	النقر بالزر الأيمن ← التحويل باستخدام Joey يعمل في {fm}
+Log out and back in once to use them	سجّل الخروج ثم الدخول مرة واحدة لاستخدامها
+No supported file manager found	لم يُعثر على مدير ملفات مدعوم
+Convert with Joey	التحويل باستخدام Joey
+subtitles	ترجمة
+archive	أرشيف
+other	أخرى
+{n} other items	{n} عناصر أخرى
+File actions	إجراءات الملفات
+Copy the path	نسخ المسار
+Copy to…	نسخ إلى…
+Move to…	نقل إلى…
+Open a terminal here	فتح طرفية هنا
+Put in a ZIP	وضعها في ملف ZIP
+Choose a folder	اختر مجلدًا
+Terminal opened	فُتحت الطرفية
+Path copied	نُسخ المسار
+In the folder you chose	في المجلد المختار
+Rotate left	تدوير لليسار
+Rotate right	تدوير لليمين
+Black and white	أبيض وأسود
+Crop to a shape…	قص إلى شكل…
+Trim…	اقتطاع…
+Split into pages	تقسيم إلى صفحات
+Keep only some pages…	الإبقاء على بعض الصفحات فقط…
+Protect with a password…	الحماية بكلمة مرور…
+Remove the password…	إزالة كلمة المرور…
+Extract here	استخراج هنا
+Join into one video	دمج في فيديو واحد
+From	من
+To	إلى
+For example 0:30 and 1:45. Only that part is kept.	مثلًا 0:30 و 1:45. يُحتفظ بهذا الجزء فقط.
+For example 1-3, 7. Only these pages are kept.	مثلًا 1-3, 7. يُحتفظ بهذه الصفحات فقط.
+Shape	الشكل
+The middle of the picture is kept	يُحتفظ بوسط الصورة
+Square · 1:1	مربع · 1:1
+Portrait · 4:5	طولي · 4:5
+Photo · 3:2	صورة · 3:2
+Classic · 4:3	كلاسيكي · 4:3
+Wide · 16:9	عريض · 16:9
+Story · 9:16	قصة · 9:16
+Password	كلمة المرور
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	مطلوبة لفتح ملف PDF. احتفظ بها جيدًا: لا يمكن استعادتها.
+The password that opens this PDF now.	كلمة المرور التي تفتح ملف PDF هذا حاليًا.
+wrong password	كلمة مرور خاطئة
+the archive is empty	الأرشيف فارغ
+Text (TXT)	نص (TXT)
+Web page (HTML)	صفحة ويب (HTML)
+Send to {device}	إرسال إلى {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	في أي مكان، بما في ذلك سطح المكتب: Ctrl+C ثم {keys}
+Send with LocalSend…	الإرسال عبر LocalSend…
+Sent to {device}	أُرسل إلى {device}
+{device} didn't answer	لم يستجب {device}
+Opened in LocalSend: pick the device there	فُتح في LocalSend: اختر الجهاز هناك
+no tables found in this PDF	لم يُعثر على جداول في ملف PDF هذا
+no pages to convert (check the page numbers)	لا توجد صفحات للتحويل (تحقق من أرقام الصفحات)
+the PDF looks damaged or empty	يبدو أن ملف PDF تالف أو فارغ
+File not found	الملف غير موجود
+It was moved or deleted after you selected it. Select it again.	نُقل أو حُذف بعد تحديده. حدّده مرة أخرى.
+This is a folder	هذا مجلد
+Select the files inside it, or use Put in a ZIP.	حدّد الملفات داخله، أو استخدم «وضعها في ملف ZIP».
+File type not recognised	لم يُتعرَّف على نوع الملف
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	يقرأ Joey محتوى الملف لا اسمه، وهذا المحتوى ليس صيغة يعرفها.
+Damaged or incomplete file	الملف تالف أو ناقص
+Check that it opens in another app. If you downloaded it, download it again.	تحقق مما إذا كان يُفتح في تطبيق آخر. إذا نزّلته، فنزّله مرة أخرى.
+The file is protected by a password	الملف محمي بكلمة مرور
+Remove the password first, then convert it.	أزِل كلمة المرور أولًا، ثم حوّله.
+Wrong password	كلمة مرور خاطئة
+Check the password and try again.	تحقق من كلمة المرور وحاول مرة أخرى.
+The file has no sound	الملف لا يحتوي على صوت
+This video has no audio track to extract.	لا يحتوي هذا الفيديو على مسار صوتي لاستخراجه.
+No tables found in the PDF	لم يُعثر على جداول في ملف PDF
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	يقرأ Joey الجداول فقط من ملفات PDF المنشأة على الحاسوب؛ الصفحات الممسوحة ضوئيًا صور.
+The archive is empty	الأرشيف فارغ
+There is nothing inside to extract.	لا يوجد شيء بداخله لاستخراجه.
+Those pages don't exist	هذه الصفحات غير موجودة
+Check the page numbers: the document has fewer pages.	تحقق من أرقام الصفحات: المستند يحتوي على صفحات أقل.
+Already as small as it gets	أصغر حجم ممكن بالفعل
+Compressing it more wouldn't make it smaller.	الضغط أكثر لن يجعله أصغر.
+Not possible on this computer	غير ممكن على هذا الحاسوب
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	برنامج يحتاجه Joey غير مثبّت. يوضّح ملف README ما يجب تثبيته لكل نوع من الملفات.
+A program Joey needs is missing	برنامج يحتاجه Joey مفقود
+Install it (the README lists them), then try again.	ثبّته (القائمة في README)، ثم حاول مرة أخرى.
+The installed program can't handle this format	البرنامج المثبّت لا يدعم هذه الصيغة
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	إصدارك لا يتضمن هذه الصيغة. إصدار أكمل يضيفها، مثل FFmpeg من RPM Fusion على Fedora.
+The disk is full	القرص ممتلئ
+Free some space, or save in another place.	حرّر بعض المساحة، أو احفظ في مكان آخر.
+Joey isn't allowed to write here	لا يُسمح لـ Joey بالكتابة هنا
+Copy the files to one of your folders (e.g. Documents) and convert them there.	انسخ الملفات إلى أحد مجلداتك (مثل المستندات) وحوّلها هناك.
+Not enough memory	الذاكرة غير كافية
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	الملف كبير جدًا بالنسبة للذاكرة المتاحة. أغلق تطبيقات أخرى، أو حوّل ملفات أقل في كل مرة.
+Blocked by a safety limit	حُظر بسبب حد أمان
+The image is larger than the limit set by ImageMagick's security policy.	الصورة تتجاوز الحد الذي تضعه سياسة أمان ImageMagick.
+Unexpected error	خطأ غير متوقع
+This is a bug in Joey. Please report it.	هذا خلل في Joey. يُرجى الإبلاغ عنه.
+The conversion program failed	فشل برنامج التحويل
+Please report it: the details tell us why.	يُرجى الإبلاغ: التفاصيل تخبرنا بالسبب.
+Close (Esc)	إغلاق (Esc)
+{keys} is ready in {fm}	{keys} جاهز في {fm}
+Change the shortcuts	تغيير الاختصارات
+Set up the shortcuts	إعداد الاختصارات
+Welcome to Joey	مرحبًا بك في Joey
+Two shortcuts open Joey. Keep these, or choose your own.	اختصاران يفتحان Joey. احتفظ بهما، أو اختر اختصاراتك.
+In the file manager	في مدير الملفات
+Select files, then press	حدّد الملفات، ثم اضغط
+Anywhere, desktop included	في أي مكان، بما في ذلك سطح المكتب
+Copy files with Ctrl+C, then press	انسخ الملفات بـ Ctrl+C، ثم اضغط
+Change	تغيير
+Press the keys… (Esc cancels)	اضغط المفاتيح… (Esc للإلغاء)
+Use Alt or Meta (the Windows key) with a letter or a number	استخدم Alt أو Meta (مفتاح Windows) مع حرف أو رقم
+That's already the other shortcut	هذا هو الاختصار الآخر بالفعل
+Later	لاحقًا
+Turn on	تفعيل
+Ready	تم
+Start	ابدأ
+Ideas or problems? Tell us	لديك فكرة أو مشكلة؟ أخبرنا
+Report the problem	الإبلاغ عن المشكلة
+You see the report before anything is sent	سترى التقرير قبل إرسال أي شيء
+Feedback	ملاحظات
+Last time Joey closed because of an error	في المرة الماضية أُغلق Joey بسبب خطأ
+Report	إبلاغ
+What were you doing?	ماذا كنت تفعل؟
+(optional) Write it here.	(اختياري) اكتب هنا.
+Your idea, request or opinion	فكرتك أو طلبك أو رأيك
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	لا يُرسَل شيء تلقائيًا. اقرأ النص، وغيّر أو احذف ما تشاء: أسماء ملفاتك واسم المستخدم مخفية بالفعل.
+Title, in a few words	العنوان، في كلمات قليلة
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	يفتح الإرسال GitHub في المتصفح، حيث تراجعه مرة أخرى: يلزم حساب مجاني. بدون حساب، انسخ النص وأرسله كما تشاء.
+Copy	نسخ
+Open on GitHub	فتح في GitHub
+Send by email	الإرسال بالبريد الإلكتروني
+Copied	نُسخ
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	النص طويل: يُفتح GitHub ببدايته. النص كله منسوخ: استبدله بـ Ctrl+V.

@@ -1,0 +1,241 @@
+# Русский. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Перетащите файлы сюда
+Choose files…	Выбрать файлы…
+Choose files to convert	Выберите файлы для преобразования
+Esc to close	Esc — закрыть
+1 file	1 файл
+{n} files	Файлов: {n}
+{n} {fmt} files	Файлов {fmt}: {n}
+{n} more…	Ещё {n}…
+Quick tools	Быстрые инструменты
+Convert	Преобразовать
+Adjust	Настроить
+Enter	Enter
+PDF · one image per page	PDF · одно изображение на страницу
+image	изображение
+drawing	рисунок
+audio	аудио
+video	видео
+PDF	PDF
+document	документ
+spreadsheet	таблица
+presentation	презентация
+folders aren't supported yet	папки пока не поддерживаются
+not found	не найден
+file type not recognised	тип файла не распознан
+nothing to convert {fmt} to here	здесь {fmt} не во что преобразовать
+Compress	Сжать
+Remove metadata	Удалить метаданные
+Merge into one PDF	Объединить в один PDF
+Join into one track	Объединить в одну дорожку
+Even out the volume	Выровнять громкость
+Remove the sound	Убрать звук
+Converting…	Преобразование…
+Converting {name}…	Преобразуется {name}…
+Converting {i} of {n}…	Преобразуется {i} из {n}…
+Nothing converted	Ничего не преобразовано
+1 file ready	1 файл готов
+{n} files ready	Готово файлов: {n}
+Next to the originals	Рядом с исходными
+Show in folder	Показать в папке
+Close	Закрыть
+Back to the menu	Вернуться в меню
+Other files	Другие файлы
+unexpected error	непредвиденная ошибка
+{tool} couldn't convert it	{tool} не удалось преобразовать
+already as small as it gets	уже минимальный размер
+the file has no audio track	в файле нет звуковой дорожки
+Back	Назад
+Reset to defaults	Сбросить настройки
+Remember these settings	Запомнить эти настройки
+Advanced	Дополнительно
+No settings for this one.	Для этого настроек нет.
+Estimated size: {size}	Примерный размер: {size}
+Size can't be estimated for this conversion	Размер для этого преобразования не оценить
+Quality	Качество
+Lower quality makes smaller files	Ниже качество — меньше файл
+Low	Низкое
+Medium	Среднее
+High (recommended)	Высокое (рекомендуется)
+Maximum	Максимальное
+Size	Размер
+Longest side. Never enlarges.	Длинная сторона. Никогда не увеличивает.
+Original	Исходный
+Very large · 3840 px	Очень большой · 3840 px
+Large · 1920 px	Большой · 1920 px
+Medium · 1280 px	Средний · 1280 px
+Small · 800 px	Маленький · 800 px
+Remove camera and location info	Удалить данные о камере и месте
+Date, place and camera model saved inside the photo	Дата, место и модель камеры, сохранённые в фото
+Channels	Каналы
+Mono halves the size; fine for voice	Моно вдвое уменьшает размер; подходит для голоса
+Mono	Моно
+Stereo	Стерео
+Bitrate	Битрейт
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Данные в секунду: выше — лучше звук и больше файл. Заменяет «Качество».
+Automatic	Автоматически
+Sample rate	Частота дискретизации
+How often the sound is measured each second. Change it only if a device asks.	Сколько раз в секунду измеряется звук. Меняйте, только если этого требует устройство.
+44.1 kHz · CD	44,1 кГц · CD
+48 kHz · video	48 кГц · видео
+Remove song info	Удалить данные о треке
+Title, artist, album and similar tags	Название, исполнитель, альбом и похожие теги
+Resolution	Разрешение
+Smaller resolution, much smaller file	Меньше разрешение — намного меньше файл
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Маленькое · 480p
+Keep the sound	Оставить звук
+Frames per second	Кадров в секунду
+How smooth the motion is. 30 is fine for most videos.	Плавность движения. 30 подходит для большинства видео.
+Remove video info	Удалить данные о видео
+Date, place and device saved inside the video	Дата, место и устройство, сохранённые в видео
+Width	Ширина
+Small · 320 px	Маленькая · 320 px
+Medium · 480 px	Средняя · 480 px
+Large · 720 px	Большая · 720 px
+Pages	Страницы
+For example 1-3, 7. Empty means all.	Например 1-3, 7. Пусто — все.
+all	все
+Sharpness	Чёткость
+Dots per inch: higher is sharper and bigger	Точек на дюйм: выше — чётче и больше
+Screen · 72 dpi	Экран · 72 dpi
+Normal · 150 dpi	Обычно · 150 dpi
+Print · 300 dpi	Печать · 300 dpi
+Very sharp · 600 dpi	Очень чётко · 600 dpi
+Set up Alt+C in your file manager	Настроить Alt+C в файловом менеджере
+Select files, press Alt+C, pick a format	Выберите файлы, нажмите Alt+C, выберите формат
+Alt+C is ready in {fm}	Alt+C готово в {fm}
+Right-click → Convert with Joey works in {fm}	Правый клик → «Преобразовать в Joey» работает в {fm}
+Log out and back in once to use them	Выйдите из сеанса и войдите снова один раз, чтобы ими пользоваться
+No supported file manager found	Поддерживаемый файловый менеджер не найден
+Convert with Joey	Преобразовать в Joey
+subtitles	субтитры
+archive	архив
+other	другое
+{n} other items	Ещё элементов: {n}
+File actions	Действия с файлами
+Copy the path	Копировать путь
+Copy to…	Копировать в…
+Move to…	Переместить в…
+Open a terminal here	Открыть терминал здесь
+Put in a ZIP	Упаковать в ZIP
+Choose a folder	Выберите папку
+Terminal opened	Терминал открыт
+Path copied	Путь скопирован
+In the folder you chose	В выбранной папке
+Rotate left	Повернуть влево
+Rotate right	Повернуть вправо
+Black and white	Чёрно-белое
+Crop to a shape…	Обрезать по форме…
+Trim…	Обрезать по времени…
+Split into pages	Разделить на страницы
+Keep only some pages…	Оставить только некоторые страницы…
+Protect with a password…	Защитить паролем…
+Remove the password…	Убрать пароль…
+Extract here	Распаковать сюда
+Join into one video	Объединить в одно видео
+From	С
+To	По
+For example 0:30 and 1:45. Only that part is kept.	Например 0:30 и 1:45. Останется только этот фрагмент.
+For example 1-3, 7. Only these pages are kept.	Например 1-3, 7. Останутся только эти страницы.
+Shape	Форма
+The middle of the picture is kept	Сохраняется центр изображения
+Square · 1:1	Квадрат · 1:1
+Portrait · 4:5	Портрет · 4:5
+Photo · 3:2	Фото · 3:2
+Classic · 4:3	Классика · 4:3
+Wide · 16:9	Широкий · 16:9
+Story · 9:16	Сторис · 9:16
+Password	Пароль
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Нужен для открытия PDF. Храните его надёжно: восстановить нельзя.
+The password that opens this PDF now.	Пароль, которым сейчас открывается этот PDF.
+wrong password	неверный пароль
+the archive is empty	архив пуст
+Text (TXT)	Текст (TXT)
+Web page (HTML)	Веб-страница (HTML)
+Send to {device}	Отправить на {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Где угодно, включая рабочий стол: Ctrl+C, затем {keys}
+Send with LocalSend…	Отправить через LocalSend…
+Sent to {device}	Отправлено на {device}
+{device} didn't answer	{device} не ответило
+Opened in LocalSend: pick the device there	Открыто в LocalSend: выберите устройство там
+no tables found in this PDF	в этом PDF не найдено таблиц
+no pages to convert (check the page numbers)	нет страниц для преобразования (проверьте номера страниц)
+the PDF looks damaged or empty	PDF, похоже, повреждён или пуст
+File not found	Файл не найден
+It was moved or deleted after you selected it. Select it again.	Его переместили или удалили после выбора. Выберите его снова.
+This is a folder	Это папка
+Select the files inside it, or use Put in a ZIP.	Выберите файлы внутри неё или используйте «Упаковать в ZIP».
+File type not recognised	Тип файла не распознан
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey читает содержимое файла, а не его имя, и это содержимое ему не знакомо.
+Damaged or incomplete file	Файл повреждён или неполон
+Check that it opens in another app. If you downloaded it, download it again.	Проверьте, открывается ли он в другом приложении. Если вы его скачали, скачайте заново.
+The file is protected by a password	Файл защищён паролем
+Remove the password first, then convert it.	Сначала уберите пароль, затем преобразуйте.
+Wrong password	Неверный пароль
+Check the password and try again.	Проверьте пароль и попробуйте снова.
+The file has no sound	В файле нет звука
+This video has no audio track to extract.	В этом видео нет звуковой дорожки для извлечения.
+No tables found in the PDF	В PDF не найдено таблиц
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey читает таблицы только из PDF, созданных на компьютере; отсканированные страницы — это изображения.
+The archive is empty	Архив пуст
+There is nothing inside to extract.	Внутри нечего извлекать.
+Those pages don't exist	Таких страниц нет
+Check the page numbers: the document has fewer pages.	Проверьте номера страниц: в документе их меньше.
+Already as small as it gets	Уже минимальный размер
+Compressing it more wouldn't make it smaller.	Дальнейшее сжатие не уменьшит его.
+Not possible on this computer	Невозможно на этом компьютере
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Не установлена программа, нужная Joey. В README указано, что установить для каждого типа файлов.
+A program Joey needs is missing	Не хватает программы, нужной Joey
+Install it (the README lists them), then try again.	Установите её (список в README) и попробуйте снова.
+The installed program can't handle this format	Установленная программа не поддерживает этот формат
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	В вашей версии нет этого формата. Более полная версия его добавляет, например FFmpeg из RPM Fusion в Fedora.
+The disk is full	Диск заполнен
+Free some space, or save in another place.	Освободите место или сохраните в другое место.
+Joey isn't allowed to write here	Joey не может записывать сюда
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Скопируйте файлы в одну из своих папок (например, «Документы») и преобразуйте там.
+Not enough memory	Недостаточно памяти
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Файл слишком велик для свободной памяти. Закройте другие приложения или преобразуйте меньше файлов за раз.
+Blocked by a safety limit	Заблокировано ограничением безопасности
+The image is larger than the limit set by ImageMagick's security policy.	Изображение превышает лимит политики безопасности ImageMagick.
+Unexpected error	Непредвиденная ошибка
+This is a bug in Joey. Please report it.	Это ошибка Joey. Пожалуйста, сообщите о ней.
+The conversion program failed	Программа преобразования дала сбой
+Please report it: the details tell us why.	Пожалуйста, сообщите: подробности подскажут причину.
+Close (Esc)	Закрыть (Esc)
+{keys} is ready in {fm}	{keys} готово в {fm}
+Change the shortcuts	Изменить сочетания клавиш
+Set up the shortcuts	Настроить сочетания клавиш
+Welcome to Joey	Добро пожаловать в Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Joey открывается двумя сочетаниями. Оставьте эти или выберите свои.
+In the file manager	В файловом менеджере
+Select files, then press	Выберите файлы, затем нажмите
+Anywhere, desktop included	Где угодно, включая рабочий стол
+Copy files with Ctrl+C, then press	Скопируйте файлы через Ctrl+C, затем нажмите
+Change	Изменить
+Press the keys… (Esc cancels)	Нажмите клавиши… (Esc — отмена)
+Use Alt or Meta (the Windows key) with a letter or a number	Используйте Alt или Meta (клавиша Windows) с буквой или цифрой
+That's already the other shortcut	Это уже второе сочетание
+Later	Позже
+Turn on	Включить
+Ready	Готово
+Start	Начать
+Ideas or problems? Tell us	Идеи или проблемы? Напишите нам
+Report the problem	Сообщить о проблеме
+You see the report before anything is sent	Вы увидите отчёт до любой отправки
+Feedback	Отзыв
+Last time Joey closed because of an error	В прошлый раз Joey закрылся из-за ошибки
+Report	Сообщить
+What were you doing?	Что вы делали?
+(optional) Write it here.	(необязательно) Напишите здесь.
+Your idea, request or opinion	Ваша идея, просьба или мнение
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Ничего не отправляется само. Прочитайте текст, измените или удалите что угодно: имена ваших файлов и имя пользователя уже скрыты.
+Title, in a few words	Заголовок, в нескольких словах
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	При отправке GitHub откроется в браузере, где вы проверите всё ещё раз: нужна бесплатная учётная запись. Без неё скопируйте текст и отправьте как удобно.
+Copy	Копировать
+Open on GitHub	Открыть на GitHub
+Send by email	Отправить по почте
+Copied	Скопировано
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Текст длинный: GitHub откроется с началом. Весь текст скопирован: замените его через Ctrl+V.

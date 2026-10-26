@@ -1,0 +1,241 @@
+# Bahasa Indonesia. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Letakkan berkas di sini
+Choose files…	Pilih berkas…
+Choose files to convert	Pilih berkas yang akan dikonversi
+Esc to close	Esc untuk menutup
+1 file	1 berkas
+{n} files	{n} berkas
+{n} {fmt} files	{n} berkas {fmt}
+{n} more…	{n} lagi…
+Quick tools	Alat cepat
+Convert	Konversi
+Adjust	Atur
+Enter	Enter
+PDF · one image per page	PDF · satu gambar per halaman
+image	gambar
+drawing	gambar vektor
+audio	audio
+video	video
+PDF	PDF
+document	dokumen
+spreadsheet	lembar kerja
+presentation	presentasi
+folders aren't supported yet	folder belum didukung
+not found	tidak ditemukan
+file type not recognised	jenis berkas tidak dikenali
+nothing to convert {fmt} to here	{fmt} tidak bisa dikonversi ke apa pun di sini
+Compress	Kompres
+Remove metadata	Hapus metadata
+Merge into one PDF	Gabungkan menjadi satu PDF
+Join into one track	Gabungkan menjadi satu trek
+Even out the volume	Ratakan volume
+Remove the sound	Hapus suara
+Converting…	Mengonversi…
+Converting {name}…	Mengonversi {name}…
+Converting {i} of {n}…	Mengonversi {i} dari {n}…
+Nothing converted	Tidak ada yang dikonversi
+1 file ready	1 berkas siap
+{n} files ready	{n} berkas siap
+Next to the originals	Di samping berkas asli
+Show in folder	Tampilkan di folder
+Close	Tutup
+Back to the menu	Kembali ke menu
+Other files	Berkas lain
+unexpected error	galat tak terduga
+{tool} couldn't convert it	{tool} tidak bisa mengonversinya
+already as small as it gets	sudah sekecil mungkin
+the file has no audio track	berkas tidak punya trek audio
+Back	Kembali
+Reset to defaults	Kembalikan ke bawaan
+Remember these settings	Ingat pengaturan ini
+Advanced	Lanjutan
+No settings for this one.	Tidak ada pengaturan untuk ini.
+Estimated size: {size}	Perkiraan ukuran: {size}
+Size can't be estimated for this conversion	Ukuran konversi ini tidak bisa diperkirakan
+Quality	Kualitas
+Lower quality makes smaller files	Kualitas lebih rendah, berkas lebih kecil
+Low	Rendah
+Medium	Sedang
+High (recommended)	Tinggi (disarankan)
+Maximum	Maksimal
+Size	Ukuran
+Longest side. Never enlarges.	Sisi terpanjang. Tidak pernah memperbesar.
+Original	Asli
+Very large · 3840 px	Sangat besar · 3840 px
+Large · 1920 px	Besar · 1920 px
+Medium · 1280 px	Sedang · 1280 px
+Small · 800 px	Kecil · 800 px
+Remove camera and location info	Hapus info kamera dan lokasi
+Date, place and camera model saved inside the photo	Tanggal, tempat, dan model kamera yang tersimpan di foto
+Channels	Kanal
+Mono halves the size; fine for voice	Mono memperkecil ukuran setengahnya; cocok untuk suara
+Mono	Mono
+Stereo	Stereo
+Bitrate	Bitrate
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Data per detik: lebih tinggi berarti suara lebih baik dan berkas lebih besar. Menggantikan Kualitas.
+Automatic	Otomatis
+Sample rate	Laju sampel
+How often the sound is measured each second. Change it only if a device asks.	Seberapa sering suara diukur tiap detik. Ubah hanya jika perangkat memintanya.
+44.1 kHz · CD	44,1 kHz · CD
+48 kHz · video	48 kHz · video
+Remove song info	Hapus info lagu
+Title, artist, album and similar tags	Judul, artis, album, dan tag serupa
+Resolution	Resolusi
+Smaller resolution, much smaller file	Resolusi lebih kecil, berkas jauh lebih kecil
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Kecil · 480p
+Keep the sound	Pertahankan suara
+Frames per second	Bingkai per detik
+How smooth the motion is. 30 is fine for most videos.	Seberapa halus gerakannya. 30 cukup untuk kebanyakan video.
+Remove video info	Hapus info video
+Date, place and device saved inside the video	Tanggal, tempat, dan perangkat yang tersimpan di video
+Width	Lebar
+Small · 320 px	Kecil · 320 px
+Medium · 480 px	Sedang · 480 px
+Large · 720 px	Besar · 720 px
+Pages	Halaman
+For example 1-3, 7. Empty means all.	Misalnya 1-3, 7. Kosong berarti semua.
+all	semua
+Sharpness	Ketajaman
+Dots per inch: higher is sharper and bigger	Titik per inci: lebih tinggi lebih tajam dan lebih besar
+Screen · 72 dpi	Layar · 72 dpi
+Normal · 150 dpi	Normal · 150 dpi
+Print · 300 dpi	Cetak · 300 dpi
+Very sharp · 600 dpi	Sangat tajam · 600 dpi
+Set up Alt+C in your file manager	Siapkan Alt+C di pengelola berkas
+Select files, press Alt+C, pick a format	Pilih berkas, tekan Alt+C, pilih format
+Alt+C is ready in {fm}	Alt+C siap di {fm}
+Right-click → Convert with Joey works in {fm}	Klik kanan → Konversi dengan Joey berfungsi di {fm}
+Log out and back in once to use them	Keluar lalu masuk lagi sekali untuk memakainya
+No supported file manager found	Tidak ditemukan pengelola berkas yang didukung
+Convert with Joey	Konversi dengan Joey
+subtitles	subtitel
+archive	arsip
+other	lainnya
+{n} other items	{n} item lain
+File actions	Tindakan berkas
+Copy the path	Salin jalur
+Copy to…	Salin ke…
+Move to…	Pindahkan ke…
+Open a terminal here	Buka terminal di sini
+Put in a ZIP	Masukkan ke ZIP
+Choose a folder	Pilih folder
+Terminal opened	Terminal dibuka
+Path copied	Jalur disalin
+In the folder you chose	Di folder yang dipilih
+Rotate left	Putar ke kiri
+Rotate right	Putar ke kanan
+Black and white	Hitam putih
+Crop to a shape…	Potong ke suatu bentuk…
+Trim…	Pangkas…
+Split into pages	Pisahkan per halaman
+Keep only some pages…	Simpan beberapa halaman saja…
+Protect with a password…	Lindungi dengan kata sandi…
+Remove the password…	Hapus kata sandi…
+Extract here	Ekstrak di sini
+Join into one video	Gabungkan menjadi satu video
+From	Dari
+To	Sampai
+For example 0:30 and 1:45. Only that part is kept.	Misalnya 0:30 dan 1:45. Hanya bagian itu yang disimpan.
+For example 1-3, 7. Only these pages are kept.	Misalnya 1-3, 7. Hanya halaman ini yang disimpan.
+Shape	Bentuk
+The middle of the picture is kept	Bagian tengah gambar dipertahankan
+Square · 1:1	Persegi · 1:1
+Portrait · 4:5	Potret · 4:5
+Photo · 3:2	Foto · 3:2
+Classic · 4:3	Klasik · 4:3
+Wide · 16:9	Lebar · 16:9
+Story · 9:16	Story · 9:16
+Password	Kata sandi
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Diperlukan untuk membuka PDF. Simpan baik-baik: tidak bisa dipulihkan.
+The password that opens this PDF now.	Kata sandi yang membuka PDF ini sekarang.
+wrong password	kata sandi salah
+the archive is empty	arsip kosong
+Text (TXT)	Teks (TXT)
+Web page (HTML)	Halaman web (HTML)
+Send to {device}	Kirim ke {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Di mana saja, termasuk desktop: Ctrl+C, lalu {keys}
+Send with LocalSend…	Kirim dengan LocalSend…
+Sent to {device}	Terkirim ke {device}
+{device} didn't answer	{device} tidak menjawab
+Opened in LocalSend: pick the device there	Dibuka di LocalSend: pilih perangkatnya di sana
+no tables found in this PDF	tidak ada tabel di PDF ini
+no pages to convert (check the page numbers)	tidak ada halaman untuk dikonversi (periksa nomor halaman)
+the PDF looks damaged or empty	PDF tampaknya rusak atau kosong
+File not found	Berkas tidak ditemukan
+It was moved or deleted after you selected it. Select it again.	Berkas dipindahkan atau dihapus setelah dipilih. Pilih lagi.
+This is a folder	Ini sebuah folder
+Select the files inside it, or use Put in a ZIP.	Pilih berkas di dalamnya, atau gunakan Masukkan ke ZIP.
+File type not recognised	Jenis berkas tidak dikenali
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey membaca isi berkas, bukan namanya, dan isi ini bukan format yang dikenalnya.
+Damaged or incomplete file	Berkas rusak atau tidak lengkap
+Check that it opens in another app. If you downloaded it, download it again.	Periksa apakah bisa dibuka di aplikasi lain. Jika diunduh, unduh lagi.
+The file is protected by a password	Berkas dilindungi kata sandi
+Remove the password first, then convert it.	Hapus kata sandinya dulu, lalu konversi.
+Wrong password	Kata sandi salah
+Check the password and try again.	Periksa kata sandi dan coba lagi.
+The file has no sound	Berkas tidak punya suara
+This video has no audio track to extract.	Video ini tidak punya trek audio untuk diambil.
+No tables found in the PDF	Tidak ada tabel di PDF
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey hanya bisa membaca tabel dari PDF buatan komputer; halaman hasil pindai adalah gambar.
+The archive is empty	Arsip kosong
+There is nothing inside to extract.	Tidak ada isi yang bisa diekstrak.
+Those pages don't exist	Halaman itu tidak ada
+Check the page numbers: the document has fewer pages.	Periksa nomor halaman: dokumennya punya lebih sedikit halaman.
+Already as small as it gets	Sudah sekecil mungkin
+Compressing it more wouldn't make it smaller.	Dikompres lagi tidak akan membuatnya lebih kecil.
+Not possible on this computer	Tidak bisa di komputer ini
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Program yang dibutuhkan Joey belum terpasang. README menjelaskan apa yang perlu dipasang untuk tiap jenis berkas.
+A program Joey needs is missing	Program yang dibutuhkan Joey tidak ada
+Install it (the README lists them), then try again.	Pasang program itu (ada di README), lalu coba lagi.
+The installed program can't handle this format	Program yang terpasang tidak mendukung format ini
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Versi Anda tidak punya format ini. Versi yang lebih lengkap menambahkannya, mis. FFmpeg dari RPM Fusion di Fedora.
+The disk is full	Disk penuh
+Free some space, or save in another place.	Kosongkan ruang, atau simpan di tempat lain.
+Joey isn't allowed to write here	Joey tidak diizinkan menulis di sini
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Salin berkas ke salah satu folder Anda (mis. Dokumen) dan konversi di sana.
+Not enough memory	Memori tidak cukup
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Berkas terlalu besar untuk memori yang tersisa. Tutup aplikasi lain, atau konversi lebih sedikit berkas sekaligus.
+Blocked by a safety limit	Diblokir oleh batas keamanan
+The image is larger than the limit set by ImageMagick's security policy.	Gambar melebihi batas yang diatur kebijakan keamanan ImageMagick.
+Unexpected error	Galat tak terduga
+This is a bug in Joey. Please report it.	Ini kutu di Joey. Mohon laporkan.
+The conversion program failed	Program konversi gagal
+Please report it: the details tell us why.	Mohon laporkan: detailnya memberi tahu kami penyebabnya.
+Close (Esc)	Tutup (Esc)
+{keys} is ready in {fm}	{keys} siap di {fm}
+Change the shortcuts	Ubah pintasan
+Set up the shortcuts	Siapkan pintasan
+Welcome to Joey	Selamat datang di Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Dua pintasan membuka Joey. Pakai ini, atau pilih sendiri.
+In the file manager	Di pengelola berkas
+Select files, then press	Pilih berkas, lalu tekan
+Anywhere, desktop included	Di mana saja, termasuk desktop
+Copy files with Ctrl+C, then press	Salin berkas dengan Ctrl+C, lalu tekan
+Change	Ubah
+Press the keys… (Esc cancels)	Tekan tombolnya… (Esc membatalkan)
+Use Alt or Meta (the Windows key) with a letter or a number	Gunakan Alt atau Meta (tombol Windows) dengan huruf atau angka
+That's already the other shortcut	Itu sudah dipakai pintasan yang lain
+Later	Nanti
+Turn on	Aktifkan
+Ready	Siap
+Start	Mulai
+Ideas or problems? Tell us	Ada ide atau masalah? Beri tahu kami
+Report the problem	Laporkan masalah
+You see the report before anything is sent	Anda melihat laporannya sebelum ada yang dikirim
+Feedback	Masukan
+Last time Joey closed because of an error	Terakhir kali Joey tertutup karena galat
+Report	Laporkan
+What were you doing?	Apa yang sedang Anda lakukan?
+(optional) Write it here.	(opsional) Tulis di sini.
+Your idea, request or opinion	Ide, permintaan, atau pendapat Anda
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Tidak ada yang terkirim sendiri. Baca teksnya, ubah atau hapus apa saja: nama berkas dan nama pengguna Anda sudah disembunyikan.
+Title, in a few words	Judul, dalam beberapa kata
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Mengirim akan membuka GitHub di peramban, tempat Anda memeriksanya sekali lagi: perlu akun gratis. Tanpa akun, salin teksnya dan kirim sesuka Anda.
+Copy	Salin
+Open on GitHub	Buka di GitHub
+Send by email	Kirim lewat email
+Copied	Disalin
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Teksnya panjang: GitHub terbuka dengan bagian awalnya. Seluruh teks sudah disalin: ganti dengan Ctrl+V.

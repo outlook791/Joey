@@ -1,0 +1,241 @@
+# 日本語. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	ここにファイルをドロップ
+Choose files…	ファイルを選択…
+Choose files to convert	変換するファイルを選択
+Esc to close	Esc で閉じる
+1 file	1 個のファイル
+{n} files	{n} 個のファイル
+{n} {fmt} files	{n} 個の {fmt} ファイル
+{n} more…	ほか {n} 個…
+Quick tools	クイックツール
+Convert	変換
+Adjust	調整
+Enter	Enter
+PDF · one image per page	PDF · 1 ページにつき 1 枚の画像
+image	画像
+drawing	図形
+audio	音声
+video	動画
+PDF	PDF
+document	文書
+spreadsheet	表計算
+presentation	プレゼンテーション
+folders aren't supported yet	フォルダーにはまだ対応していません
+not found	見つかりません
+file type not recognised	ファイルの種類を認識できません
+nothing to convert {fmt} to here	ここでは {fmt} の変換先がありません
+Compress	圧縮
+Remove metadata	メタデータを削除
+Merge into one PDF	1 つの PDF に結合
+Join into one track	1 つのトラックに結合
+Even out the volume	音量をそろえる
+Remove the sound	音声を削除
+Converting…	変換中…
+Converting {name}…	{name} を変換中…
+Converting {i} of {n}…	{n} 個中 {i} 個目を変換中…
+Nothing converted	何も変換されませんでした
+1 file ready	1 個のファイルが完成
+{n} files ready	{n} 個のファイルが完成
+Next to the originals	元のファイルの隣
+Show in folder	フォルダーで表示
+Close	閉じる
+Back to the menu	メニューに戻る
+Other files	別のファイル
+unexpected error	予期しないエラー
+{tool} couldn't convert it	{tool} で変換できませんでした
+already as small as it gets	これ以上小さくできません
+the file has no audio track	ファイルに音声トラックがありません
+Back	戻る
+Reset to defaults	初期設定に戻す
+Remember these settings	この設定を記憶
+Advanced	詳細設定
+No settings for this one.	この項目に設定はありません。
+Estimated size: {size}	推定サイズ: {size}
+Size can't be estimated for this conversion	この変換のサイズは推定できません
+Quality	品質
+Lower quality makes smaller files	品質を下げるとファイルが小さくなります
+Low	低
+Medium	中
+High (recommended)	高（おすすめ）
+Maximum	最高
+Size	サイズ
+Longest side. Never enlarges.	長辺の長さ。拡大はしません。
+Original	元のサイズ
+Very large · 3840 px	特大 · 3840 px
+Large · 1920 px	大 · 1920 px
+Medium · 1280 px	中 · 1280 px
+Small · 800 px	小 · 800 px
+Remove camera and location info	カメラと位置の情報を削除
+Date, place and camera model saved inside the photo	写真に保存された日付、場所、カメラの機種
+Channels	チャンネル
+Mono halves the size; fine for voice	モノラルでサイズが半分に。音声向き
+Mono	モノラル
+Stereo	ステレオ
+Bitrate	ビットレート
+Data per second: higher means better sound and a bigger file. Replaces Quality.	1 秒あたりのデータ量: 高いほど音質が良く、ファイルが大きくなります。「品質」の代わりに使われます。
+Automatic	自動
+Sample rate	サンプリングレート
+How often the sound is measured each second. Change it only if a device asks.	1 秒間に音を測る回数。機器に求められたときだけ変更してください。
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · 動画
+Remove song info	曲の情報を削除
+Title, artist, album and similar tags	タイトル、アーティスト、アルバムなどのタグ
+Resolution	解像度
+Smaller resolution, much smaller file	解像度を下げるとファイルがかなり小さくなります
+4K · 2160p	4K · 2160p
+Full HD · 1080p	フル HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	小 · 480p
+Keep the sound	音声を残す
+Frames per second	フレームレート
+How smooth the motion is. 30 is fine for most videos.	動きのなめらかさ。ほとんどの動画は 30 で十分です。
+Remove video info	動画の情報を削除
+Date, place and device saved inside the video	動画に保存された日付、場所、機器
+Width	幅
+Small · 320 px	小 · 320 px
+Medium · 480 px	中 · 480 px
+Large · 720 px	大 · 720 px
+Pages	ページ
+For example 1-3, 7. Empty means all.	例: 1-3, 7。空欄ならすべて。
+all	すべて
+Sharpness	鮮明さ
+Dots per inch: higher is sharper and bigger	1 インチあたりのドット数: 高いほど鮮明で大きくなります
+Screen · 72 dpi	画面 · 72 dpi
+Normal · 150 dpi	標準 · 150 dpi
+Print · 300 dpi	印刷 · 300 dpi
+Very sharp · 600 dpi	高精細 · 600 dpi
+Set up Alt+C in your file manager	ファイルマネージャーで Alt+C を設定
+Select files, press Alt+C, pick a format	ファイルを選んで Alt+C を押し、形式を選択
+Alt+C is ready in {fm}	{fm} で Alt+C が使えます
+Right-click → Convert with Joey works in {fm}	{fm} で右クリック → Joey で変換 が使えます
+Log out and back in once to use them	使うには一度ログアウトして再ログインしてください
+No supported file manager found	対応するファイルマネージャーが見つかりません
+Convert with Joey	Joey で変換
+subtitles	字幕
+archive	アーカイブ
+other	その他
+{n} other items	ほか {n} 項目
+File actions	ファイル操作
+Copy the path	パスをコピー
+Copy to…	コピー先…
+Move to…	移動先…
+Open a terminal here	ここで端末を開く
+Put in a ZIP	ZIP にまとめる
+Choose a folder	フォルダーを選択
+Terminal opened	端末を開きました
+Path copied	パスをコピーしました
+In the folder you chose	選んだフォルダー内
+Rotate left	左に回転
+Rotate right	右に回転
+Black and white	白黒
+Crop to a shape…	形に切り抜く…
+Trim…	トリミング…
+Split into pages	ページごとに分割
+Keep only some pages…	一部のページだけ残す…
+Protect with a password…	パスワードで保護…
+Remove the password…	パスワードを解除…
+Extract here	ここに展開
+Join into one video	1 つの動画に結合
+From	開始
+To	終了
+For example 0:30 and 1:45. Only that part is kept.	例: 0:30 と 1:45。その部分だけを残します。
+For example 1-3, 7. Only these pages are kept.	例: 1-3, 7。これらのページだけを残します。
+Shape	形
+The middle of the picture is kept	画像の中央を残します
+Square · 1:1	正方形 · 1:1
+Portrait · 4:5	縦長 · 4:5
+Photo · 3:2	写真 · 3:2
+Classic · 4:3	クラシック · 4:3
+Wide · 16:9	ワイド · 16:9
+Story · 9:16	ストーリー · 9:16
+Password	パスワード
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF を開くのに必要です。大切に保管してください: 復元はできません。
+The password that opens this PDF now.	この PDF を今開くためのパスワード。
+wrong password	パスワードが違います
+the archive is empty	アーカイブが空です
+Text (TXT)	テキスト (TXT)
+Web page (HTML)	ウェブページ (HTML)
+Send to {device}	{device} に送信
+Anywhere, desktop included: Ctrl+C, then {keys}	デスクトップを含むどこでも: Ctrl+C のあと {keys}
+Send with LocalSend…	LocalSend で送信…
+Sent to {device}	{device} に送信しました
+{device} didn't answer	{device} から応答がありません
+Opened in LocalSend: pick the device there	LocalSend で開きました: そこで機器を選んでください
+no tables found in this PDF	この PDF に表が見つかりません
+no pages to convert (check the page numbers)	変換するページがありません（ページ番号を確認してください）
+the PDF looks damaged or empty	PDF が壊れているか空のようです
+File not found	ファイルが見つかりません
+It was moved or deleted after you selected it. Select it again.	選択後に移動または削除されました。もう一度選んでください。
+This is a folder	これはフォルダーです
+Select the files inside it, or use Put in a ZIP.	中のファイルを選ぶか、「ZIP にまとめる」を使ってください。
+File type not recognised	ファイルの種類を認識できません
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey はファイル名ではなく中身を読みますが、この中身は知っている形式ではありません。
+Damaged or incomplete file	ファイルが壊れているか不完全です
+Check that it opens in another app. If you downloaded it, download it again.	別のアプリで開けるか確認してください。ダウンロードしたものなら、もう一度ダウンロードしてください。
+The file is protected by a password	ファイルはパスワードで保護されています
+Remove the password first, then convert it.	先にパスワードを解除してから変換してください。
+Wrong password	パスワードが違います
+Check the password and try again.	パスワードを確認してもう一度お試しください。
+The file has no sound	ファイルに音声がありません
+This video has no audio track to extract.	この動画には取り出せる音声トラックがありません。
+No tables found in the PDF	PDF に表が見つかりません
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey が読めるのはパソコンで作られた PDF の表だけです。スキャンしたページは画像です。
+The archive is empty	アーカイブが空です
+There is nothing inside to extract.	中に展開するものがありません。
+Those pages don't exist	そのページは存在しません
+Check the page numbers: the document has fewer pages.	ページ番号を確認してください: 文書のページ数はもっと少ないです。
+Already as small as it gets	これ以上小さくできません
+Compressing it more wouldn't make it smaller.	さらに圧縮しても小さくなりません。
+Not possible on this computer	このパソコンではできません
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey に必要なプログラムがインストールされていません。README にファイルの種類ごとに必要なものが書いてあります。
+A program Joey needs is missing	Joey に必要なプログラムがありません
+Install it (the README lists them), then try again.	インストールして（README に一覧があります）、もう一度お試しください。
+The installed program can't handle this format	インストール済みのプログラムはこの形式に対応していません
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	お使いの版にはこの形式がありません。より完全な版で追加されます。例: Fedora なら RPM Fusion の FFmpeg。
+The disk is full	ディスクがいっぱいです
+Free some space, or save in another place.	空き容量を作るか、別の場所に保存してください。
+Joey isn't allowed to write here	Joey はここに書き込めません
+Copy the files to one of your folders (e.g. Documents) and convert them there.	ファイルを自分のフォルダー（例: ドキュメント）にコピーして、そこで変換してください。
+Not enough memory	メモリが足りません
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	空きメモリに対してファイルが大きすぎます。ほかのアプリを閉じるか、一度に変換するファイルを減らしてください。
+Blocked by a safety limit	安全上の制限でブロックされました
+The image is larger than the limit set by ImageMagick's security policy.	画像が ImageMagick のセキュリティポリシーの上限を超えています。
+Unexpected error	予期しないエラー
+This is a bug in Joey. Please report it.	Joey の不具合です。報告をお願いします。
+The conversion program failed	変換プログラムが失敗しました
+Please report it: the details tell us why.	報告をお願いします: 詳細から原因がわかります。
+Close (Esc)	閉じる (Esc)
+{keys} is ready in {fm}	{fm} で {keys} が使えます
+Change the shortcuts	ショートカットを変更
+Set up the shortcuts	ショートカットを設定
+Welcome to Joey	Joey へようこそ
+Two shortcuts open Joey. Keep these, or choose your own.	2 つのショートカットで Joey が開きます。このまま使うか、自分で選んでください。
+In the file manager	ファイルマネージャーで
+Select files, then press	ファイルを選んでから押す
+Anywhere, desktop included	デスクトップを含むどこでも
+Copy files with Ctrl+C, then press	Ctrl+C でファイルをコピーしてから押す
+Change	変更
+Press the keys… (Esc cancels)	キーを押してください…（Esc で取り消し）
+Use Alt or Meta (the Windows key) with a letter or a number	Alt または Meta（Windows キー）と文字か数字を組み合わせてください
+That's already the other shortcut	それはもう一方のショートカットです
+Later	あとで
+Turn on	オンにする
+Ready	完了
+Start	はじめる
+Ideas or problems? Tell us	アイデアや問題がありますか？お知らせください
+Report the problem	問題を報告
+You see the report before anything is sent	送信前にレポートを確認できます
+Feedback	フィードバック
+Last time Joey closed because of an error	前回 Joey はエラーで終了しました
+Report	報告
+What were you doing?	何をしていましたか？
+(optional) Write it here.	（任意）ここに書いてください。
+Your idea, request or opinion	アイデア、要望、ご意見
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	自動では何も送信されません。文章を読んで、自由に変更・削除してください。ファイル名とユーザー名はすでに隠してあります。
+Title, in a few words	タイトル（短く）
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	送信するとブラウザーで GitHub が開き、もう一度確認できます。無料アカウントが必要です。アカウントがない場合は、文章をコピーして好きな方法で送ってください。
+Copy	コピー
+Open on GitHub	GitHub で開く
+Send by email	メールで送る
+Copied	コピーしました
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	文章が長いため、GitHub は冒頭だけで開きます。全文はコピー済みです: Ctrl+V で置き換えてください。

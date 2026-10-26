@@ -1,0 +1,241 @@
+# বাংলা. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	ফাইলগুলো এখানে ছেড়ে দিন
+Choose files…	ফাইল বেছে নিন…
+Choose files to convert	রূপান্তর করার ফাইল বেছে নিন
+Esc to close	বন্ধ করতে Esc
+1 file	১টি ফাইল
+{n} files	{n}টি ফাইল
+{n} {fmt} files	{n}টি {fmt} ফাইল
+{n} more…	আরও {n}টি…
+Quick tools	দ্রুত টুল
+Convert	রূপান্তর
+Adjust	সমন্বয়
+Enter	Enter
+PDF · one image per page	PDF · প্রতি পাতায় একটি ছবি
+image	ছবি
+drawing	অঙ্কন
+audio	অডিও
+video	ভিডিও
+PDF	PDF
+document	নথি
+spreadsheet	স্প্রেডশিট
+presentation	প্রেজেন্টেশন
+folders aren't supported yet	ফোল্ডার এখনও সমর্থিত নয়
+not found	পাওয়া যায়নি
+file type not recognised	ফাইলের ধরন চেনা যায়নি
+nothing to convert {fmt} to here	এখানে {fmt} কে অন্য কিছুতে রূপান্তর করা যায় না
+Compress	সংকোচন
+Remove metadata	মেটাডেটা মুছুন
+Merge into one PDF	একটি PDF-এ যুক্ত করুন
+Join into one track	একটি ট্র্যাকে যুক্ত করুন
+Even out the volume	ভলিউম সমান করুন
+Remove the sound	শব্দ মুছুন
+Converting…	রূপান্তর হচ্ছে…
+Converting {name}…	{name} রূপান্তর হচ্ছে…
+Converting {i} of {n}…	{n}টির মধ্যে {i} নম্বর রূপান্তর হচ্ছে…
+Nothing converted	কিছুই রূপান্তর হয়নি
+1 file ready	১টি ফাইল তৈরি
+{n} files ready	{n}টি ফাইল তৈরি
+Next to the originals	মূল ফাইলের পাশে
+Show in folder	ফোল্ডারে দেখান
+Close	বন্ধ করুন
+Back to the menu	মেনুতে ফিরে যান
+Other files	অন্য ফাইল
+unexpected error	অপ্রত্যাশিত ত্রুটি
+{tool} couldn't convert it	{tool} এটি রূপান্তর করতে পারেনি
+already as small as it gets	ইতিমধ্যে যতটা সম্ভব ছোট
+the file has no audio track	ফাইলে কোনো অডিও ট্র্যাক নেই
+Back	পিছনে
+Reset to defaults	ডিফল্টে ফেরান
+Remember these settings	এই সেটিংস মনে রাখুন
+Advanced	উন্নত
+No settings for this one.	এর জন্য কোনো সেটিং নেই।
+Estimated size: {size}	আনুমানিক আকার: {size}
+Size can't be estimated for this conversion	এই রূপান্তরের আকার আনুমান করা যায় না
+Quality	মান
+Lower quality makes smaller files	কম মান, ছোট ফাইল
+Low	কম
+Medium	মাঝারি
+High (recommended)	উচ্চ (প্রস্তাবিত)
+Maximum	সর্বোচ্চ
+Size	আকার
+Longest side. Never enlarges.	সবচেয়ে লম্বা দিক। কখনও বড় করে না।
+Original	মূল
+Very large · 3840 px	খুব বড় · 3840 px
+Large · 1920 px	বড় · 1920 px
+Medium · 1280 px	মাঝারি · 1280 px
+Small · 800 px	ছোট · 800 px
+Remove camera and location info	ক্যামেরা ও অবস্থানের তথ্য মুছুন
+Date, place and camera model saved inside the photo	ছবিতে সংরক্ষিত তারিখ, স্থান ও ক্যামেরার মডেল
+Channels	চ্যানেল
+Mono halves the size; fine for voice	মোনো আকার অর্ধেক করে; কণ্ঠের জন্য ভালো
+Mono	মোনো
+Stereo	স্টেরিও
+Bitrate	বিটরেট
+Data per second: higher means better sound and a bigger file. Replaces Quality.	প্রতি সেকেন্ডে ডেটা: বেশি মানে ভালো শব্দ ও বড় ফাইল। মান-এর জায়গা নেয়।
+Automatic	স্বয়ংক্রিয়
+Sample rate	স্যাম্পল রেট
+How often the sound is measured each second. Change it only if a device asks.	প্রতি সেকেন্ডে কতবার শব্দ মাপা হয়। কোনো ডিভাইস চাইলে তবেই বদলান।
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · ভিডিও
+Remove song info	গানের তথ্য মুছুন
+Title, artist, album and similar tags	শিরোনাম, শিল্পী, অ্যালবাম ও এমন ট্যাগ
+Resolution	রেজোলিউশন
+Smaller resolution, much smaller file	কম রেজোলিউশন, অনেক ছোট ফাইল
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	ছোট · 480p
+Keep the sound	শব্দ রাখুন
+Frames per second	প্রতি সেকেন্ডে ফ্রেম
+How smooth the motion is. 30 is fine for most videos.	নড়াচড়া কতটা মসৃণ। বেশিরভাগ ভিডিওর জন্য 30 যথেষ্ট।
+Remove video info	ভিডিওর তথ্য মুছুন
+Date, place and device saved inside the video	ভিডিওতে সংরক্ষিত তারিখ, স্থান ও ডিভাইস
+Width	প্রস্থ
+Small · 320 px	ছোট · 320 px
+Medium · 480 px	মাঝারি · 480 px
+Large · 720 px	বড় · 720 px
+Pages	পাতা
+For example 1-3, 7. Empty means all.	যেমন 1-3, 7। খালি মানে সব।
+all	সব
+Sharpness	স্পষ্টতা
+Dots per inch: higher is sharper and bigger	প্রতি ইঞ্চিতে বিন্দু: বেশি মানে আরও স্পষ্ট ও বড়
+Screen · 72 dpi	স্ক্রিন · 72 dpi
+Normal · 150 dpi	সাধারণ · 150 dpi
+Print · 300 dpi	প্রিন্ট · 300 dpi
+Very sharp · 600 dpi	খুব স্পষ্ট · 600 dpi
+Set up Alt+C in your file manager	ফাইল ম্যানেজারে Alt+C সেট করুন
+Select files, press Alt+C, pick a format	ফাইল বাছুন, Alt+C চাপুন, একটি ফরম্যাট বাছুন
+Alt+C is ready in {fm}	{fm}-এ Alt+C প্রস্তুত
+Right-click → Convert with Joey works in {fm}	{fm}-এ রাইট-ক্লিক → Joey দিয়ে রূপান্তর কাজ করে
+Log out and back in once to use them	এগুলো ব্যবহার করতে একবার লগ আউট করে আবার লগ ইন করুন
+No supported file manager found	সমর্থিত কোনো ফাইল ম্যানেজার পাওয়া যায়নি
+Convert with Joey	Joey দিয়ে রূপান্তর
+subtitles	সাবটাইটেল
+archive	আর্কাইভ
+other	অন্যান্য
+{n} other items	আরও {n}টি আইটেম
+File actions	ফাইলের কাজ
+Copy the path	পাথ কপি করুন
+Copy to…	এখানে কপি করুন…
+Move to…	এখানে সরান…
+Open a terminal here	এখানে টার্মিনাল খুলুন
+Put in a ZIP	ZIP-এ রাখুন
+Choose a folder	ফোল্ডার বেছে নিন
+Terminal opened	টার্মিনাল খোলা হয়েছে
+Path copied	পাথ কপি হয়েছে
+In the folder you chose	বেছে নেওয়া ফোল্ডারে
+Rotate left	বাঁয়ে ঘোরান
+Rotate right	ডানে ঘোরান
+Black and white	সাদা-কালো
+Crop to a shape…	একটি আকারে কাটুন…
+Trim…	অংশ কাটুন…
+Split into pages	পাতায় ভাগ করুন
+Keep only some pages…	শুধু কিছু পাতা রাখুন…
+Protect with a password…	পাসওয়ার্ড দিয়ে সুরক্ষিত করুন…
+Remove the password…	পাসওয়ার্ড সরান…
+Extract here	এখানে বের করুন
+Join into one video	একটি ভিডিওতে যুক্ত করুন
+From	থেকে
+To	পর্যন্ত
+For example 0:30 and 1:45. Only that part is kept.	যেমন 0:30 ও 1:45। শুধু সেই অংশ থাকবে।
+For example 1-3, 7. Only these pages are kept.	যেমন 1-3, 7। শুধু এই পাতাগুলো থাকবে।
+Shape	আকৃতি
+The middle of the picture is kept	ছবির মাঝখানটা রাখা হয়
+Square · 1:1	বর্গ · 1:1
+Portrait · 4:5	লম্বালম্বি · 4:5
+Photo · 3:2	ছবি · 3:2
+Classic · 4:3	ক্লাসিক · 4:3
+Wide · 16:9	চওড়া · 16:9
+Story · 9:16	স্টোরি · 9:16
+Password	পাসওয়ার্ড
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF খুলতে লাগবে। যত্ন করে রাখুন: এটি ফেরত পাওয়া যায় না।
+The password that opens this PDF now.	যে পাসওয়ার্ডে এই PDF এখন খোলে।
+wrong password	ভুল পাসওয়ার্ড
+the archive is empty	আর্কাইভ খালি
+Text (TXT)	টেক্সট (TXT)
+Web page (HTML)	ওয়েব পেজ (HTML)
+Send to {device}	{device}-এ পাঠান
+Anywhere, desktop included: Ctrl+C, then {keys}	যেকোনো জায়গায়, ডেস্কটপেও: Ctrl+C, তারপর {keys}
+Send with LocalSend…	LocalSend দিয়ে পাঠান…
+Sent to {device}	{device}-এ পাঠানো হয়েছে
+{device} didn't answer	{device} সাড়া দেয়নি
+Opened in LocalSend: pick the device there	LocalSend-এ খোলা হয়েছে: সেখানে ডিভাইস বেছে নিন
+no tables found in this PDF	এই PDF-এ কোনো টেবিল পাওয়া যায়নি
+no pages to convert (check the page numbers)	রূপান্তরের জন্য কোনো পাতা নেই (পাতার নম্বর দেখুন)
+the PDF looks damaged or empty	PDF ক্ষতিগ্রস্ত বা খালি মনে হচ্ছে
+File not found	ফাইল পাওয়া যায়নি
+It was moved or deleted after you selected it. Select it again.	বাছাইয়ের পরে এটি সরানো বা মুছে ফেলা হয়েছে। আবার বাছুন।
+This is a folder	এটি একটি ফোল্ডার
+Select the files inside it, or use Put in a ZIP.	ভিতরের ফাইলগুলো বাছুন, অথবা ZIP-এ রাখুন ব্যবহার করুন।
+File type not recognised	ফাইলের ধরন চেনা যায়নি
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey ফাইলের নাম নয়, ভিতরের বিষয়বস্তু পড়ে, আর এই বিষয়বস্তু তার জানা কোনো ফরম্যাট নয়।
+Damaged or incomplete file	ফাইল ক্ষতিগ্রস্ত বা অসম্পূর্ণ
+Check that it opens in another app. If you downloaded it, download it again.	দেখুন অন্য অ্যাপে খোলে কিনা। ডাউনলোড করে থাকলে আবার ডাউনলোড করুন।
+The file is protected by a password	ফাইলটি পাসওয়ার্ড দিয়ে সুরক্ষিত
+Remove the password first, then convert it.	আগে পাসওয়ার্ড সরান, তারপর রূপান্তর করুন।
+Wrong password	ভুল পাসওয়ার্ড
+Check the password and try again.	পাসওয়ার্ড দেখে আবার চেষ্টা করুন।
+The file has no sound	ফাইলে কোনো শব্দ নেই
+This video has no audio track to extract.	এই ভিডিওতে বের করার মতো কোনো অডিও ট্র্যাক নেই।
+No tables found in the PDF	PDF-এ কোনো টেবিল পাওয়া যায়নি
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey শুধু কম্পিউটারে তৈরি PDF থেকে টেবিল পড়তে পারে; স্ক্যান করা পাতা ছবি।
+The archive is empty	আর্কাইভ খালি
+There is nothing inside to extract.	ভিতরে বের করার মতো কিছু নেই।
+Those pages don't exist	সেই পাতাগুলো নেই
+Check the page numbers: the document has fewer pages.	পাতার নম্বর দেখুন: নথিতে কম পাতা আছে।
+Already as small as it gets	ইতিমধ্যে যতটা সম্ভব ছোট
+Compressing it more wouldn't make it smaller.	আরও সংকোচন করলেও ছোট হবে না।
+Not possible on this computer	এই কম্পিউটারে সম্ভব নয়
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey-র প্রয়োজনীয় একটি প্রোগ্রাম ইনস্টল করা নেই। README-তে প্রতিটি ধরনের ফাইলের জন্য কী ইনস্টল করতে হবে লেখা আছে।
+A program Joey needs is missing	Joey-র প্রয়োজনীয় একটি প্রোগ্রাম নেই
+Install it (the README lists them), then try again.	এটি ইনস্টল করুন (README-তে তালিকা আছে), তারপর আবার চেষ্টা করুন।
+The installed program can't handle this format	ইনস্টল করা প্রোগ্রাম এই ফরম্যাট সামলাতে পারে না
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	আপনার সংস্করণে এই ফরম্যাট নেই। আরও সম্পূর্ণ সংস্করণে এটি থাকে, যেমন Fedora-তে RPM Fusion-এর FFmpeg।
+The disk is full	ডিস্ক ভরে গেছে
+Free some space, or save in another place.	জায়গা খালি করুন, বা অন্য কোথাও সংরক্ষণ করুন।
+Joey isn't allowed to write here	Joey-র এখানে লেখার অনুমতি নেই
+Copy the files to one of your folders (e.g. Documents) and convert them there.	ফাইলগুলো আপনার কোনো ফোল্ডারে (যেমন নথি) কপি করে সেখানে রূপান্তর করুন।
+Not enough memory	যথেষ্ট মেমরি নেই
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	খালি মেমরির তুলনায় ফাইলটি খুব বড়। অন্য অ্যাপ বন্ধ করুন, বা একবারে কম ফাইল রূপান্তর করুন।
+Blocked by a safety limit	নিরাপত্তা সীমার কারণে আটকানো হয়েছে
+The image is larger than the limit set by ImageMagick's security policy.	ছবিটি ImageMagick-এর নিরাপত্তা নীতির সীমা ছাড়িয়ে গেছে।
+Unexpected error	অপ্রত্যাশিত ত্রুটি
+This is a bug in Joey. Please report it.	এটি Joey-র একটি বাগ। দয়া করে জানান।
+The conversion program failed	রূপান্তরের প্রোগ্রাম ব্যর্থ হয়েছে
+Please report it: the details tell us why.	দয়া করে জানান: বিস্তারিত থেকে আমরা কারণ বুঝব।
+Close (Esc)	বন্ধ করুন (Esc)
+{keys} is ready in {fm}	{fm}-এ {keys} প্রস্তুত
+Change the shortcuts	শর্টকাট বদলান
+Set up the shortcuts	শর্টকাট সেট করুন
+Welcome to Joey	Joey-তে স্বাগতম
+Two shortcuts open Joey. Keep these, or choose your own.	দুটি শর্টকাট Joey খোলে। এগুলো রাখুন, বা নিজেরগুলো বাছুন।
+In the file manager	ফাইল ম্যানেজারে
+Select files, then press	ফাইল বাছুন, তারপর চাপুন
+Anywhere, desktop included	যেকোনো জায়গায়, ডেস্কটপেও
+Copy files with Ctrl+C, then press	Ctrl+C দিয়ে ফাইল কপি করুন, তারপর চাপুন
+Change	বদলান
+Press the keys… (Esc cancels)	কী চাপুন… (Esc বাতিল করে)
+Use Alt or Meta (the Windows key) with a letter or a number	Alt বা Meta (Windows কী)-এর সাথে একটি অক্ষর বা সংখ্যা ব্যবহার করুন
+That's already the other shortcut	এটি ইতিমধ্যে অন্য শর্টকাট
+Later	পরে
+Turn on	চালু করুন
+Ready	সম্পন্ন
+Start	শুরু করুন
+Ideas or problems? Tell us	কোনো ভাবনা বা সমস্যা? আমাদের জানান
+Report the problem	সমস্যা জানান
+You see the report before anything is sent	কিছু পাঠানোর আগে আপনি রিপোর্টটি দেখবেন
+Feedback	মতামত
+Last time Joey closed because of an error	গতবার একটি ত্রুটির কারণে Joey বন্ধ হয়ে গিয়েছিল
+Report	জানান
+What were you doing?	আপনি কী করছিলেন?
+(optional) Write it here.	(ঐচ্ছিক) এখানে লিখুন।
+Your idea, request or opinion	আপনার ভাবনা, অনুরোধ বা মতামত
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	নিজে থেকে কিছু পাঠানো হয় না। লেখাটি পড়ুন, ইচ্ছেমতো বদলান বা মুছুন: আপনার ফাইলের নাম ও ব্যবহারকারীর নাম আগেই লুকানো হয়েছে।
+Title, in a few words	শিরোনাম, কয়েকটি শব্দে
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	পাঠালে ব্রাউজারে GitHub খুলবে, সেখানে আরেকবার দেখে নেবেন: একটি বিনামূল্যের অ্যাকাউন্ট লাগবে। অ্যাকাউন্ট না থাকলে লেখাটি কপি করে যেভাবে খুশি পাঠান।
+Copy	কপি করুন
+Open on GitHub	GitHub-এ খুলুন
+Send by email	ইমেলে পাঠান
+Copied	কপি হয়েছে
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	লেখাটি দীর্ঘ: GitHub শুরুর অংশ নিয়ে খোলে। পুরো লেখা কপি করা আছে: Ctrl+V দিয়ে বদলে দিন।

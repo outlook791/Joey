@@ -209,7 +209,13 @@ fn main() -> glib::ExitCode {
         .application_id(APP_ID)
         .flags(gio::ApplicationFlags::HANDLES_OPEN | gio::ApplicationFlags::NON_UNIQUE)
         .build();
-    app.connect_startup(|_| load_css());
+    app.connect_startup(|_| {
+        // Arabic and Urdu read right to left: mirror the whole window.
+        if i18n::right_to_left() {
+            gtk::Widget::set_default_direction(gtk::TextDirection::Rtl);
+        }
+        load_css();
+    });
     app.connect_activate(move |app| {
         let ui = build(app);
         ui.window.present();

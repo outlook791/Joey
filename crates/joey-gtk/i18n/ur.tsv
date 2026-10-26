@@ -1,0 +1,241 @@
+# اردو. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	فائلیں یہاں چھوڑیں
+Choose files…	فائلیں منتخب کریں…
+Choose files to convert	تبدیل کرنے کے لیے فائلیں منتخب کریں
+Esc to close	بند کرنے کے لیے Esc
+1 file	1 فائل
+{n} files	{n} فائلیں
+{n} {fmt} files	{n} {fmt} فائلیں
+{n} more…	مزید {n}…
+Quick tools	فوری ٹولز
+Convert	تبدیل کریں
+Adjust	ترتیب دیں
+Enter	Enter
+PDF · one image per page	PDF · ہر صفحے کی ایک تصویر
+image	تصویر
+drawing	ڈرائنگ
+audio	آڈیو
+video	ویڈیو
+PDF	PDF
+document	دستاویز
+spreadsheet	اسپریڈشیٹ
+presentation	پریزنٹیشن
+folders aren't supported yet	فولڈرز ابھی سپورٹ نہیں ہیں
+not found	نہیں ملا
+file type not recognised	فائل کی قسم پہچانی نہیں گئی
+nothing to convert {fmt} to here	یہاں {fmt} کو کسی اور شکل میں تبدیل نہیں کیا جا سکتا
+Compress	سکیڑیں
+Remove metadata	میٹا ڈیٹا ہٹائیں
+Merge into one PDF	ایک PDF میں جوڑیں
+Join into one track	ایک ٹریک میں جوڑیں
+Even out the volume	آواز برابر کریں
+Remove the sound	آواز ہٹائیں
+Converting…	تبدیل ہو رہا ہے…
+Converting {name}…	{name} تبدیل ہو رہا ہے…
+Converting {i} of {n}…	{n} میں سے {i} تبدیل ہو رہا ہے…
+Nothing converted	کچھ بھی تبدیل نہیں ہوا
+1 file ready	1 فائل تیار
+{n} files ready	{n} فائلیں تیار
+Next to the originals	اصل فائلوں کے ساتھ
+Show in folder	فولڈر میں دکھائیں
+Close	بند کریں
+Back to the menu	مینو پر واپس
+Other files	دوسری فائلیں
+unexpected error	غیر متوقع خرابی
+{tool} couldn't convert it	{tool} اسے تبدیل نہیں کر سکا
+already as small as it gets	پہلے ہی جتنا ممکن ہو چھوٹا
+the file has no audio track	فائل میں آڈیو ٹریک نہیں ہے
+Back	واپس
+Reset to defaults	ڈیفالٹ پر واپس
+Remember these settings	یہ ترتیبات یاد رکھیں
+Advanced	ایڈوانسڈ
+No settings for this one.	اس کے لیے کوئی ترتیب نہیں ہے۔
+Estimated size: {size}	متوقع سائز: {size}
+Size can't be estimated for this conversion	اس تبدیلی کا سائز اندازہ نہیں لگایا جا سکتا
+Quality	معیار
+Lower quality makes smaller files	کم معیار، چھوٹی فائلیں
+Low	کم
+Medium	درمیانہ
+High (recommended)	زیادہ (تجویز کردہ)
+Maximum	زیادہ سے زیادہ
+Size	سائز
+Longest side. Never enlarges.	سب سے لمبی جانب۔ کبھی بڑا نہیں کرتا۔
+Original	اصل
+Very large · 3840 px	بہت بڑا · 3840 px
+Large · 1920 px	بڑا · 1920 px
+Medium · 1280 px	درمیانہ · 1280 px
+Small · 800 px	چھوٹا · 800 px
+Remove camera and location info	کیمرے اور مقام کی معلومات ہٹائیں
+Date, place and camera model saved inside the photo	تصویر میں محفوظ تاریخ، جگہ اور کیمرے کا ماڈل
+Channels	چینلز
+Mono halves the size; fine for voice	مونو سائز آدھا کر دیتا ہے؛ آواز کے لیے اچھا
+Mono	مونو
+Stereo	اسٹیریو
+Bitrate	بٹ ریٹ
+Data per second: higher means better sound and a bigger file. Replaces Quality.	فی سیکنڈ ڈیٹا: زیادہ یعنی بہتر آواز اور بڑی فائل۔ معیار کی جگہ لیتا ہے۔
+Automatic	خودکار
+Sample rate	سیمپل ریٹ
+How often the sound is measured each second. Change it only if a device asks.	آواز فی سیکنڈ کتنی بار ناپی جاتی ہے۔ صرف تب بدلیں جب کوئی ڈیوائس مانگے۔
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · ویڈیو
+Remove song info	گانے کی معلومات ہٹائیں
+Title, artist, album and similar tags	عنوان، فنکار، البم اور ایسے ٹیگ
+Resolution	ریزولوشن
+Smaller resolution, much smaller file	کم ریزولوشن، بہت چھوٹی فائل
+4K · 2160p	4K · 2160p
+Full HD · 1080p	فل HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	چھوٹا · 480p
+Keep the sound	آواز رکھیں
+Frames per second	فریم فی سیکنڈ
+How smooth the motion is. 30 is fine for most videos.	حرکت کتنی ہموار ہو۔ زیادہ تر ویڈیوز کے لیے 30 کافی ہے۔
+Remove video info	ویڈیو کی معلومات ہٹائیں
+Date, place and device saved inside the video	ویڈیو میں محفوظ تاریخ، جگہ اور ڈیوائس
+Width	چوڑائی
+Small · 320 px	چھوٹا · 320 px
+Medium · 480 px	درمیانہ · 480 px
+Large · 720 px	بڑا · 720 px
+Pages	صفحات
+For example 1-3, 7. Empty means all.	مثلاً 1-3, 7۔ خالی کا مطلب سب۔
+all	سب
+Sharpness	وضاحت
+Dots per inch: higher is sharper and bigger	فی انچ نقطے: زیادہ یعنی زیادہ صاف اور بڑا
+Screen · 72 dpi	اسکرین · 72 dpi
+Normal · 150 dpi	عام · 150 dpi
+Print · 300 dpi	پرنٹ · 300 dpi
+Very sharp · 600 dpi	بہت صاف · 600 dpi
+Set up Alt+C in your file manager	فائل مینیجر میں Alt+C سیٹ کریں
+Select files, press Alt+C, pick a format	فائلیں منتخب کریں، Alt+C دبائیں، فارمیٹ چنیں
+Alt+C is ready in {fm}	{fm} میں Alt+C تیار ہے
+Right-click → Convert with Joey works in {fm}	{fm} میں رائٹ کلک ← Joey سے تبدیل کریں کام کرتا ہے
+Log out and back in once to use them	انہیں استعمال کرنے کے لیے ایک بار لاگ آؤٹ کر کے دوبارہ لاگ اِن کریں
+No supported file manager found	کوئی سپورٹڈ فائل مینیجر نہیں ملا
+Convert with Joey	Joey سے تبدیل کریں
+subtitles	سب ٹائٹلز
+archive	آرکائیو
+other	دیگر
+{n} other items	مزید {n} آئٹمز
+File actions	فائل کے کام
+Copy the path	پاتھ کاپی کریں
+Copy to…	یہاں کاپی کریں…
+Move to…	یہاں منتقل کریں…
+Open a terminal here	یہاں ٹرمینل کھولیں
+Put in a ZIP	ZIP میں ڈالیں
+Choose a folder	فولڈر منتخب کریں
+Terminal opened	ٹرمینل کھل گیا
+Path copied	پاتھ کاپی ہو گیا
+In the folder you chose	منتخب فولڈر میں
+Rotate left	بائیں گھمائیں
+Rotate right	دائیں گھمائیں
+Black and white	سیاہ و سفید
+Crop to a shape…	کسی شکل میں کاٹیں…
+Trim…	حصہ کاٹیں…
+Split into pages	صفحات میں تقسیم کریں
+Keep only some pages…	صرف کچھ صفحات رکھیں…
+Protect with a password…	پاس ورڈ سے محفوظ کریں…
+Remove the password…	پاس ورڈ ہٹائیں…
+Extract here	یہاں نکالیں
+Join into one video	ایک ویڈیو میں جوڑیں
+From	سے
+To	تک
+For example 0:30 and 1:45. Only that part is kept.	مثلاً 0:30 اور 1:45۔ صرف وہی حصہ رہے گا۔
+For example 1-3, 7. Only these pages are kept.	مثلاً 1-3, 7۔ صرف یہ صفحات رہیں گے۔
+Shape	شکل
+The middle of the picture is kept	تصویر کا درمیانی حصہ رکھا جاتا ہے
+Square · 1:1	مربع · 1:1
+Portrait · 4:5	عمودی · 4:5
+Photo · 3:2	تصویر · 3:2
+Classic · 4:3	کلاسک · 4:3
+Wide · 16:9	چوڑا · 16:9
+Story · 9:16	اسٹوری · 9:16
+Password	پاس ورڈ
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF کھولنے کے لیے ضروری۔ اسے سنبھال کر رکھیں: یہ واپس نہیں مل سکتا۔
+The password that opens this PDF now.	وہ پاس ورڈ جس سے یہ PDF ابھی کھلتی ہے۔
+wrong password	غلط پاس ورڈ
+the archive is empty	آرکائیو خالی ہے
+Text (TXT)	متن (TXT)
+Web page (HTML)	ویب صفحہ (HTML)
+Send to {device}	{device} کو بھیجیں
+Anywhere, desktop included: Ctrl+C, then {keys}	کہیں بھی، ڈیسک ٹاپ پر بھی: Ctrl+C، پھر {keys}
+Send with LocalSend…	LocalSend سے بھیجیں…
+Sent to {device}	{device} کو بھیج دیا
+{device} didn't answer	{device} نے جواب نہیں دیا
+Opened in LocalSend: pick the device there	LocalSend میں کھل گیا: وہاں ڈیوائس چنیں
+no tables found in this PDF	اس PDF میں کوئی ٹیبل نہیں ملا
+no pages to convert (check the page numbers)	تبدیل کرنے کے لیے کوئی صفحہ نہیں (صفحہ نمبر چیک کریں)
+the PDF looks damaged or empty	PDF خراب یا خالی لگتی ہے
+File not found	فائل نہیں ملی
+It was moved or deleted after you selected it. Select it again.	منتخب کرنے کے بعد اسے منتقل یا حذف کر دیا گیا۔ دوبارہ منتخب کریں۔
+This is a folder	یہ ایک فولڈر ہے
+Select the files inside it, or use Put in a ZIP.	اس کے اندر کی فائلیں منتخب کریں، یا ZIP میں ڈالیں استعمال کریں۔
+File type not recognised	فائل کی قسم پہچانی نہیں گئی
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey فائل کا نام نہیں، اس کا مواد پڑھتا ہے، اور یہ مواد کسی جانے پہچانے فارمیٹ کا نہیں۔
+Damaged or incomplete file	فائل خراب یا نامکمل ہے
+Check that it opens in another app. If you downloaded it, download it again.	دیکھیں کہ یہ کسی دوسری ایپ میں کھلتی ہے یا نہیں۔ ڈاؤن لوڈ کی تھی تو دوبارہ ڈاؤن لوڈ کریں۔
+The file is protected by a password	فائل پاس ورڈ سے محفوظ ہے
+Remove the password first, then convert it.	پہلے پاس ورڈ ہٹائیں، پھر تبدیل کریں۔
+Wrong password	غلط پاس ورڈ
+Check the password and try again.	پاس ورڈ چیک کریں اور دوبارہ کوشش کریں۔
+The file has no sound	فائل میں آواز نہیں ہے
+This video has no audio track to extract.	اس ویڈیو میں نکالنے کے لیے کوئی آڈیو ٹریک نہیں۔
+No tables found in the PDF	PDF میں کوئی ٹیبل نہیں ملا
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey صرف کمپیوٹر پر بنی PDF سے ٹیبل پڑھ سکتا ہے؛ اسکین کیے گئے صفحات تصاویر ہوتے ہیں۔
+The archive is empty	آرکائیو خالی ہے
+There is nothing inside to extract.	اندر نکالنے کے لیے کچھ نہیں ہے۔
+Those pages don't exist	وہ صفحات موجود نہیں
+Check the page numbers: the document has fewer pages.	صفحہ نمبر چیک کریں: دستاویز میں کم صفحات ہیں۔
+Already as small as it gets	پہلے ہی جتنا ممکن ہو چھوٹا
+Compressing it more wouldn't make it smaller.	مزید سکیڑنے سے یہ چھوٹا نہیں ہو گا۔
+Not possible on this computer	اس کمپیوٹر پر ممکن نہیں
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey کو جس پروگرام کی ضرورت ہے وہ انسٹال نہیں۔ README بتاتا ہے کہ ہر قسم کی فائل کے لیے کیا انسٹال کرنا ہے۔
+A program Joey needs is missing	Joey کو جس پروگرام کی ضرورت ہے وہ موجود نہیں
+Install it (the README lists them), then try again.	اسے انسٹال کریں (README میں فہرست ہے)، پھر دوبارہ کوشش کریں۔
+The installed program can't handle this format	انسٹال شدہ پروگرام یہ فارمیٹ نہیں سنبھالتا
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	آپ کے ورژن میں یہ فارمیٹ نہیں۔ زیادہ مکمل ورژن اسے شامل کرتا ہے، مثلاً Fedora پر RPM Fusion کا FFmpeg۔
+The disk is full	ڈسک بھر گئی ہے
+Free some space, or save in another place.	جگہ خالی کریں، یا کہیں اور محفوظ کریں۔
+Joey isn't allowed to write here	Joey کو یہاں لکھنے کی اجازت نہیں
+Copy the files to one of your folders (e.g. Documents) and convert them there.	فائلیں اپنے کسی فولڈر (مثلاً دستاویزات) میں کاپی کریں اور وہاں تبدیل کریں۔
+Not enough memory	میموری کافی نہیں
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	خالی میموری کے لحاظ سے فائل بہت بڑی ہے۔ دوسری ایپس بند کریں، یا ایک بار میں کم فائلیں تبدیل کریں۔
+Blocked by a safety limit	حفاظتی حد نے روک دیا
+The image is larger than the limit set by ImageMagick's security policy.	تصویر ImageMagick کی سیکیورٹی پالیسی کی حد سے بڑی ہے۔
+Unexpected error	غیر متوقع خرابی
+This is a bug in Joey. Please report it.	یہ Joey میں ایک بگ ہے۔ براہ کرم رپورٹ کریں۔
+The conversion program failed	تبدیلی کا پروگرام ناکام ہو گیا
+Please report it: the details tell us why.	براہ کرم رپورٹ کریں: تفصیلات سے ہمیں وجہ معلوم ہو گی۔
+Close (Esc)	بند کریں (Esc)
+{keys} is ready in {fm}	{fm} میں {keys} تیار ہے
+Change the shortcuts	شارٹ کٹس بدلیں
+Set up the shortcuts	شارٹ کٹس سیٹ کریں
+Welcome to Joey	Joey میں خوش آمدید
+Two shortcuts open Joey. Keep these, or choose your own.	دو شارٹ کٹس Joey کھولتے ہیں۔ انہیں رکھیں، یا اپنے چنیں۔
+In the file manager	فائل مینیجر میں
+Select files, then press	فائلیں منتخب کریں، پھر دبائیں
+Anywhere, desktop included	کہیں بھی، ڈیسک ٹاپ پر بھی
+Copy files with Ctrl+C, then press	Ctrl+C سے فائلیں کاپی کریں، پھر دبائیں
+Change	بدلیں
+Press the keys… (Esc cancels)	کیز دبائیں… (Esc منسوخ کرتا ہے)
+Use Alt or Meta (the Windows key) with a letter or a number	Alt یا Meta (Windows کی) کے ساتھ کوئی حرف یا عدد استعمال کریں
+That's already the other shortcut	یہ پہلے ہی دوسرا شارٹ کٹ ہے
+Later	بعد میں
+Turn on	آن کریں
+Ready	ہو گیا
+Start	شروع کریں
+Ideas or problems? Tell us	کوئی خیال یا مسئلہ؟ ہمیں بتائیں
+Report the problem	مسئلہ رپورٹ کریں
+You see the report before anything is sent	کچھ بھی بھیجنے سے پہلے آپ رپورٹ دیکھیں گے
+Feedback	رائے
+Last time Joey closed because of an error	پچھلی بار Joey ایک خرابی کی وجہ سے بند ہو گیا
+Report	رپورٹ کریں
+What were you doing?	آپ کیا کر رہے تھے؟
+(optional) Write it here.	(اختیاری) یہاں لکھیں۔
+Your idea, request or opinion	آپ کا خیال، درخواست یا رائے
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	خود بخود کچھ نہیں بھیجا جاتا۔ متن پڑھیں، جو چاہیں بدلیں یا ہٹائیں: آپ کی فائلوں کے نام اور یوزر نیم پہلے ہی چھپا دیے گئے ہیں۔
+Title, in a few words	عنوان، چند الفاظ میں
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	بھیجنے پر براؤزر میں GitHub کھلے گا، جہاں آپ ایک بار پھر دیکھ سکتے ہیں: ایک مفت اکاؤنٹ درکار ہے۔ اکاؤنٹ نہ ہو تو متن کاپی کریں اور جیسے چاہیں بھیجیں۔
+Copy	کاپی کریں
+Open on GitHub	GitHub پر کھولیں
+Send by email	ای میل سے بھیجیں
+Copied	کاپی ہو گیا
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	متن لمبا ہے: GitHub ابتدائی حصے کے ساتھ کھلتا ہے۔ پورا متن کاپی ہو چکا ہے: Ctrl+V سے بدل دیں۔

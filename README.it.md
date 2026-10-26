@@ -244,7 +244,9 @@ Sullo schermo touch Joey nasconde i suggerimenti dei tasti e ingrandisce le righ
 
 <p align="center"><img src="docs/screenshots/it/touch.png" width="300" alt="Modalità touch: righe più grandi, niente tasti"> &nbsp; <img src="docs/screenshots/it/dark.png" width="300" alt="Tema scuro"></p>
 
-Joey segue il tema chiaro o scuro e il colore di accento del sistema, e parla la lingua del sistema (per ora italiano e inglese).
+Joey segue il tema chiaro o scuro e il colore di accento del sistema, e parla la lingua del sistema: inglese, cinese (semplificato), hindi, spagnolo, arabo, francese, bengalese, portoghese (Brasile), russo, indonesiano, urdu, tedesco, giapponese, marathi, vietnamita e italiano. Arabo e urdu sono mostrati da destra a sinistra.
+
+Le traduzioni sono state fatte con l'AI e non sono ancora state controllate da madrelingua. Se una parola suona male, [diccelo](#feedback-e-segnalazioni) o correggila direttamente: ogni lingua è un semplice file di testo in [`crates/joey-gtk/i18n/`](crates/joey-gtk/i18n/), una riga per testo (inglese, un tab, la traduzione).
 
 ## Quando qualcosa va storto: codici di errore
 
@@ -331,7 +333,7 @@ joey-gtk --remove-file-managers    # li toglie
 
 ## Come è fatto Joey
 
-Joey è scritto con un assistente AI (Claude, di Anthropic), guidato, provato e mantenuto dal suo autore, outlook791. Quasi tutto il codice, il pacchetto Flatpak e queste guide sono stati generati dall'AI a partire dalle sue richieste. Ogni modifica viene verificata automaticamente su cinque distribuzioni, e l'autore lo prova su Fedora KDE. Se qualcosa non funziona, [segnalalo](#feedback-e-segnalazioni).
+Joey è scritto con un assistente AI (Claude, di Anthropic), guidato, provato e mantenuto dal suo autore, outlook791. Quasi tutto il codice, il pacchetto Flatpak, queste guide e le traduzioni sono stati generati dall'AI a partire dalle sue richieste. Ogni modifica viene verificata automaticamente su cinque distribuzioni, e l'autore lo prova su Fedora KDE. Se qualcosa non funziona, [segnalalo](#feedback-e-segnalazioni).
 
 ## Licenza
 

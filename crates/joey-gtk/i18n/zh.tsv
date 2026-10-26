@@ -1,0 +1,241 @@
+# 中文 (简体). One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	把文件拖到这里
+Choose files…	选择文件…
+Choose files to convert	选择要转换的文件
+Esc to close	按 Esc 关闭
+1 file	1 个文件
+{n} files	{n} 个文件
+{n} {fmt} files	{n} 个 {fmt} 文件
+{n} more…	还有 {n} 个…
+Quick tools	快捷工具
+Convert	转换
+Adjust	调整
+Enter	回车
+PDF · one image per page	PDF · 每页一张图片
+image	图片
+drawing	矢量图
+audio	音频
+video	视频
+PDF	PDF
+document	文档
+spreadsheet	表格
+presentation	演示文稿
+folders aren't supported yet	暂不支持文件夹
+not found	未找到
+file type not recognised	无法识别文件类型
+nothing to convert {fmt} to here	这里没有可以把 {fmt} 转换成的格式
+Compress	压缩
+Remove metadata	删除元数据
+Merge into one PDF	合并为一个 PDF
+Join into one track	合并为一条音轨
+Even out the volume	统一音量
+Remove the sound	去掉声音
+Converting…	正在转换…
+Converting {name}…	正在转换 {name}…
+Converting {i} of {n}…	正在转换第 {i} 个，共 {n} 个…
+Nothing converted	没有转换任何文件
+1 file ready	1 个文件已完成
+{n} files ready	{n} 个文件已完成
+Next to the originals	在原文件旁边
+Show in folder	在文件夹中显示
+Close	关闭
+Back to the menu	返回菜单
+Other files	其他文件
+unexpected error	意外错误
+{tool} couldn't convert it	{tool} 无法转换
+already as small as it gets	已经是最小了
+the file has no audio track	该文件没有音轨
+Back	返回
+Reset to defaults	恢复默认
+Remember these settings	记住这些设置
+Advanced	高级
+No settings for this one.	此项没有设置。
+Estimated size: {size}	预计大小：{size}
+Size can't be estimated for this conversion	无法估算这次转换的大小
+Quality	质量
+Lower quality makes smaller files	质量越低，文件越小
+Low	低
+Medium	中
+High (recommended)	高（推荐）
+Maximum	最高
+Size	尺寸
+Longest side. Never enlarges.	最长边。绝不放大。
+Original	原始
+Very large · 3840 px	超大 · 3840 px
+Large · 1920 px	大 · 1920 px
+Medium · 1280 px	中 · 1280 px
+Small · 800 px	小 · 800 px
+Remove camera and location info	删除相机和位置信息
+Date, place and camera model saved inside the photo	照片中保存的日期、地点和相机型号
+Channels	声道
+Mono halves the size; fine for voice	单声道可让大小减半；适合人声
+Mono	单声道
+Stereo	立体声
+Bitrate	比特率
+Data per second: higher means better sound and a bigger file. Replaces Quality.	每秒数据量：越高音质越好，文件越大。会替代“质量”。
+Automatic	自动
+Sample rate	采样率
+How often the sound is measured each second. Change it only if a device asks.	每秒测量声音的次数。只在设备要求时更改。
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · 视频
+Remove song info	删除歌曲信息
+Title, artist, album and similar tags	标题、艺术家、专辑等标签
+Resolution	分辨率
+Smaller resolution, much smaller file	分辨率越低，文件小得多
+4K · 2160p	4K · 2160p
+Full HD · 1080p	全高清 · 1080p
+HD · 720p	高清 · 720p
+Small · 480p	小 · 480p
+Keep the sound	保留声音
+Frames per second	每秒帧数
+How smooth the motion is. 30 is fine for most videos.	动作的流畅度。大多数视频 30 就够了。
+Remove video info	删除视频信息
+Date, place and device saved inside the video	视频中保存的日期、地点和设备
+Width	宽度
+Small · 320 px	小 · 320 px
+Medium · 480 px	中 · 480 px
+Large · 720 px	大 · 720 px
+Pages	页面
+For example 1-3, 7. Empty means all.	例如 1-3, 7。留空表示全部。
+all	全部
+Sharpness	清晰度
+Dots per inch: higher is sharper and bigger	每英寸点数：越高越清晰，文件越大
+Screen · 72 dpi	屏幕 · 72 dpi
+Normal · 150 dpi	普通 · 150 dpi
+Print · 300 dpi	打印 · 300 dpi
+Very sharp · 600 dpi	非常清晰 · 600 dpi
+Set up Alt+C in your file manager	在文件管理器中设置 Alt+C
+Select files, press Alt+C, pick a format	选择文件，按 Alt+C，选择格式
+Alt+C is ready in {fm}	Alt+C 已在 {fm} 中可用
+Right-click → Convert with Joey works in {fm}	右键 → 用 Joey 转换 已在 {fm} 中可用
+Log out and back in once to use them	注销并重新登录一次即可使用
+No supported file manager found	未找到支持的文件管理器
+Convert with Joey	用 Joey 转换
+subtitles	字幕
+archive	压缩包
+other	其他
+{n} other items	还有 {n} 项
+File actions	文件操作
+Copy the path	复制路径
+Copy to…	复制到…
+Move to…	移动到…
+Open a terminal here	在此打开终端
+Put in a ZIP	打包成 ZIP
+Choose a folder	选择文件夹
+Terminal opened	终端已打开
+Path copied	路径已复制
+In the folder you chose	在所选文件夹中
+Rotate left	向左旋转
+Rotate right	向右旋转
+Black and white	黑白
+Crop to a shape…	裁剪为某个比例…
+Trim…	剪辑片段…
+Split into pages	拆分为单页
+Keep only some pages…	只保留部分页面…
+Protect with a password…	用密码保护…
+Remove the password…	移除密码…
+Extract here	解压到这里
+Join into one video	合并为一个视频
+From	从
+To	到
+For example 0:30 and 1:45. Only that part is kept.	例如 0:30 和 1:45。只保留这一段。
+For example 1-3, 7. Only these pages are kept.	例如 1-3, 7。只保留这些页面。
+Shape	比例
+The middle of the picture is kept	保留图片中间部分
+Square · 1:1	方形 · 1:1
+Portrait · 4:5	竖版 · 4:5
+Photo · 3:2	照片 · 3:2
+Classic · 4:3	经典 · 4:3
+Wide · 16:9	宽屏 · 16:9
+Story · 9:16	快拍 · 9:16
+Password	密码
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	打开 PDF 时需要。请妥善保存：无法找回。
+The password that opens this PDF now.	当前用于打开此 PDF 的密码。
+wrong password	密码错误
+the archive is empty	压缩包是空的
+Text (TXT)	文本 (TXT)
+Web page (HTML)	网页 (HTML)
+Send to {device}	发送到 {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	在任何地方，包括桌面：Ctrl+C，然后 {keys}
+Send with LocalSend…	用 LocalSend 发送…
+Sent to {device}	已发送到 {device}
+{device} didn't answer	{device} 没有响应
+Opened in LocalSend: pick the device there	已在 LocalSend 中打开：请在那里选择设备
+no tables found in this PDF	此 PDF 中未找到表格
+no pages to convert (check the page numbers)	没有可转换的页面（请检查页码）
+the PDF looks damaged or empty	PDF 似乎已损坏或为空
+File not found	找不到文件
+It was moved or deleted after you selected it. Select it again.	文件在选择后被移动或删除了。请重新选择。
+This is a folder	这是一个文件夹
+Select the files inside it, or use Put in a ZIP.	请选择其中的文件，或使用“打包成 ZIP”。
+File type not recognised	无法识别文件类型
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey 读取的是文件内容而不是文件名，而这些内容不是它认识的格式。
+Damaged or incomplete file	文件已损坏或不完整
+Check that it opens in another app. If you downloaded it, download it again.	看看它能否在其他应用中打开。如果是下载的，请重新下载。
+The file is protected by a password	文件受密码保护
+Remove the password first, then convert it.	请先移除密码，再进行转换。
+Wrong password	密码错误
+Check the password and try again.	请检查密码后重试。
+The file has no sound	文件没有声音
+This video has no audio track to extract.	此视频没有可提取的音轨。
+No tables found in the PDF	PDF 中未找到表格
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey 只能读取电脑生成的 PDF 中的表格；扫描的页面是图片。
+The archive is empty	压缩包是空的
+There is nothing inside to extract.	里面没有可解压的内容。
+Those pages don't exist	这些页面不存在
+Check the page numbers: the document has fewer pages.	请检查页码：文档的页数更少。
+Already as small as it gets	已经是最小了
+Compressing it more wouldn't make it smaller.	再压缩也不会更小。
+Not possible on this computer	在这台电脑上无法完成
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey 需要的程序没有安装。README 列出了每种文件需要安装什么。
+A program Joey needs is missing	缺少 Joey 需要的程序
+Install it (the README lists them), then try again.	请安装它（见 README），然后重试。
+The installed program can't handle this format	已安装的程序不支持此格式
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	你的版本缺少此格式。更完整的版本会提供它，例如 Fedora 上来自 RPM Fusion 的 FFmpeg。
+The disk is full	磁盘已满
+Free some space, or save in another place.	请释放空间，或保存到其他位置。
+Joey isn't allowed to write here	Joey 无权写入此处
+Copy the files to one of your folders (e.g. Documents) and convert them there.	把文件复制到你自己的文件夹（例如“文档”），在那里转换。
+Not enough memory	内存不足
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	文件太大，可用内存不够。请关闭其他应用，或一次少转换几个文件。
+Blocked by a safety limit	被安全限制阻止
+The image is larger than the limit set by ImageMagick's security policy.	图片超出了 ImageMagick 安全策略设定的上限。
+Unexpected error	意外错误
+This is a bug in Joey. Please report it.	这是 Joey 的问题。请报告给我们。
+The conversion program failed	转换程序出错了
+Please report it: the details tell us why.	请报告：详细信息会告诉我们原因。
+Close (Esc)	关闭 (Esc)
+{keys} is ready in {fm}	{keys} 已在 {fm} 中可用
+Change the shortcuts	更改快捷键
+Set up the shortcuts	设置快捷键
+Welcome to Joey	欢迎使用 Joey
+Two shortcuts open Joey. Keep these, or choose your own.	两个快捷键可以打开 Joey。保留它们，或选择你自己的。
+In the file manager	在文件管理器中
+Select files, then press	选择文件，然后按
+Anywhere, desktop included	在任何地方，包括桌面
+Copy files with Ctrl+C, then press	用 Ctrl+C 复制文件，然后按
+Change	更改
+Press the keys… (Esc cancels)	请按下按键…（Esc 取消）
+Use Alt or Meta (the Windows key) with a letter or a number	使用 Alt 或 Meta（Windows 键）加一个字母或数字
+That's already the other shortcut	这已经是另一个快捷键了
+Later	稍后
+Turn on	开启
+Ready	完成
+Start	开始
+Ideas or problems? Tell us	有想法或遇到问题？告诉我们
+Report the problem	报告问题
+You see the report before anything is sent	发送前你会先看到报告内容
+Feedback	反馈
+Last time Joey closed because of an error	Joey 上次因错误而关闭
+Report	报告
+What were you doing?	你当时在做什么？
+(optional) Write it here.	（可选）写在这里。
+Your idea, request or opinion	你的想法、请求或意见
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	不会自动发送任何内容。阅读文本，随意修改或删除：你的文件名和用户名已被隐藏。
+Title, in a few words	标题，几个字即可
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	发送会在浏览器中打开 GitHub，你可以再检查一次：需要一个免费账号。没有账号的话，复制文本，用你喜欢的方式发送。
+Copy	复制
+Open on GitHub	在 GitHub 上打开
+Send by email	通过电子邮件发送
+Copied	已复制
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	文本较长：GitHub 只会打开开头部分。全文已复制：用 Ctrl+V 替换。

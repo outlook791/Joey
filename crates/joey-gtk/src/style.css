@@ -109,6 +109,10 @@ window.joey {
   opacity: 0.6;
 }
 
+.close-x:dir(rtl) {
+  margin: 16px 0 0 18px;
+}
+
 .close-x:hover {
   opacity: 1;
 }

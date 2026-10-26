@@ -1,0 +1,241 @@
+# मराठी. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	फाइल्स इथे सोडा
+Choose files…	फाइल्स निवडा…
+Choose files to convert	रूपांतरित करायच्या फाइल्स निवडा
+Esc to close	बंद करण्यासाठी Esc
+1 file	1 फाइल
+{n} files	{n} फाइल्स
+{n} {fmt} files	{n} {fmt} फाइल्स
+{n} more…	आणखी {n}…
+Quick tools	झटपट साधने
+Convert	रूपांतरित करा
+Adjust	समायोजित करा
+Enter	Enter
+PDF · one image per page	PDF · प्रत्येक पानाची एक प्रतिमा
+image	प्रतिमा
+drawing	रेखाचित्र
+audio	ऑडिओ
+video	व्हिडिओ
+PDF	PDF
+document	दस्तऐवज
+spreadsheet	स्प्रेडशीट
+presentation	सादरीकरण
+folders aren't supported yet	फोल्डर्स अजून समर्थित नाहीत
+not found	सापडले नाही
+file type not recognised	फाइलचा प्रकार ओळखता आला नाही
+nothing to convert {fmt} to here	इथे {fmt} चे दुसऱ्या कशातही रूपांतर करता येत नाही
+Compress	लहान करा
+Remove metadata	मेटाडेटा काढा
+Merge into one PDF	एका PDF मध्ये जोडा
+Join into one track	एका ट्रॅकमध्ये जोडा
+Even out the volume	आवाज समान करा
+Remove the sound	आवाज काढा
+Converting…	रूपांतर होत आहे…
+Converting {name}…	{name} चे रूपांतर होत आहे…
+Converting {i} of {n}…	{n} पैकी {i} चे रूपांतर होत आहे…
+Nothing converted	काहीही रूपांतरित झाले नाही
+1 file ready	1 फाइल तयार
+{n} files ready	{n} फाइल्स तयार
+Next to the originals	मूळ फाइल्सच्या शेजारी
+Show in folder	फोल्डरमध्ये दाखवा
+Close	बंद करा
+Back to the menu	मेनूवर परत
+Other files	इतर फाइल्स
+unexpected error	अनपेक्षित त्रुटी
+{tool} couldn't convert it	{tool} ला याचे रूपांतर करता आले नाही
+already as small as it gets	आधीच शक्य तितके लहान
+the file has no audio track	फाइलमध्ये ऑडिओ ट्रॅक नाही
+Back	मागे
+Reset to defaults	डीफॉल्टवर परत
+Remember these settings	ही सेटिंग्ज लक्षात ठेवा
+Advanced	प्रगत
+No settings for this one.	यासाठी कोणतीही सेटिंग नाही.
+Estimated size: {size}	अंदाजे आकार: {size}
+Size can't be estimated for this conversion	या रूपांतराचा आकार अंदाजता येत नाही
+Quality	गुणवत्ता
+Lower quality makes smaller files	कमी गुणवत्ता, लहान फाइल्स
+Low	कमी
+Medium	मध्यम
+High (recommended)	उच्च (शिफारस केलेली)
+Maximum	कमाल
+Size	आकार
+Longest side. Never enlarges.	सर्वात लांब बाजू. कधीही मोठे करत नाही.
+Original	मूळ
+Very large · 3840 px	खूप मोठा · 3840 px
+Large · 1920 px	मोठा · 1920 px
+Medium · 1280 px	मध्यम · 1280 px
+Small · 800 px	लहान · 800 px
+Remove camera and location info	कॅमेरा आणि ठिकाणाची माहिती काढा
+Date, place and camera model saved inside the photo	फोटोमध्ये जतन केलेली तारीख, ठिकाण आणि कॅमेरा मॉडेल
+Channels	चॅनेल्स
+Mono halves the size; fine for voice	मोनोमुळे आकार अर्धा होतो; आवाजासाठी चांगले
+Mono	मोनो
+Stereo	स्टीरिओ
+Bitrate	बिटरेट
+Data per second: higher means better sound and a bigger file. Replaces Quality.	प्रति सेकंद डेटा: जास्त म्हणजे चांगला आवाज आणि मोठी फाइल. गुणवत्तेची जागा घेते.
+Automatic	आपोआप
+Sample rate	सॅम्पल रेट
+How often the sound is measured each second. Change it only if a device asks.	आवाज प्रति सेकंद किती वेळा मोजला जातो. एखाद्या उपकरणाने मागितले तरच बदला.
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · व्हिडिओ
+Remove song info	गाण्याची माहिती काढा
+Title, artist, album and similar tags	शीर्षक, कलाकार, अल्बम आणि तसे टॅग
+Resolution	रिझोल्यूशन
+Smaller resolution, much smaller file	कमी रिझोल्यूशन, खूप लहान फाइल
+4K · 2160p	4K · 2160p
+Full HD · 1080p	फुल HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	लहान · 480p
+Keep the sound	आवाज ठेवा
+Frames per second	फ्रेम प्रति सेकंद
+How smooth the motion is. 30 is fine for most videos.	हालचाल किती सहज आहे. बहुतेक व्हिडिओंसाठी 30 पुरेसे आहे.
+Remove video info	व्हिडिओची माहिती काढा
+Date, place and device saved inside the video	व्हिडिओमध्ये जतन केलेली तारीख, ठिकाण आणि उपकरण
+Width	रुंदी
+Small · 320 px	लहान · 320 px
+Medium · 480 px	मध्यम · 480 px
+Large · 720 px	मोठा · 720 px
+Pages	पाने
+For example 1-3, 7. Empty means all.	उदा. 1-3, 7. रिकामे म्हणजे सर्व.
+all	सर्व
+Sharpness	स्पष्टता
+Dots per inch: higher is sharper and bigger	प्रति इंच बिंदू: जास्त म्हणजे अधिक स्पष्ट आणि मोठे
+Screen · 72 dpi	स्क्रीन · 72 dpi
+Normal · 150 dpi	सामान्य · 150 dpi
+Print · 300 dpi	छपाई · 300 dpi
+Very sharp · 600 dpi	खूप स्पष्ट · 600 dpi
+Set up Alt+C in your file manager	फाइल मॅनेजरमध्ये Alt+C सेट करा
+Select files, press Alt+C, pick a format	फाइल्स निवडा, Alt+C दाबा, फॉरमॅट निवडा
+Alt+C is ready in {fm}	{fm} मध्ये Alt+C तयार आहे
+Right-click → Convert with Joey works in {fm}	{fm} मध्ये उजवे-क्लिक → Joey ने रूपांतरित करा चालते
+Log out and back in once to use them	वापरण्यासाठी एकदा लॉग आउट करून पुन्हा लॉग इन करा
+No supported file manager found	समर्थित फाइल मॅनेजर सापडला नाही
+Convert with Joey	Joey ने रूपांतरित करा
+subtitles	उपशीर्षके
+archive	आर्काइव्ह
+other	इतर
+{n} other items	आणखी {n} आयटम
+File actions	फाइल क्रिया
+Copy the path	पाथ कॉपी करा
+Copy to…	इथे कॉपी करा…
+Move to…	इथे हलवा…
+Open a terminal here	इथे टर्मिनल उघडा
+Put in a ZIP	ZIP मध्ये ठेवा
+Choose a folder	फोल्डर निवडा
+Terminal opened	टर्मिनल उघडले
+Path copied	पाथ कॉपी झाला
+In the folder you chose	निवडलेल्या फोल्डरमध्ये
+Rotate left	डावीकडे फिरवा
+Rotate right	उजवीकडे फिरवा
+Black and white	कृष्णधवल
+Crop to a shape…	एखाद्या आकारात कापा…
+Trim…	भाग कापा…
+Split into pages	पानांमध्ये विभागा
+Keep only some pages…	फक्त काही पाने ठेवा…
+Protect with a password…	पासवर्डने सुरक्षित करा…
+Remove the password…	पासवर्ड काढा…
+Extract here	इथे काढा
+Join into one video	एका व्हिडिओमध्ये जोडा
+From	पासून
+To	पर्यंत
+For example 0:30 and 1:45. Only that part is kept.	उदा. 0:30 आणि 1:45. फक्त तोच भाग राहतो.
+For example 1-3, 7. Only these pages are kept.	उदा. 1-3, 7. फक्त ही पाने राहतात.
+Shape	आकार
+The middle of the picture is kept	प्रतिमेचा मधला भाग ठेवला जातो
+Square · 1:1	चौरस · 1:1
+Portrait · 4:5	उभा · 4:5
+Photo · 3:2	फोटो · 3:2
+Classic · 4:3	क्लासिक · 4:3
+Wide · 16:9	रुंद · 16:9
+Story · 9:16	स्टोरी · 9:16
+Password	पासवर्ड
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF उघडण्यासाठी आवश्यक. तो जपून ठेवा: तो परत मिळवता येत नाही.
+The password that opens this PDF now.	हा PDF सध्या ज्या पासवर्डने उघडतो तो.
+wrong password	चुकीचा पासवर्ड
+the archive is empty	आर्काइव्ह रिकामे आहे
+Text (TXT)	मजकूर (TXT)
+Web page (HTML)	वेब पान (HTML)
+Send to {device}	{device} ला पाठवा
+Anywhere, desktop included: Ctrl+C, then {keys}	कुठेही, डेस्कटॉपवरही: Ctrl+C, मग {keys}
+Send with LocalSend…	LocalSend ने पाठवा…
+Sent to {device}	{device} ला पाठवले
+{device} didn't answer	{device} ने उत्तर दिले नाही
+Opened in LocalSend: pick the device there	LocalSend मध्ये उघडले: तिथे उपकरण निवडा
+no tables found in this PDF	या PDF मध्ये कोणतेही टेबल सापडले नाही
+no pages to convert (check the page numbers)	रूपांतरित करण्यासाठी कोणतेही पान नाही (पान क्रमांक तपासा)
+the PDF looks damaged or empty	PDF खराब किंवा रिकामा दिसतो
+File not found	फाइल सापडली नाही
+It was moved or deleted after you selected it. Select it again.	निवडल्यानंतर ती हलवली किंवा हटवली गेली. पुन्हा निवडा.
+This is a folder	हा एक फोल्डर आहे
+Select the files inside it, or use Put in a ZIP.	त्यातील फाइल्स निवडा, किंवा ZIP मध्ये ठेवा वापरा.
+File type not recognised	फाइलचा प्रकार ओळखता आला नाही
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey फाइलचे नाव नव्हे तर तिचा मजकूर वाचतो, आणि हा मजकूर त्याला माहीत असलेला फॉरमॅट नाही.
+Damaged or incomplete file	फाइल खराब किंवा अपूर्ण आहे
+Check that it opens in another app. If you downloaded it, download it again.	ती दुसऱ्या ॲपमध्ये उघडते का ते पहा. डाउनलोड केली असल्यास पुन्हा डाउनलोड करा.
+The file is protected by a password	फाइल पासवर्डने सुरक्षित आहे
+Remove the password first, then convert it.	आधी पासवर्ड काढा, मग रूपांतरित करा.
+Wrong password	चुकीचा पासवर्ड
+Check the password and try again.	पासवर्ड तपासा आणि पुन्हा प्रयत्न करा.
+The file has no sound	फाइलमध्ये आवाज नाही
+This video has no audio track to extract.	या व्हिडिओमध्ये काढण्यासाठी ऑडिओ ट्रॅक नाही.
+No tables found in the PDF	PDF मध्ये कोणतेही टेबल सापडले नाही
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey फक्त संगणकावर तयार केलेल्या PDF मधील टेबल वाचू शकतो; स्कॅन केलेली पाने प्रतिमा असतात.
+The archive is empty	आर्काइव्ह रिकामे आहे
+There is nothing inside to extract.	आत काढण्यासारखे काहीही नाही.
+Those pages don't exist	ती पाने अस्तित्वात नाहीत
+Check the page numbers: the document has fewer pages.	पान क्रमांक तपासा: दस्तऐवजात कमी पाने आहेत.
+Already as small as it gets	आधीच शक्य तितके लहान
+Compressing it more wouldn't make it smaller.	आणखी लहान केल्याने ते लहान होणार नाही.
+Not possible on this computer	या संगणकावर शक्य नाही
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey ला लागणारा प्रोग्राम इन्स्टॉल नाही. README मध्ये प्रत्येक प्रकारच्या फाइलसाठी काय इन्स्टॉल करायचे ते दिले आहे.
+A program Joey needs is missing	Joey ला लागणारा प्रोग्राम नाही
+Install it (the README lists them), then try again.	तो इन्स्टॉल करा (README मध्ये यादी आहे), मग पुन्हा प्रयत्न करा.
+The installed program can't handle this format	इन्स्टॉल केलेला प्रोग्राम हा फॉरमॅट हाताळत नाही
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	तुमच्या आवृत्तीत हा फॉरमॅट नाही. अधिक पूर्ण आवृत्ती तो जोडते, उदा. Fedora वर RPM Fusion मधील FFmpeg.
+The disk is full	डिस्क भरली आहे
+Free some space, or save in another place.	जागा मोकळी करा, किंवा दुसरीकडे जतन करा.
+Joey isn't allowed to write here	Joey ला इथे लिहिण्याची परवानगी नाही
+Copy the files to one of your folders (e.g. Documents) and convert them there.	फाइल्स तुमच्या एखाद्या फोल्डरमध्ये (उदा. दस्तऐवज) कॉपी करा आणि तिथे रूपांतरित करा.
+Not enough memory	पुरेशी मेमरी नाही
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	मोकळ्या मेमरीच्या तुलनेत फाइल खूप मोठी आहे. इतर ॲप्स बंद करा, किंवा एका वेळी कमी फाइल्स रूपांतरित करा.
+Blocked by a safety limit	सुरक्षा मर्यादेमुळे अडवले
+The image is larger than the limit set by ImageMagick's security policy.	प्रतिमा ImageMagick च्या सुरक्षा धोरणाची मर्यादा ओलांडते.
+Unexpected error	अनपेक्षित त्रुटी
+This is a bug in Joey. Please report it.	हा Joey मधील बग आहे. कृपया कळवा.
+The conversion program failed	रूपांतर करणारा प्रोग्राम अयशस्वी झाला
+Please report it: the details tell us why.	कृपया कळवा: तपशीलांवरून आम्हाला कारण कळेल.
+Close (Esc)	बंद करा (Esc)
+{keys} is ready in {fm}	{fm} मध्ये {keys} तयार आहे
+Change the shortcuts	शॉर्टकट बदला
+Set up the shortcuts	शॉर्टकट सेट करा
+Welcome to Joey	Joey मध्ये स्वागत आहे
+Two shortcuts open Joey. Keep these, or choose your own.	दोन शॉर्टकट Joey उघडतात. हेच ठेवा, किंवा तुमचे निवडा.
+In the file manager	फाइल मॅनेजरमध्ये
+Select files, then press	फाइल्स निवडा, मग दाबा
+Anywhere, desktop included	कुठेही, डेस्कटॉपवरही
+Copy files with Ctrl+C, then press	Ctrl+C ने फाइल्स कॉपी करा, मग दाबा
+Change	बदला
+Press the keys… (Esc cancels)	कळा दाबा… (Esc रद्द करते)
+Use Alt or Meta (the Windows key) with a letter or a number	Alt किंवा Meta (Windows कळ) सोबत एखादे अक्षर किंवा अंक वापरा
+That's already the other shortcut	तो आधीच दुसरा शॉर्टकट आहे
+Later	नंतर
+Turn on	चालू करा
+Ready	झाले
+Start	सुरू करा
+Ideas or problems? Tell us	काही कल्पना किंवा अडचण? आम्हाला सांगा
+Report the problem	अडचण कळवा
+You see the report before anything is sent	काहीही पाठवण्यापूर्वी तुम्ही अहवाल पाहाल
+Feedback	अभिप्राय
+Last time Joey closed because of an error	मागच्या वेळी Joey एका त्रुटीमुळे बंद झाला
+Report	कळवा
+What were you doing?	तुम्ही काय करत होता?
+(optional) Write it here.	(ऐच्छिक) इथे लिहा.
+Your idea, request or opinion	तुमची कल्पना, विनंती किंवा मत
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	आपोआप काहीही पाठवले जात नाही. मजकूर वाचा, हवे ते बदला किंवा काढा: तुमच्या फाइल्सची नावे आणि वापरकर्तानाव आधीच लपवले आहे.
+Title, in a few words	शीर्षक, काही शब्दांत
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	पाठवल्यावर ब्राउझरमध्ये GitHub उघडते, तिथे तुम्ही पुन्हा एकदा तपासता: एक मोफत खाते लागते. खाते नसल्यास मजकूर कॉपी करा आणि हवे तसे पाठवा.
+Copy	कॉपी करा
+Open on GitHub	GitHub वर उघडा
+Send by email	ईमेलने पाठवा
+Copied	कॉपी झाले
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	मजकूर लांब आहे: GitHub सुरुवातीच्या भागासह उघडते. संपूर्ण मजकूर कॉपी झाला आहे: Ctrl+V ने बदला.

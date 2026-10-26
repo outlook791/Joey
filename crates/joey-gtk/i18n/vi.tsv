@@ -1,0 +1,241 @@
+# Tiếng Việt. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Thả tệp vào đây
+Choose files…	Chọn tệp…
+Choose files to convert	Chọn tệp cần chuyển đổi
+Esc to close	Esc để đóng
+1 file	1 tệp
+{n} files	{n} tệp
+{n} {fmt} files	{n} tệp {fmt}
+{n} more…	Thêm {n}…
+Quick tools	Công cụ nhanh
+Convert	Chuyển đổi
+Adjust	Điều chỉnh
+Enter	Enter
+PDF · one image per page	PDF · mỗi trang một ảnh
+image	ảnh
+drawing	hình vẽ
+audio	âm thanh
+video	video
+PDF	PDF
+document	tài liệu
+spreadsheet	bảng tính
+presentation	trình chiếu
+folders aren't supported yet	chưa hỗ trợ thư mục
+not found	không tìm thấy
+file type not recognised	không nhận ra loại tệp
+nothing to convert {fmt} to here	ở đây không thể chuyển {fmt} sang định dạng nào
+Compress	Nén
+Remove metadata	Xóa siêu dữ liệu
+Merge into one PDF	Gộp thành một PDF
+Join into one track	Ghép thành một bản nhạc
+Even out the volume	Cân bằng âm lượng
+Remove the sound	Bỏ âm thanh
+Converting…	Đang chuyển đổi…
+Converting {name}…	Đang chuyển đổi {name}…
+Converting {i} of {n}…	Đang chuyển đổi {i} trên {n}…
+Nothing converted	Không có gì được chuyển đổi
+1 file ready	1 tệp đã xong
+{n} files ready	{n} tệp đã xong
+Next to the originals	Cạnh các tệp gốc
+Show in folder	Hiện trong thư mục
+Close	Đóng
+Back to the menu	Quay lại menu
+Other files	Tệp khác
+unexpected error	lỗi không mong muốn
+{tool} couldn't convert it	{tool} không chuyển đổi được
+already as small as it gets	đã nhỏ nhất có thể
+the file has no audio track	tệp không có rãnh âm thanh
+Back	Quay lại
+Reset to defaults	Đặt lại mặc định
+Remember these settings	Ghi nhớ các thiết lập này
+Advanced	Nâng cao
+No settings for this one.	Mục này không có thiết lập.
+Estimated size: {size}	Kích thước ước tính: {size}
+Size can't be estimated for this conversion	Không ước tính được kích thước cho lần chuyển đổi này
+Quality	Chất lượng
+Lower quality makes smaller files	Chất lượng thấp hơn, tệp nhỏ hơn
+Low	Thấp
+Medium	Trung bình
+High (recommended)	Cao (khuyên dùng)
+Maximum	Tối đa
+Size	Kích thước
+Longest side. Never enlarges.	Cạnh dài nhất. Không bao giờ phóng to.
+Original	Gốc
+Very large · 3840 px	Rất lớn · 3840 px
+Large · 1920 px	Lớn · 1920 px
+Medium · 1280 px	Vừa · 1280 px
+Small · 800 px	Nhỏ · 800 px
+Remove camera and location info	Xóa thông tin máy ảnh và vị trí
+Date, place and camera model saved inside the photo	Ngày, nơi chụp và dòng máy ảnh lưu trong ảnh
+Channels	Kênh
+Mono halves the size; fine for voice	Mono giảm một nửa kích thước; hợp với giọng nói
+Mono	Mono
+Stereo	Stereo
+Bitrate	Tốc độ bit
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Dữ liệu mỗi giây: cao hơn là âm thanh tốt hơn và tệp lớn hơn. Thay cho Chất lượng.
+Automatic	Tự động
+Sample rate	Tần số lấy mẫu
+How often the sound is measured each second. Change it only if a device asks.	Số lần âm thanh được đo mỗi giây. Chỉ đổi khi thiết bị yêu cầu.
+44.1 kHz · CD	44,1 kHz · CD
+48 kHz · video	48 kHz · video
+Remove song info	Xóa thông tin bài hát
+Title, artist, album and similar tags	Tên bài, nghệ sĩ, album và các thẻ tương tự
+Resolution	Độ phân giải
+Smaller resolution, much smaller file	Độ phân giải thấp hơn, tệp nhỏ hơn nhiều
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Nhỏ · 480p
+Keep the sound	Giữ âm thanh
+Frames per second	Khung hình mỗi giây
+How smooth the motion is. 30 is fine for most videos.	Độ mượt của chuyển động. 30 là đủ cho hầu hết video.
+Remove video info	Xóa thông tin video
+Date, place and device saved inside the video	Ngày, nơi quay và thiết bị lưu trong video
+Width	Chiều rộng
+Small · 320 px	Nhỏ · 320 px
+Medium · 480 px	Vừa · 480 px
+Large · 720 px	Lớn · 720 px
+Pages	Trang
+For example 1-3, 7. Empty means all.	Ví dụ 1-3, 7. Để trống là tất cả.
+all	tất cả
+Sharpness	Độ nét
+Dots per inch: higher is sharper and bigger	Số điểm mỗi inch: cao hơn là nét hơn và lớn hơn
+Screen · 72 dpi	Màn hình · 72 dpi
+Normal · 150 dpi	Thường · 150 dpi
+Print · 300 dpi	In · 300 dpi
+Very sharp · 600 dpi	Rất nét · 600 dpi
+Set up Alt+C in your file manager	Cài Alt+C trong trình quản lý tệp
+Select files, press Alt+C, pick a format	Chọn tệp, nhấn Alt+C, chọn định dạng
+Alt+C is ready in {fm}	Alt+C đã sẵn sàng trong {fm}
+Right-click → Convert with Joey works in {fm}	Nhấp chuột phải → Chuyển đổi bằng Joey dùng được trong {fm}
+Log out and back in once to use them	Đăng xuất rồi đăng nhập lại một lần để dùng
+No supported file manager found	Không tìm thấy trình quản lý tệp được hỗ trợ
+Convert with Joey	Chuyển đổi bằng Joey
+subtitles	phụ đề
+archive	tệp nén
+other	khác
+{n} other items	Thêm {n} mục
+File actions	Thao tác với tệp
+Copy the path	Sao chép đường dẫn
+Copy to…	Sao chép đến…
+Move to…	Di chuyển đến…
+Open a terminal here	Mở terminal tại đây
+Put in a ZIP	Cho vào ZIP
+Choose a folder	Chọn thư mục
+Terminal opened	Đã mở terminal
+Path copied	Đã sao chép đường dẫn
+In the folder you chose	Trong thư mục bạn chọn
+Rotate left	Xoay trái
+Rotate right	Xoay phải
+Black and white	Đen trắng
+Crop to a shape…	Cắt theo khung…
+Trim…	Cắt đoạn…
+Split into pages	Tách thành từng trang
+Keep only some pages…	Chỉ giữ một số trang…
+Protect with a password…	Bảo vệ bằng mật khẩu…
+Remove the password…	Gỡ mật khẩu…
+Extract here	Giải nén tại đây
+Join into one video	Ghép thành một video
+From	Từ
+To	Đến
+For example 0:30 and 1:45. Only that part is kept.	Ví dụ 0:30 và 1:45. Chỉ giữ đoạn đó.
+For example 1-3, 7. Only these pages are kept.	Ví dụ 1-3, 7. Chỉ giữ các trang này.
+Shape	Khung
+The middle of the picture is kept	Giữ phần giữa của ảnh
+Square · 1:1	Vuông · 1:1
+Portrait · 4:5	Dọc · 4:5
+Photo · 3:2	Ảnh · 3:2
+Classic · 4:3	Cổ điển · 4:3
+Wide · 16:9	Rộng · 16:9
+Story · 9:16	Story · 9:16
+Password	Mật khẩu
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Cần để mở PDF. Hãy cất giữ cẩn thận: không thể khôi phục.
+The password that opens this PDF now.	Mật khẩu đang dùng để mở PDF này.
+wrong password	sai mật khẩu
+the archive is empty	tệp nén trống
+Text (TXT)	Văn bản (TXT)
+Web page (HTML)	Trang web (HTML)
+Send to {device}	Gửi đến {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Ở bất kỳ đâu, kể cả màn hình nền: Ctrl+C, rồi {keys}
+Send with LocalSend…	Gửi bằng LocalSend…
+Sent to {device}	Đã gửi đến {device}
+{device} didn't answer	{device} không phản hồi
+Opened in LocalSend: pick the device there	Đã mở trong LocalSend: chọn thiết bị ở đó
+no tables found in this PDF	không tìm thấy bảng trong PDF này
+no pages to convert (check the page numbers)	không có trang nào để chuyển đổi (kiểm tra số trang)
+the PDF looks damaged or empty	PDF có vẻ bị hỏng hoặc trống
+File not found	Không tìm thấy tệp
+It was moved or deleted after you selected it. Select it again.	Tệp đã bị di chuyển hoặc xóa sau khi chọn. Hãy chọn lại.
+This is a folder	Đây là một thư mục
+Select the files inside it, or use Put in a ZIP.	Chọn các tệp bên trong, hoặc dùng Cho vào ZIP.
+File type not recognised	Không nhận ra loại tệp
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey đọc nội dung tệp chứ không đọc tên, và nội dung này không phải định dạng nó biết.
+Damaged or incomplete file	Tệp bị hỏng hoặc không đầy đủ
+Check that it opens in another app. If you downloaded it, download it again.	Kiểm tra xem nó có mở được bằng ứng dụng khác không. Nếu tải về, hãy tải lại.
+The file is protected by a password	Tệp được bảo vệ bằng mật khẩu
+Remove the password first, then convert it.	Hãy gỡ mật khẩu trước, rồi chuyển đổi.
+Wrong password	Sai mật khẩu
+Check the password and try again.	Kiểm tra mật khẩu rồi thử lại.
+The file has no sound	Tệp không có âm thanh
+This video has no audio track to extract.	Video này không có rãnh âm thanh để tách.
+No tables found in the PDF	Không tìm thấy bảng trong PDF
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey chỉ đọc được bảng trong PDF tạo bằng máy tính; trang scan là hình ảnh.
+The archive is empty	Tệp nén trống
+There is nothing inside to extract.	Bên trong không có gì để giải nén.
+Those pages don't exist	Các trang đó không tồn tại
+Check the page numbers: the document has fewer pages.	Kiểm tra số trang: tài liệu có ít trang hơn.
+Already as small as it gets	Đã nhỏ nhất có thể
+Compressing it more wouldn't make it smaller.	Nén thêm cũng không làm nó nhỏ hơn.
+Not possible on this computer	Không thể làm trên máy này
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Chưa cài chương trình mà Joey cần. README liệt kê những gì cần cài cho từng loại tệp.
+A program Joey needs is missing	Thiếu chương trình mà Joey cần
+Install it (the README lists them), then try again.	Hãy cài nó (xem README), rồi thử lại.
+The installed program can't handle this format	Chương trình đã cài không xử lý được định dạng này
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Phiên bản của bạn thiếu định dạng này. Bản đầy đủ hơn có thêm, ví dụ FFmpeg từ RPM Fusion trên Fedora.
+The disk is full	Ổ đĩa đã đầy
+Free some space, or save in another place.	Giải phóng dung lượng, hoặc lưu ở chỗ khác.
+Joey isn't allowed to write here	Joey không được phép ghi vào đây
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Sao chép tệp vào một thư mục của bạn (ví dụ Tài liệu) rồi chuyển đổi ở đó.
+Not enough memory	Không đủ bộ nhớ
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Tệp quá lớn so với bộ nhớ còn trống. Đóng ứng dụng khác, hoặc chuyển đổi ít tệp hơn mỗi lần.
+Blocked by a safety limit	Bị chặn bởi giới hạn an toàn
+The image is larger than the limit set by ImageMagick's security policy.	Ảnh vượt quá giới hạn do chính sách bảo mật của ImageMagick đặt ra.
+Unexpected error	Lỗi không mong muốn
+This is a bug in Joey. Please report it.	Đây là lỗi của Joey. Vui lòng báo cáo.
+The conversion program failed	Chương trình chuyển đổi bị lỗi
+Please report it: the details tell us why.	Vui lòng báo cáo: chi tiết sẽ cho chúng tôi biết lý do.
+Close (Esc)	Đóng (Esc)
+{keys} is ready in {fm}	{keys} đã sẵn sàng trong {fm}
+Change the shortcuts	Đổi phím tắt
+Set up the shortcuts	Cài phím tắt
+Welcome to Joey	Chào mừng đến với Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Hai phím tắt mở Joey. Giữ nguyên, hoặc chọn phím của bạn.
+In the file manager	Trong trình quản lý tệp
+Select files, then press	Chọn tệp, rồi nhấn
+Anywhere, desktop included	Ở bất kỳ đâu, kể cả màn hình nền
+Copy files with Ctrl+C, then press	Sao chép tệp bằng Ctrl+C, rồi nhấn
+Change	Đổi
+Press the keys… (Esc cancels)	Nhấn tổ hợp phím… (Esc để hủy)
+Use Alt or Meta (the Windows key) with a letter or a number	Dùng Alt hoặc Meta (phím Windows) với một chữ cái hoặc số
+That's already the other shortcut	Đó đã là phím tắt còn lại
+Later	Để sau
+Turn on	Bật
+Ready	Xong
+Start	Bắt đầu
+Ideas or problems? Tell us	Có ý tưởng hay vấn đề? Hãy cho chúng tôi biết
+Report the problem	Báo cáo sự cố
+You see the report before anything is sent	Bạn xem báo cáo trước khi bất cứ thứ gì được gửi
+Feedback	Góp ý
+Last time Joey closed because of an error	Lần trước Joey bị đóng do lỗi
+Report	Báo cáo
+What were you doing?	Bạn đang làm gì?
+(optional) Write it here.	(không bắt buộc) Viết vào đây.
+Your idea, request or opinion	Ý tưởng, yêu cầu hoặc ý kiến của bạn
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Không có gì tự gửi đi. Đọc văn bản, sửa hoặc xóa tùy ý: tên tệp và tên người dùng của bạn đã được ẩn.
+Title, in a few words	Tiêu đề, vài chữ thôi
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Khi gửi, GitHub sẽ mở trong trình duyệt để bạn kiểm tra lại: cần một tài khoản miễn phí. Không có tài khoản thì sao chép văn bản và gửi theo cách bạn muốn.
+Copy	Sao chép
+Open on GitHub	Mở trên GitHub
+Send by email	Gửi qua email
+Copied	Đã sao chép
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Văn bản dài: GitHub mở với phần đầu. Toàn bộ văn bản đã được sao chép: thay bằng Ctrl+V.
