@@ -418,6 +418,11 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="26.11.1" date="2026-11-24">
+      <description>
+        <p>PDF to Markdown for AI apps (far fewer tokens); compress to a size you choose; the size saved and the hidden details removed are shown when done; Polish, Turkish, Korean, Ukrainian, Dutch and Czech (22 languages, AI translations); Meta key named right on KDE.</p>
+      </description>
+    </release>
     <release version="26.10.4" date="2026-10-26">
       <description>
         <p>Joey speaks 16 languages: the 15 most spoken in the world plus Italian (AI translations, corrections welcome); right-to-left layout for Arabic and Urdu.</p>
