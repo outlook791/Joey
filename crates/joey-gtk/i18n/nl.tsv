@@ -1,0 +1,263 @@
+# Nederlands. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Zet bestanden hier neer
+Choose files…	Bestanden kiezen…
+Choose files to convert	Kies bestanden om om te zetten
+Esc to close	Esc om te sluiten
+1 file	1 bestand
+{n} files	{n} bestanden
+{n} {fmt} files	{n} {fmt}-bestanden
+{n} more…	Nog {n}…
+Quick tools	Snelle hulpmiddelen
+Convert	Omzetten
+Adjust	Aanpassen
+Enter	Enter
+PDF · one image per page	PDF · één afbeelding per pagina
+image	afbeelding
+drawing	tekening
+audio	audio
+video	video
+PDF	PDF
+document	document
+spreadsheet	spreadsheet
+presentation	presentatie
+folders aren't supported yet	mappen worden nog niet ondersteund
+not found	niet gevonden
+file type not recognised	bestandstype niet herkend
+nothing to convert {fmt} to here	hier kan {fmt} nergens in omgezet worden
+Compress	Comprimeren
+Remove metadata	Metadata verwijderen
+Merge into one PDF	Samenvoegen tot één PDF
+Join into one track	Samenvoegen tot één track
+Even out the volume	Volume gelijktrekken
+Remove the sound	Geluid verwijderen
+Converting…	Bezig met omzetten…
+Converting {name}…	{name} wordt omgezet…
+Converting {i} of {n}…	{i} van {n} wordt omgezet…
+Nothing converted	Niets omgezet
+1 file ready	1 bestand klaar
+{n} files ready	{n} bestanden klaar
+Next to the originals	Naast de originelen
+Show in folder	Tonen in map
+Close	Sluiten
+Back to the menu	Terug naar het menu
+Other files	Andere bestanden
+unexpected error	onverwachte fout
+{tool} couldn't convert it	{tool} kon het niet omzetten
+already as small as it gets	al zo klein als het kan
+the file has no audio track	het bestand heeft geen audiospoor
+Back	Terug
+Reset to defaults	Standaard herstellen
+Remember these settings	Deze instellingen onthouden
+Advanced	Geavanceerd
+No settings for this one.	Hier zijn geen instellingen voor.
+Estimated size: {size}	Geschatte grootte: {size}
+Size can't be estimated for this conversion	De grootte van deze omzetting is niet te schatten
+Quality	Kwaliteit
+Lower quality makes smaller files	Lagere kwaliteit geeft kleinere bestanden
+Low	Laag
+Medium	Gemiddeld
+High (recommended)	Hoog (aanbevolen)
+Maximum	Maximaal
+Size	Grootte
+Longest side. Never enlarges.	Langste zijde. Vergroot nooit.
+Original	Origineel
+Very large · 3840 px	Zeer groot · 3840 px
+Large · 1920 px	Groot · 1920 px
+Medium · 1280 px	Gemiddeld · 1280 px
+Small · 800 px	Klein · 800 px
+Remove camera and location info	Camera- en locatiegegevens verwijderen
+Date, place and camera model saved inside the photo	Datum, plaats en cameramodel opgeslagen in de foto
+Channels	Kanalen
+Mono halves the size; fine for voice	Mono halveert de grootte; prima voor spraak
+Mono	Mono
+Stereo	Stereo
+Bitrate	Bitrate
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Gegevens per seconde: hoger betekent beter geluid en een groter bestand. Vervangt Kwaliteit.
+Automatic	Automatisch
+Sample rate	Samplefrequentie
+How often the sound is measured each second. Change it only if a device asks.	Hoe vaak per seconde het geluid gemeten wordt. Alleen wijzigen als een apparaat erom vraagt.
+44.1 kHz · CD	44,1 kHz · cd
+48 kHz · video	48 kHz · video
+Remove song info	Nummergegevens verwijderen
+Title, artist, album and similar tags	Titel, artiest, album en vergelijkbare tags
+Resolution	Resolutie
+Smaller resolution, much smaller file	Kleinere resolutie, veel kleiner bestand
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Klein · 480p
+Keep the sound	Geluid behouden
+Frames per second	Beelden per seconde
+How smooth the motion is. 30 is fine for most videos.	Hoe vloeiend de beweging is. 30 is goed voor de meeste video's.
+Remove video info	Videogegevens verwijderen
+Date, place and device saved inside the video	Datum, plaats en apparaat opgeslagen in de video
+Width	Breedte
+Small · 320 px	Klein · 320 px
+Medium · 480 px	Gemiddeld · 480 px
+Large · 720 px	Groot · 720 px
+Pages	Pagina's
+For example 1-3, 7. Empty means all.	Bijvoorbeeld 1-3, 7. Leeg betekent alle.
+all	alle
+Sharpness	Scherpte
+Dots per inch: higher is sharper and bigger	Punten per inch: hoger is scherper en groter
+Screen · 72 dpi	Scherm · 72 dpi
+Normal · 150 dpi	Normaal · 150 dpi
+Print · 300 dpi	Afdrukken · 300 dpi
+Very sharp · 600 dpi	Zeer scherp · 600 dpi
+Set up Alt+C in your file manager	Alt+C instellen in je bestandsbeheerder
+Select files, press Alt+C, pick a format	Selecteer bestanden, druk op Alt+C, kies een formaat
+Alt+C is ready in {fm}	Alt+C is klaar in {fm}
+Right-click → Convert with Joey works in {fm}	Rechtsklik → Omzetten met Joey werkt in {fm}
+Log out and back in once to use them	Log één keer uit en weer in om ze te gebruiken
+No supported file manager found	Geen ondersteunde bestandsbeheerder gevonden
+Convert with Joey	Omzetten met Joey
+subtitles	ondertitels
+archive	archief
+other	overig
+{n} other items	{n} andere items
+File actions	Bestandsacties
+Copy the path	Pad kopiëren
+Copy to…	Kopiëren naar…
+Move to…	Verplaatsen naar…
+Open a terminal here	Hier een terminal openen
+Put in a ZIP	In een ZIP stoppen
+Choose a folder	Kies een map
+Terminal opened	Terminal geopend
+Path copied	Pad gekopieerd
+In the folder you chose	In de gekozen map
+Rotate left	Linksom draaien
+Rotate right	Rechtsom draaien
+Black and white	Zwart-wit
+Crop to a shape…	Bijsnijden tot een vorm…
+Trim…	Inkorten…
+Split into pages	Splitsen in pagina's
+Keep only some pages…	Alleen sommige pagina's houden…
+Protect with a password…	Beveiligen met een wachtwoord…
+Remove the password…	Wachtwoord verwijderen…
+Extract here	Hier uitpakken
+Join into one video	Samenvoegen tot één video
+From	Van
+To	Tot
+For example 0:30 and 1:45. Only that part is kept.	Bijvoorbeeld 0:30 en 1:45. Alleen dat deel blijft over.
+For example 1-3, 7. Only these pages are kept.	Bijvoorbeeld 1-3, 7. Alleen deze pagina's blijven over.
+Shape	Vorm
+The middle of the picture is kept	Het midden van de afbeelding blijft behouden
+Square · 1:1	Vierkant · 1:1
+Portrait · 4:5	Staand · 4:5
+Photo · 3:2	Foto · 3:2
+Classic · 4:3	Klassiek · 4:3
+Wide · 16:9	Breed · 16:9
+Story · 9:16	Story · 9:16
+Password	Wachtwoord
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Nodig om de PDF te openen. Bewaar het goed: het kan niet hersteld worden.
+The password that opens this PDF now.	Het wachtwoord waarmee deze PDF nu opent.
+wrong password	verkeerd wachtwoord
+the archive is empty	het archief is leeg
+Text (TXT)	Tekst (TXT)
+Web page (HTML)	Webpagina (HTML)
+Send to {device}	Naar {device} sturen
+Anywhere, desktop included: Ctrl+C, then {keys}	Overal, ook op het bureaublad: Ctrl+C, daarna {keys}
+Send with LocalSend…	Versturen met LocalSend…
+Sent to {device}	Naar {device} gestuurd
+{device} didn't answer	{device} reageerde niet
+Opened in LocalSend: pick the device there	Geopend in LocalSend: kies daar het apparaat
+no tables found in this PDF	geen tabellen gevonden in deze PDF
+no pages to convert (check the page numbers)	geen pagina's om om te zetten (controleer de paginanummers)
+the PDF looks damaged or empty	de PDF lijkt beschadigd of leeg
+File not found	Bestand niet gevonden
+It was moved or deleted after you selected it. Select it again.	Het is verplaatst of verwijderd nadat je het selecteerde. Selecteer het opnieuw.
+This is a folder	Dit is een map
+Select the files inside it, or use Put in a ZIP.	Selecteer de bestanden erin, of gebruik In een ZIP stoppen.
+File type not recognised	Bestandstype niet herkend
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey leest wat er in het bestand staat, niet de naam, en deze inhoud is geen formaat dat Joey kent.
+Damaged or incomplete file	Beschadigd of onvolledig bestand
+Check that it opens in another app. If you downloaded it, download it again.	Kijk of het in een andere app opent. Heb je het gedownload, download het dan opnieuw.
+The file is protected by a password	Het bestand is beveiligd met een wachtwoord
+Remove the password first, then convert it.	Verwijder eerst het wachtwoord en zet het daarna om.
+Wrong password	Verkeerd wachtwoord
+Check the password and try again.	Controleer het wachtwoord en probeer het opnieuw.
+The file has no sound	Het bestand heeft geen geluid
+This video has no audio track to extract.	Deze video heeft geen audiospoor om eruit te halen.
+No tables found in the PDF	Geen tabellen gevonden in de PDF
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey kan alleen tabellen lezen uit PDF's die op een computer gemaakt zijn; gescande pagina's zijn afbeeldingen.
+The archive is empty	Het archief is leeg
+There is nothing inside to extract.	Er zit niets in om uit te pakken.
+Those pages don't exist	Die pagina's bestaan niet
+Check the page numbers: the document has fewer pages.	Controleer de paginanummers: het document heeft minder pagina's.
+Already as small as it gets	Al zo klein als het kan
+Compressing it more wouldn't make it smaller.	Meer comprimeren maakt het niet kleiner.
+Not possible on this computer	Niet mogelijk op deze computer
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Een programma dat Joey nodig heeft is niet geïnstalleerd. In de README staat wat je per soort bestand moet installeren.
+A program Joey needs is missing	Een programma dat Joey nodig heeft ontbreekt
+Install it (the README lists them), then try again.	Installeer het (de README noemt ze) en probeer het opnieuw.
+The installed program can't handle this format	Het geïnstalleerde programma kan dit formaat niet aan
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Jouw versie mist dit formaat. Een vollediger versie voegt het toe, bijv. FFmpeg van RPM Fusion op Fedora.
+The disk is full	De schijf is vol
+Free some space, or save in another place.	Maak ruimte vrij, of sla het ergens anders op.
+Joey isn't allowed to write here	Joey mag hier niet schrijven
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Kopieer de bestanden naar een van je mappen (bijv. Documenten) en zet ze daar om.
+Not enough memory	Niet genoeg geheugen
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Het bestand is te groot voor het vrije geheugen. Sluit andere apps of zet minder bestanden tegelijk om.
+Blocked by a safety limit	Geblokkeerd door een veiligheidslimiet
+The image is larger than the limit set by ImageMagick's security policy.	De afbeelding is groter dan de limiet van het beveiligingsbeleid van ImageMagick.
+Unexpected error	Onverwachte fout
+This is a bug in Joey. Please report it.	Dit is een fout in Joey. Meld het alsjeblieft.
+The conversion program failed	Het omzetprogramma is mislukt
+Please report it: the details tell us why.	Meld het alsjeblieft: de details vertellen ons waarom.
+Close (Esc)	Sluiten (Esc)
+{keys} is ready in {fm}	{keys} is klaar in {fm}
+Change the shortcuts	Sneltoetsen wijzigen
+Set up the shortcuts	Sneltoetsen instellen
+Welcome to Joey	Welkom bij Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Twee sneltoetsen openen Joey. Houd deze, of kies je eigen.
+In the file manager	In de bestandsbeheerder
+Select files, then press	Selecteer bestanden en druk dan op
+Anywhere, desktop included	Overal, ook op het bureaublad
+Copy files with Ctrl+C, then press	Kopieer bestanden met Ctrl+C en druk dan op
+Change	Wijzigen
+Press the keys… (Esc cancels)	Druk de toetsen in… (Esc annuleert)
+Use Alt or Meta (the Windows key) with a letter or a number	Gebruik Alt of Meta (de Windows-toets) met een letter of cijfer
+That's already the other shortcut	Dat is al de andere sneltoets
+Later	Later
+Turn on	Inschakelen
+Ready	Klaar
+Start	Beginnen
+Ideas or problems? Tell us	Ideeën of problemen? Laat het ons weten
+Report the problem	Het probleem melden
+You see the report before anything is sent	Je ziet de melding voordat er iets verstuurd wordt
+Feedback	Feedback
+Last time Joey closed because of an error	Vorige keer sloot Joey door een fout
+Report	Melden
+What were you doing?	Wat was je aan het doen?
+(optional) Write it here.	(optioneel) Schrijf het hier.
+Your idea, request or opinion	Je idee, verzoek of mening
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Er wordt niets vanzelf verstuurd. Lees de tekst, wijzig of verwijder wat je wilt: je bestandsnamen en gebruikersnaam zijn al verborgen.
+Title, in a few words	Titel, in een paar woorden
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Versturen opent GitHub in je browser, waar je alles nog eens controleert: een gratis account is nodig. Zonder account kopieer je de tekst en stuur je hem zoals je wilt.
+Copy	Kopiëren
+Open on GitHub	Openen op GitHub
+Send by email	Versturen per e-mail
+Copied	Gekopieerd
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	De tekst is lang: GitHub opent met het begin. De hele tekst is gekopieerd: vervang hem met Ctrl+V.
+Markdown for AI apps	Markdown voor AI-apps
+Compress to a size…	Comprimeren tot een grootte…
+At most	Hoogstens
+Joey lowers the quality just enough	Joey verlaagt de kwaliteit net zoveel als nodig
+{before} → {after}, {percent}% smaller	{before} → {after}, {percent}% kleiner
+Removed: {what}	Verwijderd: {what}
+No hidden details were found	Geen verborgen gegevens gevonden
+place	plaats
+date and time	datum en tijd
+camera or device	camera of apparaat
+author	auteur
+software used	gebruikte software
+title and tags	titel en tags
+Use Joey from an AI app	Joey gebruiken vanuit een AI-app
+Copies the setup for apps that support MCP	Kopieert de instelling voor apps die MCP ondersteunen
+Copied: paste it in your AI app's MCP settings	Gekopieerd: plak het in de MCP-instellingen van je AI-app
+The PDF has no text	De PDF bevat geen tekst
+Its pages are pictures, as in a scan: there is no text to read.	De pagina's zijn afbeeldingen, zoals bij een scan: er is geen tekst om te lezen.
+Already smaller than that	Al kleiner dan dat
+The file is already under the size you chose: nothing to do.	Het bestand is al kleiner dan de gekozen grootte: er is niets te doen.
+Can't make it that small	Zo klein lukt niet
+Even at the lowest quality it stays bigger. Choose a larger size.	Zelfs met de laagste kwaliteit blijft het groter. Kies een grotere grootte.

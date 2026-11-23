@@ -29,6 +29,13 @@ if target/release/joey --engines | grep -q imagemagick; then
     target/release/joey "$tmp/photo.jpg" --to png
     test -s "$tmp/photo.png"
 fi
+# A PDF as Markdown for AI apps: the details on top, the table as a table.
+cp crates/joey-core/tests/fixtures/invoice.pdf "$tmp/"
+if target/release/joey --engines | grep -q pdf-markdown; then
+    target/release/joey "$tmp/invoice.pdf" --to md
+    grep -q "^pages: 1" "$tmp/invoice.md"
+    grep -q "| Product | Qty | Price |" "$tmp/invoice.md"
+fi
 # A missing file must fail with its error code, not crash.
 if target/release/joey /nonexistent.jpg --to png 2>"$tmp/err"; then
     echo "a missing file should fail" >&2
@@ -40,9 +47,10 @@ step "AI server (MCP)"
 printf '%s\n' \
     '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18"}}' \
     '{"jsonrpc":"2.0","id":2,"method":"tools/list"}' \
-    "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"joey_inspect\",\"arguments\":{\"paths\":[\"$tmp/photo.jpg\"]}}}" |
+    "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"joey_inspect\",\"arguments\":{\"paths\":[\"$tmp/photo.jpg\"]}}}" \
+    "{\"jsonrpc\":\"2.0\",\"id\":4,\"method\":\"tools/call\",\"params\":{\"name\":\"joey_tool\",\"arguments\":{\"tool\":\"compress-to\",\"paths\":[\"$tmp/photo.jpg\"],\"size_mb\":5}}}" |
     target/release/joey --mcp >"$tmp/mcp"
-for want in '"serverInfo"' joey_convert '"format":"jpg"'; do
+for want in '"serverInfo"' joey_convert '"format":"jpg"' E113; do
     grep -q "$want" "$tmp/mcp" || { cut -c1-200 "$tmp/mcp"; echo "MCP answer lacks $want" >&2; exit 1; }
 done
 echo "MCP answers correctly"

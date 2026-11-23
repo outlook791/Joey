@@ -130,3 +130,13 @@ window.joey.touch .close-x {
   min-width: 40px;
   min-height: 40px;
 }
+
+/* Keys of a shortcut on the first-start screen: "Meta + C". */
+.keycap {
+  font-size: 0.9em;
+  padding: 2px 7px;
+  min-width: 14px;
+  border: 1px solid alpha(currentColor, 0.25);
+  border-radius: 6px;
+  box-shadow: inset 0 -2px alpha(currentColor, 0.12);
+}

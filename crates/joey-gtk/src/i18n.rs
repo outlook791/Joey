@@ -23,6 +23,12 @@ const CATALOGS: &[(&str, &str)] = &[
     ("ja", include_str!("../i18n/ja.tsv")),
     ("mr", include_str!("../i18n/mr.tsv")),
     ("vi", include_str!("../i18n/vi.tsv")),
+    ("pl", include_str!("../i18n/pl.tsv")),
+    ("tr", include_str!("../i18n/tr.tsv")),
+    ("ko", include_str!("../i18n/ko.tsv")),
+    ("uk", include_str!("../i18n/uk.tsv")),
+    ("nl", include_str!("../i18n/nl.tsv")),
+    ("cs", include_str!("../i18n/cs.tsv")),
 ];
 
 /// The language code of the interface ("it", "zh"…), from the usual

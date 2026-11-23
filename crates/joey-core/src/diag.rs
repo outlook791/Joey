@@ -200,6 +200,9 @@ pub const CODES: &[Code] = &[
     code("E109", "The archive is empty", "There is nothing inside to extract."),
     code("E110", "Those pages don't exist", "Check the page numbers: the document has fewer pages."),
     code("E111", "Already as small as it gets", "Compressing it more wouldn't make it smaller."),
+    code("E112", "The PDF has no text", "Its pages are pictures, as in a scan: there is no text to read."),
+    code("E113", "Already smaller than that", "The file is already under the size you chose: nothing to do."),
+    code("E114", "Can't make it that small", "Even at the lowest quality it stays bigger. Choose a larger size."),
     code("E201", "Not possible on this computer", "A program Joey needs isn't installed. The README lists what to install for each kind of file."),
     code("E202", "A program Joey needs is missing", "Install it (the README lists them), then try again."),
     code("E203", "The installed program can't handle this format", "Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora."),
@@ -286,6 +289,12 @@ pub fn classify_text(text: &str) -> Code {
         "E107"
     } else if has(&["no tables found"]) {
         "E108"
+    } else if has(&["has no text: its pages are pictures"]) {
+        "E112"
+    } else if has(&["already smaller than that"]) {
+        "E113"
+    } else if has(&["can't make it that small"]) {
+        "E114"
     } else if has(&["archive is empty"]) {
         "E109"
     } else if has(&["check the page numbers"]) {

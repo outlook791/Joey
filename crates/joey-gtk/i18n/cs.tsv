@@ -1,0 +1,263 @@
+# Čeština. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Přetáhněte soubory sem
+Choose files…	Vybrat soubory…
+Choose files to convert	Vyberte soubory k převodu
+Esc to close	Esc zavře
+1 file	1 soubor
+{n} files	Souborů: {n}
+{n} {fmt} files	Souborů {fmt}: {n}
+{n} more…	Další: {n}…
+Quick tools	Rychlé nástroje
+Convert	Převést
+Adjust	Upravit
+Enter	Enter
+PDF · one image per page	PDF · jeden obrázek na stránku
+image	obrázek
+drawing	kresba
+audio	zvuk
+video	video
+PDF	PDF
+document	dokument
+spreadsheet	tabulka
+presentation	prezentace
+folders aren't supported yet	složky zatím nejsou podporované
+not found	nenalezeno
+file type not recognised	typ souboru nerozpoznán
+nothing to convert {fmt} to here	{fmt} tu nelze na nic převést
+Compress	Komprimovat
+Remove metadata	Odstranit metadata
+Merge into one PDF	Sloučit do jednoho PDF
+Join into one track	Spojit do jedné stopy
+Even out the volume	Vyrovnat hlasitost
+Remove the sound	Odstranit zvuk
+Converting…	Převádí se…
+Converting {name}…	Převádí se {name}…
+Converting {i} of {n}…	Převádí se {i} z {n}…
+Nothing converted	Nic nebylo převedeno
+1 file ready	1 soubor hotov
+{n} files ready	Hotových souborů: {n}
+Next to the originals	Vedle originálů
+Show in folder	Zobrazit ve složce
+Close	Zavřít
+Back to the menu	Zpět do nabídky
+Other files	Jiné soubory
+unexpected error	neočekávaná chyba
+{tool} couldn't convert it	{tool} to nedokázal převést
+already as small as it gets	už je tak malý, jak to jde
+the file has no audio track	soubor nemá zvukovou stopu
+Back	Zpět
+Reset to defaults	Obnovit výchozí
+Remember these settings	Zapamatovat si tato nastavení
+Advanced	Pokročilé
+No settings for this one.	Pro tuto volbu nejsou žádná nastavení.
+Estimated size: {size}	Odhadovaná velikost: {size}
+Size can't be estimated for this conversion	Velikost tohoto převodu nelze odhadnout
+Quality	Kvalita
+Lower quality makes smaller files	Nižší kvalita dává menší soubory
+Low	Nízká
+Medium	Střední
+High (recommended)	Vysoká (doporučeno)
+Maximum	Nejvyšší
+Size	Velikost
+Longest side. Never enlarges.	Delší strana. Nikdy nezvětšuje.
+Original	Původní
+Very large · 3840 px	Velmi velká · 3840 px
+Large · 1920 px	Velká · 1920 px
+Medium · 1280 px	Střední · 1280 px
+Small · 800 px	Malá · 800 px
+Remove camera and location info	Odstranit údaje o fotoaparátu a poloze
+Date, place and camera model saved inside the photo	Datum, místo a model fotoaparátu uložené ve fotce
+Channels	Kanály
+Mono halves the size; fine for voice	Mono zmenší velikost na polovinu; stačí na řeč
+Mono	Mono
+Stereo	Stereo
+Bitrate	Datový tok
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Data za sekundu: víc znamená lepší zvuk a větší soubor. Nahrazuje Kvalitu.
+Automatic	Automaticky
+Sample rate	Vzorkovací frekvence
+How often the sound is measured each second. Change it only if a device asks.	Kolikrát za sekundu se zvuk měří. Měňte jen tehdy, když to zařízení vyžaduje.
+44.1 kHz · CD	44,1 kHz · CD
+48 kHz · video	48 kHz · video
+Remove song info	Odstranit údaje o skladbě
+Title, artist, album and similar tags	Název, interpret, album a podobné štítky
+Resolution	Rozlišení
+Smaller resolution, much smaller file	Menší rozlišení, mnohem menší soubor
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Malé · 480p
+Keep the sound	Zachovat zvuk
+Frames per second	Snímky za sekundu
+How smooth the motion is. 30 is fine for most videos.	Jak plynulý je pohyb. Pro většinu videí stačí 30.
+Remove video info	Odstranit údaje o videu
+Date, place and device saved inside the video	Datum, místo a zařízení uložené ve videu
+Width	Šířka
+Small · 320 px	Malá · 320 px
+Medium · 480 px	Střední · 480 px
+Large · 720 px	Velká · 720 px
+Pages	Stránky
+For example 1-3, 7. Empty means all.	Například 1-3, 7. Prázdné znamená všechny.
+all	všechny
+Sharpness	Ostrost
+Dots per inch: higher is sharper and bigger	Body na palec: víc je ostřejší a větší
+Screen · 72 dpi	Obrazovka · 72 dpi
+Normal · 150 dpi	Běžná · 150 dpi
+Print · 300 dpi	Tisk · 300 dpi
+Very sharp · 600 dpi	Velmi ostrá · 600 dpi
+Set up Alt+C in your file manager	Nastavit Alt+C ve správci souborů
+Select files, press Alt+C, pick a format	Vyberte soubory, stiskněte Alt+C, zvolte formát
+Alt+C is ready in {fm}	Alt+C je připraveno v {fm}
+Right-click → Convert with Joey works in {fm}	Pravé tlačítko → Převést pomocí Joey funguje v {fm}
+Log out and back in once to use them	Pro použití se jednou odhlaste a znovu přihlaste
+No supported file manager found	Nebyl nalezen podporovaný správce souborů
+Convert with Joey	Převést pomocí Joey
+subtitles	titulky
+archive	archiv
+other	jiné
+{n} other items	Další položky: {n}
+File actions	Akce se soubory
+Copy the path	Kopírovat cestu
+Copy to…	Kopírovat do…
+Move to…	Přesunout do…
+Open a terminal here	Otevřít tu terminál
+Put in a ZIP	Zabalit do ZIP
+Choose a folder	Vyberte složku
+Terminal opened	Terminál otevřen
+Path copied	Cesta zkopírována
+In the folder you chose	Ve vybrané složce
+Rotate left	Otočit doleva
+Rotate right	Otočit doprava
+Black and white	Černobílé
+Crop to a shape…	Oříznout na tvar…
+Trim…	Zkrátit…
+Split into pages	Rozdělit na stránky
+Keep only some pages…	Ponechat jen některé stránky…
+Protect with a password…	Chránit heslem…
+Remove the password…	Odstranit heslo…
+Extract here	Rozbalit sem
+Join into one video	Spojit do jednoho videa
+From	Od
+To	Do
+For example 0:30 and 1:45. Only that part is kept.	Například 0:30 a 1:45. Zůstane jen tato část.
+For example 1-3, 7. Only these pages are kept.	Například 1-3, 7. Zůstanou jen tyto stránky.
+Shape	Tvar
+The middle of the picture is kept	Zůstane střed obrázku
+Square · 1:1	Čtverec · 1:1
+Portrait · 4:5	Na výšku · 4:5
+Photo · 3:2	Fotka · 3:2
+Classic · 4:3	Klasický · 4:3
+Wide · 16:9	Široký · 16:9
+Story · 9:16	Příběh · 9:16
+Password	Heslo
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Je potřeba k otevření PDF. Dobře ho uschovejte: nelze ho obnovit.
+The password that opens this PDF now.	Heslo, kterým se toto PDF teď otevírá.
+wrong password	špatné heslo
+the archive is empty	archiv je prázdný
+Text (TXT)	Text (TXT)
+Web page (HTML)	Webová stránka (HTML)
+Send to {device}	Poslat do {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Kdekoli, i na ploše: Ctrl+C, pak {keys}
+Send with LocalSend…	Poslat přes LocalSend…
+Sent to {device}	Posláno do {device}
+{device} didn't answer	{device} neodpovídá
+Opened in LocalSend: pick the device there	Otevřeno v LocalSend: vyberte tam zařízení
+no tables found in this PDF	v tomto PDF nebyly nalezeny tabulky
+no pages to convert (check the page numbers)	žádné stránky k převodu (zkontrolujte čísla stránek)
+the PDF looks damaged or empty	PDF vypadá poškozené nebo prázdné
+File not found	Soubor nenalezen
+It was moved or deleted after you selected it. Select it again.	Po výběru byl přesunut nebo smazán. Vyberte ho znovu.
+This is a folder	Toto je složka
+Select the files inside it, or use Put in a ZIP.	Vyberte soubory v ní, nebo použijte Zabalit do ZIP.
+File type not recognised	Typ souboru nerozpoznán
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey čte obsah souboru, ne jeho název, a tento obsah není formát, který zná.
+Damaged or incomplete file	Poškozený nebo neúplný soubor
+Check that it opens in another app. If you downloaded it, download it again.	Zkontrolujte, zda se otevře v jiné aplikaci. Pokud jste ho stáhli, stáhněte ho znovu.
+The file is protected by a password	Soubor je chráněn heslem
+Remove the password first, then convert it.	Nejdřív odstraňte heslo, pak ho převeďte.
+Wrong password	Špatné heslo
+Check the password and try again.	Zkontrolujte heslo a zkuste to znovu.
+The file has no sound	Soubor nemá zvuk
+This video has no audio track to extract.	Toto video nemá zvukovou stopu k vytažení.
+No tables found in the PDF	V PDF nebyly nalezeny tabulky
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey umí číst tabulky jen z PDF vytvořených na počítači; naskenované stránky jsou obrázky.
+The archive is empty	Archiv je prázdný
+There is nothing inside to extract.	Uvnitř není nic k rozbalení.
+Those pages don't exist	Tyto stránky neexistují
+Check the page numbers: the document has fewer pages.	Zkontrolujte čísla stránek: dokument má méně stránek.
+Already as small as it gets	Už je tak malý, jak to jde
+Compressing it more wouldn't make it smaller.	Další komprese by ho nezmenšila.
+Not possible on this computer	Na tomto počítači to nejde
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Program, který Joey potřebuje, není nainstalovaný. README uvádí, co nainstalovat pro každý druh souborů.
+A program Joey needs is missing	Chybí program, který Joey potřebuje
+Install it (the README lists them), then try again.	Nainstalujte ho (README je uvádí) a zkuste to znovu.
+The installed program can't handle this format	Nainstalovaný program tento formát nezvládne
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Vaší verzi tento formát chybí. Úplnější verze ho přidává, např. FFmpeg z RPM Fusion ve Fedoře.
+The disk is full	Disk je plný
+Free some space, or save in another place.	Uvolněte místo nebo uložte jinam.
+Joey isn't allowed to write here	Joey sem nesmí zapisovat
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Zkopírujte soubory do některé své složky (např. Dokumenty) a převeďte je tam.
+Not enough memory	Nedostatek paměti
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Soubor je na volnou paměť příliš velký. Zavřete jiné aplikace nebo převádějte méně souborů najednou.
+Blocked by a safety limit	Zablokováno bezpečnostním limitem
+The image is larger than the limit set by ImageMagick's security policy.	Obrázek překračuje limit nastavený bezpečnostní politikou ImageMagick.
+Unexpected error	Neočekávaná chyba
+This is a bug in Joey. Please report it.	Toto je chyba v Joey. Nahlaste ji, prosím.
+The conversion program failed	Převodní program selhal
+Please report it: the details tell us why.	Nahlaste to, prosím: podrobnosti nám řeknou proč.
+Close (Esc)	Zavřít (Esc)
+{keys} is ready in {fm}	{keys} je připraveno v {fm}
+Change the shortcuts	Změnit zkratky
+Set up the shortcuts	Nastavit zkratky
+Welcome to Joey	Vítejte v Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Joey otevírají dvě zkratky. Ponechte tyto, nebo si zvolte vlastní.
+In the file manager	Ve správci souborů
+Select files, then press	Vyberte soubory a stiskněte
+Anywhere, desktop included	Kdekoli, i na ploše
+Copy files with Ctrl+C, then press	Zkopírujte soubory přes Ctrl+C a stiskněte
+Change	Změnit
+Press the keys… (Esc cancels)	Stiskněte klávesy… (Esc ruší)
+Use Alt or Meta (the Windows key) with a letter or a number	Použijte Alt nebo Meta (klávesa Windows) s písmenem nebo číslicí
+That's already the other shortcut	To už je ta druhá zkratka
+Later	Později
+Turn on	Zapnout
+Ready	Hotovo
+Start	Začít
+Ideas or problems? Tell us	Nápady nebo potíže? Napište nám
+Report the problem	Nahlásit problém
+You see the report before anything is sent	Hlášení uvidíte dřív, než se cokoli odešle
+Feedback	Zpětná vazba
+Last time Joey closed because of an error	Minule se Joey zavřel kvůli chybě
+Report	Nahlásit
+What were you doing?	Co jste dělali?
+(optional) Write it here.	(nepovinné) Napište to sem.
+Your idea, request or opinion	Váš nápad, prosba nebo názor
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Nic se neodešle samo. Přečtěte si text, změňte nebo odstraňte, co chcete: názvy souborů a uživatelské jméno jsou už skryté.
+Title, in a few words	Název, pár slovy
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Odeslání otevře GitHub v prohlížeči, kde vše ještě jednou zkontrolujete: je potřeba bezplatný účet. Bez něj zkopírujte text a pošlete ho, jak chcete.
+Copy	Kopírovat
+Open on GitHub	Otevřít na GitHubu
+Send by email	Poslat e-mailem
+Copied	Zkopírováno
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Text je dlouhý: GitHub se otevře s jeho začátkem. Celý text je zkopírovaný: nahraďte ho pomocí Ctrl+V.
+Markdown for AI apps	Markdown pro aplikace s AI
+Compress to a size…	Komprimovat na velikost…
+At most	Nejvýše
+Joey lowers the quality just enough	Joey sníží kvalitu jen tolik, kolik je potřeba
+{before} → {after}, {percent}% smaller	{before} → {after}, o {percent} % menší
+Removed: {what}	Odstraněno: {what}
+No hidden details were found	Nebyly nalezeny žádné skryté údaje
+place	místo
+date and time	datum a čas
+camera or device	fotoaparát nebo zařízení
+author	autor
+software used	použitý program
+title and tags	název a štítky
+Use Joey from an AI app	Používat Joey z aplikace s AI
+Copies the setup for apps that support MCP	Zkopíruje nastavení pro aplikace podporující MCP
+Copied: paste it in your AI app's MCP settings	Zkopírováno: vložte do nastavení MCP své aplikace s AI
+The PDF has no text	PDF neobsahuje text
+Its pages are pictures, as in a scan: there is no text to read.	Jeho stránky jsou obrázky, jako u skenu: není co číst.
+Already smaller than that	Už je menší
+The file is already under the size you chose: nothing to do.	Soubor už je pod zvolenou velikostí: není co dělat.
+Can't make it that small	Tak malý být nemůže
+Even at the lowest quality it stays bigger. Choose a larger size.	I při nejnižší kvalitě zůstává větší. Zvolte větší velikost.

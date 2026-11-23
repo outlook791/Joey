@@ -239,3 +239,25 @@ Open on GitHub	Mở trên GitHub
 Send by email	Gửi qua email
 Copied	Đã sao chép
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Văn bản dài: GitHub mở với phần đầu. Toàn bộ văn bản đã được sao chép: thay bằng Ctrl+V.
+Markdown for AI apps	Markdown cho ứng dụng AI
+Compress to a size…	Nén xuống một kích thước…
+At most	Tối đa
+Joey lowers the quality just enough	Joey chỉ giảm chất lượng vừa đủ
+{before} → {after}, {percent}% smaller	{before} → {after}, nhỏ hơn {percent}%
+Removed: {what}	Đã xóa: {what}
+No hidden details were found	Không có dữ liệu ẩn nào
+place	địa điểm
+date and time	ngày và giờ
+camera or device	máy ảnh hoặc thiết bị
+author	tác giả
+software used	phần mềm đã dùng
+title and tags	tiêu đề và thẻ
+Use Joey from an AI app	Dùng Joey từ ứng dụng AI
+Copies the setup for apps that support MCP	Sao chép thiết lập cho ứng dụng hỗ trợ MCP
+Copied: paste it in your AI app's MCP settings	Đã sao chép: dán vào cài đặt MCP của ứng dụng AI
+The PDF has no text	PDF không có văn bản
+Its pages are pictures, as in a scan: there is no text to read.	Các trang là hình ảnh, như bản scan: không có văn bản để đọc.
+Already smaller than that	Đã nhỏ hơn mức đó
+The file is already under the size you chose: nothing to do.	Tệp đã dưới kích thước bạn chọn: không cần làm gì.
+Can't make it that small	Không thể nén nhỏ đến vậy
+Even at the lowest quality it stays bigger. Choose a larger size.	Ngay cả ở chất lượng thấp nhất vẫn lớn hơn. Hãy chọn kích thước lớn hơn.

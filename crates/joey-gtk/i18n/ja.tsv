@@ -239,3 +239,25 @@ Open on GitHub	GitHub で開く
 Send by email	メールで送る
 Copied	コピーしました
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	文章が長いため、GitHub は冒頭だけで開きます。全文はコピー済みです: Ctrl+V で置き換えてください。
+Markdown for AI apps	AI アプリ向け Markdown
+Compress to a size…	サイズを指定して圧縮…
+At most	上限
+Joey lowers the quality just enough	Joey は必要な分だけ品質を下げます
+{before} → {after}, {percent}% smaller	{before} → {after}、{percent}% 削減
+Removed: {what}	削除した情報: {what}
+No hidden details were found	隠れた情報はありませんでした
+place	場所
+date and time	日付と時刻
+camera or device	カメラや機器
+author	作成者
+software used	使用したソフトウェア
+title and tags	タイトルとタグ
+Use Joey from an AI app	AI アプリから Joey を使う
+Copies the setup for apps that support MCP	MCP 対応アプリ用の設定をコピーします
+Copied: paste it in your AI app's MCP settings	コピーしました: AI アプリの MCP 設定に貼り付けてください
+The PDF has no text	この PDF には文字がありません
+Its pages are pictures, as in a scan: there is no text to read.	ページはスキャンのような画像で、読み取れる文字がありません。
+Already smaller than that	すでにそれより小さいです
+The file is already under the size you chose: nothing to do.	ファイルはすでに選んだサイズより小さいので、何もしません。
+Can't make it that small	そこまで小さくできません
+Even at the lowest quality it stays bigger. Choose a larger size.	最低の品質でも大きいままです。もっと大きいサイズを選んでください。

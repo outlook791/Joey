@@ -1,6 +1,6 @@
 //! The one question some quick tools need: from when to when (trim),
-//! which pages, which shape (crop), which password. One small screen,
-//! then Convert.
+//! which pages, which shape (crop), which password, how small. One small
+//! screen, then Convert.
 
 use std::rc::Rc;
 
@@ -22,6 +22,37 @@ const SHAPES: [(&str, u32, u32); 6] = [
     ("Story · 9:16", 9, 16),
 ];
 
+/// Sizes offered by "Compress to a size…", in bytes.
+const SIZES: [u64; 8] = [
+    500_000,
+    1_000_000,
+    2_000_000,
+    5_000_000,
+    10_000_000,
+    25_000_000,
+    50_000_000,
+    100_000_000,
+];
+
+fn size_label(bytes: u64) -> String {
+    if bytes >= 1_000_000 {
+        format!("{} MB", bytes / 1_000_000)
+    } else {
+        format!("{} KB", bytes / 1_000)
+    }
+}
+
+/// The size first offered: the largest one well under the files' own.
+fn default_size(g: &crate::Group) -> u64 {
+    let each = g.bytes / g.files.len().max(1) as u64;
+    SIZES
+        .iter()
+        .rev()
+        .find(|s| **s * 10 <= each * 8)
+        .copied()
+        .unwrap_or(SIZES[0])
+}
+
 /// Whether this group still needs an answer before it can run.
 pub fn missing(g: &crate::Group) -> bool {
     let Choice::Tool(tool) = g.choice() else {
@@ -33,6 +64,7 @@ pub fn missing(g: &crate::Group) -> bool {
         Ask::TimeRange => !matches!(p.trim, Some((a, b)) if b > a),
         Ask::Pages => p.pages.as_deref().is_none_or(|s| s.trim().is_empty()),
         Ask::Shape => p.shape.is_none(),
+        Ask::TargetSize => p.target.is_none(),
         Ask::Password => {
             tool == Tool::ProtectPdf && p.password.as_deref().is_none_or(str::is_empty)
         }
@@ -45,16 +77,21 @@ pub fn show(ui: &Rc<Ui>, gi: usize) {
     while let Some(child) = page.first_child() {
         page.remove(&child);
     }
-    let (title, tool, params) = {
+    let (title, tool, params, size) = {
         let st = ui.state.borrow();
         let g = &st.groups[gi];
         let Choice::Tool(tool) = g.choice() else {
             return;
         };
         (
-            format!("{} → {}", glib_escape(&g.name()), choice_label(g.choice())),
+            format!(
+                "{} → {}",
+                glib_escape(&g.name()),
+                choice_label(g.from, g.choice())
+            ),
             tool,
             g.params.clone(),
+            default_size(g),
         )
     };
     let pg = adw::PreferencesGroup::builder().title(title).build();
@@ -145,6 +182,26 @@ pub fn show(ui: &Rc<Ui>, gi: usize) {
             } else {
                 t("The password that opens this PDF now.")
             }));
+        }
+        Ask::TargetSize => {
+            let labels: Vec<String> = SIZES.iter().map(|b| size_label(*b)).collect();
+            let strs: Vec<&str> = labels.iter().map(String::as_str).collect();
+            let chosen = params.target.unwrap_or(size);
+            let selected = SIZES.iter().position(|b| *b == chosen).unwrap_or(0);
+            let row = adw::ComboRow::builder()
+                .title(t("At most"))
+                .subtitle(t("Joey lowers the quality just enough"))
+                .model(&gtk::StringList::new(&strs))
+                .selected(selected as u32)
+                .build();
+            let first = SIZES[selected];
+            set(&|p| p.target = Some(first));
+            let set = set.clone();
+            row.connect_selected_notify(move |r| {
+                let b = SIZES[r.selected() as usize];
+                set(&|p| p.target = Some(b));
+            });
+            pg.add(&row);
         }
         Ask::Nothing => {}
     }

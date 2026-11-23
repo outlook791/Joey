@@ -1,0 +1,263 @@
+# Українська. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Перетягніть файли сюди
+Choose files…	Вибрати файли…
+Choose files to convert	Виберіть файли для перетворення
+Esc to close	Esc — закрити
+1 file	1 файл
+{n} files	Файлів: {n}
+{n} {fmt} files	Файлів {fmt}: {n}
+{n} more…	Ще {n}…
+Quick tools	Швидкі інструменти
+Convert	Перетворити
+Adjust	Налаштувати
+Enter	Enter
+PDF · one image per page	PDF · одне зображення на сторінку
+image	зображення
+drawing	малюнок
+audio	аудіо
+video	відео
+PDF	PDF
+document	документ
+spreadsheet	таблиця
+presentation	презентація
+folders aren't supported yet	теки поки не підтримуються
+not found	не знайдено
+file type not recognised	тип файлу не розпізнано
+nothing to convert {fmt} to here	тут {fmt} нема на що перетворити
+Compress	Стиснути
+Remove metadata	Вилучити метадані
+Merge into one PDF	Об'єднати в один PDF
+Join into one track	Об'єднати в одну доріжку
+Even out the volume	Вирівняти гучність
+Remove the sound	Прибрати звук
+Converting…	Перетворення…
+Converting {name}…	Перетворюється {name}…
+Converting {i} of {n}…	Перетворюється {i} з {n}…
+Nothing converted	Нічого не перетворено
+1 file ready	1 файл готовий
+{n} files ready	Готово файлів: {n}
+Next to the originals	Поруч з оригіналами
+Show in folder	Показати в теці
+Close	Закрити
+Back to the menu	Назад до меню
+Other files	Інші файли
+unexpected error	неочікувана помилка
+{tool} couldn't convert it	{tool} не вдалося перетворити
+already as small as it gets	вже мінімальний розмір
+the file has no audio track	у файлі немає звукової доріжки
+Back	Назад
+Reset to defaults	Скинути налаштування
+Remember these settings	Запам'ятати ці налаштування
+Advanced	Додатково
+No settings for this one.	Для цього налаштувань немає.
+Estimated size: {size}	Приблизний розмір: {size}
+Size can't be estimated for this conversion	Розмір цього перетворення не оцінити
+Quality	Якість
+Lower quality makes smaller files	Нижча якість — менші файли
+Low	Низька
+Medium	Середня
+High (recommended)	Висока (рекомендовано)
+Maximum	Максимальна
+Size	Розмір
+Longest side. Never enlarges.	Довша сторона. Ніколи не збільшує.
+Original	Оригінальний
+Very large · 3840 px	Дуже великий · 3840 px
+Large · 1920 px	Великий · 1920 px
+Medium · 1280 px	Середній · 1280 px
+Small · 800 px	Малий · 800 px
+Remove camera and location info	Вилучити дані про камеру й місце
+Date, place and camera model saved inside the photo	Дата, місце та модель камери, збережені у фото
+Channels	Канали
+Mono halves the size; fine for voice	Моно вдвічі зменшує розмір; підходить для голосу
+Mono	Моно
+Stereo	Стерео
+Bitrate	Бітрейт
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Дані за секунду: більше — кращий звук і більший файл. Замінює «Якість».
+Automatic	Автоматично
+Sample rate	Частота дискретизації
+How often the sound is measured each second. Change it only if a device asks.	Скільки разів на секунду вимірюється звук. Змінюйте, лише якщо цього вимагає пристрій.
+44.1 kHz · CD	44,1 кГц · CD
+48 kHz · video	48 кГц · відео
+Remove song info	Вилучити дані про пісню
+Title, artist, album and similar tags	Назва, виконавець, альбом і схожі теги
+Resolution	Роздільність
+Smaller resolution, much smaller file	Менша роздільність, набагато менший файл
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Мала · 480p
+Keep the sound	Залишити звук
+Frames per second	Кадрів на секунду
+How smooth the motion is. 30 is fine for most videos.	Наскільки плавний рух. Для більшості відео вистачить 30.
+Remove video info	Вилучити дані про відео
+Date, place and device saved inside the video	Дата, місце та пристрій, збережені у відео
+Width	Ширина
+Small · 320 px	Мала · 320 px
+Medium · 480 px	Середня · 480 px
+Large · 720 px	Велика · 720 px
+Pages	Сторінки
+For example 1-3, 7. Empty means all.	Наприклад 1-3, 7. Порожньо — усі.
+all	усі
+Sharpness	Чіткість
+Dots per inch: higher is sharper and bigger	Точок на дюйм: більше — чіткіше й більше
+Screen · 72 dpi	Екран · 72 dpi
+Normal · 150 dpi	Звичайна · 150 dpi
+Print · 300 dpi	Друк · 300 dpi
+Very sharp · 600 dpi	Дуже чітка · 600 dpi
+Set up Alt+C in your file manager	Налаштувати Alt+C у файловому менеджері
+Select files, press Alt+C, pick a format	Виберіть файли, натисніть Alt+C, виберіть формат
+Alt+C is ready in {fm}	Alt+C готове в {fm}
+Right-click → Convert with Joey works in {fm}	Правий клік → «Перетворити в Joey» працює в {fm}
+Log out and back in once to use them	Щоб ними користуватися, один раз вийдіть із сеансу й увійдіть знову
+No supported file manager found	Не знайдено підтримуваного файлового менеджера
+Convert with Joey	Перетворити в Joey
+subtitles	субтитри
+archive	архів
+other	інше
+{n} other items	Ще елементів: {n}
+File actions	Дії з файлами
+Copy the path	Копіювати шлях
+Copy to…	Копіювати до…
+Move to…	Перемістити до…
+Open a terminal here	Відкрити тут термінал
+Put in a ZIP	Запакувати в ZIP
+Choose a folder	Виберіть теку
+Terminal opened	Термінал відкрито
+Path copied	Шлях скопійовано
+In the folder you chose	У вибраній теці
+Rotate left	Повернути ліворуч
+Rotate right	Повернути праворуч
+Black and white	Чорно-біле
+Crop to a shape…	Обрізати за формою…
+Trim…	Обрізати за часом…
+Split into pages	Розділити на сторінки
+Keep only some pages…	Залишити лише деякі сторінки…
+Protect with a password…	Захистити паролем…
+Remove the password…	Прибрати пароль…
+Extract here	Розпакувати сюди
+Join into one video	Об'єднати в одне відео
+From	Від
+To	До
+For example 0:30 and 1:45. Only that part is kept.	Наприклад 0:30 і 1:45. Залишиться лише цей фрагмент.
+For example 1-3, 7. Only these pages are kept.	Наприклад 1-3, 7. Залишаться лише ці сторінки.
+Shape	Форма
+The middle of the picture is kept	Залишається середина зображення
+Square · 1:1	Квадрат · 1:1
+Portrait · 4:5	Портрет · 4:5
+Photo · 3:2	Фото · 3:2
+Classic · 4:3	Класика · 4:3
+Wide · 16:9	Широкий · 16:9
+Story · 9:16	Сторіс · 9:16
+Password	Пароль
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Потрібен, щоб відкрити PDF. Зберігайте його надійно: відновити неможливо.
+The password that opens this PDF now.	Пароль, яким зараз відкривається цей PDF.
+wrong password	неправильний пароль
+the archive is empty	архів порожній
+Text (TXT)	Текст (TXT)
+Web page (HTML)	Вебсторінка (HTML)
+Send to {device}	Надіслати на {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Будь-де, зокрема на стільниці: Ctrl+C, потім {keys}
+Send with LocalSend…	Надіслати через LocalSend…
+Sent to {device}	Надіслано на {device}
+{device} didn't answer	{device} не відповідає
+Opened in LocalSend: pick the device there	Відкрито в LocalSend: виберіть пристрій там
+no tables found in this PDF	у цьому PDF не знайдено таблиць
+no pages to convert (check the page numbers)	немає сторінок для перетворення (перевірте номери сторінок)
+the PDF looks damaged or empty	PDF, схоже, пошкоджений або порожній
+File not found	Файл не знайдено
+It was moved or deleted after you selected it. Select it again.	Його перемістили або видалили після вибору. Виберіть його знову.
+This is a folder	Це тека
+Select the files inside it, or use Put in a ZIP.	Виберіть файли в ній або скористайтеся «Запакувати в ZIP».
+File type not recognised	Тип файлу не розпізнано
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey читає вміст файлу, а не його назву, і цей вміст — не відомий йому формат.
+Damaged or incomplete file	Пошкоджений або неповний файл
+Check that it opens in another app. If you downloaded it, download it again.	Перевірте, чи він відкривається в іншій програмі. Якщо ви його завантажили, завантажте знову.
+The file is protected by a password	Файл захищено паролем
+Remove the password first, then convert it.	Спершу приберіть пароль, потім перетворіть.
+Wrong password	Неправильний пароль
+Check the password and try again.	Перевірте пароль і спробуйте знову.
+The file has no sound	У файлі немає звуку
+This video has no audio track to extract.	У цьому відео немає звукової доріжки, яку можна витягти.
+No tables found in the PDF	У PDF не знайдено таблиць
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey читає таблиці лише з PDF, створених на комп'ютері; відскановані сторінки — це зображення.
+The archive is empty	Архів порожній
+There is nothing inside to extract.	Усередині нічого розпаковувати.
+Those pages don't exist	Таких сторінок немає
+Check the page numbers: the document has fewer pages.	Перевірте номери сторінок: у документі їх менше.
+Already as small as it gets	Вже мінімальний розмір
+Compressing it more wouldn't make it smaller.	Сильніше стиснення його не зменшить.
+Not possible on this computer	Неможливо на цьому комп'ютері
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Не встановлено програму, потрібну Joey. У README сказано, що встановити для кожного типу файлів.
+A program Joey needs is missing	Бракує програми, потрібної Joey
+Install it (the README lists them), then try again.	Встановіть її (список у README) і спробуйте знову.
+The installed program can't handle this format	Встановлена програма не підтримує цей формат
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	У вашій версії немає цього формату. Повніша версія його додає, наприклад FFmpeg з RPM Fusion у Fedora.
+The disk is full	Диск заповнений
+Free some space, or save in another place.	Звільніть місце або збережіть деінде.
+Joey isn't allowed to write here	Joey не має дозволу записувати сюди
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Скопіюйте файли до однієї зі своїх тек (наприклад, «Документи») і перетворіть там.
+Not enough memory	Бракує пам'яті
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Файл завеликий для вільної пам'яті. Закрийте інші програми або перетворюйте менше файлів за раз.
+Blocked by a safety limit	Заблоковано обмеженням безпеки
+The image is larger than the limit set by ImageMagick's security policy.	Зображення перевищує межу політики безпеки ImageMagick.
+Unexpected error	Неочікувана помилка
+This is a bug in Joey. Please report it.	Це помилка в Joey. Будь ласка, повідомте про неї.
+The conversion program failed	Програма перетворення дала збій
+Please report it: the details tell us why.	Будь ласка, повідомте: подробиці підкажуть причину.
+Close (Esc)	Закрити (Esc)
+{keys} is ready in {fm}	{keys} готове в {fm}
+Change the shortcuts	Змінити скорочення
+Set up the shortcuts	Налаштувати скорочення
+Welcome to Joey	Ласкаво просимо до Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Joey відкривають два скорочення. Залиште ці або виберіть свої.
+In the file manager	У файловому менеджері
+Select files, then press	Виберіть файли, потім натисніть
+Anywhere, desktop included	Будь-де, зокрема на стільниці
+Copy files with Ctrl+C, then press	Скопіюйте файли через Ctrl+C, потім натисніть
+Change	Змінити
+Press the keys… (Esc cancels)	Натисніть клавіші… (Esc скасовує)
+Use Alt or Meta (the Windows key) with a letter or a number	Використовуйте Alt або Meta (клавіша Windows) з літерою чи цифрою
+That's already the other shortcut	Це вже інше скорочення
+Later	Пізніше
+Turn on	Увімкнути
+Ready	Готово
+Start	Почати
+Ideas or problems? Tell us	Ідеї чи проблеми? Напишіть нам
+Report the problem	Повідомити про проблему
+You see the report before anything is sent	Ви побачите звіт, перш ніж щось буде надіслано
+Feedback	Відгук
+Last time Joey closed because of an error	Минулого разу Joey закрився через помилку
+Report	Повідомити
+What were you doing?	Що ви робили?
+(optional) Write it here.	(необов'язково) Напишіть тут.
+Your idea, request or opinion	Ваша ідея, прохання чи думка
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Нічого не надсилається само. Прочитайте текст, змініть або видаліть що завгодно: назви файлів та ім'я користувача вже приховано.
+Title, in a few words	Заголовок, кількома словами
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Надсилання відкриє GitHub у браузері, де ви ще раз усе перевірите: потрібен безкоштовний обліковий запис. Без нього скопіюйте текст і надішліть як зручно.
+Copy	Копіювати
+Open on GitHub	Відкрити на GitHub
+Send by email	Надіслати електронною поштою
+Copied	Скопійовано
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Текст довгий: GitHub відкриється з початком. Увесь текст скопійовано: замініть його через Ctrl+V.
+Markdown for AI apps	Markdown для ШІ-застосунків
+Compress to a size…	Стиснути до розміру…
+At most	Не більше
+Joey lowers the quality just enough	Joey знижує якість рівно настільки, наскільки треба
+{before} → {after}, {percent}% smaller	{before} → {after}, менше на {percent}%
+Removed: {what}	Вилучено: {what}
+No hidden details were found	Прихованих даних не знайдено
+place	місце
+date and time	дата й час
+camera or device	камера чи пристрій
+author	автор
+software used	програма
+title and tags	назва й теги
+Use Joey from an AI app	Користуватися Joey з ШІ-застосунку
+Copies the setup for apps that support MCP	Копіює налаштування для застосунків із підтримкою MCP
+Copied: paste it in your AI app's MCP settings	Скопійовано: вставте в налаштування MCP вашого ШІ-застосунку
+The PDF has no text	У PDF немає тексту
+Its pages are pictures, as in a scan: there is no text to read.	Його сторінки — зображення, як у скані: читати нічого.
+Already smaller than that	Вже менший за це
+The file is already under the size you chose: nothing to do.	Файл уже менший за вибраний розмір: робити нічого.
+Can't make it that small	Так сильно зменшити не вийде
+Even at the lowest quality it stays bigger. Choose a larger size.	Навіть за найнижчої якості він більший. Виберіть більший розмір.

@@ -239,3 +239,25 @@ Open on GitHub	Auf GitHub öffnen
 Send by email	Per E-Mail senden
 Copied	Kopiert
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Der Text ist lang: GitHub öffnet sich mit dem Anfang. Der ganze Text ist kopiert: Ersetzen Sie ihn mit Strg+V.
+Markdown for AI apps	Markdown für KI-Apps
+Compress to a size…	Auf eine Größe komprimieren…
+At most	Höchstens
+Joey lowers the quality just enough	Joey senkt die Qualität nur so weit wie nötig
+{before} → {after}, {percent}% smaller	{before} → {after}, {percent} % kleiner
+Removed: {what}	Entfernt: {what}
+No hidden details were found	Keine versteckten Angaben gefunden
+place	Ort
+date and time	Datum und Uhrzeit
+camera or device	Kamera oder Gerät
+author	Autor
+software used	verwendete Software
+title and tags	Titel und Tags
+Use Joey from an AI app	Joey aus einer KI-App nutzen
+Copies the setup for apps that support MCP	Kopiert die Einrichtung für Apps mit MCP
+Copied: paste it in your AI app's MCP settings	Kopiert: in die MCP-Einstellungen Ihrer KI-App einfügen
+The PDF has no text	Das PDF enthält keinen Text
+Its pages are pictures, as in a scan: there is no text to read.	Die Seiten sind Bilder, wie bei einem Scan: Es gibt keinen Text zu lesen.
+Already smaller than that	Schon kleiner als das
+The file is already under the size you chose: nothing to do.	Die Datei ist schon unter der gewählten Größe: Es gibt nichts zu tun.
+Can't make it that small	So klein geht es nicht
+Even at the lowest quality it stays bigger. Choose a larger size.	Selbst bei niedrigster Qualität bleibt sie größer. Wählen Sie eine größere Größe.

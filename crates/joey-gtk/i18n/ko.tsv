@@ -1,0 +1,263 @@
+# 한국어. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	파일을 여기에 놓으세요
+Choose files…	파일 선택…
+Choose files to convert	변환할 파일을 선택하세요
+Esc to close	Esc로 닫기
+1 file	파일 1개
+{n} files	파일 {n}개
+{n} {fmt} files	{fmt} 파일 {n}개
+{n} more…	{n}개 더…
+Quick tools	빠른 도구
+Convert	변환
+Adjust	조정
+Enter	Enter
+PDF · one image per page	PDF · 페이지마다 이미지 한 장
+image	이미지
+drawing	그림
+audio	오디오
+video	동영상
+PDF	PDF
+document	문서
+spreadsheet	스프레드시트
+presentation	프레젠테이션
+folders aren't supported yet	폴더는 아직 지원하지 않습니다
+not found	찾을 수 없음
+file type not recognised	파일 형식을 알 수 없음
+nothing to convert {fmt} to here	여기서는 {fmt}을(를) 변환할 형식이 없습니다
+Compress	압축
+Remove metadata	메타데이터 제거
+Merge into one PDF	PDF 하나로 합치기
+Join into one track	트랙 하나로 합치기
+Even out the volume	음량 고르게 맞추기
+Remove the sound	소리 제거
+Converting…	변환 중…
+Converting {name}…	{name} 변환 중…
+Converting {i} of {n}…	{n}개 중 {i}번째 변환 중…
+Nothing converted	변환된 파일이 없습니다
+1 file ready	파일 1개 완료
+{n} files ready	파일 {n}개 완료
+Next to the originals	원본 옆에 저장됨
+Show in folder	폴더에서 보기
+Close	닫기
+Back to the menu	메뉴로 돌아가기
+Other files	다른 파일
+unexpected error	예기치 않은 오류
+{tool} couldn't convert it	{tool}(으)로 변환하지 못했습니다
+already as small as it gets	이미 최대한 작습니다
+the file has no audio track	파일에 오디오 트랙이 없습니다
+Back	뒤로
+Reset to defaults	기본값으로 되돌리기
+Remember these settings	이 설정 기억하기
+Advanced	고급
+No settings for this one.	이 항목에는 설정이 없습니다.
+Estimated size: {size}	예상 크기: {size}
+Size can't be estimated for this conversion	이 변환은 크기를 예상할 수 없습니다
+Quality	품질
+Lower quality makes smaller files	품질이 낮을수록 파일이 작아집니다
+Low	낮음
+Medium	보통
+High (recommended)	높음 (권장)
+Maximum	최고
+Size	크기
+Longest side. Never enlarges.	긴 쪽 길이. 절대 확대하지 않습니다.
+Original	원본
+Very large · 3840 px	아주 큼 · 3840 px
+Large · 1920 px	큼 · 1920 px
+Medium · 1280 px	보통 · 1280 px
+Small · 800 px	작음 · 800 px
+Remove camera and location info	카메라와 위치 정보 제거
+Date, place and camera model saved inside the photo	사진에 저장된 날짜, 장소, 카메라 모델
+Channels	채널
+Mono halves the size; fine for voice	모노는 크기가 절반이 됩니다. 음성에 충분합니다
+Mono	모노
+Stereo	스테레오
+Bitrate	비트레이트
+Data per second: higher means better sound and a bigger file. Replaces Quality.	초당 데이터: 높을수록 소리가 좋고 파일이 커집니다. 품질 대신 사용됩니다.
+Automatic	자동
+Sample rate	샘플링 레이트
+How often the sound is measured each second. Change it only if a device asks.	1초에 소리를 측정하는 횟수. 기기에서 요구할 때만 바꾸세요.
+44.1 kHz · CD	44.1 kHz · CD
+48 kHz · video	48 kHz · 동영상
+Remove song info	노래 정보 제거
+Title, artist, album and similar tags	제목, 아티스트, 앨범 등의 태그
+Resolution	해상도
+Smaller resolution, much smaller file	해상도가 낮으면 파일이 훨씬 작아집니다
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	작음 · 480p
+Keep the sound	소리 유지
+Frames per second	초당 프레임
+How smooth the motion is. 30 is fine for most videos.	움직임이 얼마나 부드러운지. 대부분의 동영상은 30이면 충분합니다.
+Remove video info	동영상 정보 제거
+Date, place and device saved inside the video	동영상에 저장된 날짜, 장소, 기기
+Width	너비
+Small · 320 px	작음 · 320 px
+Medium · 480 px	보통 · 480 px
+Large · 720 px	큼 · 720 px
+Pages	페이지
+For example 1-3, 7. Empty means all.	예: 1-3, 7. 비워 두면 전체입니다.
+all	전체
+Sharpness	선명도
+Dots per inch: higher is sharper and bigger	인치당 점 수: 높을수록 선명하고 커집니다
+Screen · 72 dpi	화면 · 72 dpi
+Normal · 150 dpi	보통 · 150 dpi
+Print · 300 dpi	인쇄 · 300 dpi
+Very sharp · 600 dpi	아주 선명 · 600 dpi
+Set up Alt+C in your file manager	파일 관리자에서 Alt+C 설정
+Select files, press Alt+C, pick a format	파일을 선택하고 Alt+C를 누른 뒤 형식을 고르세요
+Alt+C is ready in {fm}	{fm}에서 Alt+C를 쓸 수 있습니다
+Right-click → Convert with Joey works in {fm}	{fm}에서 오른쪽 클릭 → Joey로 변환을 쓸 수 있습니다
+Log out and back in once to use them	사용하려면 한 번 로그아웃했다가 다시 로그인하세요
+No supported file manager found	지원되는 파일 관리자를 찾지 못했습니다
+Convert with Joey	Joey로 변환
+subtitles	자막
+archive	압축 파일
+other	기타
+{n} other items	다른 항목 {n}개
+File actions	파일 작업
+Copy the path	경로 복사
+Copy to…	다른 곳에 복사…
+Move to…	다른 곳으로 이동…
+Open a terminal here	여기서 터미널 열기
+Put in a ZIP	ZIP으로 묶기
+Choose a folder	폴더를 선택하세요
+Terminal opened	터미널을 열었습니다
+Path copied	경로를 복사했습니다
+In the folder you chose	선택한 폴더에 저장됨
+Rotate left	왼쪽으로 회전
+Rotate right	오른쪽으로 회전
+Black and white	흑백
+Crop to a shape…	모양에 맞춰 자르기…
+Trim…	구간 자르기…
+Split into pages	페이지별로 나누기
+Keep only some pages…	일부 페이지만 남기기…
+Protect with a password…	비밀번호로 보호…
+Remove the password…	비밀번호 제거…
+Extract here	여기에 압축 풀기
+Join into one video	동영상 하나로 합치기
+From	시작
+To	끝
+For example 0:30 and 1:45. Only that part is kept.	예: 0:30과 1:45. 그 구간만 남습니다.
+For example 1-3, 7. Only these pages are kept.	예: 1-3, 7. 이 페이지만 남습니다.
+Shape	모양
+The middle of the picture is kept	사진의 가운데 부분이 남습니다
+Square · 1:1	정사각형 · 1:1
+Portrait · 4:5	세로 · 4:5
+Photo · 3:2	사진 · 3:2
+Classic · 4:3	클래식 · 4:3
+Wide · 16:9	와이드 · 16:9
+Story · 9:16	스토리 · 9:16
+Password	비밀번호
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF를 열 때 필요합니다. 잘 보관하세요. 복구할 수 없습니다.
+The password that opens this PDF now.	지금 이 PDF를 여는 비밀번호.
+wrong password	잘못된 비밀번호
+the archive is empty	압축 파일이 비어 있습니다
+Text (TXT)	텍스트 (TXT)
+Web page (HTML)	웹 페이지 (HTML)
+Send to {device}	{device}(으)로 보내기
+Anywhere, desktop included: Ctrl+C, then {keys}	어디서나, 바탕화면 포함: Ctrl+C 후 {keys}
+Send with LocalSend…	LocalSend로 보내기…
+Sent to {device}	{device}(으)로 보냈습니다
+{device} didn't answer	{device}에서 응답이 없습니다
+Opened in LocalSend: pick the device there	LocalSend에서 열었습니다. 거기서 기기를 고르세요
+no tables found in this PDF	이 PDF에서 표를 찾지 못했습니다
+no pages to convert (check the page numbers)	변환할 페이지가 없습니다 (페이지 번호를 확인하세요)
+the PDF looks damaged or empty	PDF가 손상되었거나 비어 있는 것 같습니다
+File not found	파일을 찾을 수 없음
+It was moved or deleted after you selected it. Select it again.	선택한 뒤에 이동되거나 삭제되었습니다. 다시 선택하세요.
+This is a folder	폴더입니다
+Select the files inside it, or use Put in a ZIP.	안에 있는 파일을 선택하거나 ZIP으로 묶기를 쓰세요.
+File type not recognised	파일 형식을 알 수 없음
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey는 파일 이름이 아니라 내용을 읽는데, 이 내용은 아는 형식이 아닙니다.
+Damaged or incomplete file	손상되었거나 불완전한 파일
+Check that it opens in another app. If you downloaded it, download it again.	다른 앱에서 열리는지 확인하세요. 내려받은 파일이라면 다시 내려받으세요.
+The file is protected by a password	비밀번호로 보호된 파일입니다
+Remove the password first, then convert it.	먼저 비밀번호를 제거한 뒤 변환하세요.
+Wrong password	잘못된 비밀번호
+Check the password and try again.	비밀번호를 확인하고 다시 시도하세요.
+The file has no sound	파일에 소리가 없습니다
+This video has no audio track to extract.	이 동영상에는 추출할 오디오 트랙이 없습니다.
+No tables found in the PDF	PDF에서 표를 찾지 못했습니다
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey는 컴퓨터로 만든 PDF의 표만 읽을 수 있습니다. 스캔한 페이지는 이미지입니다.
+The archive is empty	압축 파일이 비어 있습니다
+There is nothing inside to extract.	안에 풀 것이 없습니다.
+Those pages don't exist	그 페이지는 없습니다
+Check the page numbers: the document has fewer pages.	페이지 번호를 확인하세요. 문서의 페이지가 더 적습니다.
+Already as small as it gets	이미 최대한 작습니다
+Compressing it more wouldn't make it smaller.	더 압축해도 작아지지 않습니다.
+Not possible on this computer	이 컴퓨터에서는 할 수 없습니다
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey에 필요한 프로그램이 설치되어 있지 않습니다. README에 파일 종류별로 설치할 것이 나와 있습니다.
+A program Joey needs is missing	Joey에 필요한 프로그램이 없습니다
+Install it (the README lists them), then try again.	설치한 뒤(README에 목록이 있습니다) 다시 시도하세요.
+The installed program can't handle this format	설치된 프로그램이 이 형식을 처리하지 못합니다
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	사용 중인 버전에 이 형식이 없습니다. 더 완전한 버전에 있습니다. 예: Fedora의 RPM Fusion FFmpeg.
+The disk is full	디스크가 가득 찼습니다
+Free some space, or save in another place.	공간을 비우거나 다른 곳에 저장하세요.
+Joey isn't allowed to write here	Joey가 여기에 쓸 권한이 없습니다
+Copy the files to one of your folders (e.g. Documents) and convert them there.	파일을 내 폴더(예: 문서)로 복사한 뒤 거기서 변환하세요.
+Not enough memory	메모리가 부족합니다
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	남은 메모리에 비해 파일이 너무 큽니다. 다른 앱을 닫거나 한 번에 더 적은 파일을 변환하세요.
+Blocked by a safety limit	안전 제한으로 차단됨
+The image is larger than the limit set by ImageMagick's security policy.	이미지가 ImageMagick 보안 정책의 제한보다 큽니다.
+Unexpected error	예기치 않은 오류
+This is a bug in Joey. Please report it.	Joey의 버그입니다. 신고해 주세요.
+The conversion program failed	변환 프로그램이 실패했습니다
+Please report it: the details tell us why.	신고해 주세요. 자세한 내용으로 원인을 알 수 있습니다.
+Close (Esc)	닫기 (Esc)
+{keys} is ready in {fm}	{fm}에서 {keys}을(를) 쓸 수 있습니다
+Change the shortcuts	단축키 바꾸기
+Set up the shortcuts	단축키 설정
+Welcome to Joey	Joey에 오신 것을 환영합니다
+Two shortcuts open Joey. Keep these, or choose your own.	두 단축키로 Joey를 엽니다. 그대로 쓰거나 직접 고르세요.
+In the file manager	파일 관리자에서
+Select files, then press	파일을 선택한 뒤 누르기
+Anywhere, desktop included	어디서나, 바탕화면 포함
+Copy files with Ctrl+C, then press	Ctrl+C로 파일을 복사한 뒤 누르기
+Change	바꾸기
+Press the keys… (Esc cancels)	키를 누르세요… (Esc로 취소)
+Use Alt or Meta (the Windows key) with a letter or a number	Alt 또는 Meta(Windows 키)와 글자나 숫자를 함께 쓰세요
+That's already the other shortcut	이미 다른 단축키입니다
+Later	나중에
+Turn on	켜기
+Ready	완료
+Start	시작하기
+Ideas or problems? Tell us	아이디어나 문제가 있나요? 알려 주세요
+Report the problem	문제 신고
+You see the report before anything is sent	무엇이든 보내기 전에 보고서를 확인합니다
+Feedback	의견
+Last time Joey closed because of an error	지난번에 Joey가 오류로 닫혔습니다
+Report	신고
+What were you doing?	무엇을 하고 있었나요?
+(optional) Write it here.	(선택) 여기에 적어 주세요.
+Your idea, request or opinion	아이디어, 요청 또는 의견
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	아무것도 저절로 보내지지 않습니다. 내용을 읽고 원하는 대로 고치거나 지우세요. 파일 이름과 사용자 이름은 이미 가려져 있습니다.
+Title, in a few words	제목, 몇 단어로
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	보내면 브라우저에서 GitHub가 열리고 한 번 더 확인합니다. 무료 계정이 필요합니다. 계정이 없으면 내용을 복사해 원하는 방법으로 보내세요.
+Copy	복사
+Open on GitHub	GitHub에서 열기
+Send by email	이메일로 보내기
+Copied	복사했습니다
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	내용이 깁니다. GitHub는 앞부분으로 열립니다. 전체 내용은 복사되어 있으니 Ctrl+V로 바꾸세요.
+Markdown for AI apps	AI 앱용 Markdown
+Compress to a size…	크기를 정해 압축…
+At most	최대
+Joey lowers the quality just enough	Joey는 필요한 만큼만 품질을 낮춥니다
+{before} → {after}, {percent}% smaller	{before} → {after}, {percent}% 줄어듦
+Removed: {what}	제거됨: {what}
+No hidden details were found	숨겨진 정보가 없었습니다
+place	장소
+date and time	날짜와 시간
+camera or device	카메라 또는 기기
+author	작성자
+software used	사용한 소프트웨어
+title and tags	제목과 태그
+Use Joey from an AI app	AI 앱에서 Joey 사용하기
+Copies the setup for apps that support MCP	MCP를 지원하는 앱용 설정을 복사합니다
+Copied: paste it in your AI app's MCP settings	복사했습니다: AI 앱의 MCP 설정에 붙여 넣으세요
+The PDF has no text	PDF에 글자가 없습니다
+Its pages are pictures, as in a scan: there is no text to read.	페이지가 스캔처럼 이미지라서 읽을 글자가 없습니다.
+Already smaller than that	이미 그보다 작습니다
+The file is already under the size you chose: nothing to do.	파일이 이미 선택한 크기보다 작습니다. 할 일이 없습니다.
+Can't make it that small	그만큼 작게 만들 수 없습니다
+Even at the lowest quality it stays bigger. Choose a larger size.	가장 낮은 품질에서도 더 큽니다. 더 큰 크기를 고르세요.

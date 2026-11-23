@@ -239,3 +239,25 @@ Open on GitHub	GitHub वर उघडा
 Send by email	ईमेलने पाठवा
 Copied	कॉपी झाले
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	मजकूर लांब आहे: GitHub सुरुवातीच्या भागासह उघडते. संपूर्ण मजकूर कॉपी झाला आहे: Ctrl+V ने बदला.
+Markdown for AI apps	AI ॲप्ससाठी Markdown
+Compress to a size…	ठरावीक आकारापर्यंत लहान करा…
+At most	जास्तीत जास्त
+Joey lowers the quality just enough	Joey गुणवत्ता गरजेपुरतीच कमी करतो
+{before} → {after}, {percent}% smaller	{before} → {after}, {percent}% लहान
+Removed: {what}	काढले: {what}
+No hidden details were found	कोणतीही लपलेली माहिती सापडली नाही
+place	ठिकाण
+date and time	तारीख आणि वेळ
+camera or device	कॅमेरा किंवा उपकरण
+author	लेखक
+software used	वापरलेले सॉफ्टवेअर
+title and tags	शीर्षक आणि टॅग
+Use Joey from an AI app	AI ॲपमधून Joey वापरा
+Copies the setup for apps that support MCP	MCP वापरणाऱ्या ॲप्ससाठी सेटअप कॉपी करते
+Copied: paste it in your AI app's MCP settings	कॉपी झाले: तुमच्या AI ॲपच्या MCP सेटिंग्जमध्ये पेस्ट करा
+The PDF has no text	या PDF मध्ये मजकूर नाही
+Its pages are pictures, as in a scan: there is no text to read.	त्याची पाने प्रतिमा आहेत, स्कॅनसारखी: वाचण्यासाठी मजकूर नाही.
+Already smaller than that	आधीच त्यापेक्षा लहान आहे
+The file is already under the size you chose: nothing to do.	फाइल आधीच निवडलेल्या आकारापेक्षा लहान आहे: काही करायचे नाही.
+Can't make it that small	इतके लहान करता येत नाही
+Even at the lowest quality it stays bigger. Choose a larger size.	सर्वात कमी गुणवत्तेतही ती मोठीच राहते. मोठा आकार निवडा.

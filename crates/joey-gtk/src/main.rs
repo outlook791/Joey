@@ -425,6 +425,7 @@ fn build(app: &adw::Application) -> Rc<Ui> {
     let done_title = gtk::Label::new(None);
     done_title.add_css_class("title-4");
     let done_sub = gtk::Label::new(None);
+    done_sub.set_justify(gtk::Justification::Center);
     done_sub.add_css_class("dim-label");
     let done_errors = gtk::Label::builder()
         .wrap(true)
@@ -913,8 +914,10 @@ pub fn file_name(p: &std::path::Path) -> String {
         .unwrap_or_default()
 }
 
-pub fn choice_label(c: Choice) -> String {
+pub fn choice_label(from: Format, c: Choice) -> String {
     match c {
+        // Made for AI apps: the PDF's text and tables, no pictures.
+        Choice::To(Format::Md) if from == Format::Pdf => t("Markdown for AI apps"),
         Choice::To(f) => t(f.display_name()),
         Choice::Tool(tool) => t(tool.label()),
         Choice::Action(a) => a.title(),
@@ -930,6 +933,7 @@ fn tool_rank(cat: joey_core::Category, tool: Tool, several: bool) -> u8 {
     let order: &[Tool] = match cat {
         C::Image => &[
             Tool::Compress,
+            Tool::CompressTo,
             Tool::Crop,
             Tool::RotateRight,
             Tool::RotateLeft,
@@ -939,6 +943,7 @@ fn tool_rank(cat: joey_core::Category, tool: Tool, several: bool) -> u8 {
         C::Video => &[
             Tool::Trim,
             Tool::Compress,
+            Tool::CompressTo,
             Tool::RemoveAudio,
             Tool::RotateRight,
             Tool::RotateLeft,
@@ -947,6 +952,7 @@ fn tool_rank(cat: joey_core::Category, tool: Tool, several: bool) -> u8 {
         C::Audio => &[Tool::Trim, Tool::NormalizeAudio, Tool::RemoveMetadata],
         C::Pdf => &[
             Tool::Compress,
+            Tool::CompressTo,
             Tool::ExtractPages,
             Tool::SplitPdf,
             Tool::RotateRight,
@@ -967,6 +973,7 @@ fn tool_rank(cat: joey_core::Category, tool: Tool, several: bool) -> u8 {
 fn tool_icon(tool: Tool) -> &'static str {
     match tool {
         Tool::Compress => "zoom-out-symbolic",
+        Tool::CompressTo => "drive-harddisk-symbolic",
         Tool::RemoveMetadata => "edit-clear-symbolic",
         Tool::RotateLeft => "object-rotate-left-symbolic",
         Tool::RotateRight => "object-rotate-right-symbolic",
@@ -1156,7 +1163,7 @@ fn item_row(ui: &Rc<Ui>, g: &Group, gi: usize, i: usize, key: Option<usize>) -> 
     }
     row.append(
         &gtk::Label::builder()
-            .label(choice_label(choice))
+            .label(choice_label(g.from, choice))
             .xalign(0.0)
             .hexpand(true)
             .ellipsize(gtk::pango::EllipsizeMode::End)
@@ -1421,6 +1428,10 @@ pub fn start(ui: &Rc<Ui>) {
         let mut written = Vec::new();
         let mut errors = Vec::new();
         let mut problems = Vec::new();
+        // What compressing saved, and the hidden details taken away.
+        let (mut before, mut after) = (0u64, 0u64);
+        let mut removed: Vec<&'static str> = Vec::new();
+        let mut cleaned = false;
         for (i, job) in jobs.into_iter().enumerate() {
             let what = match &job {
                 Job::Convert(f, to, _) => {
@@ -1447,8 +1458,31 @@ pub fn start(ui: &Rc<Ui>) {
             });
             ui.progress.set_fraction(i as f64 / total as f64);
             let joey = ui.joey.clone();
+            let compressing = matches!(&job, Job::Tool(Tool::Compress | Tool::CompressTo, ..));
+            let input_bytes: u64 = match &job {
+                Job::Tool(_, fs, _) => fs
+                    .iter()
+                    .filter_map(|f| f.metadata().ok())
+                    .map(|m| m.len())
+                    .sum(),
+                _ => 0,
+            };
+            let stripping = matches!(&job, Job::Tool(Tool::RemoveMetadata, ..));
+            let found_out = std::sync::Arc::new(std::sync::Mutex::new(Vec::<&'static str>::new()));
+            let found_in = found_out.clone();
             let outcomes = gio::spawn_blocking(move || match job {
                 Job::Convert(f, to, o) => vec![joey.convert_with(&f, to, None, &o)],
+                Job::Tool(Tool::RemoveMetadata, fs, p) => {
+                    // What was there, to say what went.
+                    for f in &fs {
+                        if let Ok(fmt) = joey.detect(f) {
+                            if let Ok(mut list) = found_in.lock() {
+                                list.extend(joey_core::tools::metadata_found(f, fmt));
+                            }
+                        }
+                    }
+                    joey.run_tool_with(Tool::RemoveMetadata, &fs, &p)
+                }
                 Job::Tool(tool, fs, p) => joey.run_tool_with(tool, &fs, &p),
                 Job::Zip(fs) => vec![joey.zip(&fs)],
                 Job::Copy(fs, dest, moving) => vec![actions::copy_or_move(&fs, &dest, moving)
@@ -1460,9 +1494,27 @@ pub fn start(ui: &Rc<Ui>) {
             .await;
             match outcomes {
                 Ok(list) => {
+                    cleaned |= stripping && list.iter().any(|o| o.is_ok());
+                    if let Ok(found) = found_out.lock() {
+                        for k in found.iter() {
+                            if !removed.contains(k) {
+                                removed.push(k);
+                            }
+                        }
+                    }
                     for o in list {
                         match o {
-                            Ok(out) => written.extend(out),
+                            Ok(out) => {
+                                if compressing {
+                                    before += input_bytes;
+                                    after += out
+                                        .iter()
+                                        .filter_map(|f| f.metadata().ok())
+                                        .map(|m| m.len())
+                                        .sum::<u64>();
+                                }
+                                written.extend(out)
+                            }
                             Err(e) => {
                                 let failures = joey_core::diag::take_failures();
                                 let code = joey_core::diag::classify(&e, &failures);
@@ -1500,7 +1552,25 @@ pub fn start(ui: &Rc<Ui>) {
         }
         ui.progress.set_fraction(1.0);
         *ui.problems.borrow_mut() = problems;
-        finish(&ui, written, errors, notes);
+        let mut extra = Vec::new();
+        if after > 0 && after < before {
+            let percent = 100 - after * 100 / before.max(1);
+            extra.push(tf(
+                "{before} → {after}, {percent}% smaller",
+                &[
+                    ("before", &size_text(before)),
+                    ("after", &size_text(after)),
+                    ("percent", &percent),
+                ],
+            ));
+        }
+        if !removed.is_empty() {
+            let words: Vec<String> = removed.iter().map(|k| t(metadata_word(k))).collect();
+            extra.push(tf("Removed: {what}", &[("what", &words.join(", "))]));
+        } else if cleaned {
+            extra.push(t("No hidden details were found"));
+        }
+        finish(&ui, written, errors, notes, extra);
     });
 }
 
@@ -1532,7 +1602,30 @@ fn friendly(e: &joey_core::Error) -> String {
     }
 }
 
-fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<String>) {
+/// A file size for people: "4.2 MB".
+fn size_text(bytes: u64) -> String {
+    estimate::human(bytes).trim_start_matches('~').to_string()
+}
+
+/// How "Remove metadata" names each kind of hidden detail.
+fn metadata_word(kind: &str) -> &'static str {
+    match kind {
+        "place" => "place",
+        "date" => "date and time",
+        "device" => "camera or device",
+        "author" => "author",
+        "software" => "software used",
+        _ => "title and tags",
+    }
+}
+
+fn finish(
+    ui: &Rc<Ui>,
+    written: Vec<PathBuf>,
+    errors: Vec<String>,
+    notes: Vec<String>,
+    extra: Vec<String>,
+) {
     *ui.first_output.borrow_mut() = written.first().cloned();
     let n = written.len();
     let ok = errors.is_empty();
@@ -1555,11 +1648,17 @@ fn finish(ui: &Rc<Ui>, written: Vec<PathBuf>, errors: Vec<String>, notes: Vec<St
         .groups
         .iter()
         .any(|g| matches!(g.choice(), Choice::Action(Action::CopyTo | Action::MoveTo)));
-    ui.done_sub.set_text(&if moved {
+    let place = if moved {
         t("In the folder you chose")
     } else {
         t("Next to the originals")
-    });
+    };
+    ui.done_sub.set_text(
+        &std::iter::once(place)
+            .chain(extra)
+            .collect::<Vec<_>>()
+            .join("\n"),
+    );
     ui.done_sub.set_visible(n > 0);
     ui.done_errors.set_markup(&errors.join("\n"));
     ui.done_errors.set_visible(!ok);

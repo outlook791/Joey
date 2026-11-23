@@ -239,3 +239,25 @@ Open on GitHub	在 GitHub 上打开
 Send by email	通过电子邮件发送
 Copied	已复制
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	文本较长：GitHub 只会打开开头部分。全文已复制：用 Ctrl+V 替换。
+Markdown for AI apps	供 AI 应用使用的 Markdown
+Compress to a size…	压缩到指定大小…
+At most	最大
+Joey lowers the quality just enough	Joey 只会把质量降低到刚好够用
+{before} → {after}, {percent}% smaller	{before} → {after}，减小 {percent}%
+Removed: {what}	已删除：{what}
+No hidden details were found	没有发现隐藏信息
+place	地点
+date and time	日期和时间
+camera or device	相机或设备
+author	作者
+software used	所用软件
+title and tags	标题和标签
+Use Joey from an AI app	在 AI 应用中使用 Joey
+Copies the setup for apps that support MCP	复制适用于支持 MCP 的应用的设置
+Copied: paste it in your AI app's MCP settings	已复制：粘贴到你的 AI 应用的 MCP 设置中
+The PDF has no text	这个 PDF 没有文字
+Its pages are pictures, as in a scan: there is no text to read.	它的页面是图片，就像扫描件：没有可读取的文字。
+Already smaller than that	已经比这更小了
+The file is already under the size you chose: nothing to do.	文件已经小于你选择的大小：无需处理。
+Can't make it that small	无法压缩到这么小
+Even at the lowest quality it stays bigger. Choose a larger size.	即使用最低质量仍然更大。请选择更大的尺寸。

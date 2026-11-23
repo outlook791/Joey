@@ -5,6 +5,26 @@
   <name>Joey Office</name>
   <summary>Word, Excel and PowerPoint at their best, with LibreOffice</summary>
   <summary xml:lang="it">Word, Excel e PowerPoint al meglio, con LibreOffice</summary>
+  <summary xml:lang="zh_CN">借助 LibreOffice，让 Word、Excel 和 PowerPoint 达到最佳效果</summary>
+  <summary xml:lang="hi">LibreOffice के साथ Word, Excel और PowerPoint सबसे अच्छे रूप में</summary>
+  <summary xml:lang="es">Word, Excel y PowerPoint en su mejor versión, con LibreOffice</summary>
+  <summary xml:lang="ar">Word وExcel وPowerPoint في أفضل حالاتها، مع LibreOffice</summary>
+  <summary xml:lang="fr">Word, Excel et PowerPoint au mieux, avec LibreOffice</summary>
+  <summary xml:lang="bn">LibreOffice দিয়ে Word, Excel ও PowerPoint সেরা রূপে</summary>
+  <summary xml:lang="pt_BR">Word, Excel e PowerPoint no seu melhor, com LibreOffice</summary>
+  <summary xml:lang="ru">Word, Excel и PowerPoint в лучшем виде, с LibreOffice</summary>
+  <summary xml:lang="id">Word, Excel, dan PowerPoint sebaik-baiknya, dengan LibreOffice</summary>
+  <summary xml:lang="ur">LibreOffice کے ساتھ Word، Excel اور PowerPoint بہترین صورت میں</summary>
+  <summary xml:lang="de">Word, Excel und PowerPoint in Bestform, mit LibreOffice</summary>
+  <summary xml:lang="ja">LibreOffice で Word、Excel、PowerPoint を最高の状態に</summary>
+  <summary xml:lang="mr">LibreOffice सह Word, Excel आणि PowerPoint सर्वोत्तम स्वरूपात</summary>
+  <summary xml:lang="vi">Word, Excel và PowerPoint tốt nhất, với LibreOffice</summary>
+  <summary xml:lang="pl">Word, Excel i PowerPoint w najlepszym wydaniu, z LibreOffice</summary>
+  <summary xml:lang="tr">Word, Excel ve PowerPoint en iyi hâliyle, LibreOffice ile</summary>
+  <summary xml:lang="ko">LibreOffice로 Word, Excel, PowerPoint를 가장 잘</summary>
+  <summary xml:lang="uk">Word, Excel і PowerPoint у найкращому вигляді, з LibreOffice</summary>
+  <summary xml:lang="nl">Word, Excel en PowerPoint op hun best, met LibreOffice</summary>
+  <summary xml:lang="cs">Word, Excel a PowerPoint v nejlepší podobě, s LibreOffice</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MPL-2.0</project_license>
   <developer id="io.github.outlook791">

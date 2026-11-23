@@ -124,6 +124,7 @@ pub fn available_engines() -> Vec<Box<dyn Engine>> {
     add!(rsvg::Rsvg::probe());
     add!(poppler::Poppler::probe());
     add!(poppler::PdfText::probe());
+    add!(pdfmd::PdfMarkdown::probe());
     add!(ghostscript::Ghostscript::probe());
     add!(img2pdf::Img2Pdf::probe());
     add!(imagemagick::ImageMagick::probe());

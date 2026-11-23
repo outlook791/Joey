@@ -239,3 +239,25 @@ Open on GitHub	Открыть на GitHub
 Send by email	Отправить по почте
 Copied	Скопировано
 The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Текст длинный: GitHub откроется с началом. Весь текст скопирован: замените его через Ctrl+V.
+Markdown for AI apps	Markdown для ИИ-приложений
+Compress to a size…	Сжать до размера…
+At most	Не больше
+Joey lowers the quality just enough	Joey снижает качество ровно настолько, насколько нужно
+{before} → {after}, {percent}% smaller	{before} → {after}, меньше на {percent}%
+Removed: {what}	Удалено: {what}
+No hidden details were found	Скрытых данных не найдено
+place	место
+date and time	дата и время
+camera or device	камера или устройство
+author	автор
+software used	программа
+title and tags	название и теги
+Use Joey from an AI app	Использовать Joey из ИИ-приложения
+Copies the setup for apps that support MCP	Копирует настройку для приложений с поддержкой MCP
+Copied: paste it in your AI app's MCP settings	Скопировано: вставьте в настройки MCP вашего ИИ-приложения
+The PDF has no text	В PDF нет текста
+Its pages are pictures, as in a scan: there is no text to read.	Его страницы — изображения, как при сканировании: читать нечего.
+Already smaller than that	Уже меньше этого
+The file is already under the size you chose: nothing to do.	Файл уже меньше выбранного размера: делать нечего.
+Can't make it that small	Так сильно уменьшить нельзя
+Even at the lowest quality it stays bigger. Choose a larger size.	Даже при самом низком качестве он остаётся больше. Выберите размер побольше.

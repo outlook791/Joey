@@ -12,9 +12,9 @@ Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i f
 >
 > **Fatto con l'AI:** Joey è scritto con un assistente AI. Vedi [Come è fatto Joey](#come-è-fatto-joey).
 >
-> Le versioni sono numerate per data: **anno.mese.uscita del mese** (26.10.2 è la seconda uscita di ottobre 2026). Non c'è un calendario fisso: gli aggiornamenti escono quando servono.
+> Le versioni sono numerate per data: **anno.mese.uscita del mese** (26.10.2 è la seconda uscita di ottobre 2026).
 
-**Indice:** [Come aprirlo](#due-modi-per-aprire-joey) · [Installazione](#installazione) · [Convertire](#convertire) · [Più file insieme](#più-file-insieme) · [Regola](#regola-qualità-dimensioni-audio) · [Strumenti rapidi](#strumenti-rapidi) · [Azioni sui file](#azioni-sui-file) · [Invio a telefono o PC](#invio-al-telefono-o-al-pc) · [Da PDF a Excel](#da-pdf-a-excel) · [Tastiera, mouse, touch](#tastiera-mouse-e-touch) · [Codici di errore](#quando-qualcosa-va-storto-codici-di-errore) · [Segnalazioni](#feedback-e-segnalazioni) · [Usare Joey da un'AI](#usare-joey-da-unai) · [Riga di comando](#riga-di-comando) · [Problemi comuni](#problemi-comuni)
+**Indice:** [Come aprirlo](#due-modi-per-aprire-joey) · [Installazione](#installazione) · [Convertire](#convertire) · [Più file insieme](#più-file-insieme) · [Regola](#regola-qualità-dimensioni-audio) · [Strumenti rapidi](#strumenti-rapidi) · [Azioni sui file](#azioni-sui-file) · [Invio a telefono o PC](#invio-al-telefono-o-al-pc) · [Da PDF a Excel](#da-pdf-a-excel) · [PDF per le app di AI](#pdf-per-le-app-di-ai) · [Tastiera, mouse, touch](#tastiera-mouse-e-touch) · [Codici di errore](#quando-qualcosa-va-storto-codici-di-errore) · [Segnalazioni](#feedback-e-segnalazioni) · [Usare Joey da un'AI](#usare-joey-da-unai) · [Riga di comando](#riga-di-comando) · [Problemi comuni](#problemi-comuni)
 
 ## Due modi per aprire Joey
 
@@ -34,7 +34,7 @@ Joey è un convertitore di file per Linux, gratuito e open source. Selezioni i f
 
 **Il modo semplice:** apri **[outlook791.github.io/Joey](https://outlook791.github.io/Joey/)** e premi **Joey**: Discover o GNOME Software lo installano, e gli aggiornamenti arrivano da soli. Premi anche **Joey Office** se vuoi PowerPoint, e Word ed Excel al meglio (aggiunge LibreOffice, circa 230 MB).
 
-Poi apri Joey dal menu delle applicazioni. La prima volta ti mostra quali tasti lo apriranno: tieni **Alt+C** e **Meta+C**, oppure cliccali per scegliere i tuoi, e premi **Attiva**. Esci e rientra nella sessione una volta e sono pronti. Puoi cambiarli in seguito dalla pagina iniziale di Joey (*Cambia le scorciatoie*).
+Poi apri Joey dal menu delle applicazioni. La prima volta ti mostra quali tasti lo apriranno: tieni **Alt+C** e **Meta+C**, oppure cliccali per scegliere i tuoi, e premi **Attiva**. Esci e rientra nella sessione una volta e sono pronti. Puoi cambiarli in seguito dalla pagina iniziale di Joey (*Cambia le scorciatoie*). Se usi un'app di AI, *Usa Joey da un'app di AI* copia la configurazione che le serve (vedi [Usare Joey da un'AI](#usare-joey-da-unai)).
 
 <p align="center"><img src="docs/screenshots/it/welcome.png" width="360" alt="Il primo avvio: le due scorciatoie, con Attiva"></p>
 
@@ -146,7 +146,7 @@ Cosa può diventare cosa:
 | Immagini | JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, HEIC (foto dei telefoni); disegni SVG |
 | Audio | MP3, M4A (AAC), OGG, Opus, FLAC, WAV, AIFF, WMA; l'audio di qualsiasi video |
 | Video | MP4, MKV, WebM, MOV, AVI, WMV; video in GIF animata e viceversa |
-| PDF | pagine in immagini; immagini in PDF; in Word, ODT, PowerPoint, testo, Markdown, EPUB; tabelle in Excel |
+| PDF | pagine in immagini; immagini in PDF; in Word, ODT, PowerPoint, testo, EPUB; Markdown per le app di AI; tabelle in Excel |
 | Documenti | Word, ODT, RTF, TXT, Markdown, HTML, EPUB · Excel, ODS, CSV, TSV · PowerPoint, ODP |
 | Sottotitoli | SRT, WebVTT, ASS; sottotitoli in testo semplice |
 | Archivi | ZIP, TAR, TAR.GZ, 7Z; RAR (solo apertura) |
@@ -175,8 +175,9 @@ Sotto i formati, Joey propone strumenti che modificano il file senza cambiarne i
 
 | Strumento | Per | Cosa fa |
 |---|---|---|
-| Comprimi | immagini, video, PDF | File più leggero, stesso formato |
-| Rimuovi metadati | immagini, audio, video | Toglie fotocamera, posizione, autore, dati del brano |
+| Comprimi | immagini, video, PDF | File più leggero, stesso formato. Alla fine Joey mostra il peso prima e dopo |
+| Comprimi a una dimensione… | immagini, video, PDF | Scegli quanto può pesare al massimo, da 500 KB a 100 MB (per esempio per un'email): Joey abbassa la qualità quanto basta, e riduce i pixel di foto e video solo se serve |
+| Rimuovi metadati | immagini, audio, video | Toglie fotocamera, posizione, autore, dati del brano. Alla fine Joey dice cosa ha trovato e tolto (luogo, data e ora, fotocamera…) |
 | Ruota a sinistra / a destra | immagini, video, PDF | Gira di 90° |
 | Bianco e nero | immagini | Scala di grigi |
 | Ritaglia in una forma… | immagini | Quadrato, 4:5, 3:2, 4:3, 16:9 o 9:16, tenendo il centro |
@@ -195,7 +196,7 @@ Sotto i formati, Joey propone strumenti che modificano il file senza cambiarne i
 
 Gli strumenti con "…" fanno una sola domanda in una piccola schermata, poi partono:
 
-<p align="center"><img src="docs/screenshots/it/ask.png" width="360" alt="Taglia chiede da quando a quando"></p>
+<p align="center"><img src="docs/screenshots/it/ask.png" width="360" alt="Taglia chiede da quando a quando"> <img src="docs/screenshots/it/compress-to.png" width="360" alt="Comprimi a una dimensione chiede quanto può pesare"></p>
 
 ## Azioni sui file
 
@@ -227,6 +228,29 @@ Seleziona un PDF, apri l'elenco completo (*Altri N…*) e scegli **Excel (XLSX)*
 
 <p align="center"><img src="docs/screenshots/it/pdf-excel.png" width="360" alt="Un PDF può diventare Word, Excel, PowerPoint e altro"></p>
 
+## PDF per le app di AI
+
+Le app di AI leggono un PDF in modo lento e costoso: per ogni pagina prendono il testo **e** un'immagine della pagina. La documentazione di Anthropic, per esempio, conta da 1.500 a 3.000 token di testo per pagina, più l'immagine. Scegli **Markdown per le app di AI** su un PDF (o lascia che sia la tua app di AI a chiederlo a Joey, vedi [Usare Joey da un'AI](#usare-joey-da-unai)) e ottieni solo quello che serve all'AI, come testo semplice:
+
+- i dati del documento in cima (titolo, autore, data, numero di pagine);
+- titoli, paragrafi ed elenchi, nell'ordine di lettura, anche nelle pagine stampate su due colonne;
+- le tabelle come tabelle;
+- niente numeri di pagina e niente intestazioni ripetute su ogni pagina.
+
+Cosa abbiamo misurato su cinque PDF di prova, da un report di 1 pagina a 117 pagine di dispense:
+
+| PDF | Pagine | Markdown | PDF letto da un'AI (almeno) | Risparmio |
+|---|---|---|---|---|
+| Report con una tabella | 1 | ~235 token | 1.500 token | 85% |
+| Pagina di Google Docs con una tabella | 1 | ~350 token | 1.500 token | 77% |
+| Articolo su due colonne | 3 | ~1.850 token | 4.500 token | 59% |
+| Testo fitto | 4 | ~3.700 token | 6.000 token | 39% |
+| Dispense con formule | 117 | ~41.300 token | 175.500 token | 77% |
+
+Come abbiamo contato: il Markdown come caratteri diviso 4 (una stima approssimativa diffusa: i conteggi reali cambiano con il modello di AI e con la lingua); il PDF come 1.500 token per pagina, la cifra più bassa della documentazione, **senza** le immagini. Quindi il risparmio reale è più grande di quello in tabella. Funziona sui PDF creati al computer: le pagine scansionate sono immagini senza testo (errore E112). Formule e impaginazioni insolite escono meno ordinate del testo normale.
+
+<p align="center"><img src="docs/screenshots/it/pdf-ai.png" width="360" alt="Un PDF con Markdown per le app di AI tra i formati"></p>
+
 ## Tastiera, mouse e touch
 
 Tutto funziona con ognuno dei tre.
@@ -244,7 +268,7 @@ Sullo schermo touch Joey nasconde i suggerimenti dei tasti e ingrandisce le righ
 
 <p align="center"><img src="docs/screenshots/it/touch.png" width="300" alt="Modalità touch: righe più grandi, niente tasti"> &nbsp; <img src="docs/screenshots/it/dark.png" width="300" alt="Tema scuro"></p>
 
-Joey segue il tema chiaro o scuro e il colore di accento del sistema, e parla la lingua del sistema: inglese, cinese (semplificato), hindi, spagnolo, arabo, francese, bengalese, portoghese (Brasile), russo, indonesiano, urdu, tedesco, giapponese, marathi, vietnamita e italiano. Arabo e urdu sono mostrati da destra a sinistra.
+Joey segue il tema chiaro o scuro e il colore di accento del sistema, e parla la lingua del sistema: inglese, cinese (semplificato), hindi, spagnolo, arabo, francese, bengalese, portoghese (Brasile), russo, indonesiano, urdu, tedesco, giapponese, marathi, vietnamita, polacco, turco, coreano, ucraino, olandese, ceco e italiano. Arabo e urdu sono mostrati da destra a sinistra.
 
 Le traduzioni sono state fatte con l'AI e non sono ancora state controllate da madrelingua. Se una parola suona male, [diccelo](#feedback-e-segnalazioni) o correggila direttamente: ogni lingua è un semplice file di testo in [`crates/joey-gtk/i18n/`](crates/joey-gtk/i18n/), una riga per testo (inglese, un tab, la traduzione).
 
@@ -267,6 +291,9 @@ Ogni problema mostra un codice, cosa significa e cosa fare. Il codice è lo stes
 | E109 | L'archivio è vuoto | Dentro non c'è nulla da estrarre. |
 | E110 | Quelle pagine non esistono | Il documento ha meno pagine: controlla i numeri. |
 | E111 | È già il più piccolo possibile | Comprimerlo ancora non lo renderebbe più piccolo. |
+| E112 | Il PDF non contiene testo | Le pagine sono immagini, come in una scansione: non c'è testo da leggere. |
+| E113 | È già più piccolo di così | Il file è già sotto la dimensione scelta: non c'è niente da fare. |
+| E114 | Non si riesce a renderlo così piccolo | Anche alla qualità più bassa resta più grande. Scegli una dimensione maggiore. |
 | E201 | Non possibile su questo computer | Manca un programma che serve a Joey (vedi [Installazione](#installazione)). |
 | E202 | Manca un programma che serve a Joey | Installalo, poi riprova. |
 | E203 | Il programma installato non gestisce questo formato | Una versione più completa lo aggiunge (es. FFmpeg di RPM Fusion su Fedora). |
@@ -291,7 +318,7 @@ Non viene inviato nulla da solo. Prima ancora che tu veda la segnalazione, i nom
 
 Joey non contiene un'AI, ma qualsiasi app di AI che supporta il **Model Context Protocol** (MCP) può usarlo: chiedi "trasforma queste foto in un unico PDF" o "metti in Excel le tabelle di questa fattura" e l'AI richiama Joey sul tuo computer. Funziona sia con modelli online sia locali, nelle app MCP come Claude Code, Gemini CLI, LM Studio, Goose o Cursor.
 
-Aggiungi Joey ai server MCP della tua app di AI. Quasi tutte usano questo formato:
+Aggiungi Joey ai server MCP della tua app di AI. La schermata del primo avvio può copiarlo per te (*Usa Joey da un'app di AI*, poi *Copia*). Quasi tutte le app usano questo formato:
 
 ```json
 {

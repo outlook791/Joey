@@ -125,7 +125,7 @@ fn shortcut_row(ui: &Rc<Ui>, title: &str, subtitle: &str, which: Which) -> adw::
         };
         // The keys themselves are the button: click to change them.
         let inner = gtk::Box::new(gtk::Orientation::Horizontal, 6);
-        inner.append(&gtk::ShortcutLabel::new(&sc.gtk()));
+        inner.append(&keycaps(&sc.label()));
         inner.append(&gtk::Image::from_icon_name("document-edit-symbolic"));
         let change = gtk::Button::builder()
             .child(&inner)
@@ -142,6 +142,51 @@ fn shortcut_row(ui: &Rc<Ui>, title: &str, subtitle: &str, which: Which) -> adw::
         row.add_suffix(&change);
     }
     row
+}
+
+/// Optional: the setup that lets AI apps use Joey (MCP), copied to paste
+/// in the app's settings.
+fn ai_row(ui: &Rc<Ui>) -> adw::ActionRow {
+    let row = adw::ActionRow::builder()
+        .title(t("Use Joey from an AI app"))
+        .subtitle(t("Copies the setup for apps that support MCP"))
+        .build();
+    let copy = gtk::Button::builder()
+        .label(t("Copy"))
+        .valign(gtk::Align::Center)
+        .build();
+    copy.add_css_class("flat");
+    let window = ui.window.clone();
+    let r = row.clone();
+    copy.connect_clicked(move |_| {
+        let command = if joey_core::host::in_flatpak() {
+            r#""command": "flatpak", "args": ["run", "--command=joey", "io.github.outlook791.Joey", "--mcp"]"#
+        } else {
+            r#""command": "joey", "args": ["--mcp"]"#
+        };
+        let setup = format!("{{\n  \"mcpServers\": {{\n    \"joey\": {{ {command} }}\n  }}\n}}\n");
+        window.clipboard().set_text(&setup);
+        r.set_subtitle(&t("Copied: paste it in your AI app's MCP settings"));
+    });
+    row.add_suffix(&copy);
+    row
+}
+
+/// "Meta+C" drawn as keys. GTK's own shortcut label always says "Super",
+/// which KDE calls Meta: the desktop's own word is used instead.
+fn keycaps(text: &str) -> gtk::Box {
+    let keys = gtk::Box::new(gtk::Orientation::Horizontal, 4);
+    for (i, part) in text.split('+').enumerate() {
+        if i > 0 {
+            let plus = gtk::Label::new(Some("+"));
+            plus.add_css_class("dim-label");
+            keys.append(&plus);
+        }
+        let key = gtk::Label::new(Some(part));
+        key.add_css_class("keycap");
+        keys.append(&key);
+    }
+    keys
 }
 
 /// Shows the welcome page (also to change the shortcuts later).
@@ -179,6 +224,7 @@ pub fn show(ui: &Rc<Ui>) {
         &t("Copy files with Ctrl+C, then press"),
         Which::Anywhere,
     ));
+    group.add(&ai_row(ui));
     page.append(&group);
 
     if let Some(problem) = PROBLEM.with(|p| p.borrow().clone()) {

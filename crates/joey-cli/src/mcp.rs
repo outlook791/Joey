@@ -101,7 +101,7 @@ fn tool_list() -> Value {
         {
             "name": "joey_convert",
             "title": "Convert files",
-            "description": "Converts files to another format. Writes new files next to the originals (or in out_dir) and never overwrites. Settings are optional.",
+            "description": "Converts files to another format. Writes new files next to the originals (or in out_dir) and never overwrites. Settings are optional. To read a PDF, convert it to md first: Markdown made for AI, with the headings, lists and tables as text and the document details on top, in far fewer tokens than the PDF itself (PDFs made by a computer; scanned pages have no text).",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -122,7 +122,7 @@ fn tool_list() -> Value {
         {
             "name": "joey_tool",
             "title": "Quick tool",
-            "description": "Runs a quick tool: compress, rotate, crop, trim, merge or split PDFs, protect or unlock PDFs, join audio or video, extract archives, zip. Merging tools take all paths at once.",
+            "description": "Runs a quick tool: compress (or compress-to a size in MB, for images, videos and PDFs), rotate, crop, trim, merge or split PDFs, protect or unlock PDFs, join audio or video, extract archives, zip. Merging tools take all paths at once.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -132,7 +132,8 @@ fn tool_list() -> Value {
                     "end": {"type": "string", "description": "trim: end time, e.g. 1:45"},
                     "pages": {"type": "string", "description": "extract-pages: e.g. \"1-3,7\""},
                     "shape": {"type": "string", "description": "crop: width:height, e.g. 1:1 or 16:9"},
-                    "password": {"type": "string", "description": "protect-pdf / unlock-pdf"}
+                    "password": {"type": "string", "description": "protect-pdf / unlock-pdf"},
+                    "size_mb": {"type": "number", "description": "compress-to: the most the result may weigh, in megabytes, e.g. 10"}
                 },
                 "required": ["tool", "paths"]
             },
@@ -246,6 +247,11 @@ fn call(joey: &Joey, name: &str, args: &Value) -> Result<Value, String> {
                 p.shape = Some((w, h));
             }
             p.password = str_arg(args, "password").map(str::to_string);
+            p.target = args
+                .get("size_mb")
+                .and_then(Value::as_f64)
+                .filter(|mb| *mb > 0.0)
+                .map(|mb| (mb * 1_000_000.0) as u64);
             let results = joey.run_tool_with(tool, &files, &p);
             let list: Vec<Value> = if tool.merges() {
                 results.iter().map(|o| outcome(&files[0], o)).collect()

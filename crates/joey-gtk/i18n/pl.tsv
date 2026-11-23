@@ -1,0 +1,263 @@
+# Polski. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Upuść pliki tutaj
+Choose files…	Wybierz pliki…
+Choose files to convert	Wybierz pliki do konwersji
+Esc to close	Esc, aby zamknąć
+1 file	1 plik
+{n} files	Pliki: {n}
+{n} {fmt} files	Pliki {fmt}: {n}
+{n} more…	Jeszcze {n}…
+Quick tools	Szybkie narzędzia
+Convert	Konwertuj
+Adjust	Dostosuj
+Enter	Enter
+PDF · one image per page	PDF · jeden obraz na stronę
+image	obraz
+drawing	rysunek
+audio	dźwięk
+video	wideo
+PDF	PDF
+document	dokument
+spreadsheet	arkusz kalkulacyjny
+presentation	prezentacja
+folders aren't supported yet	foldery nie są jeszcze obsługiwane
+not found	nie znaleziono
+file type not recognised	nie rozpoznano typu pliku
+nothing to convert {fmt} to here	tutaj nie ma na co przekonwertować {fmt}
+Compress	Kompresuj
+Remove metadata	Usuń metadane
+Merge into one PDF	Połącz w jeden PDF
+Join into one track	Połącz w jedną ścieżkę
+Even out the volume	Wyrównaj głośność
+Remove the sound	Usuń dźwięk
+Converting…	Konwertowanie…
+Converting {name}…	Konwertowanie {name}…
+Converting {i} of {n}…	Konwertowanie {i} z {n}…
+Nothing converted	Nic nie przekonwertowano
+1 file ready	1 plik gotowy
+{n} files ready	Gotowe pliki: {n}
+Next to the originals	Obok oryginałów
+Show in folder	Pokaż w folderze
+Close	Zamknij
+Back to the menu	Wróć do menu
+Other files	Inne pliki
+unexpected error	nieoczekiwany błąd
+{tool} couldn't convert it	{tool} nie zdołał tego przekonwertować
+already as small as it gets	już jest tak mały, jak się da
+the file has no audio track	plik nie ma ścieżki dźwiękowej
+Back	Wstecz
+Reset to defaults	Przywróć domyślne
+Remember these settings	Zapamiętaj te ustawienia
+Advanced	Zaawansowane
+No settings for this one.	Brak ustawień dla tej opcji.
+Estimated size: {size}	Szacowany rozmiar: {size}
+Size can't be estimated for this conversion	Nie da się oszacować rozmiaru tej konwersji
+Quality	Jakość
+Lower quality makes smaller files	Niższa jakość daje mniejsze pliki
+Low	Niska
+Medium	Średnia
+High (recommended)	Wysoka (zalecana)
+Maximum	Maksymalna
+Size	Rozmiar
+Longest side. Never enlarges.	Dłuższy bok. Nigdy nie powiększa.
+Original	Oryginalny
+Very large · 3840 px	Bardzo duży · 3840 px
+Large · 1920 px	Duży · 1920 px
+Medium · 1280 px	Średni · 1280 px
+Small · 800 px	Mały · 800 px
+Remove camera and location info	Usuń dane aparatu i lokalizacji
+Date, place and camera model saved inside the photo	Data, miejsce i model aparatu zapisane w zdjęciu
+Channels	Kanały
+Mono halves the size; fine for voice	Mono zmniejsza rozmiar o połowę; wystarcza dla głosu
+Mono	Mono
+Stereo	Stereo
+Bitrate	Przepływność
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Dane na sekundę: więcej to lepszy dźwięk i większy plik. Zastępuje Jakość.
+Automatic	Automatycznie
+Sample rate	Częstotliwość próbkowania
+How often the sound is measured each second. Change it only if a device asks.	Ile razy na sekundę mierzony jest dźwięk. Zmieniaj tylko, gdy urządzenie tego wymaga.
+44.1 kHz · CD	44,1 kHz · CD
+48 kHz · video	48 kHz · wideo
+Remove song info	Usuń informacje o utworze
+Title, artist, album and similar tags	Tytuł, wykonawca, album i podobne znaczniki
+Resolution	Rozdzielczość
+Smaller resolution, much smaller file	Mniejsza rozdzielczość, dużo mniejszy plik
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Mała · 480p
+Keep the sound	Zachowaj dźwięk
+Frames per second	Klatki na sekundę
+How smooth the motion is. 30 is fine for most videos.	Jak płynny jest ruch. 30 wystarcza do większości filmów.
+Remove video info	Usuń informacje o wideo
+Date, place and device saved inside the video	Data, miejsce i urządzenie zapisane w wideo
+Width	Szerokość
+Small · 320 px	Mała · 320 px
+Medium · 480 px	Średnia · 480 px
+Large · 720 px	Duża · 720 px
+Pages	Strony
+For example 1-3, 7. Empty means all.	Na przykład 1-3, 7. Puste oznacza wszystkie.
+all	wszystkie
+Sharpness	Ostrość
+Dots per inch: higher is sharper and bigger	Punkty na cal: więcej to ostrzej i większy plik
+Screen · 72 dpi	Ekran · 72 dpi
+Normal · 150 dpi	Normalna · 150 dpi
+Print · 300 dpi	Druk · 300 dpi
+Very sharp · 600 dpi	Bardzo ostra · 600 dpi
+Set up Alt+C in your file manager	Ustaw Alt+C w menedżerze plików
+Select files, press Alt+C, pick a format	Zaznacz pliki, naciśnij Alt+C, wybierz format
+Alt+C is ready in {fm}	Alt+C działa w {fm}
+Right-click → Convert with Joey works in {fm}	Prawy przycisk → Konwertuj za pomocą Joey działa w {fm}
+Log out and back in once to use them	Wyloguj się i zaloguj ponownie, aby ich używać
+No supported file manager found	Nie znaleziono obsługiwanego menedżera plików
+Convert with Joey	Konwertuj za pomocą Joey
+subtitles	napisy
+archive	archiwum
+other	inne
+{n} other items	Inne elementy: {n}
+File actions	Działania na plikach
+Copy the path	Kopiuj ścieżkę
+Copy to…	Kopiuj do…
+Move to…	Przenieś do…
+Open a terminal here	Otwórz tu terminal
+Put in a ZIP	Spakuj do ZIP
+Choose a folder	Wybierz folder
+Terminal opened	Terminal otwarty
+Path copied	Ścieżka skopiowana
+In the folder you chose	W wybranym folderze
+Rotate left	Obróć w lewo
+Rotate right	Obróć w prawo
+Black and white	Czarno-białe
+Crop to a shape…	Przytnij do kształtu…
+Trim…	Przytnij fragment…
+Split into pages	Podziel na strony
+Keep only some pages…	Zostaw tylko niektóre strony…
+Protect with a password…	Zabezpiecz hasłem…
+Remove the password…	Usuń hasło…
+Extract here	Rozpakuj tutaj
+Join into one video	Połącz w jedno wideo
+From	Od
+To	Do
+For example 0:30 and 1:45. Only that part is kept.	Na przykład 0:30 i 1:45. Zostaje tylko ten fragment.
+For example 1-3, 7. Only these pages are kept.	Na przykład 1-3, 7. Zostają tylko te strony.
+Shape	Kształt
+The middle of the picture is kept	Zostaje środek obrazu
+Square · 1:1	Kwadrat · 1:1
+Portrait · 4:5	Pion · 4:5
+Photo · 3:2	Zdjęcie · 3:2
+Classic · 4:3	Klasyczny · 4:3
+Wide · 16:9	Szeroki · 16:9
+Story · 9:16	Relacja · 9:16
+Password	Hasło
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	Potrzebne do otwarcia PDF. Przechowuj je bezpiecznie: nie da się go odzyskać.
+The password that opens this PDF now.	Hasło, które teraz otwiera ten PDF.
+wrong password	błędne hasło
+the archive is empty	archiwum jest puste
+Text (TXT)	Tekst (TXT)
+Web page (HTML)	Strona internetowa (HTML)
+Send to {device}	Wyślij do {device}
+Anywhere, desktop included: Ctrl+C, then {keys}	Wszędzie, także na pulpicie: Ctrl+C, potem {keys}
+Send with LocalSend…	Wyślij przez LocalSend…
+Sent to {device}	Wysłano do {device}
+{device} didn't answer	{device} nie odpowiada
+Opened in LocalSend: pick the device there	Otwarto w LocalSend: wybierz tam urządzenie
+no tables found in this PDF	nie znaleziono tabel w tym PDF
+no pages to convert (check the page numbers)	brak stron do konwersji (sprawdź numery stron)
+the PDF looks damaged or empty	PDF wygląda na uszkodzony lub pusty
+File not found	Nie znaleziono pliku
+It was moved or deleted after you selected it. Select it again.	Został przeniesiony lub usunięty po zaznaczeniu. Zaznacz go ponownie.
+This is a folder	To jest folder
+Select the files inside it, or use Put in a ZIP.	Zaznacz pliki w środku albo użyj Spakuj do ZIP.
+File type not recognised	Nie rozpoznano typu pliku
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey czyta zawartość pliku, a nie jego nazwę, a ta zawartość nie jest znanym mu formatem.
+Damaged or incomplete file	Plik uszkodzony lub niekompletny
+Check that it opens in another app. If you downloaded it, download it again.	Sprawdź, czy otwiera się w innej aplikacji. Jeśli został pobrany, pobierz go ponownie.
+The file is protected by a password	Plik jest chroniony hasłem
+Remove the password first, then convert it.	Najpierw usuń hasło, potem go przekonwertuj.
+Wrong password	Błędne hasło
+Check the password and try again.	Sprawdź hasło i spróbuj ponownie.
+The file has no sound	Plik nie ma dźwięku
+This video has no audio track to extract.	To wideo nie ma ścieżki dźwiękowej do wyodrębnienia.
+No tables found in the PDF	Nie znaleziono tabel w PDF
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey odczytuje tabele tylko z PDF-ów utworzonych na komputerze; zeskanowane strony to obrazy.
+The archive is empty	Archiwum jest puste
+There is nothing inside to extract.	W środku nie ma nic do rozpakowania.
+Those pages don't exist	Tych stron nie ma
+Check the page numbers: the document has fewer pages.	Sprawdź numery stron: dokument ma mniej stron.
+Already as small as it gets	Już jest tak mały, jak się da
+Compressing it more wouldn't make it smaller.	Mocniejsza kompresja nie zmniejszy go.
+Not possible on this computer	Niemożliwe na tym komputerze
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Brakuje programu, którego potrzebuje Joey. README podaje, co zainstalować dla każdego rodzaju plików.
+A program Joey needs is missing	Brakuje programu potrzebnego Joey
+Install it (the README lists them), then try again.	Zainstaluj go (lista jest w README) i spróbuj ponownie.
+The installed program can't handle this format	Zainstalowany program nie obsługuje tego formatu
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Twoja wersja nie ma tego formatu. Pełniejsza wersja go dodaje, np. FFmpeg z RPM Fusion w Fedorze.
+The disk is full	Dysk jest pełny
+Free some space, or save in another place.	Zwolnij miejsce albo zapisz gdzie indziej.
+Joey isn't allowed to write here	Joey nie może tu zapisywać
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Skopiuj pliki do jednego ze swoich folderów (np. Dokumenty) i tam je przekonwertuj.
+Not enough memory	Za mało pamięci
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Plik jest za duży na wolną pamięć. Zamknij inne aplikacje albo konwertuj mniej plików naraz.
+Blocked by a safety limit	Zablokowane przez limit bezpieczeństwa
+The image is larger than the limit set by ImageMagick's security policy.	Obraz przekracza limit ustawiony w polityce bezpieczeństwa ImageMagick.
+Unexpected error	Nieoczekiwany błąd
+This is a bug in Joey. Please report it.	To błąd w Joey. Zgłoś go, proszę.
+The conversion program failed	Program konwertujący zawiódł
+Please report it: the details tell us why.	Zgłoś to, proszę: szczegóły powiedzą nam dlaczego.
+Close (Esc)	Zamknij (Esc)
+{keys} is ready in {fm}	{keys} działa w {fm}
+Change the shortcuts	Zmień skróty
+Set up the shortcuts	Ustaw skróty
+Welcome to Joey	Witaj w Joey
+Two shortcuts open Joey. Keep these, or choose your own.	Joey otwierają dwa skróty. Zostaw te albo wybierz własne.
+In the file manager	W menedżerze plików
+Select files, then press	Zaznacz pliki, potem naciśnij
+Anywhere, desktop included	Wszędzie, także na pulpicie
+Copy files with Ctrl+C, then press	Skopiuj pliki przez Ctrl+C, potem naciśnij
+Change	Zmień
+Press the keys… (Esc cancels)	Naciśnij klawisze… (Esc anuluje)
+Use Alt or Meta (the Windows key) with a letter or a number	Użyj Alt lub Meta (klawisz Windows) z literą lub cyfrą
+That's already the other shortcut	To już jest drugi skrót
+Later	Później
+Turn on	Włącz
+Ready	Gotowe
+Start	Zacznij
+Ideas or problems? Tell us	Pomysły lub problemy? Napisz do nas
+Report the problem	Zgłoś problem
+You see the report before anything is sent	Zobaczysz zgłoszenie, zanim cokolwiek zostanie wysłane
+Feedback	Opinia
+Last time Joey closed because of an error	Ostatnio Joey zamknął się z powodu błędu
+Report	Zgłoś
+What were you doing?	Co robiłeś?
+(optional) Write it here.	(opcjonalnie) Napisz tutaj.
+Your idea, request or opinion	Twój pomysł, prośba lub opinia
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Nic nie wysyła się samo. Przeczytaj tekst, zmień lub usuń, co chcesz: nazwy plików i nazwa użytkownika są już ukryte.
+Title, in a few words	Tytuł, w kilku słowach
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Wysłanie otwiera GitHub w przeglądarce, gdzie sprawdzisz wszystko jeszcze raz: potrzebne jest darmowe konto. Bez konta skopiuj tekst i wyślij, jak wolisz.
+Copy	Kopiuj
+Open on GitHub	Otwórz na GitHubie
+Send by email	Wyślij e-mailem
+Copied	Skopiowano
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Tekst jest długi: GitHub otworzy się z początkiem. Cały tekst jest skopiowany: zastąp go przez Ctrl+V.
+Markdown for AI apps	Markdown dla aplikacji AI
+Compress to a size…	Kompresuj do rozmiaru…
+At most	Najwyżej
+Joey lowers the quality just enough	Joey obniża jakość tylko tyle, ile trzeba
+{before} → {after}, {percent}% smaller	{before} → {after}, mniej o {percent}%
+Removed: {what}	Usunięto: {what}
+No hidden details were found	Nie znaleziono ukrytych danych
+place	miejsce
+date and time	data i godzina
+camera or device	aparat lub urządzenie
+author	autor
+software used	użyty program
+title and tags	tytuł i znaczniki
+Use Joey from an AI app	Używaj Joey z aplikacji AI
+Copies the setup for apps that support MCP	Kopiuje konfigurację dla aplikacji obsługujących MCP
+Copied: paste it in your AI app's MCP settings	Skopiowano: wklej w ustawieniach MCP aplikacji AI
+The PDF has no text	PDF nie zawiera tekstu
+Its pages are pictures, as in a scan: there is no text to read.	Jego strony to obrazy, jak w skanie: nie ma tekstu do odczytania.
+Already smaller than that	Już jest mniejszy
+The file is already under the size you chose: nothing to do.	Plik jest już poniżej wybranego rozmiaru: nie ma nic do zrobienia.
+Can't make it that small	Nie da się go tak zmniejszyć
+Even at the lowest quality it stays bigger. Choose a larger size.	Nawet przy najniższej jakości pozostaje większy. Wybierz większy rozmiar.

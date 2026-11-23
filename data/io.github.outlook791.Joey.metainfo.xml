@@ -7,29 +7,271 @@
   <name>Joey</name>
   <summary>Convert files in two steps</summary>
   <summary xml:lang="it">Converti file in due passaggi</summary>
+  <summary xml:lang="zh_CN">两步转换文件</summary>
+  <summary xml:lang="hi">दो कदमों में फ़ाइलें बदलें</summary>
+  <summary xml:lang="es">Convierte archivos en dos pasos</summary>
+  <summary xml:lang="ar">حوّل الملفات في خطوتين</summary>
+  <summary xml:lang="fr">Convertir des fichiers en deux étapes</summary>
+  <summary xml:lang="bn">দুই ধাপে ফাইল রূপান্তর</summary>
+  <summary xml:lang="pt_BR">Converta arquivos em dois passos</summary>
+  <summary xml:lang="ru">Преобразование файлов в два шага</summary>
+  <summary xml:lang="id">Konversi berkas dalam dua langkah</summary>
+  <summary xml:lang="ur">دو قدموں میں فائلیں تبدیل کریں</summary>
+  <summary xml:lang="de">Dateien in zwei Schritten umwandeln</summary>
+  <summary xml:lang="ja">2 ステップでファイル変換</summary>
+  <summary xml:lang="mr">दोन टप्प्यांत फाइल्स रूपांतरित करा</summary>
+  <summary xml:lang="vi">Chuyển đổi tệp trong hai bước</summary>
+  <summary xml:lang="pl">Konwertuj pliki w dwóch krokach</summary>
+  <summary xml:lang="tr">Dosyaları iki adımda dönüştürün</summary>
+  <summary xml:lang="ko">두 단계로 끝나는 파일 변환</summary>
+  <summary xml:lang="uk">Перетворення файлів за два кроки</summary>
+  <summary xml:lang="nl">Bestanden omzetten in twee stappen</summary>
+  <summary xml:lang="cs">Převod souborů ve dvou krocích</summary>
 
   <description>
     <p>Converts files. That's it, really. Select files, press Alt+C (or copy them and press Meta+C anywhere, the desktop included), pick a format: done. The result lands next to the original, which is never touched.</p>
     <p xml:lang="it">Converte file. Tutto qui, davvero. Seleziona i file, premi Alt+C (oppure copiali e premi Meta+C ovunque, anche sul desktop), scegli il formato: fatto. Il risultato finisce accanto all'originale, che non viene mai toccato.</p>
+    <p xml:lang="zh_CN">转换文件，就这么简单。选中文件，按 Alt+C（或复制文件后在任何地方按 Meta+C，包括桌面），选一个格式：完成。结果保存在原文件旁边，原文件不会被改动。</p>
+    <p xml:lang="hi">फ़ाइलें बदलता है। बस इतना ही, सच में। फ़ाइलें चुनें, Alt+C दबाएँ (या उन्हें कॉपी करके कहीं भी Meta+C दबाएँ, डेस्कटॉप पर भी), एक फ़ॉर्मेट चुनें: हो गया। नतीजा मूल फ़ाइल के पास बनता है, जिसे कभी छुआ नहीं जाता।</p>
+    <p xml:lang="es">Convierte archivos. Eso es todo, de verdad. Selecciona archivos, pulsa Alt+C (o cópialos y pulsa Meta+C en cualquier sitio, también el escritorio), elige un formato: listo. El resultado queda junto al original, que nunca se toca.</p>
+    <p xml:lang="ar">يحوّل الملفات. هذا كل شيء حقًا. حدّد الملفات، واضغط Alt+C (أو انسخها واضغط Meta+C في أي مكان، حتى على سطح المكتب)، واختر صيغة: انتهى. تظهر النتيجة بجانب الملف الأصلي الذي لا يُمسّ أبدًا.</p>
+    <p xml:lang="fr">Convertit des fichiers. C'est tout, vraiment. Sélectionnez des fichiers, appuyez sur Alt+C (ou copiez-les et appuyez sur Meta+C n'importe où, bureau compris), choisissez un format : c'est fait. Le résultat arrive à côté de l'original, qui n'est jamais modifié.</p>
+    <p xml:lang="bn">ফাইল রূপান্তর করে। এটুকুই, সত্যি। ফাইল বাছুন, Alt+C চাপুন (অথবা কপি করে যেকোনো জায়গায় Meta+C চাপুন, ডেস্কটপেও), একটি ফরম্যাট বাছুন: হয়ে গেল। ফলাফল মূল ফাইলের পাশে থাকে, মূল ফাইলে কখনো হাত দেওয়া হয় না।</p>
+    <p xml:lang="pt_BR">Converte arquivos. É só isso, de verdade. Selecione os arquivos, aperte Alt+C (ou copie e aperte Meta+C em qualquer lugar, inclusive na área de trabalho), escolha um formato: pronto. O resultado fica ao lado do original, que nunca é alterado.</p>
+    <p xml:lang="ru">Преобразует файлы. Вот и всё, правда. Выберите файлы, нажмите Alt+C (или скопируйте их и нажмите Meta+C где угодно, даже на рабочем столе), выберите формат: готово. Результат появится рядом с оригиналом, который никогда не меняется.</p>
+    <p xml:lang="id">Mengonversi berkas. Itu saja, sungguh. Pilih berkas, tekan Alt+C (atau salin lalu tekan Meta+C di mana saja, termasuk desktop), pilih format: selesai. Hasilnya muncul di samping berkas asli, yang tidak pernah diubah.</p>
+    <p xml:lang="ur">فائلیں تبدیل کرتا ہے۔ بس اتنا ہی، واقعی۔ فائلیں منتخب کریں، Alt+C دبائیں (یا انہیں کاپی کر کے کہیں بھی Meta+C دبائیں، ڈیسک ٹاپ پر بھی)، فارمیٹ چنیں: ہو گیا۔ نتیجہ اصل فائل کے ساتھ بنتا ہے، جسے کبھی چھیڑا نہیں جاتا۔</p>
+    <p xml:lang="de">Wandelt Dateien um. Das ist alles, wirklich. Dateien auswählen, Alt+C drücken (oder kopieren und überall Meta+C drücken, auch auf dem Desktop), Format wählen: fertig. Das Ergebnis landet neben dem Original, das nie verändert wird.</p>
+    <p xml:lang="ja">ファイルを変換します。本当にそれだけ。ファイルを選んで Alt+C を押し（またはコピーしてどこでも Meta+C、デスクトップでも）、形式を選べば完了。結果は元のファイルの隣に保存され、元のファイルには一切手を加えません。</p>
+    <p xml:lang="mr">फाइल्स रूपांतरित करतो. इतकेच, खरेच. फाइल्स निवडा, Alt+C दाबा (किंवा त्या कॉपी करून कुठेही Meta+C दाबा, डेस्कटॉपवरही), फॉरमॅट निवडा: झाले. परिणाम मूळ फाइलच्या शेजारी येतो, मूळ फाइलला कधीही हात लावला जात नाही.</p>
+    <p xml:lang="vi">Chuyển đổi tệp. Chỉ vậy thôi. Chọn tệp, nhấn Alt+C (hoặc sao chép rồi nhấn Meta+C ở bất kỳ đâu, kể cả màn hình nền), chọn định dạng: xong. Kết quả nằm cạnh tệp gốc, tệp gốc không bao giờ bị thay đổi.</p>
+    <p xml:lang="pl">Konwertuje pliki. To wszystko, naprawdę. Zaznacz pliki, naciśnij Alt+C (albo skopiuj je i naciśnij Meta+C gdziekolwiek, także na pulpicie), wybierz format: gotowe. Wynik trafia obok oryginału, który nigdy nie jest zmieniany.</p>
+    <p xml:lang="tr">Dosyaları dönüştürür. Hepsi bu, gerçekten. Dosyaları seçin, Alt+C'ye basın (ya da kopyalayıp her yerde, masaüstü dahil, Meta+C'ye basın), bir biçim seçin: bitti. Sonuç, hiç dokunulmayan orijinalin yanına kaydedilir.</p>
+    <p xml:lang="ko">파일을 변환합니다. 정말 그게 다입니다. 파일을 선택하고 Alt+C를 누르세요(또는 복사한 뒤 바탕화면을 포함해 어디서나 Meta+C). 형식을 고르면 끝. 결과는 원본 옆에 저장되며 원본은 절대 건드리지 않습니다.</p>
+    <p xml:lang="uk">Перетворює файли. Ось і все, справді. Виберіть файли, натисніть Alt+C (або скопіюйте їх і натисніть Meta+C будь-де, зокрема на стільниці), виберіть формат: готово. Результат з'явиться поруч з оригіналом, який ніколи не змінюється.</p>
+    <p xml:lang="nl">Zet bestanden om. Dat is alles, echt. Selecteer bestanden, druk op Alt+C (of kopieer ze en druk overal op Meta+C, ook op het bureaublad), kies een formaat: klaar. Het resultaat komt naast het origineel, dat nooit wordt aangeraakt.</p>
+    <p xml:lang="cs">Převádí soubory. To je vše, opravdu. Vyberte soubory, stiskněte Alt+C (nebo je zkopírujte a stiskněte Meta+C kdekoli, i na ploše), zvolte formát: hotovo. Výsledek se objeví vedle originálu, na který se nikdy nesahá.</p>
     <ul>
       <li>Images: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, and HEIC photos from phones</li>
       <li xml:lang="it">Immagini: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO e foto HEIC dei telefoni</li>
+      <li xml:lang="zh_CN">图片：JPG、PNG、WebP、AVIF、GIF、TIFF、BMP、ICO，以及手机拍的 HEIC 照片</li>
+      <li xml:lang="hi">इमेज: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO और फ़ोन की HEIC फ़ोटो</li>
+      <li xml:lang="es">Imágenes: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO y fotos HEIC de móviles</li>
+      <li xml:lang="ar">الصور: JPG وPNG وWebP وAVIF وGIF وTIFF وBMP وICO وصور HEIC من الهواتف</li>
+      <li xml:lang="fr">Images : JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO et photos HEIC des téléphones</li>
+      <li xml:lang="bn">ছবি: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO এবং ফোনের HEIC ছবি</li>
+      <li xml:lang="pt_BR">Imagens: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO e fotos HEIC de celulares</li>
+      <li xml:lang="ru">Изображения: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO и фото HEIC с телефонов</li>
+      <li xml:lang="id">Gambar: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, dan foto HEIC dari ponsel</li>
+      <li xml:lang="ur">تصاویر: JPG، PNG، WebP، AVIF، GIF، TIFF، BMP، ICO اور فون کی HEIC تصاویر</li>
+      <li xml:lang="de">Bilder: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO und HEIC-Fotos von Handys</li>
+      <li xml:lang="ja">画像: JPG、PNG、WebP、AVIF、GIF、TIFF、BMP、ICO、スマートフォンの HEIC 写真</li>
+      <li xml:lang="mr">प्रतिमा: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO आणि फोनमधील HEIC फोटो</li>
+      <li xml:lang="vi">Ảnh: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO và ảnh HEIC từ điện thoại</li>
+      <li xml:lang="pl">Obrazy: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO i zdjęcia HEIC z telefonów</li>
+      <li xml:lang="tr">Görseller: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO ve telefonlardan HEIC fotoğraflar</li>
+      <li xml:lang="ko">이미지: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO, 휴대폰 HEIC 사진</li>
+      <li xml:lang="uk">Зображення: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO і фото HEIC з телефонів</li>
+      <li xml:lang="nl">Afbeeldingen: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO en HEIC-foto's van telefoons</li>
+      <li xml:lang="cs">Obrázky: JPG, PNG, WebP, AVIF, GIF, TIFF, BMP, ICO a fotky HEIC z telefonů</li>
       <li>Audio and video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV and more; sound from videos; animated GIFs</li>
       <li xml:lang="it">Audio e video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV e altri; audio dai video; GIF animate</li>
+      <li xml:lang="zh_CN">音频和视频：MP3、M4A、OGG、Opus、FLAC、WAV、MP4、MKV、WebM、MOV 等；提取视频中的声音；动图 GIF</li>
+      <li xml:lang="hi">ऑडियो और वीडियो: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV और भी; वीडियो से आवाज़; एनिमेटेड GIF</li>
+      <li xml:lang="es">Audio y vídeo: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV y más; el sonido de los vídeos; GIF animados</li>
+      <li xml:lang="ar">الصوت والفيديو: MP3 وM4A وOGG وOpus وFLAC وWAV وMP4 وMKV وWebM وMOV وغيرها؛ الصوت من الفيديو؛ صور GIF المتحركة</li>
+      <li xml:lang="fr">Audio et vidéo : MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV et plus ; le son des vidéos ; GIF animés</li>
+      <li xml:lang="bn">অডিও ও ভিডিও: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV ও আরও; ভিডিও থেকে শব্দ; অ্যানিমেটেড GIF</li>
+      <li xml:lang="pt_BR">Áudio e vídeo: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV e mais; o som dos vídeos; GIFs animados</li>
+      <li xml:lang="ru">Аудио и видео: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV и другие; звук из видео; анимированные GIF</li>
+      <li xml:lang="id">Audio dan video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV dan lainnya; suara dari video; GIF animasi</li>
+      <li xml:lang="ur">آڈیو اور ویڈیو: MP3، M4A، OGG، Opus، FLAC، WAV، MP4، MKV، WebM، MOV اور مزید؛ ویڈیو سے آواز؛ متحرک GIF</li>
+      <li xml:lang="de">Audio und Video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV und mehr; Ton aus Videos; animierte GIFs</li>
+      <li xml:lang="ja">音声と動画: MP3、M4A、OGG、Opus、FLAC、WAV、MP4、MKV、WebM、MOV など。動画から音声を取り出し、アニメーション GIF にも</li>
+      <li xml:lang="mr">ऑडिओ आणि व्हिडिओ: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV आणि इतर; व्हिडिओतील आवाज; ॲनिमेटेड GIF</li>
+      <li xml:lang="vi">Âm thanh và video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV và nhiều hơn; tách tiếng từ video; GIF động</li>
+      <li xml:lang="pl">Dźwięk i wideo: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV i inne; dźwięk z filmów; animowane GIF-y</li>
+      <li xml:lang="tr">Ses ve video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV ve daha fazlası; videolardan ses; hareketli GIF'ler</li>
+      <li xml:lang="ko">오디오와 동영상: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV 등; 동영상의 소리 추출; 움직이는 GIF</li>
+      <li xml:lang="uk">Аудіо й відео: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV та інші; звук із відео; анімовані GIF</li>
+      <li xml:lang="nl">Audio en video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV en meer; geluid uit video's; geanimeerde GIF's</li>
+      <li xml:lang="cs">Zvuk a video: MP3, M4A, OGG, Opus, FLAC, WAV, MP4, MKV, WebM, MOV a další; zvuk z videí; animované GIFy</li>
       <li>Documents: Word, ODT, RTF, Markdown, HTML, EPUB, and all of them to PDF</li>
       <li xml:lang="it">Documenti: Word, ODT, RTF, Markdown, HTML, EPUB, e tutti in PDF</li>
+      <li xml:lang="zh_CN">文档：Word、ODT、RTF、Markdown、HTML、EPUB，并可全部转为 PDF</li>
+      <li xml:lang="hi">दस्तावेज़: Word, ODT, RTF, Markdown, HTML, EPUB, और सब PDF में</li>
+      <li xml:lang="es">Documentos: Word, ODT, RTF, Markdown, HTML, EPUB, y todos a PDF</li>
+      <li xml:lang="ar">المستندات: Word وODT وRTF وMarkdown وHTML وEPUB، وكلها إلى PDF</li>
+      <li xml:lang="fr">Documents : Word, ODT, RTF, Markdown, HTML, EPUB, et tous en PDF</li>
+      <li xml:lang="bn">নথি: Word, ODT, RTF, Markdown, HTML, EPUB, এবং সবগুলো PDF-এ</li>
+      <li xml:lang="pt_BR">Documentos: Word, ODT, RTF, Markdown, HTML, EPUB, e todos em PDF</li>
+      <li xml:lang="ru">Документы: Word, ODT, RTF, Markdown, HTML, EPUB и все они в PDF</li>
+      <li xml:lang="id">Dokumen: Word, ODT, RTF, Markdown, HTML, EPUB, dan semuanya ke PDF</li>
+      <li xml:lang="ur">دستاویزات: Word، ODT، RTF، Markdown، HTML، EPUB، اور سب PDF میں</li>
+      <li xml:lang="de">Dokumente: Word, ODT, RTF, Markdown, HTML, EPUB, und alle davon als PDF</li>
+      <li xml:lang="ja">文書: Word、ODT、RTF、Markdown、HTML、EPUB、そしてすべて PDF に</li>
+      <li xml:lang="mr">दस्तऐवज: Word, ODT, RTF, Markdown, HTML, EPUB, आणि सर्व PDF मध्ये</li>
+      <li xml:lang="vi">Tài liệu: Word, ODT, RTF, Markdown, HTML, EPUB, và tất cả sang PDF</li>
+      <li xml:lang="pl">Dokumenty: Word, ODT, RTF, Markdown, HTML, EPUB, i wszystkie do PDF</li>
+      <li xml:lang="tr">Belgeler: Word, ODT, RTF, Markdown, HTML, EPUB ve hepsinden PDF</li>
+      <li xml:lang="ko">문서: Word, ODT, RTF, Markdown, HTML, EPUB, 그리고 모두 PDF로</li>
+      <li xml:lang="uk">Документи: Word, ODT, RTF, Markdown, HTML, EPUB і всі вони в PDF</li>
+      <li xml:lang="nl">Documenten: Word, ODT, RTF, Markdown, HTML, EPUB, en ze allemaal naar PDF</li>
+      <li xml:lang="cs">Dokumenty: Word, ODT, RTF, Markdown, HTML, EPUB a všechny do PDF</li>
       <li>Spreadsheets: Excel, ODS, CSV, also to PDF; PDF tables to Excel; PDF to text</li>
       <li xml:lang="it">Fogli di calcolo: Excel, ODS, CSV, anche in PDF; tabelle PDF in Excel; PDF in testo</li>
+      <li xml:lang="zh_CN">表格：Excel、ODS、CSV，也可转为 PDF；把 PDF 中的表格转为 Excel；PDF 转文本</li>
+      <li xml:lang="hi">स्प्रेडशीट: Excel, ODS, CSV, PDF में भी; PDF की टेबल Excel में; PDF से टेक्स्ट</li>
+      <li xml:lang="es">Hojas de cálculo: Excel, ODS, CSV, también a PDF; tablas de PDF a Excel; PDF a texto</li>
+      <li xml:lang="ar">جداول البيانات: Excel وODS وCSV، وإلى PDF أيضًا؛ جداول PDF إلى Excel؛ PDF إلى نص</li>
+      <li xml:lang="fr">Tableurs : Excel, ODS, CSV, aussi en PDF ; tableaux de PDF vers Excel ; PDF en texte</li>
+      <li xml:lang="bn">স্প্রেডশিট: Excel, ODS, CSV, PDF-এও; PDF-এর টেবিল Excel-এ; PDF থেকে লেখা</li>
+      <li xml:lang="pt_BR">Planilhas: Excel, ODS, CSV, também em PDF; tabelas de PDF para Excel; PDF em texto</li>
+      <li xml:lang="ru">Таблицы: Excel, ODS, CSV, также в PDF; таблицы из PDF в Excel; PDF в текст</li>
+      <li xml:lang="id">Lembar kerja: Excel, ODS, CSV, juga ke PDF; tabel PDF ke Excel; PDF ke teks</li>
+      <li xml:lang="ur">اسپریڈشیٹ: Excel، ODS، CSV، PDF میں بھی؛ PDF کے ٹیبل Excel میں؛ PDF سے متن</li>
+      <li xml:lang="de">Tabellen: Excel, ODS, CSV, auch als PDF; PDF-Tabellen nach Excel; PDF als Text</li>
+      <li xml:lang="ja">表計算: Excel、ODS、CSV、PDF にも。PDF の表を Excel に。PDF をテキストに</li>
+      <li xml:lang="mr">स्प्रेडशीट: Excel, ODS, CSV, PDF मध्येही; PDF मधील टेबल Excel मध्ये; PDF मधून मजकूर</li>
+      <li xml:lang="vi">Bảng tính: Excel, ODS, CSV, cả sang PDF; bảng trong PDF sang Excel; PDF sang văn bản</li>
+      <li xml:lang="pl">Arkusze: Excel, ODS, CSV, także do PDF; tabele z PDF do Excela; PDF do tekstu</li>
+      <li xml:lang="tr">Hesap tabloları: Excel, ODS, CSV, PDF'e de; PDF tablolarından Excel'e; PDF'ten metne</li>
+      <li xml:lang="ko">스프레드시트: Excel, ODS, CSV, PDF로도; PDF 표를 Excel로; PDF를 텍스트로</li>
+      <li xml:lang="uk">Таблиці: Excel, ODS, CSV, також у PDF; таблиці з PDF в Excel; PDF у текст</li>
+      <li xml:lang="nl">Spreadsheets: Excel, ODS, CSV, ook naar PDF; tabellen uit PDF naar Excel; PDF naar tekst</li>
+      <li xml:lang="cs">Tabulky: Excel, ODS, CSV, také do PDF; tabulky z PDF do Excelu; PDF na text</li>
+      <li>PDF to Markdown for AI apps: headings, lists and tables as text, in far fewer tokens</li>
+      <li xml:lang="it">PDF in Markdown per le app di AI: titoli, elenchi e tabelle come testo, con molti meno token</li>
+      <li xml:lang="zh_CN">PDF 转 Markdown，供 AI 应用使用：标题、列表和表格都是文字，所用 token 少得多</li>
+      <li xml:lang="hi">AI ऐप्स के लिए PDF से Markdown: शीर्षक, सूचियाँ और टेबल टेक्स्ट के रूप में, बहुत कम टोकन में</li>
+      <li xml:lang="es">PDF a Markdown para apps de IA: títulos, listas y tablas como texto, con muchos menos tokens</li>
+      <li xml:lang="ar">PDF إلى Markdown لتطبيقات الذكاء الاصطناعي: العناوين والقوائم والجداول نصًا، بعدد رموز أقل بكثير</li>
+      <li xml:lang="fr">PDF en Markdown pour les applis d'IA : titres, listes et tableaux en texte, avec beaucoup moins de tokens</li>
+      <li xml:lang="bn">AI অ্যাপের জন্য PDF থেকে Markdown: শিরোনাম, তালিকা ও টেবিল লেখা হিসেবে, অনেক কম টোকেনে</li>
+      <li xml:lang="pt_BR">PDF em Markdown para apps de IA: títulos, listas e tabelas como texto, com muito menos tokens</li>
+      <li xml:lang="ru">PDF в Markdown для ИИ-приложений: заголовки, списки и таблицы текстом, с гораздо меньшим числом токенов</li>
+      <li xml:lang="id">PDF ke Markdown untuk aplikasi AI: judul, daftar, dan tabel sebagai teks, dengan token jauh lebih sedikit</li>
+      <li xml:lang="ur">AI ایپس کے لیے PDF سے Markdown: عنوانات، فہرستیں اور ٹیبل متن کی صورت میں، بہت کم ٹوکن میں</li>
+      <li xml:lang="de">PDF als Markdown für KI-Apps: Überschriften, Listen und Tabellen als Text, mit viel weniger Tokens</li>
+      <li xml:lang="ja">AI アプリ向けに PDF を Markdown へ: 見出し・リスト・表をテキストにして、トークンを大幅に節約</li>
+      <li xml:lang="mr">AI ॲप्ससाठी PDF मधून Markdown: शीर्षके, याद्या आणि टेबल मजकूर स्वरूपात, खूप कमी टोकनमध्ये</li>
+      <li xml:lang="vi">PDF sang Markdown cho ứng dụng AI: tiêu đề, danh sách và bảng dạng văn bản, tốn ít token hơn nhiều</li>
+      <li xml:lang="pl">PDF do Markdown dla aplikacji AI: nagłówki, listy i tabele jako tekst, przy dużo mniejszej liczbie tokenów</li>
+      <li xml:lang="tr">Yapay zekâ uygulamaları için PDF'ten Markdown'a: başlıklar, listeler ve tablolar metin olarak, çok daha az token ile</li>
+      <li xml:lang="ko">AI 앱용 PDF → Markdown: 제목, 목록, 표를 텍스트로, 토큰은 훨씬 적게</li>
+      <li xml:lang="uk">PDF у Markdown для ШІ-застосунків: заголовки, списки й таблиці текстом, із набагато меншою кількістю токенів</li>
+      <li xml:lang="nl">PDF naar Markdown voor AI-apps: koppen, lijsten en tabellen als tekst, met veel minder tokens</li>
+      <li xml:lang="cs">PDF do Markdownu pro aplikace s AI: nadpisy, seznamy a tabulky jako text, s mnohem menším počtem tokenů</li>
       <li>PowerPoint and exact Office layouts with the optional Joey Office add-on (LibreOffice)</li>
       <li xml:lang="it">PowerPoint e impaginazione Office esatta con l'estensione facoltativa Joey Office (LibreOffice)</li>
-      <li>Quick tools: compress, rotate, crop, trim, split or merge PDFs, protect with a password, join tracks and videos, and more</li>
-      <li xml:lang="it">Strumenti rapidi: comprimi, ruota, ritaglia, taglia, dividi o unisci PDF, proteggi con password, unisci tracce e video, e altro</li>
+      <li xml:lang="zh_CN">使用可选的 Joey Office 扩展（LibreOffice）处理 PowerPoint 并保持 Office 排版</li>
+      <li xml:lang="hi">वैकल्पिक Joey Office ऐड-ऑन (LibreOffice) के साथ PowerPoint और Office का सटीक लेआउट</li>
+      <li xml:lang="es">PowerPoint y diseño exacto de Office con el complemento opcional Joey Office (LibreOffice)</li>
+      <li xml:lang="ar">PowerPoint وتنسيق Office الدقيق مع الإضافة الاختيارية Joey Office ‏(LibreOffice)</li>
+      <li xml:lang="fr">PowerPoint et mise en page Office exacte avec le module facultatif Joey Office (LibreOffice)</li>
+      <li xml:lang="bn">ঐচ্ছিক Joey Office অ্যাড-অন (LibreOffice) দিয়ে PowerPoint ও Office-এর নিখুঁত বিন্যাস</li>
+      <li xml:lang="pt_BR">PowerPoint e layout exato do Office com o complemento opcional Joey Office (LibreOffice)</li>
+      <li xml:lang="ru">PowerPoint и точная вёрстка Office с дополнительным модулем Joey Office (LibreOffice)</li>
+      <li xml:lang="id">PowerPoint dan tata letak Office yang persis dengan tambahan opsional Joey Office (LibreOffice)</li>
+      <li xml:lang="ur">اختیاری Joey Office ایڈ آن (LibreOffice) کے ساتھ PowerPoint اور Office کا درست لے آؤٹ</li>
+      <li xml:lang="de">PowerPoint und exaktes Office-Layout mit der optionalen Erweiterung Joey Office (LibreOffice)</li>
+      <li xml:lang="ja">追加の Joey Office 拡張（LibreOffice）で PowerPoint と正確な Office レイアウト</li>
+      <li xml:lang="mr">पर्यायी Joey Office ॲड-ऑनसह (LibreOffice) PowerPoint आणि Office चा अचूक लेआउट</li>
+      <li xml:lang="vi">PowerPoint và bố cục Office chính xác với tiện ích tùy chọn Joey Office (LibreOffice)</li>
+      <li xml:lang="pl">PowerPoint i dokładny układ Office z opcjonalnym dodatkiem Joey Office (LibreOffice)</li>
+      <li xml:lang="tr">İsteğe bağlı Joey Office eklentisiyle (LibreOffice) PowerPoint ve birebir Office düzeni</li>
+      <li xml:lang="ko">선택 사항인 Joey Office 애드온(LibreOffice)으로 PowerPoint와 정확한 Office 레이아웃</li>
+      <li xml:lang="uk">PowerPoint і точне компонування Office з додатковим модулем Joey Office (LibreOffice)</li>
+      <li xml:lang="nl">PowerPoint en exacte Office-opmaak met de optionele uitbreiding Joey Office (LibreOffice)</li>
+      <li xml:lang="cs">PowerPoint a přesné rozvržení Office s volitelným doplňkem Joey Office (LibreOffice)</li>
+      <li>Quick tools: compress (also to a size you choose), rotate, crop, trim, split or merge PDFs, protect with a password, join tracks and videos, and more</li>
+      <li xml:lang="it">Strumenti rapidi: comprimi (anche a una dimensione scelta), ruota, ritaglia, taglia, dividi o unisci PDF, proteggi con password, unisci tracce e video, e altro</li>
+      <li xml:lang="zh_CN">快捷工具：压缩（也可压缩到指定大小）、旋转、裁剪、剪辑、拆分或合并 PDF、加密码保护、合并音轨和视频等</li>
+      <li xml:lang="hi">झटपट टूल: छोटा करें (चुने हुए आकार तक भी), घुमाएँ, काटें, हिस्सा काटें, PDF बाँटें या जोड़ें, पासवर्ड से सुरक्षित करें, ट्रैक और वीडियो जोड़ें, और भी</li>
+      <li xml:lang="es">Herramientas rápidas: comprimir (también a un tamaño elegido), girar, recortar, cortar, dividir o unir PDF, proteger con contraseña, unir pistas y vídeos, y más</li>
+      <li xml:lang="ar">أدوات سريعة: الضغط (وإلى حجم تختاره أيضًا)، والتدوير، والقص، والاقتطاع، وتقسيم ملفات PDF أو دمجها، والحماية بكلمة مرور، ودمج المقاطع والفيديوهات، والمزيد</li>
+      <li xml:lang="fr">Outils rapides : compresser (aussi à une taille choisie), pivoter, recadrer, couper, diviser ou fusionner des PDF, protéger par mot de passe, joindre pistes et vidéos, et plus</li>
+      <li xml:lang="bn">দ্রুত টুল: সংকোচন (বেছে নেওয়া আকারেও), ঘোরানো, ক্রপ, অংশ কাটা, PDF ভাগ বা যুক্ত করা, পাসওয়ার্ড দিয়ে সুরক্ষা, ট্র্যাক ও ভিডিও যুক্ত করা, আরও অনেক কিছু</li>
+      <li xml:lang="pt_BR">Ferramentas rápidas: comprimir (também para um tamanho escolhido), girar, recortar, cortar, dividir ou juntar PDFs, proteger com senha, juntar faixas e vídeos, e mais</li>
+      <li xml:lang="ru">Быстрые инструменты: сжатие (в том числе до выбранного размера), поворот, обрезка, вырезание фрагмента, разделение и объединение PDF, защита паролем, объединение треков и видео и другое</li>
+      <li xml:lang="id">Alat cepat: kompres (juga ke ukuran pilihan), putar, potong, pangkas, pisah atau gabung PDF, lindungi dengan kata sandi, gabung trek dan video, dan lainnya</li>
+      <li xml:lang="ur">فوری ٹولز: سکیڑیں (منتخب سائز تک بھی)، گھمائیں، کاٹیں، حصہ کاٹیں، PDF تقسیم یا یکجا کریں، پاس ورڈ سے محفوظ کریں، ٹریک اور ویڈیو جوڑیں، اور مزید</li>
+      <li xml:lang="de">Schnellwerkzeuge: komprimieren (auch auf eine gewählte Größe), drehen, zuschneiden, kürzen, PDFs teilen oder zusammenfügen, mit Passwort schützen, Spuren und Videos verbinden und mehr</li>
+      <li xml:lang="ja">クイックツール: 圧縮（指定サイズへの圧縮も）、回転、切り抜き、トリミング、PDF の分割と結合、パスワード保護、トラックや動画の結合など</li>
+      <li xml:lang="mr">झटपट साधने: लहान करा (निवडलेल्या आकारापर्यंतही), फिरवा, कापा, भाग कापा, PDF विभागा किंवा जोडा, पासवर्डने सुरक्षित करा, ट्रॅक आणि व्हिडिओ जोडा, आणि बरेच</li>
+      <li xml:lang="vi">Công cụ nhanh: nén (cả xuống kích thước tự chọn), xoay, cắt khung, cắt đoạn, tách hoặc gộp PDF, đặt mật khẩu, ghép bản nhạc và video, và hơn nữa</li>
+      <li xml:lang="pl">Szybkie narzędzia: kompresja (także do wybranego rozmiaru), obracanie, kadrowanie, przycinanie, dzielenie i łączenie PDF, ochrona hasłem, łączenie ścieżek i filmów i więcej</li>
+      <li xml:lang="tr">Hızlı araçlar: sıkıştırma (seçtiğiniz bir boyuta da), döndürme, kırpma, kesme, PDF bölme ya da birleştirme, parolayla koruma, parça ve video birleştirme ve daha fazlası</li>
+      <li xml:lang="ko">빠른 도구: 압축(원하는 크기로도), 회전, 자르기, 구간 자르기, PDF 나누기와 합치기, 비밀번호 보호, 트랙과 동영상 합치기 등</li>
+      <li xml:lang="uk">Швидкі інструменти: стиснення (зокрема до вибраного розміру), поворот, кадрування, обрізання, поділ чи об'єднання PDF, захист паролем, об'єднання доріжок і відео та інше</li>
+      <li xml:lang="nl">Snelle hulpmiddelen: comprimeren (ook tot een gekozen grootte), draaien, bijsnijden, inkorten, PDF's splitsen of samenvoegen, beveiligen met een wachtwoord, tracks en video's samenvoegen en meer</li>
+      <li xml:lang="cs">Rychlé nástroje: komprese (i na zvolenou velikost), otočení, oříznutí, zkrácení, rozdělení či sloučení PDF, ochrana heslem, spojení stop a videí a další</li>
       <li>Send to your phone with KDE Connect or GSConnect, or to any nearby device with LocalSend</li>
       <li xml:lang="it">Invia al telefono con KDE Connect o GSConnect, o a qualsiasi dispositivo vicino con LocalSend</li>
-      <li>Keyboard, mouse and touch; light and dark theme; clear error codes and reports you check before sending</li>
-      <li xml:lang="it">Tastiera, mouse e touch; tema chiaro e scuro; codici di errore chiari e segnalazioni che controlli prima dell'invio</li>
+      <li xml:lang="zh_CN">用 KDE Connect 或 GSConnect 发送到手机，或用 LocalSend 发送到附近的任何设备</li>
+      <li xml:lang="hi">KDE Connect या GSConnect से फ़ोन पर, या LocalSend से पास के किसी भी डिवाइस पर भेजें</li>
+      <li xml:lang="es">Envía al móvil con KDE Connect o GSConnect, o a cualquier dispositivo cercano con LocalSend</li>
+      <li xml:lang="ar">أرسل إلى هاتفك عبر KDE Connect أو GSConnect، أو إلى أي جهاز قريب عبر LocalSend</li>
+      <li xml:lang="fr">Envoyez vers votre téléphone avec KDE Connect ou GSConnect, ou vers tout appareil proche avec LocalSend</li>
+      <li xml:lang="bn">KDE Connect বা GSConnect দিয়ে ফোনে, বা LocalSend দিয়ে কাছের যেকোনো ডিভাইসে পাঠান</li>
+      <li xml:lang="pt_BR">Envie para o celular com KDE Connect ou GSConnect, ou para qualquer aparelho por perto com LocalSend</li>
+      <li xml:lang="ru">Отправка на телефон через KDE Connect или GSConnect, или на любое устройство рядом через LocalSend</li>
+      <li xml:lang="id">Kirim ke ponsel dengan KDE Connect atau GSConnect, atau ke perangkat terdekat dengan LocalSend</li>
+      <li xml:lang="ur">KDE Connect یا GSConnect سے فون پر، یا LocalSend سے قریب کی کسی بھی ڈیوائس پر بھیجیں</li>
+      <li xml:lang="de">Ans Handy senden mit KDE Connect oder GSConnect, oder an jedes Gerät in der Nähe mit LocalSend</li>
+      <li xml:lang="ja">KDE Connect や GSConnect でスマートフォンへ、LocalSend で近くのどんな機器へも送信</li>
+      <li xml:lang="mr">KDE Connect किंवा GSConnect ने फोनवर, किंवा LocalSend ने जवळच्या कोणत्याही उपकरणावर पाठवा</li>
+      <li xml:lang="vi">Gửi sang điện thoại bằng KDE Connect hoặc GSConnect, hoặc tới thiết bị gần đó bằng LocalSend</li>
+      <li xml:lang="pl">Wysyłaj na telefon przez KDE Connect lub GSConnect albo na dowolne pobliskie urządzenie przez LocalSend</li>
+      <li xml:lang="tr">KDE Connect ya da GSConnect ile telefonunuza, LocalSend ile yakındaki her cihaza gönderin</li>
+      <li xml:lang="ko">KDE Connect나 GSConnect로 휴대폰에, LocalSend로 근처 모든 기기에 보내기</li>
+      <li xml:lang="uk">Надсилайте на телефон через KDE Connect або GSConnect, або на будь-який пристрій поруч через LocalSend</li>
+      <li xml:lang="nl">Stuur naar je telefoon met KDE Connect of GSConnect, of naar elk apparaat in de buurt met LocalSend</li>
+      <li xml:lang="cs">Posílejte do telefonu přes KDE Connect nebo GSConnect, nebo do jakéhokoli zařízení poblíž přes LocalSend</li>
+      <li>Keyboard, mouse and touch; light and dark theme; 22 languages; clear error codes and reports you check before sending</li>
+      <li xml:lang="it">Tastiera, mouse e touch; tema chiaro e scuro; 22 lingue; codici di errore chiari e segnalazioni che controlli prima dell'invio</li>
+      <li xml:lang="zh_CN">支持键盘、鼠标和触控；浅色和深色主题；22 种语言；清楚的错误代码，报告发送前可先查看</li>
+      <li xml:lang="hi">कीबोर्ड, माउस और टच; हल्की और गहरी थीम; 22 भाषाएँ; साफ़ त्रुटि कोड और भेजने से पहले जाँची जाने वाली रिपोर्ट</li>
+      <li xml:lang="es">Teclado, ratón y táctil; tema claro y oscuro; 22 idiomas; códigos de error claros e informes que revisas antes de enviar</li>
+      <li xml:lang="ar">لوحة المفاتيح والفأرة واللمس؛ سمة فاتحة وداكنة؛ 22 لغة؛ رموز أخطاء واضحة وتقارير تراجعها قبل الإرسال</li>
+      <li xml:lang="fr">Clavier, souris et tactile ; thème clair et sombre ; 22 langues ; codes d'erreur clairs et rapports que vous vérifiez avant l'envoi</li>
+      <li xml:lang="bn">কিবোর্ড, মাউস ও টাচ; হালকা ও গাঢ় থিম; ২২টি ভাষা; স্পষ্ট ত্রুটি কোড এবং পাঠানোর আগে দেখে নেওয়া রিপোর্ট</li>
+      <li xml:lang="pt_BR">Teclado, mouse e toque; tema claro e escuro; 22 idiomas; códigos de erro claros e relatórios que você confere antes de enviar</li>
+      <li xml:lang="ru">Клавиатура, мышь и сенсорный экран; светлая и тёмная тема; 22 языка; понятные коды ошибок и отчёты, которые вы проверяете перед отправкой</li>
+      <li xml:lang="id">Keyboard, mouse, dan sentuh; tema terang dan gelap; 22 bahasa; kode galat yang jelas dan laporan yang Anda periksa sebelum dikirim</li>
+      <li xml:lang="ur">کی بورڈ، ماؤس اور ٹچ؛ ہلکی اور گہری تھیم؛ 22 زبانیں؛ واضح خرابی کوڈ اور بھیجنے سے پہلے دیکھی جانے والی رپورٹ</li>
+      <li xml:lang="de">Tastatur, Maus und Touch; helles und dunkles Design; 22 Sprachen; klare Fehlercodes und Berichte, die Sie vor dem Senden prüfen</li>
+      <li xml:lang="ja">キーボード、マウス、タッチに対応。ライトとダークのテーマ。22 言語。わかりやすいエラーコードと、送信前に確認できるレポート</li>
+      <li xml:lang="mr">कीबोर्ड, माउस आणि टच; फिकी आणि गडद थीम; 22 भाषा; स्पष्ट त्रुटी कोड आणि पाठवण्यापूर्वी तपासता येणारे अहवाल</li>
+      <li xml:lang="vi">Bàn phím, chuột và cảm ứng; giao diện sáng và tối; 22 ngôn ngữ; mã lỗi rõ ràng và báo cáo bạn xem trước khi gửi</li>
+      <li xml:lang="pl">Klawiatura, mysz i dotyk; jasny i ciemny motyw; 22 języki; jasne kody błędów i zgłoszenia, które sprawdzasz przed wysłaniem</li>
+      <li xml:lang="tr">Klavye, fare ve dokunmatik; açık ve koyu tema; 22 dil; açık hata kodları ve göndermeden önce kontrol ettiğiniz raporlar</li>
+      <li xml:lang="ko">키보드, 마우스, 터치; 밝은 테마와 어두운 테마; 22개 언어; 알기 쉬운 오류 코드와 보내기 전에 확인하는 보고서</li>
+      <li xml:lang="uk">Клавіатура, миша й дотик; світла й темна тема; 22 мови; зрозумілі коди помилок і звіти, які ви перевіряєте перед надсиланням</li>
+      <li xml:lang="nl">Toetsenbord, muis en aanraking; licht en donker thema; 22 talen; duidelijke foutcodes en meldingen die je controleert voor het versturen</li>
+      <li xml:lang="cs">Klávesnice, myš i dotyk; světlý a tmavý motiv; 22 jazyků; srozumitelné kódy chyb a hlášení, která si před odesláním zkontrolujete</li>
       <li>Everything happens on your computer: nothing is uploaded</li>
       <li xml:lang="it">Tutto avviene sul tuo computer: nulla viene caricato online</li>
+      <li xml:lang="zh_CN">一切都在你的电脑上完成：不会上传任何内容</li>
+      <li xml:lang="hi">सब कुछ आपके कंप्यूटर पर होता है: कुछ भी अपलोड नहीं होता</li>
+      <li xml:lang="es">Todo ocurre en tu ordenador: no se sube nada</li>
+      <li xml:lang="ar">كل شيء يحدث على حاسوبك: لا يُرفع أي شيء</li>
+      <li xml:lang="fr">Tout se passe sur votre ordinateur : rien n'est envoyé en ligne</li>
+      <li xml:lang="bn">সবকিছু আপনার কম্পিউটারেই হয়: কিছুই আপলোড হয় না</li>
+      <li xml:lang="pt_BR">Tudo acontece no seu computador: nada é enviado para a internet</li>
+      <li xml:lang="ru">Всё происходит на вашем компьютере: ничего не загружается в сеть</li>
+      <li xml:lang="id">Semua terjadi di komputer Anda: tidak ada yang diunggah</li>
+      <li xml:lang="ur">سب کچھ آپ کے کمپیوٹر پر ہوتا ہے: کچھ بھی اپ لوڈ نہیں ہوتا</li>
+      <li xml:lang="de">Alles passiert auf Ihrem Computer: nichts wird hochgeladen</li>
+      <li xml:lang="ja">すべてあなたのパソコンの中で完結。何もアップロードしません</li>
+      <li xml:lang="mr">सर्व काही तुमच्या संगणकावर होते: काहीही अपलोड होत नाही</li>
+      <li xml:lang="vi">Mọi thứ diễn ra trên máy tính của bạn: không tải gì lên mạng</li>
+      <li xml:lang="pl">Wszystko dzieje się na twoim komputerze: nic nie jest wysyłane do sieci</li>
+      <li xml:lang="tr">Her şey bilgisayarınızda olur: hiçbir şey yüklenmez</li>
+      <li xml:lang="ko">모든 작업이 내 컴퓨터에서 이루어집니다. 아무것도 업로드하지 않습니다</li>
+      <li xml:lang="uk">Усе відбувається на вашому комп'ютері: нічого не завантажується в мережу</li>
+      <li xml:lang="nl">Alles gebeurt op je computer: er wordt niets geüpload</li>
+      <li xml:lang="cs">Vše probíhá ve vašem počítači: nic se nenahrává</li>
     </ul>
   </description>
 
@@ -37,21 +279,101 @@
     <screenshot type="default">
       <caption>A photo and what it can become</caption>
       <caption xml:lang="it">Una foto e cosa può diventare</caption>
+      <caption xml:lang="zh_CN">一张照片可以变成什么</caption>
+      <caption xml:lang="hi">एक फ़ोटो और वह क्या बन सकती है</caption>
+      <caption xml:lang="es">Una foto y lo que puede llegar a ser</caption>
+      <caption xml:lang="ar">صورة وما يمكن أن تصبح</caption>
+      <caption xml:lang="fr">Une photo et ce qu'elle peut devenir</caption>
+      <caption xml:lang="bn">একটি ছবি এবং সেটি কী হতে পারে</caption>
+      <caption xml:lang="pt_BR">Uma foto e o que ela pode virar</caption>
+      <caption xml:lang="ru">Фото и то, чем оно может стать</caption>
+      <caption xml:lang="id">Sebuah foto dan apa yang bisa dihasilkannya</caption>
+      <caption xml:lang="ur">ایک تصویر اور وہ کیا بن سکتی ہے</caption>
+      <caption xml:lang="de">Ein Foto und was daraus werden kann</caption>
+      <caption xml:lang="ja">1 枚の写真とその変換先</caption>
+      <caption xml:lang="mr">एक फोटो आणि तो काय बनू शकतो</caption>
+      <caption xml:lang="vi">Một bức ảnh và những gì nó có thể trở thành</caption>
+      <caption xml:lang="pl">Zdjęcie i to, czym może się stać</caption>
+      <caption xml:lang="tr">Bir fotoğraf ve neye dönüşebileceği</caption>
+      <caption xml:lang="ko">사진 한 장과 바꿀 수 있는 형식</caption>
+      <caption xml:lang="uk">Фото і те, чим воно може стати</caption>
+      <caption xml:lang="nl">Een foto en wat ervan kan worden</caption>
+      <caption xml:lang="cs">Fotka a čím se může stát</caption>
       <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/menu.png</image>
     </screenshot>
     <screenshot>
       <caption>Files of different kinds at once</caption>
       <caption xml:lang="it">File di tipi diversi insieme</caption>
+      <caption xml:lang="zh_CN">同时处理不同类型的文件</caption>
+      <caption xml:lang="hi">अलग-अलग तरह की फ़ाइलें एक साथ</caption>
+      <caption xml:lang="es">Archivos de distintos tipos a la vez</caption>
+      <caption xml:lang="ar">ملفات من أنواع مختلفة معًا</caption>
+      <caption xml:lang="fr">Des fichiers de types différents à la fois</caption>
+      <caption xml:lang="bn">ভিন্ন ভিন্ন ধরনের ফাইল একসাথে</caption>
+      <caption xml:lang="pt_BR">Arquivos de tipos diferentes de uma vez</caption>
+      <caption xml:lang="ru">Файлы разных типов сразу</caption>
+      <caption xml:lang="id">Berkas berbagai jenis sekaligus</caption>
+      <caption xml:lang="ur">مختلف قسم کی فائلیں ایک ساتھ</caption>
+      <caption xml:lang="de">Dateien verschiedener Art auf einmal</caption>
+      <caption xml:lang="ja">種類の違うファイルをまとめて</caption>
+      <caption xml:lang="mr">वेगवेगळ्या प्रकारच्या फाइल्स एकाच वेळी</caption>
+      <caption xml:lang="vi">Nhiều loại tệp cùng lúc</caption>
+      <caption xml:lang="pl">Pliki różnych rodzajów naraz</caption>
+      <caption xml:lang="tr">Farklı türde dosyalar bir arada</caption>
+      <caption xml:lang="ko">여러 종류의 파일을 한꺼번에</caption>
+      <caption xml:lang="uk">Файли різних типів одночасно</caption>
+      <caption xml:lang="nl">Bestanden van verschillende soorten tegelijk</caption>
+      <caption xml:lang="cs">Soubory různých druhů najednou</caption>
       <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/mixed.png</image>
     </screenshot>
     <screenshot>
       <caption>Settings in plain words, with the estimated size</caption>
       <caption xml:lang="it">Impostazioni a parole, con il peso stimato</caption>
+      <caption xml:lang="zh_CN">用平实的话说明的设置，附带预计大小</caption>
+      <caption xml:lang="hi">आसान शब्दों में सेटिंग, अनुमानित आकार के साथ</caption>
+      <caption xml:lang="es">Ajustes en palabras sencillas, con el tamaño estimado</caption>
+      <caption xml:lang="ar">إعدادات بكلمات بسيطة، مع الحجم التقديري</caption>
+      <caption xml:lang="fr">Des réglages en mots simples, avec la taille estimée</caption>
+      <caption xml:lang="bn">সহজ ভাষায় সেটিংস, আনুমানিক আকারসহ</caption>
+      <caption xml:lang="pt_BR">Configurações em palavras simples, com o tamanho estimado</caption>
+      <caption xml:lang="ru">Настройки простыми словами, с примерным размером</caption>
+      <caption xml:lang="id">Pengaturan dengan kata-kata sederhana, dengan perkiraan ukuran</caption>
+      <caption xml:lang="ur">آسان الفاظ میں ترتیبات، اندازاً سائز کے ساتھ</caption>
+      <caption xml:lang="de">Einstellungen in einfachen Worten, mit geschätzter Größe</caption>
+      <caption xml:lang="ja">やさしい言葉の設定と推定サイズ</caption>
+      <caption xml:lang="mr">सोप्या शब्दांतील सेटिंग्ज, अंदाजे आकारासह</caption>
+      <caption xml:lang="vi">Thiết lập bằng lời dễ hiểu, kèm kích thước ước tính</caption>
+      <caption xml:lang="pl">Ustawienia prostymi słowami, z szacowanym rozmiarem</caption>
+      <caption xml:lang="tr">Basit sözcüklerle ayarlar, tahmini boyutla</caption>
+      <caption xml:lang="ko">쉬운 말로 된 설정과 예상 크기</caption>
+      <caption xml:lang="uk">Налаштування простими словами, з приблизним розміром</caption>
+      <caption xml:lang="nl">Instellingen in gewone woorden, met de geschatte grootte</caption>
+      <caption xml:lang="cs">Nastavení srozumitelnými slovy, s odhadem velikosti</caption>
       <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/adjust.png</image>
     </screenshot>
     <screenshot>
       <caption>Follows the dark theme</caption>
       <caption xml:lang="it">Segue il tema scuro</caption>
+      <caption xml:lang="zh_CN">跟随深色主题</caption>
+      <caption xml:lang="hi">गहरी थीम के साथ चलता है</caption>
+      <caption xml:lang="es">Sigue el tema oscuro</caption>
+      <caption xml:lang="ar">يتبع السمة الداكنة</caption>
+      <caption xml:lang="fr">Suit le thème sombre</caption>
+      <caption xml:lang="bn">গাঢ় থিম মেনে চলে</caption>
+      <caption xml:lang="pt_BR">Segue o tema escuro</caption>
+      <caption xml:lang="ru">Поддерживает тёмную тему</caption>
+      <caption xml:lang="id">Mengikuti tema gelap</caption>
+      <caption xml:lang="ur">گہری تھیم کے مطابق</caption>
+      <caption xml:lang="de">Folgt dem dunklen Design</caption>
+      <caption xml:lang="ja">ダークテーマにも対応</caption>
+      <caption xml:lang="mr">गडद थीमशी जुळते</caption>
+      <caption xml:lang="vi">Theo giao diện tối</caption>
+      <caption xml:lang="pl">Dopasowuje się do ciemnego motywu</caption>
+      <caption xml:lang="tr">Koyu temaya uyar</caption>
+      <caption xml:lang="ko">어두운 테마를 따름</caption>
+      <caption xml:lang="uk">Підтримує темну тему</caption>
+      <caption xml:lang="nl">Volgt het donkere thema</caption>
+      <caption xml:lang="cs">Řídí se tmavým motivem</caption>
       <image>https://raw.githubusercontent.com/outlook791/Joey/main/docs/screenshots/en/dark.png</image>
     </screenshot>
   </screenshots>

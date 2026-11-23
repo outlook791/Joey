@@ -14,6 +14,7 @@ use crate::{move_file, stem_of, unique_path, Error, Outcome};
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Tool {
     Compress,
+    CompressTo,
     RemoveMetadata,
     RotateLeft,
     RotateRight,
@@ -41,6 +42,7 @@ pub enum Ask {
     Pages,
     Shape,
     Password,
+    TargetSize,
 }
 
 /// Answers to `Ask`.
@@ -50,11 +52,14 @@ pub struct ToolParams {
     pub pages: Option<String>,
     pub shape: Option<(u32, u32)>,
     pub password: Option<String>,
+    /// Compress to a size: the most the result may weigh, in bytes.
+    pub target: Option<u64>,
 }
 
 impl Tool {
-    pub const ALL: [Tool; 18] = [
+    pub const ALL: [Tool; 19] = [
         Tool::Compress,
+        Tool::CompressTo,
         Tool::RemoveMetadata,
         Tool::RotateLeft,
         Tool::RotateRight,
@@ -78,6 +83,7 @@ impl Tool {
     pub fn label(self) -> &'static str {
         match self {
             Tool::Compress => "Compress",
+            Tool::CompressTo => "Compress to a size…",
             Tool::RemoveMetadata => "Remove metadata",
             Tool::RotateLeft => "Rotate left",
             Tool::RotateRight => "Rotate right",
@@ -102,6 +108,7 @@ impl Tool {
     pub fn key(self) -> &'static str {
         match self {
             Tool::Compress => "compress",
+            Tool::CompressTo => "compress-to",
             Tool::RemoveMetadata => "strip",
             Tool::RotateLeft => "rotate-left",
             Tool::RotateRight => "rotate-right",
@@ -140,13 +147,14 @@ impl Tool {
             Tool::ExtractPages => Ask::Pages,
             Tool::Crop => Ask::Shape,
             Tool::ProtectPdf | Tool::UnlockPdf => Ask::Password,
+            Tool::CompressTo => Ask::TargetSize,
             _ => Ask::Nothing,
         }
     }
 
     fn suffix(self) -> &'static str {
         match self {
-            Tool::Compress => "compressed",
+            Tool::Compress | Tool::CompressTo => "compressed",
             Tool::RemoveMetadata => "clean",
             Tool::RotateLeft | Tool::RotateRight => "rotated",
             Tool::Grayscale => "black and white",
@@ -202,7 +210,9 @@ impl Toolbox {
         Tool::ALL
             .into_iter()
             .filter(|t| match t {
-                Tool::Compress => (image && im) || (video && ff) || (pdf && self.gs.is_some()),
+                Tool::Compress | Tool::CompressTo => {
+                    (image && im) || (video && ff) || (pdf && self.gs.is_some())
+                }
                 Tool::RemoveMetadata => {
                     (image && (im || self.exiftool.is_some())) || ((audio || video) && ff)
                 }
@@ -279,6 +289,148 @@ impl Toolbox {
         Ok(())
     }
 
+    /// A picture under `target` bytes: JPEG and WebP lower their quality
+    /// (their encoders aim at a size); other formats, and pictures still too
+    /// big at low quality, get smaller in pixels.
+    fn image_to_size(
+        &self,
+        input: &Path,
+        fmt: Format,
+        out: &Path,
+        before: u64,
+        target: u64,
+    ) -> Result<(), Error> {
+        let im = self.im()?;
+        // Aim a little below: the encoders' guess is approximate.
+        let aim = target * 95 / 100;
+        let mut scale = 100.0f64;
+        for attempt in 0..8 {
+            let mut cmd = Command::new(im.bin());
+            cmd.arg(input).args(["-auto-orient", "-strip"]);
+            if scale < 100.0 {
+                cmd.args(["-resize", &format!("{scale:.1}%")]);
+            }
+            match fmt {
+                Format::Jpg => {
+                    cmd.args(["-define", &format!("jpeg:extent={aim}")]);
+                }
+                Format::Webp => {
+                    cmd.args(["-define", &format!("webp:target-size={aim}")]);
+                }
+                Format::Png => {
+                    cmd.args(["-define", "png:compression-level=9"]);
+                }
+                _ => {
+                    cmd.args(["-quality", "75"]);
+                }
+            }
+            cmd.arg(out);
+            run("imagemagick", &mut cmd)?;
+            let size = std::fs::metadata(out)?.len();
+            if size <= target {
+                return Ok(());
+            }
+            // Pixels to drop: the size goes with the area.
+            let ratio = if attempt == 0 && scale >= 100.0 {
+                (target as f64 / size.max(before.min(size)) as f64).sqrt()
+            } else {
+                (target as f64 / size as f64).sqrt()
+            };
+            scale *= (ratio * 0.95).clamp(0.3, 0.95);
+            if scale < 3.0 {
+                break;
+            }
+        }
+        Ok(())
+    }
+
+    /// A video under `target` bytes: the bitrate that fits its length,
+    /// fewer pixels when that bitrate is low, and a second try a little
+    /// lower if the first one overshoots.
+    fn video_to_size(&self, input: &Path, out: &Path, target: u64) -> Result<(), Error> {
+        let ff = self.ffmpeg()?;
+        let seconds = duration(input)
+            .filter(|d| *d > 0.1)
+            .ok_or_else(|| Error::Tool {
+                tool: "joey",
+                message: "can't make it that small".into(),
+            })?;
+        let mut factor = 0.92;
+        for _ in 0..3 {
+            let total = target as f64 * 8.0 * factor / seconds; // bits per second
+            let audio = if total > 600_000.0 {
+                96_000.0
+            } else {
+                48_000.0
+            };
+            let video = (total - audio).max(40_000.0);
+            let height = match video {
+                v if v < 250_000.0 => 360,
+                v if v < 600_000.0 => 480,
+                v if v < 1_500_000.0 => 720,
+                v if v < 4_000_000.0 => 1080,
+                _ => 0,
+            };
+            let mut cmd = Command::new(ff.bin());
+            cmd.args(["-hide_banner", "-nostdin", "-y", "-i"])
+                .arg(input)
+                .args([
+                    "-map", "0:v:0?", "-map", "0:a:0?", "-c:v", "libx264", "-preset", "medium",
+                ])
+                .args(["-b:v", &format!("{}", video as u64)])
+                .args(["-maxrate", &format!("{}", (video * 1.5) as u64)])
+                .args(["-bufsize", &format!("{}", (video * 2.0) as u64)])
+                .args(["-c:a", "aac", "-b:a", &format!("{}", audio as u64)])
+                .args(["-pix_fmt", "yuv420p", "-movflags", "+faststart"]);
+            if height > 0 {
+                cmd.args(["-vf", &format!("scale=-2:'min({height},ih)'")]);
+            }
+            cmd.arg(out);
+            run("ffmpeg", &mut cmd)?;
+            if std::fs::metadata(out)?.len() <= target {
+                return Ok(());
+            }
+            factor *= 0.8;
+        }
+        Ok(())
+    }
+
+    /// A PDF under `target` bytes: Ghostscript's settings from good to
+    /// rough, pictures at fewer dots per inch each time.
+    fn pdf_to_size(&self, input: &Path, out: &Path, target: u64) -> Result<(), Error> {
+        let gs = self.gs.as_ref().ok_or_else(|| no_tool("Ghostscript"))?;
+        let mut best: Option<u64> = None;
+        let candidate = out.with_extension("try.pdf");
+        for dpi in [150, 110, 90, 72, 50, 36] {
+            let preset = if dpi >= 150 { "/ebook" } else { "/screen" };
+            run(
+                "ghostscript",
+                Command::new(gs)
+                    .args(["-sDEVICE=pdfwrite", "-dNOPAUSE", "-dBATCH", "-dQUIET"])
+                    .arg(format!("-dPDFSETTINGS={preset}"))
+                    .args([
+                        "-dDownsampleColorImages=true",
+                        "-dDownsampleGrayImages=true",
+                    ])
+                    .arg(format!("-dColorImageResolution={dpi}"))
+                    .arg(format!("-dGrayImageResolution={dpi}"))
+                    .arg(format!("-dMonoImageResolution={}", dpi * 2))
+                    .arg(format!("-sOutputFile={}", candidate.display()))
+                    .arg(input),
+            )?;
+            let size = std::fs::metadata(&candidate)?.len();
+            if best.is_none_or(|b| size < b) {
+                std::fs::rename(&candidate, out)?;
+                best = Some(size);
+            }
+            if size <= target {
+                break;
+            }
+        }
+        let _ = std::fs::remove_file(&candidate);
+        Ok(())
+    }
+
     fn one(&self, tool: Tool, input: &Path, fmt: Format, params: &ToolParams) -> Outcome {
         let (dir, stem) = place(input);
         let work = tempfile::Builder::new().prefix(".joey-").tempdir_in(&dir)?;
@@ -330,6 +482,37 @@ impl Toolbox {
                         .arg(format!("-sOutputFile={}", tmp.display()))
                         .arg(input),
                 )?;
+            }
+            (Tool::CompressTo, _) => {
+                let target = params
+                    .target
+                    .filter(|t| *t > 0)
+                    .ok_or_else(|| ask_err("size"))?;
+                let before = std::fs::metadata(input)?.len();
+                if before <= target {
+                    return Err(Error::Tool {
+                        tool: "joey",
+                        message: "already smaller than that".into(),
+                    });
+                }
+                match cat {
+                    Category::Image => self.image_to_size(input, fmt, &tmp, before, target)?,
+                    Category::Video => self.video_to_size(input, &tmp, target)?,
+                    Category::Pdf => self.pdf_to_size(input, &tmp, target)?,
+                    _ => {
+                        return Err(Error::Tool {
+                            tool: "joey",
+                            message: format!("{} doesn't apply here", tool.label()),
+                        })
+                    }
+                }
+                let after = std::fs::metadata(&tmp)?.len();
+                if after > target {
+                    return Err(Error::Tool {
+                        tool: "joey",
+                        message: "can't make it that small".into(),
+                    });
+                }
             }
             (Tool::RemoveMetadata, Category::Image) => {
                 if let Some(exif) = &self.exiftool {
@@ -535,7 +718,7 @@ impl Toolbox {
             }
         }
 
-        if tool == Tool::Compress {
+        if matches!(tool, Tool::Compress | Tool::CompressTo) {
             let before = std::fs::metadata(input)?.len();
             let after = std::fs::metadata(&tmp)?.len();
             if after >= before {
@@ -772,5 +955,126 @@ fn ask_err(what: &str) -> Error {
     Error::Tool {
         tool: "joey",
         message: format!("missing {what}"),
+    }
+}
+
+/// A video's or song's length in seconds, from ffprobe.
+fn duration(input: &Path) -> Option<f64> {
+    let probe = which("ffprobe")?;
+    let out = Command::new(probe)
+        .args([
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "csv=p=0",
+        ])
+        .arg(input)
+        .output()
+        .ok()?;
+    String::from_utf8_lossy(&out.stdout).trim().parse().ok()
+}
+
+/// Kinds of hidden details in a file, as "Remove metadata" would take
+/// them away: "date", "place", "device", "author", "software", "title".
+pub fn metadata_found(input: &Path, fmt: Format) -> Vec<&'static str> {
+    let mut text = String::new();
+    match fmt.category() {
+        Category::Image => {
+            if let Some(exif) = which("exiftool") {
+                if let Ok(o) = Command::new(exif)
+                    .args(["-s", "-s", "-G0"])
+                    .arg(input)
+                    .output()
+                {
+                    text = String::from_utf8_lossy(&o.stdout).into_owned();
+                }
+            } else if let Some(im) = ImageMagick::probe() {
+                if let Ok(o) = Command::new(im.bin())
+                    .arg(input)
+                    .args(["-format", "%[EXIF:*]%[IPTC:*]%[XMP:*]", "info:"])
+                    .output()
+                {
+                    text = String::from_utf8_lossy(&o.stdout).into_owned();
+                }
+            }
+        }
+        Category::Video | Category::Audio => {
+            if let Some(probe) = which("ffprobe") {
+                if let Ok(o) = Command::new(probe)
+                    .args([
+                        "-v",
+                        "error",
+                        "-show_entries",
+                        "format_tags:stream_tags",
+                        "-of",
+                        "flat",
+                    ])
+                    .arg(input)
+                    .output()
+                {
+                    text = String::from_utf8_lossy(&o.stdout).into_owned();
+                }
+            }
+        }
+        _ => {}
+    }
+    summarize_metadata(&text)
+}
+
+/// Sorts tag names into kinds a person understands.
+fn summarize_metadata(text: &str) -> Vec<&'static str> {
+    let lower = text.to_lowercase();
+    // "name=value" (ImageMagick, ffprobe) or "name : value" (exiftool).
+    let pairs: Vec<(&str, &str)> = lower
+        .lines()
+        .filter_map(|l| l.split_once('=').or_else(|| l.split_once(':')))
+        .map(|(n, v)| (n.trim(), v.trim().trim_matches('"')))
+        .filter(|(_, v)| !v.is_empty() && *v != "0")
+        .collect();
+    let has = |keys: &[&str]| {
+        pairs
+            .iter()
+            .any(|(name, _)| keys.iter().any(|k| name.contains(k)))
+    };
+    let mut found = Vec::new();
+    if has(&["gps", "location", "iso6709"]) {
+        found.push("place");
+    }
+    if has(&["datetime", "creation_time", "date", "createdate"]) {
+        found.push("date");
+    }
+    if has(&["make", "model", "lens", "serial"]) {
+        found.push("device");
+    }
+    if has(&["artist", "author", "copyright", "creator", "owner"]) {
+        found.push("author");
+    }
+    // Not "encoder" or "handler_name": every saved video gets its own.
+    if has(&["software", "processing"]) {
+        found.push("software");
+    }
+    if has(&["title", "album", "comment", "description", "genre", "track"]) {
+        found.push("title");
+    }
+    found
+}
+
+#[cfg(test)]
+mod metadata_tests {
+    #[test]
+    fn kinds_of_hidden_details() {
+        let video = "format.tags.creation_time=\"2026-08-14\"\nformat.tags.location=\"+45.46+009.19/\"\nformat.tags.encoder=\"Lavf60\"\nformat.tags.title=\"Summer\"\n";
+        assert_eq!(
+            super::summarize_metadata(video),
+            vec!["place", "date", "title"]
+        );
+        let photo = "exif:DateTimeOriginal=2026:08:14 10:00:00\nexif:GPSLatitude=45/1\nexif:Make=Canon\nexif:Model=EOS\nexif:Software=GIMP\n";
+        assert_eq!(
+            super::summarize_metadata(photo),
+            vec!["place", "date", "device", "software"]
+        );
+        assert!(super::summarize_metadata("").is_empty());
     }
 }

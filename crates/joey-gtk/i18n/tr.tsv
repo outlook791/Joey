@@ -1,0 +1,263 @@
+# Türkçe. One line per text: English<TAB>translation. Keep {placeholders}.
+Drop files here	Dosyaları buraya bırakın
+Choose files…	Dosya seçin…
+Choose files to convert	Dönüştürülecek dosyaları seçin
+Esc to close	Kapatmak için Esc
+1 file	1 dosya
+{n} files	{n} dosya
+{n} {fmt} files	{n} {fmt} dosyası
+{n} more…	{n} tane daha…
+Quick tools	Hızlı araçlar
+Convert	Dönüştür
+Adjust	Ayarla
+Enter	Enter
+PDF · one image per page	PDF · her sayfaya bir görsel
+image	görsel
+drawing	çizim
+audio	ses
+video	video
+PDF	PDF
+document	belge
+spreadsheet	hesap tablosu
+presentation	sunum
+folders aren't supported yet	klasörler henüz desteklenmiyor
+not found	bulunamadı
+file type not recognised	dosya türü tanınmadı
+nothing to convert {fmt} to here	{fmt} burada hiçbir şeye dönüştürülemiyor
+Compress	Sıkıştır
+Remove metadata	Üst verileri kaldır
+Merge into one PDF	Tek PDF'de birleştir
+Join into one track	Tek parçada birleştir
+Even out the volume	Ses düzeyini eşitle
+Remove the sound	Sesi kaldır
+Converting…	Dönüştürülüyor…
+Converting {name}…	{name} dönüştürülüyor…
+Converting {i} of {n}…	{i} / {n} dönüştürülüyor…
+Nothing converted	Hiçbir şey dönüştürülmedi
+1 file ready	1 dosya hazır
+{n} files ready	{n} dosya hazır
+Next to the originals	Orijinallerin yanında
+Show in folder	Klasörde göster
+Close	Kapat
+Back to the menu	Menüye dön
+Other files	Başka dosyalar
+unexpected error	beklenmeyen hata
+{tool} couldn't convert it	{tool} bunu dönüştüremedi
+already as small as it gets	zaten olabileceği kadar küçük
+the file has no audio track	dosyada ses kanalı yok
+Back	Geri
+Reset to defaults	Varsayılanlara dön
+Remember these settings	Bu ayarları hatırla
+Advanced	Gelişmiş
+No settings for this one.	Bunun için ayar yok.
+Estimated size: {size}	Tahmini boyut: {size}
+Size can't be estimated for this conversion	Bu dönüştürmenin boyutu tahmin edilemiyor
+Quality	Kalite
+Lower quality makes smaller files	Düşük kalite daha küçük dosya demek
+Low	Düşük
+Medium	Orta
+High (recommended)	Yüksek (önerilen)
+Maximum	En yüksek
+Size	Boyut
+Longest side. Never enlarges.	En uzun kenar. Asla büyütmez.
+Original	Orijinal
+Very large · 3840 px	Çok büyük · 3840 px
+Large · 1920 px	Büyük · 1920 px
+Medium · 1280 px	Orta · 1280 px
+Small · 800 px	Küçük · 800 px
+Remove camera and location info	Kamera ve konum bilgilerini kaldır
+Date, place and camera model saved inside the photo	Fotoğrafın içine kaydedilen tarih, yer ve kamera modeli
+Channels	Kanallar
+Mono halves the size; fine for voice	Mono boyutu yarıya indirir; konuşma için yeterli
+Mono	Mono
+Stereo	Stereo
+Bitrate	Bit hızı
+Data per second: higher means better sound and a bigger file. Replaces Quality.	Saniye başına veri: yüksek değer daha iyi ses ve daha büyük dosya demek. Kalite'nin yerine geçer.
+Automatic	Otomatik
+Sample rate	Örnekleme hızı
+How often the sound is measured each second. Change it only if a device asks.	Sesin saniyede kaç kez ölçüldüğü. Yalnızca bir cihaz isterse değiştirin.
+44.1 kHz · CD	44,1 kHz · CD
+48 kHz · video	48 kHz · video
+Remove song info	Şarkı bilgilerini kaldır
+Title, artist, album and similar tags	Başlık, sanatçı, albüm ve benzeri etiketler
+Resolution	Çözünürlük
+Smaller resolution, much smaller file	Daha düşük çözünürlük, çok daha küçük dosya
+4K · 2160p	4K · 2160p
+Full HD · 1080p	Full HD · 1080p
+HD · 720p	HD · 720p
+Small · 480p	Küçük · 480p
+Keep the sound	Sesi koru
+Frames per second	Saniyedeki kare
+How smooth the motion is. 30 is fine for most videos.	Hareketin akıcılığı. Çoğu video için 30 yeterli.
+Remove video info	Video bilgilerini kaldır
+Date, place and device saved inside the video	Videonun içine kaydedilen tarih, yer ve cihaz
+Width	Genişlik
+Small · 320 px	Küçük · 320 px
+Medium · 480 px	Orta · 480 px
+Large · 720 px	Büyük · 720 px
+Pages	Sayfalar
+For example 1-3, 7. Empty means all.	Örneğin 1-3, 7. Boş bırakılırsa hepsi.
+all	hepsi
+Sharpness	Netlik
+Dots per inch: higher is sharper and bigger	İnç başına nokta: yüksek değer daha net ve daha büyük
+Screen · 72 dpi	Ekran · 72 dpi
+Normal · 150 dpi	Normal · 150 dpi
+Print · 300 dpi	Baskı · 300 dpi
+Very sharp · 600 dpi	Çok net · 600 dpi
+Set up Alt+C in your file manager	Dosya yöneticinizde Alt+C'yi kurun
+Select files, press Alt+C, pick a format	Dosyaları seçin, Alt+C'ye basın, bir biçim seçin
+Alt+C is ready in {fm}	Alt+C {fm} içinde hazır
+Right-click → Convert with Joey works in {fm}	Sağ tık → Joey ile dönüştür {fm} içinde çalışıyor
+Log out and back in once to use them	Kullanmak için bir kez oturumu kapatıp yeniden açın
+No supported file manager found	Desteklenen dosya yöneticisi bulunamadı
+Convert with Joey	Joey ile dönüştür
+subtitles	altyazı
+archive	arşiv
+other	diğer
+{n} other items	{n} öğe daha
+File actions	Dosya işlemleri
+Copy the path	Yolu kopyala
+Copy to…	Şuraya kopyala…
+Move to…	Şuraya taşı…
+Open a terminal here	Burada terminal aç
+Put in a ZIP	ZIP'e koy
+Choose a folder	Bir klasör seçin
+Terminal opened	Terminal açıldı
+Path copied	Yol kopyalandı
+In the folder you chose	Seçtiğiniz klasörde
+Rotate left	Sola döndür
+Rotate right	Sağa döndür
+Black and white	Siyah beyaz
+Crop to a shape…	Bir şekle göre kırp…
+Trim…	Kes…
+Split into pages	Sayfalara ayır
+Keep only some pages…	Yalnızca bazı sayfaları tut…
+Protect with a password…	Parolayla koru…
+Remove the password…	Parolayı kaldır…
+Extract here	Buraya çıkar
+Join into one video	Tek videoda birleştir
+From	Başlangıç
+To	Bitiş
+For example 0:30 and 1:45. Only that part is kept.	Örneğin 0:30 ve 1:45. Yalnızca o bölüm kalır.
+For example 1-3, 7. Only these pages are kept.	Örneğin 1-3, 7. Yalnızca bu sayfalar kalır.
+Shape	Şekil
+The middle of the picture is kept	Görselin ortası korunur
+Square · 1:1	Kare · 1:1
+Portrait · 4:5	Dikey · 4:5
+Photo · 3:2	Fotoğraf · 3:2
+Classic · 4:3	Klasik · 4:3
+Wide · 16:9	Geniş · 16:9
+Story · 9:16	Hikâye · 9:16
+Password	Parola
+Needed to open the PDF. Keep it somewhere safe: it can't be recovered.	PDF'i açmak için gerekli. İyi saklayın: kurtarılamaz.
+The password that opens this PDF now.	Bu PDF'i şu an açan parola.
+wrong password	yanlış parola
+the archive is empty	arşiv boş
+Text (TXT)	Metin (TXT)
+Web page (HTML)	Web sayfası (HTML)
+Send to {device}	{device} cihazına gönder
+Anywhere, desktop included: Ctrl+C, then {keys}	Her yerde, masaüstü dahil: Ctrl+C, sonra {keys}
+Send with LocalSend…	LocalSend ile gönder…
+Sent to {device}	{device} cihazına gönderildi
+{device} didn't answer	{device} yanıt vermedi
+Opened in LocalSend: pick the device there	LocalSend'de açıldı: cihazı orada seçin
+no tables found in this PDF	bu PDF'de tablo bulunamadı
+no pages to convert (check the page numbers)	dönüştürülecek sayfa yok (sayfa numaralarını kontrol edin)
+the PDF looks damaged or empty	PDF bozuk ya da boş görünüyor
+File not found	Dosya bulunamadı
+It was moved or deleted after you selected it. Select it again.	Seçtikten sonra taşınmış ya da silinmiş. Yeniden seçin.
+This is a folder	Bu bir klasör
+Select the files inside it, or use Put in a ZIP.	İçindeki dosyaları seçin ya da ZIP'e koy'u kullanın.
+File type not recognised	Dosya türü tanınmadı
+Joey reads what's inside the file, not its name, and this content isn't a format it knows.	Joey dosyanın adını değil içeriğini okur ve bu içerik tanıdığı bir biçim değil.
+Damaged or incomplete file	Bozuk ya da eksik dosya
+Check that it opens in another app. If you downloaded it, download it again.	Başka bir uygulamada açılıp açılmadığına bakın. İndirdiyseniz yeniden indirin.
+The file is protected by a password	Dosya parolayla korunuyor
+Remove the password first, then convert it.	Önce parolayı kaldırın, sonra dönüştürün.
+Wrong password	Yanlış parola
+Check the password and try again.	Parolayı kontrol edip yeniden deneyin.
+The file has no sound	Dosyada ses yok
+This video has no audio track to extract.	Bu videoda çıkarılacak ses kanalı yok.
+No tables found in the PDF	PDF'de tablo bulunamadı
+Only PDFs made by a computer have tables Joey can read; scanned pages are pictures.	Joey yalnızca bilgisayarda oluşturulmuş PDF'lerdeki tabloları okuyabilir; taranmış sayfalar görseldir.
+The archive is empty	Arşiv boş
+There is nothing inside to extract.	İçinde çıkarılacak bir şey yok.
+Those pages don't exist	Bu sayfalar yok
+Check the page numbers: the document has fewer pages.	Sayfa numaralarını kontrol edin: belgede daha az sayfa var.
+Already as small as it gets	Zaten olabileceği kadar küçük
+Compressing it more wouldn't make it smaller.	Daha fazla sıkıştırmak onu küçültmez.
+Not possible on this computer	Bu bilgisayarda mümkün değil
+A program Joey needs isn't installed. The README lists what to install for each kind of file.	Joey'nin ihtiyaç duyduğu bir program kurulu değil. README her dosya türü için neyin kurulacağını anlatır.
+A program Joey needs is missing	Joey'nin ihtiyaç duyduğu bir program eksik
+Install it (the README lists them), then try again.	Onu kurun (README'de listelenir), sonra yeniden deneyin.
+The installed program can't handle this format	Kurulu program bu biçimi işleyemiyor
+Your version of it lacks this format. A fuller version adds it, e.g. FFmpeg from RPM Fusion on Fedora.	Sürümünüzde bu biçim yok. Daha kapsamlı bir sürüm ekler, ör. Fedora'da RPM Fusion'dan FFmpeg.
+The disk is full	Disk dolu
+Free some space, or save in another place.	Biraz yer açın ya da başka bir yere kaydedin.
+Joey isn't allowed to write here	Joey'nin buraya yazma izni yok
+Copy the files to one of your folders (e.g. Documents) and convert them there.	Dosyaları kendi klasörlerinizden birine (ör. Belgeler) kopyalayıp orada dönüştürün.
+Not enough memory	Yeterli bellek yok
+The file is too big for the free memory. Close other apps, or convert fewer files at a time.	Dosya boş bellek için çok büyük. Diğer uygulamaları kapatın ya da aynı anda daha az dosya dönüştürün.
+Blocked by a safety limit	Bir güvenlik sınırı tarafından engellendi
+The image is larger than the limit set by ImageMagick's security policy.	Görsel, ImageMagick güvenlik politikasının sınırından büyük.
+Unexpected error	Beklenmeyen hata
+This is a bug in Joey. Please report it.	Bu Joey'de bir hata. Lütfen bildirin.
+The conversion program failed	Dönüştürme programı başarısız oldu
+Please report it: the details tell us why.	Lütfen bildirin: ayrıntılar bize nedenini söyler.
+Close (Esc)	Kapat (Esc)
+{keys} is ready in {fm}	{keys} {fm} içinde hazır
+Change the shortcuts	Kısayolları değiştir
+Set up the shortcuts	Kısayolları kur
+Welcome to Joey	Joey'ye hoş geldiniz
+Two shortcuts open Joey. Keep these, or choose your own.	Joey'yi iki kısayol açar. Bunları tutun ya da kendinizinkileri seçin.
+In the file manager	Dosya yöneticisinde
+Select files, then press	Dosyaları seçin, sonra basın
+Anywhere, desktop included	Her yerde, masaüstü dahil
+Copy files with Ctrl+C, then press	Dosyaları Ctrl+C ile kopyalayın, sonra basın
+Change	Değiştir
+Press the keys… (Esc cancels)	Tuşlara basın… (Esc iptal eder)
+Use Alt or Meta (the Windows key) with a letter or a number	Alt veya Meta'yı (Windows tuşu) bir harf ya da rakamla kullanın
+That's already the other shortcut	Bu zaten diğer kısayol
+Later	Sonra
+Turn on	Aç
+Ready	Hazır
+Start	Başla
+Ideas or problems? Tell us	Fikir ya da sorun mu var? Bize anlatın
+Report the problem	Sorunu bildir
+You see the report before anything is sent	Bir şey gönderilmeden önce raporu görürsünüz
+Feedback	Geri bildirim
+Last time Joey closed because of an error	Joey geçen sefer bir hata yüzünden kapandı
+Report	Bildir
+What were you doing?	Ne yapıyordunuz?
+(optional) Write it here.	(isteğe bağlı) Buraya yazın.
+Your idea, request or opinion	Fikriniz, isteğiniz ya da görüşünüz
+Nothing is sent by itself. Read the text, change or remove what you want: your file names and your user name are already hidden.	Hiçbir şey kendiliğinden gönderilmez. Metni okuyun, istediğinizi değiştirin ya da silin: dosya adlarınız ve kullanıcı adınız zaten gizlendi.
+Title, in a few words	Başlık, birkaç kelimeyle
+Sending opens GitHub in your browser, where you check it once more: a free account is needed. Without one, copy the text and send it as you prefer.	Göndermek tarayıcınızda GitHub'ı açar, orada bir kez daha kontrol edersiniz: ücretsiz bir hesap gerekir. Hesabınız yoksa metni kopyalayıp dilediğiniz gibi gönderin.
+Copy	Kopyala
+Open on GitHub	GitHub'da aç
+Send by email	E-postayla gönder
+Copied	Kopyalandı
+The text is long: GitHub opens with the beginning. The whole text is copied: replace it with Ctrl+V.	Metin uzun: GitHub başlangıcıyla açılır. Metnin tamamı kopyalandı: Ctrl+V ile değiştirin.
+Markdown for AI apps	Yapay zekâ uygulamaları için Markdown
+Compress to a size…	Bir boyuta sıkıştır…
+At most	En fazla
+Joey lowers the quality just enough	Joey kaliteyi yalnızca gerektiği kadar düşürür
+{before} → {after}, {percent}% smaller	{before} → {after}, %{percent} daha küçük
+Removed: {what}	Kaldırıldı: {what}
+No hidden details were found	Gizli bilgi bulunamadı
+place	yer
+date and time	tarih ve saat
+camera or device	kamera veya cihaz
+author	yazar
+software used	kullanılan yazılım
+title and tags	başlık ve etiketler
+Use Joey from an AI app	Joey'yi bir yapay zekâ uygulamasından kullanın
+Copies the setup for apps that support MCP	MCP destekleyen uygulamalar için kurulumu kopyalar
+Copied: paste it in your AI app's MCP settings	Kopyalandı: yapay zekâ uygulamanızın MCP ayarlarına yapıştırın
+The PDF has no text	PDF'de metin yok
+Its pages are pictures, as in a scan: there is no text to read.	Sayfaları, taramadaki gibi görsel: okunacak metin yok.
+Already smaller than that	Zaten bundan küçük
+The file is already under the size you chose: nothing to do.	Dosya zaten seçtiğiniz boyutun altında: yapılacak bir şey yok.
+Can't make it that small	Bu kadar küçültülemiyor
+Even at the lowest quality it stays bigger. Choose a larger size.	En düşük kalitede bile daha büyük kalıyor. Daha büyük bir boyut seçin.
