@@ -130,11 +130,11 @@ jobs:
         run: |
           # The official LibreOffice build, checked against its published checksum.
           base=https://download.documentfoundation.org/libreoffice/stable
-          v=$(curl -sSL "$base/" | grep -o 'href="[0-9][0-9.]*/"' | sed 's/href="//; s#/"##' | sort -V | tail -1)
+          v=$(curl -sSL --retry 5 --retry-all-errors --retry-delay 10 "$base/" | grep -o 'href="[0-9][0-9.]*/"' | sed 's/href="//; s#/"##' | sort -V | tail -1)
           f="LibreOffice_${v}_Linux_x86-64_deb.tar.gz"
           echo "LibreOffice $v"
-          curl -sSL -o flatpak/LibreOffice.tar.gz "$base/$v/deb/x86_64/$f"
-          want=$(curl -sSL "$base/$v/deb/x86_64/$f.sha256" | grep -o '^[0-9a-f]\{64\}')
+          curl -sSL --retry 5 --retry-all-errors --retry-delay 10 -o flatpak/LibreOffice.tar.gz "$base/$v/deb/x86_64/$f"
+          want=$(curl -sSL --retry 5 --retry-all-errors --retry-delay 10 "$base/$v/deb/x86_64/$f.sha256" | grep -o '^[0-9a-f]\{64\}')
           echo "$want  flatpak/LibreOffice.tar.gz" | sha256sum -c
           ci/run.sh "Joey Office build" flatpak-builder --user --disable-rofiles-fuse --force-clean \
             --repo=repo build-office flatpak/io.github.outlook791.Joey.Office.yml
