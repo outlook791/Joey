@@ -8,6 +8,15 @@ Joey is a free, open-source file converter for Linux. Select files, press a key,
 
 <p align="center"><img src="docs/images/demo-en.gif" width="620" alt="A photo becomes a PDF: Joey opens, Enter, done"></p>
 
+**Two ways to open Joey:**
+
+| Where | What you press |
+|---|---|
+| In the file manager | Select the files, then **Alt+C**. No Ctrl+C needed. |
+| Anywhere, the desktop included | **Ctrl+C** to copy the files, then **Meta+C** (the key with the Windows logo). |
+
+Ctrl+C followed by Alt+C doesn't work: after Ctrl+C, the key is Meta+C.
+
 > Status: current version (26.11.1). It works end to end; polish comes next.
 >
 > **Made with AI:** Joey is written with an AI assistant. See [How Joey is made](#how-joey-is-made).
